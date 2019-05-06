@@ -28,6 +28,12 @@
     <Filter Include="Header Files\game\objects">
       <UniqueIdentifier>{e44dfeaa-98e5-40ec-9b70-051291c2c221}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\game\states">
+      <UniqueIdentifier>{2f0142e6-39ed-4095-882c-3788481da1a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\game\states">
+      <UniqueIdentifier>{4081df57-95ae-432d-a4c3-43e8b3a4059a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -56,6 +62,18 @@
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>Header Files\game\states</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayState.h">
+      <Filter>Header Files\game\states</Filter>
+    </ClInclude>
+    <ClInclude Include="PauseState.h">
+      <Filter>Header Files\game\states</Filter>
+    </ClInclude>
+    <ClInclude Include="HomeState.h">
+      <Filter>Header Files\game\states</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -88,6 +106,18 @@
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Source Files\game</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState.cpp">
+      <Filter>Source Files\game\states</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayState.cpp">
+      <Filter>Source Files\game\states</Filter>
+    </ClCompile>
+    <ClCompile Include="PauseState.cpp">
+      <Filter>Source Files\game\states</Filter>
+    </ClCompile>
+    <ClCompile Include="HomeState.cpp">
+      <Filter>Source Files\game\states</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

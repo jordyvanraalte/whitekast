@@ -165,8 +165,12 @@
     <ClInclude Include="Flipper.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameState.h" />
+    <ClInclude Include="HomeState.h" />
+    <ClInclude Include="PauseState.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayState.h" />
     <ClInclude Include="Wall.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>
@@ -176,6 +180,9 @@
     <ClCompile Include="Flipper.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="HomeState.cpp" />
+    <ClCompile Include="PauseState.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -183,6 +190,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayState.cpp" />
     <ClCompile Include="Wall.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="World.cpp" />
