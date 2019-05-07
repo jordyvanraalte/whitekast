@@ -1,24 +1,15 @@
 #include "pch.h"
 #include "World.h"
 #include <GL/freeglut.h>
+#include <iostream>
 
 
 
 static World* world;
 
-World::World(const char* titel, int argc, char *argv[], int width, int height) {
+World::World() {
 
-	//window inits
-	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
-	glutInitWindowSize(width, height);
-	glutCreateWindow(titel);
-	world = this;
-
-	//functions inits
-	glutIdleFunc([]() {world->idle(); });
-	glutDisplayFunc([]() {world->display(); });
-	glutMainLoop();
+	
 }
 
 
@@ -26,10 +17,10 @@ World::~World() {
 	delete world;
 }
 
-World* World::getWorld(const char* titel, int argc, char* argv[], int width, int height)
+World* World::getWorld()
 {
 	if (world != NULL) {
-		world = new World(titel, argc, argv, width, height);
+		world = new World();
 	}
 	return world;
 }
