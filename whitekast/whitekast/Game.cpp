@@ -2,28 +2,32 @@
 #include "wtypes.h"
 #include "Game.h"
 #include "Player.h"
+#include "GameObject.h"
+#include <vector>
 #include <iostream>
 #include "World.h"
 #include <GL/freeglut.h>
 
-using namespace std;
 
 Player player;
+std::vector<GameObject> objects;	
 
 Game::Game(const char* title, int argc, char* argv[]) {
 	int horizontal = 0;
 	int vertical = 0;
 	getDesktopResolution(horizontal, vertical);
 
+	objects.push_back(GameObject());
 
-	World* world = World::getWorld();
 
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
 	glutInitWindowSize(horizontal, vertical);
 	glutCreateWindow(title);
-	glutDisplayFunc([]() {});
 	
+	glutIdleFunc([]() { World::getWorld()->idle();  });
+	glutDisplayFunc([]() { World::getWorld()->display(objects); });
+
 	glutMainLoop();
 
 }

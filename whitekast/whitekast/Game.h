@@ -14,5 +14,6 @@ public:
 
 private:
 	bool isRunning;
+
 };
 
