@@ -5,13 +5,20 @@
 #include <iostream>
 #include <string>
 #include "WhitekastVision.h"
+#include <stdlib.h>
+#include <chrono>
+#include <thread>
 
 using namespace cv;
 using namespace std;
+using namespace std::this_thread; 
+using namespace std::chrono;
 
 Mat redFrame, greenFrame, blueFrame;
 vector<WhitekastObject> redObjects, greenObjects, blueObjects;
 VideoCapture vCap(1);
+bool moving;
+Ptr<SimpleBlobDetector> detector;
 
 int main()
 {
@@ -25,7 +32,6 @@ int main()
 	while (running) {
 		running = captureFrames();
 	}
-
 	waitKey(0);
 
 	findObjectsByFrame(redFrame, &redObjects, RED);
@@ -33,8 +39,76 @@ int main()
 	findObjectsByFrame(blueFrame, &blueObjects, BLUE);
 
 	waitKey(0);
+	SimpleBlobDetector::Params params;
+	// Change thresholds
+	params.minArea = 10;
+	params.filterByArea = true;
+	detector = SimpleBlobDetector::create(params);
+	running = 1;
+	while (running)
+	{
+		captureMovement();
+		cout << moving;
+	}
+	
+	waitKey(0);
 
 	return 0;
+}
+
+int captureMovement() {
+	vector<KeyPoint> keypoints, keypoints2;
+	Mat videoFrame, videoFrame2, binaryFrame2;
+	vCap.read(videoFrame);
+	cvtColor(videoFrame, videoFrame, COLOR_BGR2GRAY);
+	imshow("move1", videoFrame);
+	threshold(videoFrame, videoFrame, 100, 255, THRESH_BINARY_INV);
+	imshow("move1", videoFrame);
+	//detector->detect(videoFrame, keypoints);
+
+	//sleep_for(milliseconds(500));
+	vCap.read(videoFrame2);
+	cvtColor(videoFrame2, videoFrame2, COLOR_BGR2GRAY);
+	threshold(videoFrame2, binaryFrame2, 100, 255, THRESH_BINARY_INV);
+	imshow("move2", binaryFrame2);
+	//detector->detect(binaryFrame2, keypoints2);
+	//drawKeypoints(videoFrame2, keypoints, keypoints, Scalar(0, 0, 255), DrawMatchesFlags::DRAW_RICH_KEYPOINTS);
+
+	if (getWhitePixels(videoFrame) - getWhitePixels(binaryFrame2) >= 5000 || getWhitePixels(videoFrame) - getWhitePixels(binaryFrame2) <= -5000)
+	{
+		moving = true;
+	}
+	else
+	{
+		moving = false;
+	}	
+
+	/*int rows = frame.rows;
+	croppedFrame = Mat::zeros(200, 640, CV_8UC3);;
+	imshow("frame", frame);
+	imshow("cropped", croppedFrame);*/
+
+	if (waitKey(1) == 27) {
+		return 0;
+	}	
+	return 1;
+}
+
+int getWhitePixels(Mat mat)
+{
+	int count = 0;
+	for (int x = 0; x < mat.rows; x++)
+	{
+		for (int y = 0; y < mat.cols; y++)
+		{
+			int h = mat.at<uchar>(x, y);
+			if (mat.at<uchar>(x, y) == 255)
+			{
+				count++;
+			}
+		}
+	}
+	return count;
 }
 
 int captureFrames() {
