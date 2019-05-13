@@ -250,21 +250,21 @@ void ObjModel::loadMaterialFile(const std::string &fileName, const std::string &
 		}
 		else if (params[0] == "kd")
 		{
-			currentMaterial->diffuse.x = atof(params[1].c_str());
-			currentMaterial->diffuse.y = atof(params[2].c_str());
-			currentMaterial->diffuse.z = atof(params[3].c_str());
+			currentMaterial->diffuse.x = (float)atof(params[1].c_str());
+			currentMaterial->diffuse.y = (float)atof(params[2].c_str());
+			currentMaterial->diffuse.z = (float)atof(params[3].c_str());
 		}
 		else if (params[0] == "ka")
 		{
-			currentMaterial->ambient.x = atof(params[1].c_str());
-			currentMaterial->ambient.y = atof(params[2].c_str());
-			currentMaterial->ambient.z = atof(params[3].c_str());
+			currentMaterial->ambient.x = (float)atof(params[1].c_str());
+			currentMaterial->ambient.y = (float)atof(params[2].c_str());
+			currentMaterial->ambient.z = (float)atof(params[3].c_str());
 		}
 		else if (params[0] == "ks")
 		{
-			currentMaterial->specular.x = atof(params[1].c_str());
-			currentMaterial->specular.y = atof(params[2].c_str());
-			currentMaterial->specular.z = atof(params[3].c_str());
+			currentMaterial->specular.x = (float)atof(params[1].c_str());
+			currentMaterial->specular.y = (float)atof(params[2].c_str());
+			currentMaterial->specular.z = (float)atof(params[3].c_str());
 		}
 		else
 			std::cout << "Didn't parse " << params[0] << " in material file" << std::endl;
