@@ -167,12 +167,3 @@ void World::mousePassiveMotion(int x, int y)
 		justMovedMouse = false;
 }
 std::list<GameObject*> objects2;
-
-struct Camera
-{
-	float posX = 0;
-	float posY = -4;
-	float rotX = 0;
-	float rotY = 0;
-	float posZ = 0;
-}
