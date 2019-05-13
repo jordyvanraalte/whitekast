@@ -1,15 +1,14 @@
 #include "pch.h"
 #include "wtypes.h"
 #include "Game.h"
-#include "Player.h"
+#include <math.h>
 #include "GameObject.h"
+#include "CubeComponent.h"
 #include <vector>
 #include <iostream>
 #include "World.h"
 #include <GL/freeglut.h>
 
-
-Player player;
 std::vector<GameObject> objects;	
 
 Game::Game(const char* title, int argc, char* argv[]) {
@@ -27,6 +26,8 @@ Game::Game(const char* title, int argc, char* argv[]) {
 	
 	glutIdleFunc([]() { World::getWorld()->idle();  });
 	glutDisplayFunc([]() { World::getWorld()->display(objects); });
+
+
 
 	glutMainLoop();
 
