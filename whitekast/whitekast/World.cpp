@@ -1,4 +1,3 @@
-#include "pch.h"
 #include "World.h"
 #include "GameObject.h"
 #include <GL/freeglut.h>
