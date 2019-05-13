@@ -37,7 +37,7 @@ Game::Game(const char* title, int argc, char* argv[])
 	glutKeyboardUpFunc([](unsigned char key, int mouseX, int mouseY) { World::getWorld()->keyboardUp(key, mouseX, mouseY); });
 	glutPassiveMotionFunc([](int mouseX, int mouseY) {World::getWorld()->mousePassiveMotion(mouseX, mouseY); });
 	audiomanager = new AudioManager();
-	audiomanager->test();
+	audiomanager->playSound("test.mpeg");
 	glutMainLoop();
 }
 
