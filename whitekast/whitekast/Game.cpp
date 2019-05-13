@@ -1,4 +1,3 @@
-#include "pch.h"
 #include "wtypes.h"
 #include "Game.h"
 #include "Player.h"

@@ -34,11 +34,14 @@
     <Filter Include="Header Files\game\states">
       <UniqueIdentifier>{4081df57-95ae-432d-a4c3-43e8b3a4059a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\game\modelloader">
+      <UniqueIdentifier>{1217bb75-d02b-487e-9884-49df61adb9d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\game\modelloader">
+      <UniqueIdentifier>{d64c93bf-8870-4a9f-8513-2f3dab351b67}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="pch.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Header Files\game</Filter>
     </ClInclude>
@@ -75,11 +78,20 @@
     <ClInclude Include="HomeState.h">
       <Filter>Header Files\game\states</Filter>
     </ClInclude>
+    <ClInclude Include="ObjModel.h">
+      <Filter>Header Files\game\modelloader</Filter>
+    </ClInclude>
+    <ClInclude Include="Vec.h">
+      <Filter>Header Files\game\modelloader</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Header Files\game\modelloader</Filter>
+    </ClInclude>
+    <ClInclude Include="stbi.h">
+      <Filter>Header Files\game\modelloader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="pch.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>Source Files\game</Filter>
     </ClCompile>
@@ -118,6 +130,15 @@
     </ClCompile>
     <ClCompile Include="HomeState.cpp">
       <Filter>Source Files\game\states</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjModel.cpp">
+      <Filter>Source Files\game\modelloader</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec.cpp">
+      <Filter>Source Files\game\modelloader</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Source Files\game\modelloader</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
