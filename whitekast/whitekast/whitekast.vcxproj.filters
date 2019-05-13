@@ -40,6 +40,9 @@
     <Filter Include="Header Files\game\modelloader">
       <UniqueIdentifier>{d64c93bf-8870-4a9f-8513-2f3dab351b67}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\vision">
+      <UniqueIdentifier>{769ebc2f-af86-4796-952c-6ae6e47d5a1d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -90,6 +93,12 @@
     <ClInclude Include="stbi.h">
       <Filter>Header Files\game\modelloader</Filter>
     </ClInclude>
+    <ClInclude Include="WhitekastObject.h">
+      <Filter>Header Files\vision</Filter>
+    </ClInclude>
+    <ClInclude Include="WhitekastVision.h">
+      <Filter>Header Files\vision</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -139,6 +148,12 @@
     </ClCompile>
     <ClCompile Include="Texture.cpp">
       <Filter>Source Files\game\modelloader</Filter>
+    </ClCompile>
+    <ClCompile Include="WhitekastObject.cpp">
+      <Filter>Source Files\vision</Filter>
+    </ClCompile>
+    <ClCompile Include="WhitekastVision.cpp">
+      <Filter>Source Files\vision</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
