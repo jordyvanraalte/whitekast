@@ -1,7 +1,8 @@
 #pragma once
 
-#include <vector>
+#include <iostream>
 #include "GameObject.h"
+#include "WhitekastObject.h"
 
 class World
 {
@@ -11,6 +12,7 @@ public:
 
 	void idle(void);
 	void display();
+	void displayVisionObjects(vector<WhitekastObject>);
 	void reshape(int width, int height);
 	void keyboard(unsigned char key, int mouseX, int mouseY);
 	void keyboardUp(unsigned char key, int mouseX, int mouseY);

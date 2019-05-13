@@ -10,16 +10,23 @@ using namespace cv;
 enum ObjectColor { RED, GREEN, BLUE };
 
 class WhitekastObject {
-public:
 	ObjectColor objectColor;
 	std::vector<Point> coordinates;
-
+	Point center;
+public:
 	WhitekastObject(ObjectColor color);
 	~WhitekastObject(void);
 
 	std::vector<Point> getCoordinates();
 	void setCoordinates(std::vector<Point> newCoordinates);
 
+	Point getCenter();
+	void setCenter(Point centerPoint);
+
 	ObjectColor getObjectColor();
 	void setObjectColor(ObjectColor color);
+
+	void setDrawingColor();
+
+	void draw();
 };
