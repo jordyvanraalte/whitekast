@@ -1,31 +1,49 @@
-#include <iostream>
 #include "GameObject.h"
+#include "DrawComponent.h"
+#include <GL/freeglut.h>
 
-float posX = 0;
-float posY = 0;
-float posZ = 0;
-
-GameObject::GameObject() {
-}
-
-GameObject::~GameObject() {
-
+GameObject::GameObject()
+{
 }
 
 
-
-void GameObject::translate(float x, float y, float z) {
-	posX = x;
-	posY = y;
-	posZ = z;
+GameObject::~GameObject()
+{
 }
 
-void GameObject::draw(void) {
-	debug();
-	glBegin(GL_QUADS);
-	glEnd();
+void GameObject::addComponent(Component* component)
+{
+	component->setGameObject(this);
+	components.push_back(component);
+
+	if (!drawComponent)
+		drawComponent = dynamic_cast<DrawComponent*>(component);
 }
 
-void GameObject::debug(void) {
-	std::cout << typeid(this).name() << ": " << this << " Located: (" << posX << "," << posY << "," << posZ << ")" << "\n";
+std::list<Component*> GameObject::getComponents()
+{
+	return components;
 }
+
+
+void GameObject::draw()
+{
+	if (!drawComponent)
+		return;
+
+	glPushMatrix();
+	glTranslatef(position.x, position.y, position.z);
+	glRotatef(rotation.x, 1, 0, 0);
+	glRotatef(rotation.y, 0, 1, 0);
+	glRotatef(rotation.z, 0, 0, 1);
+	glScalef(scale.x, scale.y, scale.z);
+	drawComponent->draw();
+	glPopMatrix();
+}
+
+void GameObject::update(float elapsedTime)
+{
+	for (auto& c : components)
+		c->update(elapsedTime);
+}
+

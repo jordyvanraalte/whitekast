@@ -1,5 +1,7 @@
 #include "World.h"
+#include <math.h>
 #include "GameObject.h"
+#include "CubeComponent.h"
 #include <GL/freeglut.h>
 #include <iostream>
 
@@ -22,11 +24,15 @@ struct Camera
 	float posZ = 0;
 } camera;
 
-World::World(int horizontal, int vertical)
+World::World(int horizontal, int vertical, std::list<GameObject*> objectlist)
 {
 	width = horizontal;
 	height = vertical;
 	lastFrameTime = 0;
+	objects2 = objectlist;
+
+	glEnable(GL_DEPTH_TEST);
+	ZeroMemory(keys, sizeof(keys));
 }
 
 World::~World() 
@@ -36,13 +42,13 @@ World::~World()
 
 World* World::getWorld()
 {
-	if (world != NULL) {
-		world = new World(1920, 1080);
-	}
+	//if (world != NULL) {
+		//world = new World(1920, 1080);
+	//}
 	return world;
 }
 
-World* World::createWorld(int horizontal, int vertical)
+void World::display()
 {
 	width = horizontal;
 	height = horizontal;
@@ -73,12 +79,21 @@ void World::display(std::vector<GameObject> objects)
 	glLoadIdentity();
 	gluPerspective(90.0f, width / (float)height, 0.1f, 50.0f);
 	
-	makePlatform();
+	glRotatef(camera.rotX, 1, 0, 0);
+	glRotatef(camera.rotY, 0, 1, 0);
+	glTranslatef(camera.posX, camera.posZ, camera.posY);
 
-	for (GameObject &object : objects) 
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+
+	for (auto &object : objects2) 
 	{
-		object.draw();
+		glPushMatrix();
+		object->draw();
+		glPopMatrix();
 	}
+
+
 
 	glutSwapBuffers();
 }
@@ -106,6 +121,11 @@ void World::idle(void)
 	if (keys['d']) move(180, deltaTime*speed);
 	if (keys['w']) move(90, deltaTime*speed);
 	if (keys['s']) move(270, deltaTime*speed);
+	if (keys['q']) camera.posZ += deltaTime * speed;
+	if (keys['e']) camera.posZ -= deltaTime * speed;
+
+	for (auto& o : objects2)
+		o->update(deltaTime);
 
 	glutPostRedisplay();
 }
@@ -114,13 +134,44 @@ void World::keyboard(unsigned char key, int mouseX, int mouseY)
 {
 	switch (key)
 	{
+		case 27:
+			exit(0);
+			break;
 		default:
-
-		break;
+			break;
 	}
+	keys[key] = true;
 }
 
 void World::keyboardUp(unsigned char key, int mouseX, int mouseY)
 {
 	keys[key] = false;
 }
+
+bool justMovedMouse = false;
+void World::mousePassiveMotion(int x, int y)
+{
+	int dx = x - width / 2;
+	int dy = y - height / 2;
+	if ((dx != 0 || dy != 0) && abs(dx) < 400 && abs(dy) < 400 && !justMovedMouse)
+	{
+		camera.rotY += dx / 10.0f;
+		camera.rotX += dy / 10.0f;
+	}
+	if (!justMovedMouse)
+	{
+		glutWarpPointer(width / 2, height / 2);
+		justMovedMouse = true;
+	}
+	else
+		justMovedMouse = false;
+}
+std::list<GameObject*> objects2;
+
+struct Camera
+{
+	float posX = 0;
+	float posY = -4;
+	float rotX = 0;
+	float rotY = 0;
+	float posZ = 0;

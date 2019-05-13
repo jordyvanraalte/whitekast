@@ -166,16 +166,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Ball.h" />
-    <ClInclude Include="Bumber.h" />
-    <ClInclude Include="Flipper.h" />
+    <ClInclude Include="Component.h" />
+    <ClInclude Include="CubeComponent.h" />
+    <ClInclude Include="DrawComponent.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="HomeState.h" />
     <ClInclude Include="ObjModel.h" />
     <ClInclude Include="PauseState.h" />
-    <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerComponent.h" />
     <ClInclude Include="PlayState.h" />
     <ClInclude Include="stbi.h" />
     <ClInclude Include="Texture.h" />
@@ -184,26 +184,26 @@
     <ClInclude Include="WhitekastObject.h" />
     <ClInclude Include="WhitekastVision.h" />
     <ClInclude Include="World.h" />
+    <ClInclude Include="WorldComponent.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Ball.cpp" />
-    <ClCompile Include="Bumber.cpp" />
-    <ClCompile Include="Flipper.cpp" />
+    <ClCompile Include="Component.cpp" />
+    <ClCompile Include="CubeComponent.cpp" />
+    <ClCompile Include="DrawComponent.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="HomeState.cpp" />
     <ClCompile Include="ObjModel.cpp" />
     <ClCompile Include="PauseState.cpp" />
-    <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayState.cpp" />
     <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="Vec.cpp" />
-    <ClCompile Include="Wall.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="WhitekastObject.cpp" />
     <ClCompile Include="WhitekastVision.cpp" />
+    <ClCompile Include="Vec.cpp" />
     <ClCompile Include="World.cpp" />
+    <ClCompile Include="WorldComponent.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

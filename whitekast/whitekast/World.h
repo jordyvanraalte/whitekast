@@ -5,17 +5,16 @@
 
 class World
 {
-
 public:
-	World(int horizontal, int vertical);
+	World(int horizontal, int vertical, std::list<GameObject*> objectlist);
 	~World();
 
-	World* createWorld(int, int);
 	void idle(void);
-	void display(std::vector<GameObject> objects);
+	void display();
 	void reshape(int width, int height);
 	void keyboard(unsigned char key, int mouseX, int mouseY);
 	void keyboardUp(unsigned char key, int mouseX, int mouseY);
+	void mousePassiveMotion(int x, int y);
 	static World* getWorld();
 };
 
