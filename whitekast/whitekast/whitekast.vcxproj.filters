@@ -34,6 +34,9 @@
     <Filter Include="Header Files\game\states">
       <UniqueIdentifier>{4081df57-95ae-432d-a4c3-43e8b3a4059a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\vision">
+      <UniqueIdentifier>{769ebc2f-af86-4796-952c-6ae6e47d5a1d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -74,6 +77,12 @@
     </ClInclude>
     <ClInclude Include="HomeState.h">
       <Filter>Header Files\game\states</Filter>
+    </ClInclude>
+    <ClInclude Include="WhitekastObject.h">
+      <Filter>Header Files\vision</Filter>
+    </ClInclude>
+    <ClInclude Include="WhitekastVision.h">
+      <Filter>Header Files\vision</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -118,6 +127,12 @@
     </ClCompile>
     <ClCompile Include="HomeState.cpp">
       <Filter>Source Files\game\states</Filter>
+    </ClCompile>
+    <ClCompile Include="WhitekastObject.cpp">
+      <Filter>Source Files\vision</Filter>
+    </ClCompile>
+    <ClCompile Include="WhitekastVision.cpp">
+      <Filter>Source Files\vision</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
