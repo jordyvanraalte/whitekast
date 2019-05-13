@@ -1,5 +1,4 @@
 #pragma once
-#include <math.h>
 
 class Vec3f
 {
@@ -14,13 +13,8 @@ public:
 	};
 	Vec3f();
 	Vec3f(const Vec3f& other);
-	Vec3f(float x, float y, float z);
+	Vec3f(const float x, const float y, const float z);
 	float& operator [](int);
-
-	Vec3f operator - (const Vec3f& other);
-
-	Vec3f normalized() const;
-	float length() const;
 };
 
 class Vec2f
@@ -35,7 +29,8 @@ public:
 		float v[2];
 	};
 	Vec2f();
-	Vec2f(float x, float y);
-	Vec2f(Vec2f& other);
+	Vec2f(const float x, const float y);
+	Vec2f(const Vec2f& other);
 	float& operator [](int);
 };
+

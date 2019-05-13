@@ -8,6 +8,7 @@ public:
 	void handleEvents();
 	void update();
 	void getDesktopResolution(int& horizontal, int& vertical);
+	void makeObjects();
 
 	void clean();
 	bool running() { return isRunning; }

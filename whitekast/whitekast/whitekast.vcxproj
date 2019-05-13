@@ -171,16 +171,13 @@
     <ClInclude Include="HomeState.h" />
     <ClInclude Include="ObjModel.h" />
     <ClInclude Include="PauseState.h" />
-    <ClInclude Include="pch.h" />
     <ClInclude Include="PlayerComponent.h" />
-    <ClInclude Include="Player.h" />
     <ClInclude Include="PlayState.h" />
-    <ClInclude Include="Vec.h" />
     <ClInclude Include="stbi.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Vec.h" />
-    <ClInclude Include="Wall.h" />
     <ClInclude Include="World.h" />
+    <ClInclude Include="WorldComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Component.cpp" />
@@ -192,14 +189,12 @@
     <ClCompile Include="HomeState.cpp" />
     <ClCompile Include="ObjModel.cpp" />
     <ClCompile Include="PauseState.cpp" />
-    <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayState.cpp" />
     <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="Vec.cpp" />
-    <ClCompile Include="Wall.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Vec.cpp" />
     <ClCompile Include="World.cpp" />
+    <ClCompile Include="WorldComponent.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

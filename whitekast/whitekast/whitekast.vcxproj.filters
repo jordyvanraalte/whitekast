@@ -63,9 +63,6 @@
     <ClInclude Include="ObjModel.h">
       <Filter>Header Files\game\modelloader</Filter>
     </ClInclude>
-    <ClInclude Include="Vec.h">
-      <Filter>Header Files\game\modelloader</Filter>
-    </ClInclude>
     <ClInclude Include="Texture.h">
       <Filter>Header Files\game\modelloader</Filter>
     </ClInclude>
@@ -88,6 +85,12 @@
       <Filter>Header Files\game\components</Filter>
     </ClInclude>
     <ClInclude Include="Vec.h">
+      <Filter>Header Files\game\components</Filter>
+    </ClInclude>
+    <ClInclude Include="Vec.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldComponent.h">
       <Filter>Header Files\game\components</Filter>
     </ClInclude>
   </ItemGroup>
@@ -116,9 +119,6 @@
     <ClCompile Include="ObjModel.cpp">
       <Filter>Source Files\game\modelloader</Filter>
     </ClCompile>
-    <ClCompile Include="Vec.cpp">
-      <Filter>Source Files\game\modelloader</Filter>
-    </ClCompile>
     <ClCompile Include="Texture.cpp">
       <Filter>Source Files\game\modelloader</Filter>
     </ClCompile>
@@ -128,9 +128,6 @@
     <ClCompile Include="GameObject.cpp">
       <Filter>Source Files\game\components</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerComponent.cpp">
-      <Filter>Source Files\game\components</Filter>
-    </ClCompile>
     <ClCompile Include="CubeComponent.cpp">
       <Filter>Source Files\game\components</Filter>
     </ClCompile>
@@ -138,6 +135,12 @@
       <Filter>Source Files\game\components</Filter>
     </ClCompile>
     <ClCompile Include="Vec.cpp">
+      <Filter>Source Files\game\components</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldComponent.cpp">
       <Filter>Source Files\game\components</Filter>
     </ClCompile>
   </ItemGroup>
