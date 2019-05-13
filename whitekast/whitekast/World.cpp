@@ -15,8 +15,6 @@ float lookAtY;
 bool keys[255];
 const float M_PI = 3.14159265358979323846;
 
-std::list<GameObject*> objects2;
-
 struct Camera
 {
 	float posX = 0;
@@ -51,6 +49,28 @@ World* World::getWorld()
 }
 
 void World::display()
+{
+	width = horizontal;
+	height = horizontal;
+	world = new World(width, height);
+
+	return world;
+}
+
+void makePlatform()
+{
+	glMatrixMode(GL_MODELVIEW);
+	glBegin(GL_QUADS);
+	glColor4f(1, 0, 1, 1);
+	glVertex3f(-10, 0, -10);
+	glVertex3f(-10, 0,  10);
+	glVertex3f( 10, 0,  10);
+	glVertex3f( 10, 0, -10);
+
+	glEnd();
+}
+
+void World::display(std::vector<GameObject> objects)
 {
 	glClearColor(0.6f, 0.6f, 1, 1);
 	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
@@ -146,3 +166,12 @@ void World::mousePassiveMotion(int x, int y)
 	else
 		justMovedMouse = false;
 }
+std::list<GameObject*> objects2;
+
+struct Camera
+{
+	float posX = 0;
+	float posY = -4;
+	float rotX = 0;
+	float rotY = 0;
+	float posZ = 0;
