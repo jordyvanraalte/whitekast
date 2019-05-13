@@ -16,5 +16,5 @@
 	#define V_MAX 230
 #endif
 
-void buildFrames();
-void findObjectsByFrame(Mat, std::vector<WhitekastObject>*);
+int captureFrames();
+void findObjectsByFrame(Mat, std::vector<WhitekastObject>*, ObjectColor);

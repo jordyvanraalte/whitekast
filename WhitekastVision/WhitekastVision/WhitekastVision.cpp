@@ -11,35 +11,33 @@ using namespace std;
 
 Mat redFrame, greenFrame, blueFrame;
 vector<WhitekastObject> redObjects, greenObjects, blueObjects;
+VideoCapture vCap(1);
 
 int main()
 {
-	buildFrames();
-
-	waitKey(0);
-
-	findObjectsByFrame(redFrame, &redObjects);
-	findObjectsByFrame(greenFrame, &greenObjects);
-	findObjectsByFrame(blueFrame, &blueObjects);
-
-	waitKey(0);
-
-	return 0;
-}
-
-void buildFrames() {
-	VideoCapture vCap(1);
-
 	if (!vCap.isOpened())
 	{
 		cout << "Cannot open the video cam" << endl;
 		exit(0);
 	}
 
-	double dWidth = vCap.get(CAP_PROP_FRAME_WIDTH);
-	double dHeight = vCap.get(CAP_PROP_FRAME_HEIGHT);
-	cout << "Frame size : " << dWidth << " x " << dHeight << endl;
+	int running = 1;
+	while (running) {
+		running = captureFrames();
+	}
 
+	waitKey(0);
+
+	findObjectsByFrame(redFrame, &redObjects, RED);
+	findObjectsByFrame(greenFrame, &greenObjects, GREEN);
+	findObjectsByFrame(blueFrame, &blueObjects, BLUE);
+
+	waitKey(0);
+
+	return 0;
+}
+
+int captureFrames() {
 	Mat videoFrame;
 	vCap.read(videoFrame);
 
@@ -68,16 +66,21 @@ void buildFrames() {
 
 	imshow("Red", redFrame);
 	imshow("Green", greenFrame);
-	imshow("BlueErosion", blueFrame);
+	imshow("Blue", blueFrame);
+
+	if (waitKey(1) == 27) {
+		return 0;
+	}
+	return 1;
 }
 
-void findObjectsByFrame(Mat frame, vector<WhitekastObject>* objects) {
+void findObjectsByFrame(Mat frame, vector<WhitekastObject>* objects, ObjectColor objectColor) {
 	threshold(frame, frame, 100, 255, 0);
 
 	vector<vector<Point>> contours;
 	vector<Vec4i> hierarchy;
 
-	findContours(frame, contours, hierarchy, RETR_TREE, CHAIN_APPROX_SIMPLE);
+	findContours(frame, contours, hierarchy, RETR_EXTERNAL, CHAIN_APPROX_SIMPLE);
 
 	Mat contourFrame = Mat::zeros(frame.size(), CV_8UC3);
 
@@ -88,11 +91,11 @@ void findObjectsByFrame(Mat frame, vector<WhitekastObject>* objects) {
 			Scalar color = Scalar(0, 255, 255);
 			drawContours(contourFrame, contours, (int)i, color, 2, LINE_8, hierarchy, 0);
 
-			WhitekastObject object = WhitekastObject(BLUE);
-			//object.setCoordinates(contours[i]);
+			WhitekastObject object = WhitekastObject(objectColor);
+			object.setCoordinates(contours[i]);
 			objects->push_back(object);
 		}
 	}
 
-	imshow("contour", contourFrame);
+	imshow("contour" + objectColor, contourFrame);
 }

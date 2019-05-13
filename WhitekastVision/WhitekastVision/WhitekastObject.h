@@ -18,7 +18,7 @@ public:
 	~WhitekastObject(void);
 
 	std::vector<Point> getCoordinates();
-	//void setCoordinates(std::vector<Point> newCoordinates);
+	void setCoordinates(std::vector<Point> newCoordinates);
 
 	ObjectColor getObjectColor();
 	void setObjectColor(ObjectColor color);

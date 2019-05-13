@@ -7,22 +7,24 @@ WhitekastObject::WhitekastObject(ObjectColor color){
 	objectColor = color;
 }
 
-WhitekastObject::~WhitekastObject(){
-	delete(this);
-}
+WhitekastObject::~WhitekastObject(){}
 
-std::vector<Point> getCoordinates() {
+std::vector<Point> WhitekastObject::getCoordinates()
+{
 	return coordinates;
 }
 
-//void setCoordinates(std::vector<Point> newCoordinates) {
-//	coordinates = newCoordinates;
-//}
+void WhitekastObject::setCoordinates(std::vector<Point> newCoordinates)
+{
+	coordinates = newCoordinates;
+}
 
-Scalar getObjectColor() {
+ObjectColor WhitekastObject::getObjectColor()
+{
 	return objectColor;
 }
 
-void setObjectColor(ObjectColor color) {
+void WhitekastObject::setObjectColor(ObjectColor color)
+{
 	objectColor = color;
 }
