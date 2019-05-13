@@ -9,6 +9,7 @@
 static World* world;
 int width, height;
 float lastFrameTime;
+std::list<GameObject*> objects2;
 
 float lookAtX;
 float lookAtY;
@@ -48,15 +49,6 @@ World* World::getWorld()
 	return world;
 }
 
-void World::display()
-{
-	width = horizontal;
-	height = horizontal;
-	world = new World(width, height);
-
-	return world;
-}
-
 void makePlatform()
 {
 	glMatrixMode(GL_MODELVIEW);
@@ -70,9 +62,9 @@ void makePlatform()
 	glEnd();
 }
 
-void World::display(std::vector<GameObject> objects)
+void World::display()
 {
-	glClearColor(0.6f, 0.6f, 1, 1);
+	glClearColor(0.6f, 0.6f, 1, 1 );
 	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 	
 	glMatrixMode(GL_PROJECTION);
@@ -166,12 +158,3 @@ void World::mousePassiveMotion(int x, int y)
 	else
 		justMovedMouse = false;
 }
-std::list<GameObject*> objects2;
-
-struct Camera
-{
-	float posX = 0;
-	float posY = -4;
-	float rotX = 0;
-	float rotY = 0;
-	float posZ = 0;
