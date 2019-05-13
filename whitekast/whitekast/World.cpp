@@ -175,3 +175,4 @@ struct Camera
 	float rotX = 0;
 	float rotY = 0;
 	float posZ = 0;
+}

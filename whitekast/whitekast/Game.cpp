@@ -8,9 +8,11 @@
 #include <iostream>
 #include "World.h"
 #include <GL/freeglut.h>
+#include "AudioManager.h"
 
 std::list<GameObject*> objects;
 static World* world;
+AudioManager *audiomanager;
 
 Game::Game(const char* title, int argc, char* argv[]) 
 {
@@ -34,13 +36,14 @@ Game::Game(const char* title, int argc, char* argv[])
 	glutKeyboardFunc([](unsigned char key, int mouseX, int mouseY) { World::getWorld()->keyboard(key, mouseX, mouseY); });
 	glutKeyboardUpFunc([](unsigned char key, int mouseX, int mouseY) { World::getWorld()->keyboardUp(key, mouseX, mouseY); });
 	glutPassiveMotionFunc([](int mouseX, int mouseY) {World::getWorld()->mousePassiveMotion(mouseX, mouseY); });
-	
+	audiomanager = new AudioManager();
+	audiomanager->test();
 	glutMainLoop();
 }
 
 Game::~Game() 
 {
-
+	
 }
 
 void Game::makeObjects()
