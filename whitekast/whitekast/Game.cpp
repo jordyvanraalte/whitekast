@@ -36,8 +36,9 @@ Game::Game(const char* title, int argc, char* argv[])
 	glutKeyboardFunc([](unsigned char key, int mouseX, int mouseY) { World::getWorld()->keyboard(key, mouseX, mouseY); });
 	glutKeyboardUpFunc([](unsigned char key, int mouseX, int mouseY) { World::getWorld()->keyboardUp(key, mouseX, mouseY); });
 	glutPassiveMotionFunc([](int mouseX, int mouseY) {World::getWorld()->mousePassiveMotion(mouseX, mouseY); });
-	audiomanager = new AudioManager();
-	audiomanager->playSound("test.mpeg");
+	audiomanager = AudioManager::getAudioManager();
+	audiomanager->playSound("audio/test.mpeg");
+	audiomanager->playSound("audio/bumper_hit.wav");
 	glutMainLoop();
 }
 
