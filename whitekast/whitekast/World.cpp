@@ -5,14 +5,14 @@
 #include <GL/freeglut.h>
 #include <iostream>
 
-
-
-
+std::list<GameObject*> gameObjects;
+float lastFrameTime;
 
 float lookAtX;
 float lookAtY;
 bool keys[255];
 static World* world;
+int width, height;
 
 struct Camera
 {
@@ -29,7 +29,7 @@ World::World(int horizontal, int vertical, std::list<GameObject*> objectlist)
 	width = horizontal;
 	height = vertical;
 	lastFrameTime = 0;
-	objects = objectlist;
+	gameObjects = objectlist;
 
 	glEnable(GL_DEPTH_TEST);
 	ZeroMemory(keys, sizeof(keys));
@@ -77,37 +77,10 @@ void World::display()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	for (auto object : objects) 
+	for (auto object : gameObjects) 
 	{
 		glPushMatrix();
 		object->draw();
-		glPopMatrix();
-	}
-
-	glutSwapBuffers();
-}
-
-void World::displayVisionObjects(std::vector<WhitekastObject> *objects)
-{
-	glClearColor(0.6f, 0.6f, 1, 1);
-	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
-
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-
-	gluPerspective(90.0f, static_cast<float>(width / height) , 0.1f, 50.0f);
-
-	glRotatef(camera.rotX, 1, 0, 0);
-	glRotatef(camera.rotY, 0, 1, 0);
-	glTranslatef(camera.posX, camera.posZ, camera.posY);
-
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-
-	for (auto object : *objects)
-	{
-		glPushMatrix();
-		object.draw();
 		glPopMatrix();
 	}
 
@@ -140,7 +113,7 @@ void World::idle(void)
 	if (keys['q']) camera.posZ += deltaTime * speed;
 	if (keys['e']) camera.posZ -= deltaTime * speed;
 
-	for (auto o : objects)
+	for (auto o : gameObjects)
 		o->update(deltaTime);
 
 	glutPostRedisplay();

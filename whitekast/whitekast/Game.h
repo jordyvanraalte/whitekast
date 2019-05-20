@@ -10,10 +10,8 @@ class StateManager;
 class Game
 {
 public:
-	Game(const char* title, int argc, char* argv[]);
+	Game(const char * title, int argc, char * argv[]);
 	~Game();
-
-
 
 	void startGame();
 	void initGlut(const char* title, int argc, char* argv[]);
@@ -21,6 +19,7 @@ public:
 	void update();
 	void getDesktopResolution(int& horizontal, int& vertical);
 	void clean();
+	void initObjects();
 	bool running() { return isRunning; }
 
 private:

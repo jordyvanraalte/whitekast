@@ -4,12 +4,13 @@
 #include <opencv2/opencv.hpp>
 #include <opencv2/core.hpp>
 #include <opencv2/core/mat.hpp>
+#include "DrawComponent.h"
 
 using namespace cv;
 
-enum ObjectColor { RED, GREEN, BLUE };
+enum ObjectColor { RED, GREEN, BLUE, WHITE };
 
-class WhitekastObject {
+class WhitekastObject : public DrawComponent {
 	ObjectColor objectColor;
 	std::vector<Point> coordinates;
 	Point center;
@@ -28,5 +29,6 @@ public:
 
 	void setDrawingColor();
 
-	void draw();
+	virtual void draw() override;
+	virtual void drawWithTextures() override;
 };

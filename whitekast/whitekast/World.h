@@ -15,7 +15,7 @@ public:
 
 	void idle(void);
 	void display();
-	void displayVisionObjects(std::vector<WhitekastObject>*);
+	void addVisionObjects(vector<WhitekastObject> whitekastObjects);
 	void reshape(int width, int height);
 	void move(float angle, float fac);
 	void keyboard(unsigned char key, int mouseX, int mouseY);
@@ -23,11 +23,6 @@ public:
 	void mousePassiveMotion(int x, int y);
 	static World* getWorld();
 	void makePlatform();
-
-private:
-	int width, height;
-	float lastFrameTime;
-	std::list<GameObject*> objects;
 };
 
 

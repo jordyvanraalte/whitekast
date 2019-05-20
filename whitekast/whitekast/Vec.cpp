@@ -6,12 +6,14 @@ Vec3f::Vec3f(const float x, const float y, const float z)
 	this->y = y;
 	this->z = z;
 }
+
 Vec3f::Vec3f()
 {
 	this->x = 0;
 	this->y = 0;
 	this->z = 0;
 }
+
 Vec3f::Vec3f(const Vec3f& other)
 {
 	this->x = other.x;
@@ -23,8 +25,6 @@ float& Vec3f::operator [](int index)
 {
 	return v[index];
 }
-
-
 
 Vec2f::Vec2f(const float x, const float y)
 {

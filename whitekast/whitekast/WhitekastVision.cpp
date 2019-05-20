@@ -10,10 +10,10 @@ using namespace cv;
 using namespace std;
 
 Mat redFrame, greenFrame, blueFrame;
-vector<WhitekastObject> visionObjects;
-VideoCapture vCap(0);
+vector<WhitekastObject*> visionObjects;
+VideoCapture vCap(1);
 
-vector<WhitekastObject>* initVision()
+vector<WhitekastObject*> initVision()
 {
 	if (!vCap.isOpened())
 	{
@@ -31,11 +31,12 @@ vector<WhitekastObject>* initVision()
 
 	waitKey(0);
 
-	findObjectsByFrame(redFrame, &visionObjects, RED);
-	findObjectsByFrame(greenFrame, &visionObjects, GREEN);
-	findObjectsByFrame(blueFrame, &visionObjects, BLUE);
+	createBorder();
+	findObjectsByFrame(redFrame, RED);
+	findObjectsByFrame(greenFrame, GREEN);
+	findObjectsByFrame(blueFrame, BLUE);
 
-	return &visionObjects;
+	return visionObjects;
 }
 
 int captureFrames() {
@@ -77,7 +78,17 @@ int captureFrames() {
 	return 1;
 }
 
-void findObjectsByFrame(Mat frame, vector<WhitekastObject>* wkObjects, ObjectColor objectColor) {
+void createBorder()
+{
+	WhitekastObject* object = new WhitekastObject(WHITE);
+	double cx = CAMERA_WIDTH / 2.0;
+	double cy = CAMERA_HEIGHT / 2.0;
+	Point centerPoint = Point(cx, cy);
+	object->setCenter(centerPoint);
+	visionObjects.push_back(object);
+}
+
+void findObjectsByFrame(const Mat frame, const ObjectColor objectColor) {
 	threshold(frame, frame, 100, 255, 0);
 
 	vector<vector<Point>> contours;
@@ -94,14 +105,14 @@ void findObjectsByFrame(Mat frame, vector<WhitekastObject>* wkObjects, ObjectCol
 			//Scalar color = Scalar(0, 255, 255);
 			//drawContours(contourFrame, contours, (int)i, color, 2, LINE_8, hierarchy, 0);
 
-			WhitekastObject object = WhitekastObject(objectColor);
-			object.setCoordinates(contours[i]);
+			WhitekastObject* object = new WhitekastObject(objectColor);
+			object->setCoordinates(contours[i]);
 			Rect rect = boundingRect(contours[i]);
 			double cx = rect.x + rect.width / 2.0;
 			double cy = rect.y + rect.height / 2.0;
 			Point centerPoint = Point(cx, cy);
-			object.setCenter(centerPoint);
-			wkObjects->push_back(object);
+			object->setCenter(centerPoint);
+			visionObjects.push_back(object);
 		}
 	}
 
