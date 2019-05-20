@@ -20,6 +20,7 @@ public:
 	void getDesktopResolution(int& horizontal, int& vertical);
 	void clean();
 	void initObjects();
+	void makeObjects();
 	bool running() { return isRunning; }
 
 private:

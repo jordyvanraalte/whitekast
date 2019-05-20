@@ -6,6 +6,7 @@
 #include "WhitekastVision.h"
 #include "CubeComponent.h"
 #include "WorldComponent.h"
+#include "BallComponent.h"
 #include "Vec.h"
 #include <vector>
 #include <iostream>
@@ -23,6 +24,7 @@ int vertical = 0;
 Game::Game(const char * title, int argc, char * argv[])
 {
 	initGlut(title, argc, argv);
+	makeObjects();
 	world = new World(horizontal, vertical, objects);
 
 	audiomanager = AudioManager::getInstance();
@@ -45,15 +47,6 @@ void Game::initGlut(const char * title, int argc, char * argv[])
 {
 	getDesktopResolution(horizontal, vertical);
 
-	
-	whitekastObjects = initVision();
-	std::vector<WhitekastObject*> whitekastObjects = initVision();
-	for (auto wkObject : whitekastObjects) {
-		GameObject* gameObject = new GameObject();
-		gameObject->addComponent(wkObject);
-		objects.push_back(gameObject);
-	}
-
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
 	glutInitWindowSize(horizontal, vertical);
@@ -68,11 +61,6 @@ void Game::initGlut(const char * title, int argc, char * argv[])
 	glutKeyboardFunc([](unsigned char key, int mouseX, int mouseY) { World::getWorld()->keyboard(key, mouseX, mouseY); });
 	glutKeyboardUpFunc([](unsigned char key, int mouseX, int mouseY) { World::getWorld()->keyboardUp(key, mouseX, mouseY); });
 	glutPassiveMotionFunc([](int mouseX, int mouseY) {World::getWorld()->mousePassiveMotion(mouseX, mouseY); });
-}
-
-Game::~Game() 
-{
-	
 }
 
 void Game::makeObjects()
