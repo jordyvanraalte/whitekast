@@ -117,6 +117,9 @@
     <ClInclude Include="AudioManager.h">
       <Filter>Header Files\game\audio</Filter>
     </ClInclude>
+    <ClInclude Include="BallComponent.h">
+      <Filter>Header Files\game\components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -175,6 +178,9 @@
     </ClCompile>
     <ClCompile Include="AudioManager.cpp">
       <Filter>Source Files\game\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="BallComponent.cpp">
+      <Filter>Source Files\game\components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
