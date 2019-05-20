@@ -49,6 +49,9 @@
     <Filter Include="Header Files\game\audio">
       <UniqueIdentifier>{362d744f-e14b-4fbc-921a-6317eca272b4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\models">
+      <UniqueIdentifier>{bd7bb985-265a-431d-863a-2fef620e295d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -173,5 +176,38 @@
     <ClCompile Include="AudioManager.cpp">
       <Filter>Source Files\game\audio</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="pinball_1.0.mtl">
+      <Filter>Resource Files\models</Filter>
+    </None>
+    <None Include="pinball_2.0.mtl">
+      <Filter>Resource Files\models</Filter>
+    </None>
+    <None Include="pinball_3.0.mtl">
+      <Filter>Resource Files\models</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="pinball_1.0.obj">
+      <Filter>Resource Files\models</Filter>
+    </Object>
+    <Object Include="pinball_2.0.obj">
+      <Filter>Resource Files\models</Filter>
+    </Object>
+    <Object Include="pinball_3.0.obj">
+      <Filter>Resource Files\models</Filter>
+    </Object>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="pinball_1.0.png">
+      <Filter>Resource Files\models</Filter>
+    </Image>
+    <Image Include="pinball_2.0.png">
+      <Filter>Resource Files\models</Filter>
+    </Image>
+    <Image Include="pinball_3.0.png">
+      <Filter>Resource Files\models</Filter>
+    </Image>
   </ItemGroup>
 </Project>

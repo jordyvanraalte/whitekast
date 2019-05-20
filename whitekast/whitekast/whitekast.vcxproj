@@ -207,6 +207,22 @@
     <ClCompile Include="World.cpp" />
     <ClCompile Include="WorldComponent.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="pinball_1.0.mtl" />
+    <None Include="pinball_2.0.mtl" />
+    <None Include="pinball_3.0.mtl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="pinball_1.0.obj" />
+    <Object Include="pinball_2.0.obj" />
+    <Object Include="pinball_3.0.obj">
+    </Object>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="pinball_1.0.png" />
+    <Image Include="pinball_2.0.png" />
+    <Image Include="pinball_3.0.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
