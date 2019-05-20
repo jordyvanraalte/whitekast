@@ -98,11 +98,11 @@ ObjModel::ObjModel(const std::string &fileName)
 		params[0] = toLower(params[0]);
 
 		if (params[0] == "v")
-			vertices.push_back(Vec3f((float)atof(params[1].c_str()), (float)atof(params[2].c_str()), (float)atof(params[3].c_str())));
+			vertices.push_back(::Vec3f((float)atof(params[1].c_str()), (float)atof(params[2].c_str()), (float)atof(params[3].c_str())));
 		else if (params[0] == "vn")
-			normals.push_back(Vec3f((float)atof(params[1].c_str()), (float)atof(params[2].c_str()), (float)atof(params[3].c_str())));
+			normals.push_back(::Vec3f((float)atof(params[1].c_str()), (float)atof(params[2].c_str()), (float)atof(params[3].c_str())));
 		else if (params[0] == "vt")
-			texcoords.push_back(Vec2f((float)atof(params[1].c_str()), (float)atof(params[2].c_str())));
+			texcoords.push_back(::Vec2f((float)atof(params[1].c_str()), (float)atof(params[2].c_str())));
 		else if (params[0] == "f")
 		{
 			for (size_t ii = 4; ii <= params.size(); ii++)
@@ -183,8 +183,8 @@ void ObjModel::draw()
 		{
 			for (auto& vertex : face.vertices)
 			{
-				Vec3f& vec = vertices[vertex.position];
-				Vec2f& tex = texcoords[vertex.texcoord];
+				::Vec3f& vec = vertices[vertex.position];
+				::Vec2f& tex = texcoords[vertex.texcoord];
 				glTexCoord2fv(tex.v); glVertex3fv(vec.v);
 			}
 		}

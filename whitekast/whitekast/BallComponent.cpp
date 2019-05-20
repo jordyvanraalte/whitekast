@@ -2,9 +2,9 @@
 #include <GL/freeglut.h>
 
 
-BallComponent::BallComponent()
+BallComponent::BallComponent() : ball(new ObjModel("models/pinball_3.0.obj")), speed(0)
 {
-	this->speed = 0;
+
 }
 
 
@@ -14,7 +14,7 @@ BallComponent::~BallComponent()
 
 void BallComponent::draw()
 {
-	
+	ball->draw();
 }
 
 void BallComponent::update() 

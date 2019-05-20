@@ -132,15 +132,15 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>C:\opencv\build\include;freeglut\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\opencv\build\include;freeglut\include;irrKlang\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\opencv\build\x86\vc14\lib;freeglut\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>freeglut.lib;opencv_calib3d2413.lib;opencv_contrib2413.lib;opencv_core2413.lib;opencv_features2d2413.lib;opencv_flann2413.lib;opencv_gpu2413.lib;opencv_highgui2413.lib;opencv_imgproc2413.lib;opencv_legacy2413.lib;opencv_ml2413.lib;opencv_nonfree2413.lib;opencv_objdetect2413.lib;opencv_ocl2413.lib;opencv_photo2413.lib;opencv_stitching2413.lib;opencv_superres2413.lib;opencv_ts2413.lib;opencv_video2413.lib;opencv_videostab2413.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\opencv\build\x86\vc14\lib;freeglut\lib;irrKlang\lib\Win32-visualStudio</AdditionalLibraryDirectories>
+      <AdditionalDependencies>freeglut.lib;opencv_calib3d2413.lib;opencv_contrib2413.lib;opencv_core2413.lib;opencv_features2d2413.lib;opencv_flann2413.lib;opencv_gpu2413.lib;opencv_highgui2413.lib;opencv_imgproc2413.lib;opencv_legacy2413.lib;opencv_ml2413.lib;opencv_nonfree2413.lib;opencv_objdetect2413.lib;opencv_ocl2413.lib;opencv_photo2413.lib;opencv_stitching2413.lib;opencv_superres2413.lib;opencv_ts2413.lib;opencv_video2413.lib;opencv_videostab2413.lib;irrKlang.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -208,22 +208,6 @@
     <ClCompile Include="Vec.cpp" />
     <ClCompile Include="World.cpp" />
     <ClCompile Include="WorldComponent.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="pinball_1.0.mtl" />
-    <None Include="pinball_2.0.mtl" />
-    <None Include="pinball_3.0.mtl" />
-  </ItemGroup>
-  <ItemGroup>
-    <Object Include="pinball_1.0.obj" />
-    <Object Include="pinball_2.0.obj" />
-    <Object Include="pinball_3.0.obj">
-    </Object>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="pinball_1.0.png" />
-    <Image Include="pinball_2.0.png" />
-    <Image Include="pinball_3.0.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

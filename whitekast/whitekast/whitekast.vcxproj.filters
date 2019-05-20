@@ -183,37 +183,4 @@
       <Filter>Source Files\game\components</Filter>
     </ClCompile>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="pinball_1.0.mtl">
-      <Filter>Resource Files\models</Filter>
-    </None>
-    <None Include="pinball_2.0.mtl">
-      <Filter>Resource Files\models</Filter>
-    </None>
-    <None Include="pinball_3.0.mtl">
-      <Filter>Resource Files\models</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Object Include="pinball_1.0.obj">
-      <Filter>Resource Files\models</Filter>
-    </Object>
-    <Object Include="pinball_2.0.obj">
-      <Filter>Resource Files\models</Filter>
-    </Object>
-    <Object Include="pinball_3.0.obj">
-      <Filter>Resource Files\models</Filter>
-    </Object>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="pinball_1.0.png">
-      <Filter>Resource Files\models</Filter>
-    </Image>
-    <Image Include="pinball_2.0.png">
-      <Filter>Resource Files\models</Filter>
-    </Image>
-    <Image Include="pinball_3.0.png">
-      <Filter>Resource Files\models</Filter>
-    </Image>
-  </ItemGroup>
 </Project>
