@@ -24,7 +24,7 @@ Game::Game(const char* title, int argc, char* argv[])
 	int vertical = 0;
 	getDesktopResolution(horizontal, vertical);
 
-	makeObjects();
+	
 	whitekastObjects = initVision();
 
 	glutInit(&argc, argv);
@@ -33,6 +33,7 @@ Game::Game(const char* title, int argc, char* argv[])
 	glutCreateWindow(title);
 	
 	glEnable(GL_DEPTH_TEST);
+	makeObjects();
 	world = new World(horizontal, vertical, objects);
 
 	glutIdleFunc([]() { World::getWorld()->idle();  });
