@@ -108,3 +108,7 @@ void WhitekastObject::draw() {
 		glEnd();
 	}
 }
+
+void WhitekastObject::drawWithTextures()
+{
+}
