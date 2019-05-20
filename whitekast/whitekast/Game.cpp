@@ -45,6 +45,8 @@ void Game::initGlut(const char * title, int argc, char * argv[])
 {
 	getDesktopResolution(horizontal, vertical);
 
+	
+	whitekastObjects = initVision();
 	std::vector<WhitekastObject*> whitekastObjects = initVision();
 	for (auto wkObject : whitekastObjects) {
 		GameObject* gameObject = new GameObject();
@@ -61,10 +63,34 @@ void Game::initGlut(const char * title, int argc, char * argv[])
 
 	glutIdleFunc([]() { World::getWorld()->idle();  });
 	glutDisplayFunc([]() { World::getWorld()->display(); });
+	//glutDisplayFunc([]() { World::getWorld()->displayVisionObjects(whitekastObjects); });
 	glutReshapeFunc([](int horizontal, int vertical) { World::getWorld()->reshape(horizontal, vertical); });
 	glutKeyboardFunc([](unsigned char key, int mouseX, int mouseY) { World::getWorld()->keyboard(key, mouseX, mouseY); });
 	glutKeyboardUpFunc([](unsigned char key, int mouseX, int mouseY) { World::getWorld()->keyboardUp(key, mouseX, mouseY); });
 	glutPassiveMotionFunc([](int mouseX, int mouseY) {World::getWorld()->mousePassiveMotion(mouseX, mouseY); });
+}
+
+Game::~Game() 
+{
+	
+}
+
+void Game::makeObjects()
+{
+	/*GameObject* testCube = new GameObject();
+	testCube->addComponent(new CubeComponent(1));
+	testCube->position = ::Vec3f(0, 0, -3);
+	objects.push_back(testCube);
+
+	GameObject* roomCube = new GameObject();
+	roomCube->addComponent(new CubeComponent(10));
+	roomCube->position = ::Vec3f(0, 0, 0);
+	objects.push_back(roomCube);*/
+
+	GameObject* testball = new GameObject();
+	testball->addComponent(new BallComponent());
+	testball->position = ::Vec3f(0, 0, -3);
+	objects.push_back(testball);
 }
 
 void Game::handleEvents() 

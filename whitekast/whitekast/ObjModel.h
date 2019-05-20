@@ -34,9 +34,9 @@ private:
 		std::string name;
 		Texture* texture;
 
-		Vec3f diffuse;
-		Vec3f ambient;
-		Vec3f specular;
+		::Vec3f diffuse;
+		::Vec3f ambient;
+		::Vec3f specular;
 	};
 
 	class ObjGroup
@@ -48,9 +48,9 @@ private:
 	};
 
 
-	std::vector<Vec3f>	vertices;
-	std::vector<Vec3f>	normals;
-	std::vector<Vec2f>	texcoords;
+	std::vector<::Vec3f>	vertices;
+	std::vector<::Vec3f>	normals;
+	std::vector<::Vec2f>	texcoords;
 	std::vector<ObjGroup*> groups;
 	std::vector<MaterialInfo*> materials;
 

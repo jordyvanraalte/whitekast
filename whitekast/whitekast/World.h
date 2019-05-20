@@ -10,7 +10,7 @@
 class World
 {
 public:
-	World(int horizontal, int vertical, std::list<GameObject*> objectlist);
+	World(int horizontal, int vertical, std::list<GameObject*>& objectlist);
 	~World();
 
 	void idle(void);

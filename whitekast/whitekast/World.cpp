@@ -23,7 +23,7 @@ struct Camera
 	float posZ = 0;
 } camera;
 
-World::World(int horizontal, int vertical, std::list<GameObject*> objectlist)
+World::World(int horizontal, int vertical, std::list<GameObject*>& objectlist)
 {
 	world = this;
 	width = horizontal;
