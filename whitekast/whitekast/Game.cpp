@@ -102,19 +102,6 @@ void Game::getDesktopResolution(int& horizontal, int& vertical)
 	vertical = desktop.bottom;
 }
 
-void Game::initObjects()
-{
-	GameObject* testCube = new GameObject();
-	testCube->addComponent(new CubeComponent(1));
-	testCube->position = ::Vec3f(0, 0, -3);
-	objects.push_back(testCube);
-
-	//GameObject* roomCube = new GameObject();
-	//roomCube->addComponent(new WorldComponent(10));
-	//roomCube->position = ::Vec3f(0, 0, 0);
-	//objects.push_back(roomCube);
-}
-
 void Game::clean() 
 {
 
@@ -137,4 +124,4 @@ void Game::initObjects()
 	GameObject* roomCube = new GameObject();
 	roomCube->addComponent(new WorldComponent(10, texture1, texture2, texture3, texture4, texture5));
 	roomCube->position = ::Vec3f(0, 0, 0);
-	objects.push_back(roomCube);
+	objects.push_back(roomCube);}

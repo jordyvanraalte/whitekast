@@ -17,11 +17,6 @@ void BallComponent::draw()
 	ball->draw();
 }
 
-void BallComponent::drawWithTextures()
-{
-	ball->draw();
-}
-
 void BallComponent::update() 
 {
 	speed -= 1;

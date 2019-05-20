@@ -13,6 +13,5 @@ public:
 	~BallComponent();
 
 	virtual void draw() override;
-	virtual void drawWithTextures() override;
 	void update();
 };
