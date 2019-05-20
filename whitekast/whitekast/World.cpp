@@ -1,10 +1,10 @@
 #include "World.h"
 #include <math.h>
 #include "GameObject.h"
+#include "WhitekastObject.h"
 #include "CubeComponent.h"
 #include <GL/freeglut.h>
 #include <iostream>
-
 
 static World* world;
 int width, height;
@@ -85,7 +85,31 @@ void World::display()
 		glPopMatrix();
 	}
 
+	glutSwapBuffers();
+}
 
+void World::displayVisionObjects(std::vector<WhitekastObject> objects)
+{
+	glClearColor(0.6f, 0.6f, 1, 1);
+	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	gluPerspective(90.0f, width / (float)height, 0.1f, 50.0f);
+
+	glRotatef(camera.rotX, 1, 0, 0);
+	glRotatef(camera.rotY, 0, 1, 0);
+	glTranslatef(camera.posX, camera.posZ, camera.posY);
+
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+
+	for (auto object : objects)
+	{
+		glPushMatrix();
+		object.draw();
+		glPopMatrix();
+	}
 
 	glutSwapBuffers();
 }
