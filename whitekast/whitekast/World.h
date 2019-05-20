@@ -15,7 +15,6 @@ public:
 
 	void idle(void);
 	void display();
-	void addVisionObjects(vector<WhitekastObject> whitekastObjects);
 	void reshape(int width, int height);
 	void move(float angle, float fac);
 	void keyboard(unsigned char key, int mouseX, int mouseY);

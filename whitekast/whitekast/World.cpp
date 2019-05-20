@@ -82,6 +82,10 @@ void World::display()
 		glPushMatrix();
 		object->draw();
 		glPopMatrix();
+
+		glPushMatrix();
+		object->drawWithTextures();
+		glPopMatrix();
 	}
 
 	glutSwapBuffers();

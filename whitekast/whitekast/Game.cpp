@@ -58,6 +58,8 @@ void Game::initGlut(const char * title, int argc, char * argv[])
 	glutKeyboardFunc([](unsigned char key, int mouseX, int mouseY) { World::getWorld()->keyboard(key, mouseX, mouseY); });
 	glutKeyboardUpFunc([](unsigned char key, int mouseX, int mouseY) { World::getWorld()->keyboardUp(key, mouseX, mouseY); });
 	glutPassiveMotionFunc([](int mouseX, int mouseY) {World::getWorld()->mousePassiveMotion(mouseX, mouseY); });
+
+	initObjects();
 }
 
 void Game::handleEvents() 
@@ -86,10 +88,17 @@ void Game::initObjects()
 	testCube->position = ::Vec3f(0, 0, -3);
 	objects.push_back(testCube);
 
-	//GameObject* roomCube = new GameObject();
-	//roomCube->addComponent(new WorldComponent(10));
-	//roomCube->position = ::Vec3f(0, 0, 0);
-	//objects.push_back(roomCube);
+	Texture texture1 = Texture("Texture/LeftWall");
+	Texture texture2 = Texture("Texture/RightWall");
+	Texture texture3 = Texture("Texture/floor");
+	Texture texture4 = Texture("Texture/Cealing");
+	Texture texture5 = Texture("Texture/FrontWall");
+
+
+	GameObject* roomCube = new GameObject();
+	roomCube->addComponent(new WorldComponent(10, texture1, texture2, texture3, texture4, texture5));
+	roomCube->position = ::Vec3f(0, 0, 0);
+	objects.push_back(roomCube);
 }
 
 void Game::clean() 

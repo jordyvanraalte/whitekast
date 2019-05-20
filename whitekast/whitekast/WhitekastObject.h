@@ -29,5 +29,6 @@ public:
 
 	void setDrawingColor();
 
-	virtual void draw();
+	virtual void draw() override;
+	virtual void drawWithTextures() override;
 };

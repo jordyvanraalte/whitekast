@@ -13,8 +13,9 @@ public:
 	Texture texture2;
 	Texture texture3;
 	Texture texture4;
+	Texture texture5;
 
-	WorldComponent(float size, Texture texture1, Texture texture2, Texture texture3, Texture texture4);
+	WorldComponent(float size, Texture texture1, Texture texture2, Texture texture3, Texture texture4, Texture texture5);
 	~WorldComponent();
 
 	virtual void draw() override;

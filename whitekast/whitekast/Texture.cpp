@@ -24,6 +24,16 @@ Texture::Texture(const std::string &filename)
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 }
 
+Texture::~Texture()
+{
+
+}
+
+Texture::Texture()
+{
+
+}
+
 void Texture::bind()
 {
 	glBindTexture(GL_TEXTURE_2D, textureId);
