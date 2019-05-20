@@ -1,8 +1,12 @@
 #pragma once
-class HomeState
+#include "State.h"
+
+
+class HomeState : public State
 {
 public:
 	HomeState();
 	~HomeState();
+	void handle() override;
 };
 

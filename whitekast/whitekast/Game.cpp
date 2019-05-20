@@ -12,6 +12,7 @@
 #include "World.h"
 #include <GL/freeglut.h>
 #include "AudioManager.h"
+#include "StateManager.h"
 
 std::list<GameObject*> objects;
 static World* world;
@@ -23,6 +24,12 @@ Game::Game(const char * title, int argc, char * argv[])
 {
 	initGlut(title, argc, argv);
 	world = new World(horizontal, vertical, objects);
+
+	audiomanager = AudioManager::getInstance();
+	audiomanager->playSound("audio/test.mpeg");
+	audiomanager->playSound("audio/bumper_hit.wav");
+
+	StateManager::getInstance();
 }
 
 Game::~Game()

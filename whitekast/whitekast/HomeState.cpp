@@ -9,3 +9,7 @@ HomeState::HomeState()
 HomeState::~HomeState()
 {
 }
+
+void HomeState::handle()
+{
+}
