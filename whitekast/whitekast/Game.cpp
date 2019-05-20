@@ -25,6 +25,7 @@ Game::Game(const char * title, int argc, char * argv[])
 {
 	initGlut(title, argc, argv);
 	makeObjects();
+	initObjects();
 	world = new World(horizontal, vertical, objects);
 
 	audiomanager = AudioManager::getInstance();
@@ -61,8 +62,6 @@ void Game::initGlut(const char * title, int argc, char * argv[])
 	glutKeyboardFunc([](unsigned char key, int mouseX, int mouseY) { World::getWorld()->keyboard(key, mouseX, mouseY); });
 	glutKeyboardUpFunc([](unsigned char key, int mouseX, int mouseY) { World::getWorld()->keyboardUp(key, mouseX, mouseY); });
 	glutPassiveMotionFunc([](int mouseX, int mouseY) {World::getWorld()->mousePassiveMotion(mouseX, mouseY); });
-
-	initObjects();
 }
 
 void Game::makeObjects()
