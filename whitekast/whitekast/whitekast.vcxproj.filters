@@ -49,6 +49,12 @@
     <Filter Include="Header Files\game\audio">
       <UniqueIdentifier>{362d744f-e14b-4fbc-921a-6317eca272b4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Models">
+      <UniqueIdentifier>{344753d2-b85e-4fff-92eb-30e05ce33ffc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Models\Pinballs">
+      <UniqueIdentifier>{6660ac3c-0815-473f-a817-ce476e30a01d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -182,13 +188,13 @@
   </ItemGroup>
   <ItemGroup>
     <Object Include="Models\Pinballs\pinball_1.0.obj">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\Models\Pinballs</Filter>
     </Object>
     <Object Include="Models\Pinballs\pinball_2.0.obj">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\Models\Pinballs</Filter>
     </Object>
     <Object Include="Models\Pinballs\pinball_3.0.obj">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\Models\Pinballs</Filter>
     </Object>
   </ItemGroup>
 </Project>
