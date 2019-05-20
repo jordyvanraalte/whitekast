@@ -43,6 +43,12 @@
     <Filter Include="Header Files\vision">
       <UniqueIdentifier>{769ebc2f-af86-4796-952c-6ae6e47d5a1d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\game\audio">
+      <UniqueIdentifier>{f52fc142-bcf7-4827-9fd6-6d14d3760461}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\game\audio">
+      <UniqueIdentifier>{362d744f-e14b-4fbc-921a-6317eca272b4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -102,6 +108,12 @@
     <ClInclude Include="WhitekastVision.h">
       <Filter>Header Files\vision</Filter>
     </ClInclude>
+    <ClInclude Include="Wall.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioManager.h">
+      <Filter>Header Files\game\audio</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -157,6 +169,9 @@
     </ClCompile>
     <ClCompile Include="WhitekastVision.cpp">
       <Filter>Source Files\vision</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioManager.cpp">
+      <Filter>Source Files\game\audio</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
