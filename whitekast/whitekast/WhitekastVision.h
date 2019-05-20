@@ -19,6 +19,6 @@
 #define CAMERA_HEIGHT 480.0f
 #endif
 
-std::vector<WhitekastObject> initVision();
+std::vector<WhitekastObject>* initVision();
 int captureFrames();
 void findObjectsByFrame(Mat, std::vector<WhitekastObject>*, ObjectColor);

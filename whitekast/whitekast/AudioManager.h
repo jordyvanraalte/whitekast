@@ -1,4 +1,5 @@
 #pragma once
+#include <irrKlang.h>
 #include <iostream>
 #include <map>
 
@@ -10,7 +11,7 @@ private:
 
 public:
 	~AudioManager();
-	static AudioManager* getAudioManager();
+	static AudioManager* getInstance();
 	void playSound(const char* name);
 	void playMusic(const char* name);
 };

@@ -1,7 +1,5 @@
 #include "AudioManager.h"
-#include <irrKlang.h>
-#include <map>
-#include <iostream>
+
 
 #pragma comment(lib, "irrKlang.lib") //link with irrKlang.dll
 
@@ -16,7 +14,6 @@ AudioManager::AudioManager()
 {
 	engine = irrklang::createIrrKlangDevice();
 }
-
 AudioManager::~AudioManager()
 {
 	engine->drop();
@@ -24,20 +21,18 @@ AudioManager::~AudioManager()
 	{
 		pair.second->drop();
 	}
+	
+	if (music != nullptr) { delete music; }
 	delete engine;
-	delete music;
-
 }
-
-AudioManager* AudioManager::getAudioManager()
+AudioManager* AudioManager::getInstance()
 {
-	if (instance == NULL)
+	if (instance == nullptr)
 	{
 		instance = new AudioManager();
 	}
 	return instance;
 }
-
 void AudioManager::playSound(const char* name)
 {
 	if (audioMap.count(name) >= 1)
@@ -50,16 +45,16 @@ void AudioManager::playSound(const char* name)
 		audioMap.insert(std::pair<const char*, irrklang::ISound*>(name, sound));
 	}
 }
-void AudioManager::playMusic(const char * name)
+void AudioManager::playMusic(const char* name)
 {
-	if (music == NULL)
+	if (music == nullptr)
 	{
 		music = engine->play2D(name, true, false, true);
 	}
 	else
 	{
 		music->drop();
-		music = NULL;
+		music = nullptr;
 		music = engine->play2D(name, true, false, true);
 	}
 }

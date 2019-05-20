@@ -1,8 +1,7 @@
 #include "CubeComponent.h"
 #include <GL/freeglut.h>
 
-
-CubeComponent::CubeComponent(float size)
+CubeComponent::CubeComponent(const float size)
 {
 	this->size = size;
 }

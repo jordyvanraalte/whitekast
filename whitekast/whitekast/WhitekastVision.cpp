@@ -13,7 +13,7 @@ Mat redFrame, greenFrame, blueFrame;
 vector<WhitekastObject> visionObjects;
 VideoCapture vCap(0);
 
-vector<WhitekastObject> initVision()
+vector<WhitekastObject>* initVision()
 {
 	if (!vCap.isOpened())
 	{
@@ -35,7 +35,7 @@ vector<WhitekastObject> initVision()
 	findObjectsByFrame(greenFrame, &visionObjects, GREEN);
 	findObjectsByFrame(blueFrame, &visionObjects, BLUE);
 
-	return visionObjects;
+	return &visionObjects;
 }
 
 int captureFrames() {
