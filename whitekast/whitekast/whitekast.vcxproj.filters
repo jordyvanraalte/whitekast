@@ -57,9 +57,6 @@
     <ClInclude Include="World.h">
       <Filter>Header Files\game</Filter>
     </ClInclude>
-    <ClInclude Include="GameState.h">
-      <Filter>Header Files\game\states</Filter>
-    </ClInclude>
     <ClInclude Include="PlayState.h">
       <Filter>Header Files\game\states</Filter>
     </ClInclude>
@@ -114,6 +111,12 @@
     <ClInclude Include="AudioManager.h">
       <Filter>Header Files\game\audio</Filter>
     </ClInclude>
+    <ClInclude Include="StateManager.h">
+      <Filter>Header Files\game\states</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>Header Files\game\states</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -124,9 +127,6 @@
     </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameState.cpp">
-      <Filter>Source Files\game\states</Filter>
     </ClCompile>
     <ClCompile Include="PlayState.cpp">
       <Filter>Source Files\game\states</Filter>
@@ -172,6 +172,12 @@
     </ClCompile>
     <ClCompile Include="AudioManager.cpp">
       <Filter>Source Files\game\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="StateManager.cpp">
+      <Filter>Source Files\game\states</Filter>
+    </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>Source Files\game\states</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

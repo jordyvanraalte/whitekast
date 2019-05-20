@@ -11,7 +11,9 @@
 #include "World.h"
 #include <GL/freeglut.h>
 #include "AudioManager.h"
+#include "StateManager.h"
 
+class HomeState;
 static World* world;
 std::vector<WhitekastObject>* whitekastObjects;
 
@@ -31,6 +33,8 @@ Game::Game(const char* title, int argc, char* argv[])
 	audiomanager = AudioManager::getInstance();
 	audiomanager->playSound("audio/test.mpeg");
 	audiomanager->playSound("audio/bumper_hit.wav");
+
+	StateManager::getInstance();
 }
 
 Game::~Game() 
@@ -44,7 +48,7 @@ void Game::startGame()
 }
 
 void Game::initGlut(const char* title,int argc, char* argv[])
-{
+{	
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
 	glutInitWindowSize(horizontal, vertical);
