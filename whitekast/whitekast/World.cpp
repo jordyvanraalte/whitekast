@@ -1,20 +1,18 @@
 #include "World.h"
-#include <math.h>
 #include "GameObject.h"
 #include "WhitekastObject.h"
 #include "CubeComponent.h"
 #include <GL/freeglut.h>
 #include <iostream>
 
-static World* world;
-int width, height;
-float lastFrameTime;
 std::list<GameObject*> gameObjects;
+float lastFrameTime;
 
 float lookAtX;
 float lookAtY;
 bool keys[255];
-const float M_PI = 3.14159265358979323846;
+static World* world;
+int width, height;
 
 struct Camera
 {
@@ -27,6 +25,7 @@ struct Camera
 
 World::World(int horizontal, int vertical, std::list<GameObject*> objectlist)
 {
+	world = this;
 	width = horizontal;
 	height = vertical;
 	lastFrameTime = 0;
@@ -49,7 +48,7 @@ World* World::getWorld()
 	return world;
 }
 
-void makePlatform()
+void World::makePlatform()
 {
 	glMatrixMode(GL_MODELVIEW);
 	glBegin(GL_QUADS);
@@ -78,7 +77,7 @@ void World::display()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	for (auto &object : gameObjects) 
+	for (auto object : gameObjects) 
 	{
 		glPushMatrix();
 		object->draw();
@@ -88,21 +87,16 @@ void World::display()
 	glutSwapBuffers();
 }
 
-void World::addVisionObjects(vector<WhitekastObject> whitekastObjects)
-{
-
-}
-
 void World::reshape(int horizontal, int vertical)
 {
 	width = horizontal;
 	height = vertical;
 }
 
-void move(float angle, float fac)
+void World::move(const float angle, const float fac)
 {
-	camera.posX += (float)cos((camera.rotY + angle) / 180 * M_PI) * fac;
-	camera.posY += (float)sin((camera.rotY + angle) / 180 * M_PI) * fac;
+	camera.posX += cosf((camera.rotY + angle) / 180 * M_PI) * fac;
+	camera.posY += sinf((camera.rotY + angle) / 180 * M_PI) * fac;
 }
 
 void World::idle(void)
@@ -119,7 +113,7 @@ void World::idle(void)
 	if (keys['q']) camera.posZ += deltaTime * speed;
 	if (keys['e']) camera.posZ -= deltaTime * speed;
 
-	for (auto& o : gameObjects)
+	for (auto o : gameObjects)
 		o->update(deltaTime);
 
 	glutPostRedisplay();

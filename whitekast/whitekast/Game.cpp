@@ -15,12 +15,27 @@
 
 std::list<GameObject*> objects;
 static World* world;
-AudioManager *audiomanager;
 
-Game::Game(const char* title, int argc, char* argv[]) 
+int horizontal = 0;
+int vertical = 0;
+
+Game::Game(const char * title, int argc, char * argv[])
 {
-	int horizontal = 0;
-	int vertical = 0;
+	initGlut(title, argc, argv);
+	world = new World(horizontal, vertical, objects);
+}
+
+Game::~Game()
+{
+}
+
+void Game::startGame()
+{
+	glutMainLoop();
+}
+
+void Game::initGlut(const char * title, int argc, char * argv[])
+{
 	getDesktopResolution(horizontal, vertical);
 
 	std::vector<WhitekastObject*> whitekastObjects = initVision();
@@ -30,15 +45,12 @@ Game::Game(const char* title, int argc, char* argv[])
 		objects.push_back(gameObject);
 	}
 
-	makeObjects();
-
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
 	glutInitWindowSize(horizontal, vertical);
 	glutCreateWindow(title);
-	
+
 	glEnable(GL_DEPTH_TEST);
-	world = new World(horizontal, vertical, objects);
 
 	glutIdleFunc([]() { World::getWorld()->idle();  });
 	glutDisplayFunc([]() { World::getWorld()->display(); });
@@ -46,28 +58,6 @@ Game::Game(const char* title, int argc, char* argv[])
 	glutKeyboardFunc([](unsigned char key, int mouseX, int mouseY) { World::getWorld()->keyboard(key, mouseX, mouseY); });
 	glutKeyboardUpFunc([](unsigned char key, int mouseX, int mouseY) { World::getWorld()->keyboardUp(key, mouseX, mouseY); });
 	glutPassiveMotionFunc([](int mouseX, int mouseY) {World::getWorld()->mousePassiveMotion(mouseX, mouseY); });
-	audiomanager = AudioManager::getAudioManager();
-	audiomanager->playSound("audio/test.mpeg");
-	audiomanager->playSound("audio/bumper_hit.wav");
-	glutMainLoop();
-}
-
-Game::~Game() 
-{
-	
-}
-
-void Game::makeObjects()
-{
-	/*GameObject* testCube = new GameObject();
-	testCube->addComponent(new CubeComponent(1));
-	testCube->position = Vec3f(0, 0, -3);
-	objects.push_back(testCube);
-
-	GameObject* roomCube = new GameObject();
-	roomCube->addComponent(new CubeComponent(10));
-	roomCube->position = Vec3f(0, 0, 0);
-	objects.push_back(roomCube);*/
 }
 
 void Game::handleEvents() 
@@ -93,4 +83,3 @@ void Game::clean()
 {
 
 }
-
