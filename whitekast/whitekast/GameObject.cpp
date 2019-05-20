@@ -4,6 +4,8 @@
 
 GameObject::GameObject()
 {
+	position = Vec3f(0, 0, 0);
+	rotation = Vec3f(0, 0, 0);
 }
 
 
@@ -24,7 +26,6 @@ std::list<Component*> GameObject::getComponents()
 {
 	return components;
 }
-
 
 void GameObject::draw()
 {

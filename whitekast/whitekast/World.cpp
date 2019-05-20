@@ -9,7 +9,7 @@
 static World* world;
 int width, height;
 float lastFrameTime;
-std::list<GameObject*> objects2;
+std::list<GameObject*> gameObjects;
 
 float lookAtX;
 float lookAtY;
@@ -30,7 +30,7 @@ World::World(int horizontal, int vertical, std::list<GameObject*> objectlist)
 	width = horizontal;
 	height = vertical;
 	lastFrameTime = 0;
-	objects2 = objectlist;
+	gameObjects = objectlist;
 
 	glEnable(GL_DEPTH_TEST);
 	ZeroMemory(keys, sizeof(keys));
@@ -78,7 +78,7 @@ void World::display()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	for (auto &object : objects2) 
+	for (auto &object : gameObjects) 
 	{
 		glPushMatrix();
 		object->draw();
@@ -88,30 +88,9 @@ void World::display()
 	glutSwapBuffers();
 }
 
-void World::displayVisionObjects(std::vector<WhitekastObject> objects)
+void World::addVisionObjects(vector<WhitekastObject> whitekastObjects)
 {
-	glClearColor(0.6f, 0.6f, 1, 1);
-	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	gluPerspective(90.0f, width / (float)height, 0.1f, 50.0f);
-
-	glRotatef(camera.rotX, 1, 0, 0);
-	glRotatef(camera.rotY, 0, 1, 0);
-	glTranslatef(camera.posX, camera.posZ, camera.posY);
-
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-
-	for (auto object : objects)
-	{
-		glPushMatrix();
-		object.draw();
-		glPopMatrix();
-	}
-
-	glutSwapBuffers();
 }
 
 void World::reshape(int horizontal, int vertical)
@@ -140,7 +119,7 @@ void World::idle(void)
 	if (keys['q']) camera.posZ += deltaTime * speed;
 	if (keys['e']) camera.posZ -= deltaTime * speed;
 
-	for (auto& o : objects2)
+	for (auto& o : gameObjects)
 		o->update(deltaTime);
 
 	glutPostRedisplay();
