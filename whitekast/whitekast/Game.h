@@ -18,6 +18,7 @@ public:
 	void update();
 	void getDesktopResolution(int& horizontal, int& vertical);
 	void clean();
+	void initObjects();
 	bool running() { return isRunning; }
 
 private:

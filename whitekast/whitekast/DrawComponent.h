@@ -8,5 +8,6 @@ public:
 	DrawComponent();
 	~DrawComponent();
 	virtual void draw() = 0;
+	virtual void drawWithTextures() = 0;
 };
 
