@@ -14,7 +14,7 @@ std::list<GameObject*> objects2;
 float lookAtX;
 float lookAtY;
 bool keys[255];
-const float M_PI = 3.14159265358979323846;
+const float M_PI = 3.14159265358979323846f;
 
 struct Camera
 {

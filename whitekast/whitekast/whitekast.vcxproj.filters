@@ -49,9 +49,6 @@
     <Filter Include="Header Files\game\audio">
       <UniqueIdentifier>{362d744f-e14b-4fbc-921a-6317eca272b4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files\models">
-      <UniqueIdentifier>{bd7bb985-265a-431d-863a-2fef620e295d}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -182,5 +179,16 @@
     <ClCompile Include="BallComponent.cpp">
       <Filter>Source Files\game\components</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="Models\Pinballs\pinball_1.0.obj">
+      <Filter>Resource Files</Filter>
+    </Object>
+    <Object Include="Models\Pinballs\pinball_2.0.obj">
+      <Filter>Resource Files</Filter>
+    </Object>
+    <Object Include="Models\Pinballs\pinball_3.0.obj">
+      <Filter>Resource Files</Filter>
+    </Object>
   </ItemGroup>
 </Project>
