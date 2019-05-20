@@ -25,6 +25,7 @@ public:
 	std::list<Component*> getComponents();
 	void update(float elapsedTime);
 	void draw();
+	void drawWithTextures();
 
 	template<class T>
 	T* getComponent()

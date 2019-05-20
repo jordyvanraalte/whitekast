@@ -11,7 +11,7 @@ using namespace std;
 
 Mat redFrame, greenFrame, blueFrame;
 vector<WhitekastObject*> visionObjects;
-VideoCapture vCap(1);
+VideoCapture vCap(0);
 
 vector<WhitekastObject*> initVision()
 {
