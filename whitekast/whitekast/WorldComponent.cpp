@@ -57,5 +57,3 @@ void WorldComponent::draw()
 
 	glEnd();
 }
-
-
