@@ -109,6 +109,3 @@ void WhitekastObject::draw() {
 	}
 }
 
-void WhitekastObject::drawWithTextures()
-{
-}

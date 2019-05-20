@@ -19,6 +19,5 @@ public:
 	~WorldComponent();
 
 	virtual void draw() override;
-	virtual void drawWithTextures() override;
 };
 

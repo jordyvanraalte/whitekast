@@ -42,24 +42,8 @@ void GameObject::draw()
 	glPopMatrix();
 }
 
-void GameObject::drawWithTextures()
-{
-	if (!drawComponent)
-		return;
-
-	glPushMatrix();
-	glTranslatef(position.x, position.y, position.z);
-	glRotatef(rotation.x, 1, 0, 0);
-	glRotatef(rotation.y, 0, 1, 0);
-	glRotatef(rotation.z, 0, 0, 1);
-	glScalef(scale.x, scale.y, scale.z);
-	drawComponent->drawWithTextures();
-	glPopMatrix();
-}
-
 void GameObject::update(float elapsedTime)
 {
 	for (auto c : components)
 		c->update(elapsedTime);
 }
-

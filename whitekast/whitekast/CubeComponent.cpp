@@ -52,8 +52,3 @@ void CubeComponent::draw()
 
 	glEnd();
 }
-
-void CubeComponent::drawWithTextures()
-{
-
-}

@@ -17,11 +17,6 @@ WorldComponent::~WorldComponent()
 
 void WorldComponent::draw() 
 {
-
-}
-
-void WorldComponent::drawWithTextures()
-{
 	glEnable(GL_TEXTURE_2D);
 	texture1.bind();
 
@@ -62,4 +57,5 @@ void WorldComponent::drawWithTextures()
 
 	glEnd();
 }
+
 
