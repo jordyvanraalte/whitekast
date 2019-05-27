@@ -6,6 +6,7 @@
 std::vector<Point> coordinates;
 Point center;
 ObjectColor objectColor;
+int size = 8;
 
 WhitekastObject::WhitekastObject(ObjectColor color) : DrawComponent() {
 	
@@ -65,22 +66,26 @@ void WhitekastObject::setDrawingColor()
 	}
 }
 
+int WhitekastObject::getSize()
+{
+	return size;
+}
+
 void WhitekastObject::draw() {
 	setDrawingColor();
-	int sizeVariable = 8;
-	float scale = sizeVariable / CAMERA_HEIGHT;
+	float scale = size / CAMERA_HEIGHT;
 	if (objectColor == WHITE) {
 		float backgroundY = -2.01f;
 		glBegin(GL_QUADS);
 			glVertex3f(0, backgroundY, 0);
 			glVertex3f(CAMERA_WIDTH * scale, backgroundY, 0);
-			glVertex3f(CAMERA_WIDTH * scale, backgroundY, sizeVariable);
-			glVertex3f(0, backgroundY, sizeVariable);
+			glVertex3f(CAMERA_WIDTH * scale, backgroundY, size);
+			glVertex3f(0, backgroundY, size);
 		glEnd();
 	}
 	else {
 		float minObjectY = -2.0f;
-		float maxObjectY = minObjectY + 0.05f * sizeVariable;
+		float maxObjectY = minObjectY + 0.05f * size;
 		glBegin(GL_TRIANGLE_STRIP);
 			for (int i = 0; i < coordinates.size() - 1; i++) {
 				glVertex3f(coordinates[i].x * scale, maxObjectY, coordinates[i].y * scale);

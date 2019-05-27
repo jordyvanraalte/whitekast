@@ -25,7 +25,7 @@ public:
 
 private:
 	bool isRunning;
-
+	int worldSize = 10;
 	std::list<GameObject*> objects;
 	AudioManager* audiomanager;
 };
