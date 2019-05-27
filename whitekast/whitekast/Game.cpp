@@ -49,7 +49,7 @@ void Game::initGlut(const char * title, int argc, char * argv[])
 	getDesktopResolution(horizontal, vertical);
 	std::vector<WhitekastObject*> whitekastObjects = initVision();
 	for (auto wkObject : whitekastObjects) {
-		GameObject* gameObject = new GameObject();
+		GameObject* gameObject = new GameObject(true);
 		gameObject->addComponent(wkObject);
 		objects.push_back(gameObject);
 	}
@@ -71,7 +71,7 @@ void Game::initGlut(const char * title, int argc, char * argv[])
 
 void Game::makeObjects()
 {
-	GameObject* testball = new GameObject();
+	GameObject* testball = new GameObject(false);
 	testball->addComponent(new BallComponent());
 	testball->position = ::Vec3f(0, 0, -3);
 	objects.push_back(testball);
@@ -103,7 +103,7 @@ void Game::clean()
 
 void Game::initObjects()
 {
-	GameObject* testCube = new GameObject();
+	GameObject* testCube = new GameObject(false);
 	testCube->addComponent(new CubeComponent(1));
 	testCube->position = ::Vec3f(0, 0, -3);
 	objects.push_back(testCube);
@@ -116,7 +116,7 @@ void Game::initObjects()
 	Texture texture5 = Texture("Textures/FrontWall.png");
 
 
-	GameObject* roomCube = new GameObject();
+	GameObject* roomCube = new GameObject(false);
 	roomCube->addComponent(new WorldComponent(10, texture1, texture2, texture3, texture4, texture5));
 	roomCube->position = ::Vec3f(0, 0, 0);
 	objects.push_back(roomCube);

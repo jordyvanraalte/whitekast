@@ -12,15 +12,14 @@ class GameObject
 
 	std::list<Component*> components;
 public:
-	GameObject();
+	GameObject(bool isVisionObject);
 	~GameObject();
 
-
+	bool isVisionObject;
 	::Vec3f position;
 	::Vec3f rotation;
 	::Vec3f scale = ::Vec3f(1, 1, 1);
-
-
+	
 	void addComponent(Component* component);
 	std::list<Component*> getComponents();
 	void update(float elapsedTime);
@@ -49,5 +48,3 @@ public:
 	}
 
 };
-
-
