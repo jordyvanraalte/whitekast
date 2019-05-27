@@ -80,6 +80,10 @@ void World::display()
 	for (auto object : gameObjects) 
 	{
 		glPushMatrix();
+		
+		if (object->isVisionObject == false)
+			glRotatef(-20, 1, 0, 0);
+
 		object->draw();
 		glPopMatrix();
 	}
