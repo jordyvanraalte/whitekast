@@ -1,4 +1,6 @@
 #pragma once
+#include "Vec.h"
+
 class GameObject;
 class Component
 {

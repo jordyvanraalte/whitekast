@@ -7,6 +7,7 @@
 #include "CubeComponent.h"
 #include "WorldComponent.h"
 #include "BallComponent.h"
+#include "GravityComponent.h"
 #include "Vec.h"
 #include <vector>
 #include <iostream>
@@ -78,6 +79,7 @@ void Game::makeObjects()
 
 	GameObject* testball = new GameObject();
 	testball->addComponent(new BallComponent());
+	//testball->addComponent(new GravityComponent(::Vec3f(0, -2, 0)));
 	testball->position = ::Vec3f(0, 0, -3);
 	objects.push_back(testball);
 }
@@ -118,9 +120,4 @@ void Game::initObjects()
 	Texture texture3 = Texture("Texture/floor");
 	Texture texture4 = Texture("Texture/Cealing");
 	Texture texture5 = Texture("Texture/FrontWall");
-
-
-	GameObject* roomCube = new GameObject();
-	roomCube->addComponent(new WorldComponent(10, texture1, texture2, texture3, texture4, texture5));
-	roomCube->position = ::Vec3f(0, 0, 0);
-	objects.push_back(roomCube);}
+}

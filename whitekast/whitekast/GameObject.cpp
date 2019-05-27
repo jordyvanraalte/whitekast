@@ -46,4 +46,7 @@ void GameObject::update(float elapsedTime)
 {
 	for (auto c : components)
 		c->update(elapsedTime);
+
+	velocity.applyTime(elapsedTime);
+	position = position + velocity;
 }

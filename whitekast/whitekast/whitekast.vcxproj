@@ -117,7 +117,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\opencv\build\x64\vc14\lib;freeglut\lib;irrKlang\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\opencv\build\x64\vc14\lib;freeglut\lib;irrKlang\lib\Win32-visualStudio;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>freeglut.lib;opengl32.lib;glu32.lib;irrKlang.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -173,6 +173,7 @@
     <ClInclude Include="DrawComponent.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GravityComponent.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="HomeState.h" />
     <ClInclude Include="ObjModel.h" />
@@ -197,6 +198,7 @@
     <ClCompile Include="DrawComponent.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GravityComponent.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="HomeState.cpp" />
     <ClCompile Include="ObjModel.cpp" />

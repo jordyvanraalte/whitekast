@@ -20,6 +20,8 @@ public:
 	Vec3f(const Vec3f& other);
 	Vec3f(const float x, const float y, const float z);
 	float& operator [](int);
+
+	void applyTime(const float elapsedtime);
 };
 
 inline ::Vec3f operator +(const ::Vec3f& lhs, const ::Vec3f& rhs)

@@ -15,11 +15,10 @@ public:
 	GameObject();
 	~GameObject();
 
-
+	::Vec3f velocity;
 	::Vec3f position;
 	::Vec3f rotation;
 	::Vec3f scale = ::Vec3f(1, 1, 1);
-
 
 	void addComponent(Component* component);
 	std::list<Component*> getComponents();
