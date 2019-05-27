@@ -67,7 +67,7 @@ void WhitekastObject::setDrawingColor()
 
 void WhitekastObject::draw() {
 	setDrawingColor();
-	int sizeVariable = 4;
+	int sizeVariable = 8;
 	float scale = sizeVariable / CAMERA_HEIGHT;
 	if (objectColor == WHITE) {
 		float backgroundY = -2.01f;
