@@ -19,7 +19,8 @@ WorldComponent::~WorldComponent()
 void WorldComponent::draw() 
 {
 	glEnable(GL_TEXTURE_2D);
-	
+	glColor3f(1, 1, 1);
+
 	texture1.bind();
 	glBegin(GL_QUADS);
 	glTexCoord2f(1, 0);	glVertex3f(-size, -size, -size);
@@ -68,4 +69,5 @@ void WorldComponent::draw()
 	glVertex3f(size, size, size);
 	glVertex3f(size, -size, size);
 	glEnd();
+	glColor3f(1, 1, 1);
 }

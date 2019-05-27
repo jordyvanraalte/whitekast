@@ -24,7 +24,6 @@ int vertical = 0;
 Game::Game(const char * title, int argc, char * argv[])
 {
 	initGlut(title, argc, argv);
-	makeObjects();
 	initObjects();
 	world = new World(horizontal, vertical, objects);
 
@@ -50,7 +49,7 @@ void Game::initGlut(const char * title, int argc, char * argv[])
 	std::vector<WhitekastObject*> whitekastObjects = initVision();
 
 	for (auto wkObject : whitekastObjects) {
-		GameObject* gameObject = new GameObject();
+		GameObject* gameObject = new GameObject(true);
 		gameObject->addComponent(wkObject);
 
 		gameObject->position = ::Vec3f(-5, worldSize * -0.2, worldSize * -0.6);
@@ -70,14 +69,6 @@ void Game::initGlut(const char * title, int argc, char * argv[])
 	glutKeyboardFunc([](unsigned char key, int mouseX, int mouseY) { World::getWorld()->keyboard(key, mouseX, mouseY); });
 	glutKeyboardUpFunc([](unsigned char key, int mouseX, int mouseY) { World::getWorld()->keyboardUp(key, mouseX, mouseY); });
 	glutPassiveMotionFunc([](int mouseX, int mouseY) {World::getWorld()->mousePassiveMotion(mouseX, mouseY); });
-}
-
-void Game::makeObjects()
-{
-	GameObject* testball = new GameObject();
-	testball->addComponent(new BallComponent());
-	testball->position = ::Vec3f(0, 0, -3);
-	objects.push_back(testball);
 }
 
 void Game::handleEvents() 
@@ -113,9 +104,14 @@ void Game::initObjects()
 	Texture texture5 = Texture("Textures/FrontWall.png");
 
 
-	GameObject* roomCube = new GameObject();
-	roomCube->addComponent(new WorldComponent(worldSize, texture1, texture2, texture3, texture4, texture5));
+	GameObject* roomCube = new GameObject(false);
+	roomCube->addComponent(new WorldComponent(10, texture1, texture2, texture3, texture4, texture5));
 	roomCube->position = ::Vec3f(0, 0, 0);
 	objects.push_back(roomCube);
+
+	GameObject* testball = new GameObject(false);
+	testball->addComponent(new BallComponent());
+	testball->position = ::Vec3f(0, 0, -3);
+	objects.push_back(testball);
 
 }

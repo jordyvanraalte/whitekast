@@ -17,8 +17,8 @@ int width, height;
 struct Camera
 {
 	float posX = 0;
-	float posY = -4;
-	float rotX = 0;
+	float posY = 0;
+	float rotX = 40;
 	float rotY = 0;
 	float posZ = 0;
 } camera;
@@ -80,6 +80,10 @@ void World::display()
 	for (auto object : gameObjects) 
 	{
 		glPushMatrix();
+		
+		if (object->isVisionObject == false)
+			glRotatef(-10, 1, 0, 0);
+
 		object->draw();
 		glPopMatrix();
 	}
@@ -106,12 +110,12 @@ void World::idle(void)
 	lastFrameTime = frameTime;
 
 	const float speed = 3;
-	if (keys['a']) move(0, deltaTime*speed);
-	if (keys['d']) move(180, deltaTime*speed);
-	if (keys['w']) move(90, deltaTime*speed);
-	if (keys['s']) move(270, deltaTime*speed);
-	if (keys['q']) camera.posZ += deltaTime * speed;
-	if (keys['e']) camera.posZ -= deltaTime * speed;
+	if (keys['A']) move(0, deltaTime*speed);
+	if (keys['D']) move(180, deltaTime*speed);
+	if (keys['W']) move(90, deltaTime*speed);
+	if (keys['S']) move(270, deltaTime*speed);
+	if (keys['Q']) camera.posZ += deltaTime * speed;
+	if (keys['E']) camera.posZ -= deltaTime * speed;
 
 	for (auto o : gameObjects)
 		o->update(deltaTime);
