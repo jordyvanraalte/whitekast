@@ -94,6 +94,11 @@ void Game::clean()
 
 void Game::initObjects()
 {
+	GameObject* testball = new GameObject(false);
+	testball->addComponent(new BallComponent());
+	testball->position = ::Vec3f(0, 0, -3);
+	objects.push_back(testball);
+
 	Texture texture1 = Texture("Textures/LeftWall.png");
 	Texture texture2 = Texture("Textures/RightWall.png");
 	Texture texture3 = Texture("Textures/Floor.png");
@@ -105,10 +110,4 @@ void Game::initObjects()
 	roomCube->addComponent(new WorldComponent(10, texture1, texture2, texture3, texture4, texture5));
 	roomCube->position = ::Vec3f(0, 0, 0);
 	objects.push_back(roomCube);
-
-	GameObject* testball = new GameObject(false);
-	testball->addComponent(new BallComponent());
-	testball->position = ::Vec3f(0, 0, -3);
-	objects.push_back(testball);
-
 }
