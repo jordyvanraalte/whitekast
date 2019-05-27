@@ -208,5 +208,14 @@
     <Object Include="Models\Pinballs\pinball_3.0.obj">
       <Filter>Resource Files\Models\Pinballs</Filter>
     </Object>
+    <Object Include="Models\Pinballs\pinball_1.1.obj">
+      <Filter>Resource Files\Models\Pinballs</Filter>
+    </Object>
+    <Object Include="Models\Pinballs\pinball_2.1.obj">
+      <Filter>Resource Files\Models\Pinballs</Filter>
+    </Object>
+    <Object Include="Models\Pinballs\pinball_3.1.obj">
+      <Filter>Resource Files\Models\Pinballs</Filter>
+    </Object>
   </ItemGroup>
 </Project>
