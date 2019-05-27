@@ -22,52 +22,46 @@
     <Filter Include="Header Files\game">
       <UniqueIdentifier>{df24083e-5b4c-42a0-82d4-1edb1dfaa29a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\game\objects">
-      <UniqueIdentifier>{06934cc6-a2c0-4cb8-a1e6-dcdfca832901}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\game\objects">
-      <UniqueIdentifier>{e44dfeaa-98e5-40ec-9b70-051291c2c221}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\game\states">
       <UniqueIdentifier>{2f0142e6-39ed-4095-882c-3788481da1a0}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\game\states">
       <UniqueIdentifier>{4081df57-95ae-432d-a4c3-43e8b3a4059a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\game\modelloader">
+      <UniqueIdentifier>{1217bb75-d02b-487e-9884-49df61adb9d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\game\modelloader">
+      <UniqueIdentifier>{d64c93bf-8870-4a9f-8513-2f3dab351b67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\game\components">
+      <UniqueIdentifier>{e44dfeaa-98e5-40ec-9b70-051291c2c221}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\game\components">
+      <UniqueIdentifier>{06934cc6-a2c0-4cb8-a1e6-dcdfca832901}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Header Files\vision">
       <UniqueIdentifier>{769ebc2f-af86-4796-952c-6ae6e47d5a1d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\game\audio">
+      <UniqueIdentifier>{f52fc142-bcf7-4827-9fd6-6d14d3760461}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\game\audio">
+      <UniqueIdentifier>{362d744f-e14b-4fbc-921a-6317eca272b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Models">
+      <UniqueIdentifier>{344753d2-b85e-4fff-92eb-30e05ce33ffc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Models\Pinballs">
+      <UniqueIdentifier>{6660ac3c-0815-473f-a817-ce476e30a01d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="pch.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Header Files\game</Filter>
     </ClInclude>
     <ClInclude Include="World.h">
       <Filter>Header Files\game</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Header Files\game</Filter>
-    </ClInclude>
-    <ClInclude Include="Ball.h">
-      <Filter>Header Files\game\objects</Filter>
-    </ClInclude>
-    <ClInclude Include="Bumber.h">
-      <Filter>Header Files\game\objects</Filter>
-    </ClInclude>
-    <ClInclude Include="Flipper.h">
-      <Filter>Header Files\game\objects</Filter>
-    </ClInclude>
-    <ClInclude Include="Wall.h">
-      <Filter>Header Files\game\objects</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Header Files\game</Filter>
-    </ClInclude>
-    <ClInclude Include="GameState.h">
-      <Filter>Header Files\game\states</Filter>
     </ClInclude>
     <ClInclude Include="PlayState.h">
       <Filter>Header Files\game\states</Filter>
@@ -78,46 +72,70 @@
     <ClInclude Include="HomeState.h">
       <Filter>Header Files\game\states</Filter>
     </ClInclude>
+    <ClInclude Include="ObjModel.h">
+      <Filter>Header Files\game\modelloader</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Header Files\game\modelloader</Filter>
+    </ClInclude>
+    <ClInclude Include="stbi.h">
+      <Filter>Header Files\game\modelloader</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>Header Files\game\components</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Header Files\game\components</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerComponent.h">
+      <Filter>Header Files\game\components</Filter>
+    </ClInclude>
+    <ClInclude Include="CubeComponent.h">
+      <Filter>Header Files\game\components</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawComponent.h">
+      <Filter>Header Files\game\components</Filter>
+    </ClInclude>
+    <ClInclude Include="Vec.h">
+      <Filter>Header Files\game\components</Filter>
+    </ClInclude>
+    <ClInclude Include="Vec.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldComponent.h">
+      <Filter>Header Files\game\components</Filter>
+    </ClInclude>
     <ClInclude Include="WhitekastObject.h">
       <Filter>Header Files\vision</Filter>
     </ClInclude>
     <ClInclude Include="WhitekastVision.h">
       <Filter>Header Files\vision</Filter>
     </ClInclude>
+    <ClInclude Include="Wall.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioManager.h">
+      <Filter>Header Files\game\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="StateManager.h">
+      <Filter>Header Files\game\states</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>Header Files\game\states</Filter>
+    </ClInclude>
+    <ClInclude Include="BallComponent.h">
+      <Filter>Header Files\game\components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="pch.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>Source Files\game</Filter>
     </ClCompile>
     <ClCompile Include="World.cpp">
       <Filter>Source Files\game</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>Source Files\game</Filter>
-    </ClCompile>
-    <ClCompile Include="Bumber.cpp">
-      <Filter>Source Files\game\objects</Filter>
-    </ClCompile>
-    <ClCompile Include="Wall.cpp">
-      <Filter>Source Files\game\objects</Filter>
-    </ClCompile>
-    <ClCompile Include="Ball.cpp">
-      <Filter>Source Files\game\objects</Filter>
-    </ClCompile>
-    <ClCompile Include="Flipper.cpp">
-      <Filter>Source Files\game\objects</Filter>
-    </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Source Files\game</Filter>
-    </ClCompile>
-    <ClCompile Include="GameState.cpp">
-      <Filter>Source Files\game\states</Filter>
     </ClCompile>
     <ClCompile Include="PlayState.cpp">
       <Filter>Source Files\game\states</Filter>
@@ -128,11 +146,61 @@
     <ClCompile Include="HomeState.cpp">
       <Filter>Source Files\game\states</Filter>
     </ClCompile>
+    <ClCompile Include="ObjModel.cpp">
+      <Filter>Source Files\game\modelloader</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Source Files\game\modelloader</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>Source Files\game\components</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Source Files\game\components</Filter>
+    </ClCompile>
+    <ClCompile Include="CubeComponent.cpp">
+      <Filter>Source Files\game\components</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawComponent.cpp">
+      <Filter>Source Files\game\components</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec.cpp">
+      <Filter>Source Files\game\components</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldComponent.cpp">
+      <Filter>Source Files\game\components</Filter>
+    </ClCompile>
     <ClCompile Include="WhitekastObject.cpp">
       <Filter>Source Files\vision</Filter>
     </ClCompile>
     <ClCompile Include="WhitekastVision.cpp">
       <Filter>Source Files\vision</Filter>
     </ClCompile>
+    <ClCompile Include="AudioManager.cpp">
+      <Filter>Source Files\game\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="StateManager.cpp">
+      <Filter>Source Files\game\states</Filter>
+    </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>Source Files\game\states</Filter>
+    </ClCompile>
+    <ClCompile Include="BallComponent.cpp">
+      <Filter>Source Files\game\components</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="Models\Pinballs\pinball_1.0.obj">
+      <Filter>Resource Files\Models\Pinballs</Filter>
+    </Object>
+    <Object Include="Models\Pinballs\pinball_2.0.obj">
+      <Filter>Resource Files\Models\Pinballs</Filter>
+    </Object>
+    <Object Include="Models\Pinballs\pinball_3.0.obj">
+      <Filter>Resource Files\Models\Pinballs</Filter>
+    </Object>
   </ItemGroup>
 </Project>

@@ -1,4 +1,3 @@
-#include "pch.h"
 #include <opencv2/opencv.hpp>
 #include "opencv2/imgproc/imgproc.hpp" 
 #include "opencv2/highgui/highgui.hpp"
@@ -11,16 +10,19 @@ using namespace cv;
 using namespace std;
 
 Mat redFrame, greenFrame, blueFrame;
-vector<WhitekastObject> objects;
-VideoCapture vCap(1);
+vector<WhitekastObject*> visionObjects;
+VideoCapture vCap(0);
 
-vector<WhitekastObject> initVision()
+vector<WhitekastObject*> initVision()
 {
 	if (!vCap.isOpened())
 	{
 		cout << "Cannot open the video cam" << endl;
 		exit(0);
 	}
+	double dWidth = vCap.get(CV_CAP_PROP_FRAME_WIDTH);
+	double dHeight = vCap.get(CV_CAP_PROP_FRAME_HEIGHT);
+	cout << "Frame size : " << dWidth << " x " << dHeight << endl;
 
 	int running = 1;
 	while (running) {
@@ -29,11 +31,12 @@ vector<WhitekastObject> initVision()
 
 	waitKey(0);
 
-	findObjectsByFrame(redFrame, &objects, RED);
-	findObjectsByFrame(greenFrame, &objects, GREEN);
-	findObjectsByFrame(blueFrame, &objects, BLUE);
+	createBorder();
+	findObjectsByFrame(redFrame, RED);
+	findObjectsByFrame(greenFrame, GREEN);
+	findObjectsByFrame(blueFrame, BLUE);
 
-	return objects;
+	return visionObjects;
 }
 
 int captureFrames() {
@@ -64,18 +67,28 @@ int captureFrames() {
 	Mat blueDilation;
 	dilate(blueFrame, blueDilation, structuringElement);
 	erode(blueDilation, blueFrame, structuringElement);
-/*
-	imshow("Red", redFrame);
-	imshow("Green", greenFrame);
-	imshow("Blue", blueFrame);
-*/
+	/*
+		imshow("Red", redFrame);
+		imshow("Green", greenFrame);
+		imshow("Blue", blueFrame);
+	*/
 	if (waitKey(1) == 27) {
 		return 0;
 	}
 	return 1;
 }
 
-void findObjectsByFrame(Mat frame, vector<WhitekastObject>* wkObjects, ObjectColor objectColor) {
+void createBorder()
+{
+	WhitekastObject* object = new WhitekastObject(WHITE);
+	double cx = CAMERA_WIDTH / 2.0;
+	double cy = CAMERA_HEIGHT / 2.0;
+	Point centerPoint = Point(cx, cy);
+	object->setCenter(centerPoint);
+	visionObjects.push_back(object);
+}
+
+void findObjectsByFrame(const Mat frame, const ObjectColor objectColor) {
 	threshold(frame, frame, 100, 255, 0);
 
 	vector<vector<Point>> contours;
@@ -89,12 +102,17 @@ void findObjectsByFrame(Mat frame, vector<WhitekastObject>* wkObjects, ObjectCol
 	{
 		double areaContour = contourArea(contours[i]);
 		if (areaContour > 500.0) {
-			Scalar color = Scalar(0, 255, 255);
+			//Scalar color = Scalar(0, 255, 255);
 			//drawContours(contourFrame, contours, (int)i, color, 2, LINE_8, hierarchy, 0);
 
-			WhitekastObject object = WhitekastObject(objectColor);
-			object.setCoordinates(contours[i]);
-			wkObjects->push_back(object);
+			WhitekastObject* object = new WhitekastObject(objectColor);
+			object->setCoordinates(contours[i]);
+			Rect rect = boundingRect(contours[i]);
+			double cx = rect.x + rect.width / 2.0;
+			double cy = rect.y + rect.height / 2.0;
+			Point centerPoint = Point(cx, cy);
+			object->setCenter(centerPoint);
+			visionObjects.push_back(object);
 		}
 	}
 
