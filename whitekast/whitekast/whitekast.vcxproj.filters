@@ -126,6 +126,9 @@
     <ClInclude Include="BallComponent.h">
       <Filter>Header Files\game\components</Filter>
     </ClInclude>
+    <ClInclude Include="CollisionComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -189,6 +192,9 @@
       <Filter>Source Files\game\states</Filter>
     </ClCompile>
     <ClCompile Include="BallComponent.cpp">
+      <Filter>Source Files\game\components</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionComponent.cpp">
       <Filter>Source Files\game\components</Filter>
     </ClCompile>
   </ItemGroup>

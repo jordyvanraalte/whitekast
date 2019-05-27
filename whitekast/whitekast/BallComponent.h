@@ -3,6 +3,14 @@
 #include "DrawComponent.h"
 #include "ObjModel.h"
 
+
+struct Circle
+{
+	float x;
+	float y;
+	float radius;
+};
+
 class BallComponent : public DrawComponent
 {
 private:
