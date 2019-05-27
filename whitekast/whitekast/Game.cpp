@@ -24,7 +24,6 @@ int vertical = 0;
 Game::Game(const char * title, int argc, char * argv[])
 {
 	initGlut(title, argc, argv);
-	makeObjects();
 	initObjects();
 	world = new World(horizontal, vertical, objects);
 
@@ -69,14 +68,6 @@ void Game::initGlut(const char * title, int argc, char * argv[])
 	glutPassiveMotionFunc([](int mouseX, int mouseY) {World::getWorld()->mousePassiveMotion(mouseX, mouseY); });
 }
 
-void Game::makeObjects()
-{
-	GameObject* testball = new GameObject(false);
-	testball->addComponent(new BallComponent());
-	testball->position = ::Vec3f(0, 0, -3);
-	objects.push_back(testball);
-}
-
 void Game::handleEvents() 
 {
 
@@ -103,12 +94,6 @@ void Game::clean()
 
 void Game::initObjects()
 {
-	GameObject* testCube = new GameObject(false);
-	testCube->addComponent(new CubeComponent(1));
-	testCube->position = ::Vec3f(0, 0, -3);
-	objects.push_back(testCube);
-
-
 	Texture texture1 = Texture("Textures/LeftWall.png");
 	Texture texture2 = Texture("Textures/RightWall.png");
 	Texture texture3 = Texture("Textures/Floor.png");
@@ -120,5 +105,10 @@ void Game::initObjects()
 	roomCube->addComponent(new WorldComponent(10, texture1, texture2, texture3, texture4, texture5));
 	roomCube->position = ::Vec3f(0, 0, 0);
 	objects.push_back(roomCube);
+
+	GameObject* testball = new GameObject(false);
+	testball->addComponent(new BallComponent());
+	testball->position = ::Vec3f(0, 0, -3);
+	objects.push_back(testball);
 
 }
