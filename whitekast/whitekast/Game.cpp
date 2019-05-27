@@ -113,14 +113,17 @@ void Game::initObjects()
 	testCube->position = ::Vec3f(0, 0, -3);
 	objects.push_back(testCube);
 
-	Texture texture1 = Texture("Texture/LeftWall");
-	Texture texture2 = Texture("Texture/RightWall");
-	Texture texture3 = Texture("Texture/floor");
-	Texture texture4 = Texture("Texture/Cealing");
-	Texture texture5 = Texture("Texture/FrontWall");
+
+	Texture texture1 = Texture("Textures/LeftWall.png");
+	Texture texture2 = Texture("Textures/RightWall.png");
+	Texture texture3 = Texture("Textures/Floor.png");
+	Texture texture4 = Texture("Textures/Cealing.png");
+	Texture texture5 = Texture("Textures/FrontWall.png");
 
 
 	GameObject* roomCube = new GameObject();
 	roomCube->addComponent(new WorldComponent(10, texture1, texture2, texture3, texture4, texture5));
 	roomCube->position = ::Vec3f(0, 0, 0);
-	objects.push_back(roomCube);}
+	objects.push_back(roomCube);
+
+}
