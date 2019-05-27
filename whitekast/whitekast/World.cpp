@@ -68,7 +68,7 @@ void World::display()
 	
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(90.0f, width / (float)height, 0.1f, 50.0f);
+	gluPerspective(90.0f, width / (float)height, 0.1f, 500.0f);
 	
 	glRotatef(camera.rotX, 1, 0, 0);
 	glRotatef(camera.rotY, 0, 1, 0);
