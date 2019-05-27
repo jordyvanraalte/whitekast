@@ -11,7 +11,8 @@ GravityComponent::~GravityComponent()
 
 void GravityComponent::update(const float elapsedTime)
 {
-	gravity.applyTime(elapsedTime);
-	gameObject->velocity = gameObject->velocity - gravity;
+	Vec3f vectemp = gravity;
+	vectemp.applyTime(elapsedTime);
+	gameObject->velocity = gameObject->velocity + vectemp;
 }
 

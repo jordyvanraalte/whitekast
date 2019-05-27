@@ -79,8 +79,9 @@ void Game::makeObjects()
 
 	GameObject* testball = new GameObject();
 	testball->addComponent(new BallComponent());
-	//testball->addComponent(new GravityComponent(::Vec3f(0, -2, 0)));
+	testball->addComponent(new GravityComponent(::Vec3f(0, 0, 0.981)));
 	testball->position = ::Vec3f(0, 0, -3);
+	testball->velocity = ::Vec3f(0, 0, -3);
 	objects.push_back(testball);
 }
 
@@ -112,7 +113,7 @@ void Game::initObjects()
 {
 	GameObject* testCube = new GameObject();
 	testCube->addComponent(new CubeComponent(1));
-	testCube->position = ::Vec3f(0, 0, -3);
+	testCube->position = ::Vec3f(0, -2, 0);
 	objects.push_back(testCube);
 
 	Texture texture1 = Texture("Texture/LeftWall");

@@ -44,9 +44,11 @@ void GameObject::draw()
 
 void GameObject::update(float elapsedTime)
 {
+	Vec3f vectemp = velocity;
+	vectemp.applyTime(elapsedTime);
+	
 	for (auto c : components)
 		c->update(elapsedTime);
 
-	velocity.applyTime(elapsedTime);
-	position = position + velocity;
+	position = position + vectemp;
 }

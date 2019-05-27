@@ -20,7 +20,7 @@ struct Camera
 	float posY = -4;
 	float rotX = 0;
 	float rotY = 0;
-	float posZ = 0;
+	float posZ = -4;
 } camera;
 
 World::World(int horizontal, int vertical, std::list<GameObject*>& objectlist)
@@ -116,6 +116,7 @@ void World::idle(void)
 	for (auto o : gameObjects)
 		o->update(deltaTime);
 
+	//printf("bruh %f", deltaTime);
 	glutPostRedisplay();
 }
 
