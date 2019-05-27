@@ -28,7 +28,7 @@ public:
 	void setObjectColor(ObjectColor color);
 
 	void setDrawingColor();
-	int getSize();
+	float getSize();
 
 	virtual void draw() override;
 };

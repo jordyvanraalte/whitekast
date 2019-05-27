@@ -51,8 +51,7 @@ void Game::initGlut(const char * title, int argc, char * argv[])
 	for (auto wkObject : whitekastObjects) {
 		GameObject* gameObject = new GameObject(true);
 		gameObject->addComponent(wkObject);
-
-		gameObject->position = ::Vec3f(-5, worldSize * -0.2, worldSize * -0.6);
+		gameObject->position = ::Vec3f(wkObject->getSize() * -0.5, worldSize * -0.1, worldSize * -0.7);
 		objects.push_back(gameObject);
 	}
 	glutInit(&argc, argv);
