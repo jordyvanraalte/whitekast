@@ -188,7 +188,6 @@
     <ClInclude Include="stbi.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Vec.h" />
-    <ClInclude Include="Wall.h" />
     <ClInclude Include="WhitekastObject.h" />
     <ClInclude Include="WhitekastVision.h" />
     <ClInclude Include="World.h" />
