@@ -1,4 +1,5 @@
 #pragma once
+
 #include "WhitekastObject.h"
 #include "DeathState.h"
 
@@ -6,7 +7,6 @@ class World;
 class AudioManager;
 class GameObject;
 class StateManager;
-
 
 class Game
 {
@@ -32,4 +32,3 @@ private:
 	std::list<GameObject*> objects;
 	AudioManager* audiomanager;
 };
-

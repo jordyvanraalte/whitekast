@@ -76,9 +76,11 @@ float WhitekastObject::getSize()
 	return widthBoard;
 }
 
-void WhitekastObject::draw() {
+void WhitekastObject::draw() 
+{
 	setDrawingColor();
-	if (objectColor == WHITE) {
+	if (objectColor == WHITE) 
+	{
 		float backgroundY = -2.01f;
 		glBegin(GL_QUADS);
 			glVertex3f(0, backgroundY, 0);
@@ -109,11 +111,13 @@ void WhitekastObject::draw() {
 		glEnd();
 
 	}
-	else {
+	else 
+	{
 		float minObjectY = -2.0f;
 		float maxObjectY = minObjectY + 0.05f * size;
 		glBegin(GL_TRIANGLE_STRIP);
-			for (int i = 0; i < coordinates.size() - 1; i++) {
+			for (int i = 0; i < coordinates.size() - 1; i++) 
+			{
 				glVertex3f(coordinates[i].x * scale, maxObjectY, coordinates[i].y * scale);
 				glVertex3f(coordinates[i + 1].x * scale, maxObjectY, coordinates[i + 1].y * scale);
 				glVertex3f(center.x * scale, maxObjectY, center.y * scale);
@@ -126,7 +130,8 @@ void WhitekastObject::draw() {
 		glEnd();
 
 		glBegin(GL_QUADS);
-			for (int i = 0; i < coordinates.size() - 1; i++) {
+			for (int i = 0; i < coordinates.size() - 1; i++) 
+			{
 				glVertex3f(coordinates[i].x * scale, maxObjectY, coordinates[i].y * scale);
 				glVertex3f(coordinates[i + 1].x * scale, maxObjectY, coordinates[i + 1].y * scale);
 				glVertex3f(coordinates[i + 1].x * scale, minObjectY, coordinates[i + 1].y * scale);

@@ -7,9 +7,9 @@ BallComponent::BallComponent() : ball(new ObjModel("Models/Pinballs/pinball_3.1.
 
 }
 
-
 BallComponent::~BallComponent()
 {
+
 }
 
 void BallComponent::draw()

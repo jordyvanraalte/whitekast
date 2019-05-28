@@ -11,5 +11,3 @@ public:
 
 	virtual void draw() override;
 };
-
-

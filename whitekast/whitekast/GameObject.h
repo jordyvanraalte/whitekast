@@ -9,8 +9,8 @@ class DrawComponent;
 class GameObject
 {
 	DrawComponent* drawComponent = nullptr;
-
 	std::list<Component*> components;
+
 public:
 	GameObject(bool isVisionObject);
 	~GameObject();
@@ -24,7 +24,6 @@ public:
 	std::list<Component*> getComponents();
 	void update(float elapsedTime);
 	void draw();
-	void drawWithTextures();
 
 	template<class T>
 	T* getComponent()
