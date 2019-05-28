@@ -1,11 +1,19 @@
 #include "GameObject.h"
 #include "DrawComponent.h"
+#include "FlipComponent.h"
 #include <GL/freeglut.h>
 
 GameObject::GameObject()
 {
 	position = Vec3f(0, 0, 0);
 	rotation = Vec3f(0, 0, 0);
+}
+
+GameObject::GameObject(std::string fileName)
+{
+	position = Vec3f(0, 0, 0);
+	rotation = Vec3f(0, 0, 0);
+	model = new ObjModel(fileName);
 }
 
 
@@ -20,6 +28,9 @@ void GameObject::addComponent(Component* component)
 
 	if (!drawComponent)
 		drawComponent = dynamic_cast<DrawComponent*>(component);
+
+	if(!flipComponent)
+		flipComponent = dynamic_cast<FlipComponent*>(component);
 }
 
 std::list<Component*> GameObject::getComponents()
@@ -29,17 +40,38 @@ std::list<Component*> GameObject::getComponents()
 
 void GameObject::draw()
 {
-	if (!drawComponent)
+	if (!model) {
+		if (!drawComponent)
+			return;
+
+		glPushMatrix();
+		glTranslatef(position.x, position.y, position.z);
+		glRotatef(rotation.x, 1, 0, 0);
+		glRotatef(rotation.y, 0, 1, 0);
+		glRotatef(rotation.z, 0, 0, 1);
+		glScalef(scale.x, scale.y, scale.z);
+		drawComponent->draw();
+		glPopMatrix();
+
+	}
+	else {
+		glPushMatrix();
+		glTranslatef(position.x, position.y, position.z);
+		glRotatef(rotation.x, 1, 0, 0);
+		glRotatef(rotation.y, 0, 1, 0);
+		glRotatef(rotation.z, 0, 0, 1);
+		glScalef(scale.x, scale.y, scale.z);
+		model->draw();
+		glPopMatrix();
+	}
+}
+
+void GameObject::handleEvent(float elapsedTime)
+{
+	if (!flipComponent)
 		return;
 
-	glPushMatrix();
-	glTranslatef(position.x, position.y, position.z);
-	glRotatef(rotation.x, 1, 0, 0);
-	glRotatef(rotation.y, 0, 1, 0);
-	glRotatef(rotation.z, 0, 0, 1);
-	glScalef(scale.x, scale.y, scale.z);
-	drawComponent->draw();
-	glPopMatrix();
+	flipComponent->handleEvent(elapsedTime);
 }
 
 void GameObject::update(float elapsedTime)

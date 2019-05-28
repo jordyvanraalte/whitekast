@@ -9,6 +9,7 @@ public:
 	~Component();
 
 	virtual void update(float elapsedTime) {};
+	virtual void handleEvent(float elapsedTime) {};
 	inline void setGameObject(GameObject* gameObject) { this->gameObject = gameObject; }
 };
 

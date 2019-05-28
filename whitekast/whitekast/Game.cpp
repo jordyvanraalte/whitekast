@@ -7,6 +7,7 @@
 #include "CubeComponent.h"
 #include "WorldComponent.h"
 #include "Vec.h"
+#include "FlipComponent.h"
 #include <vector>
 #include <iostream>
 #include "World.h"
@@ -38,12 +39,16 @@ void Game::initGlut(const char * title, int argc, char * argv[])
 {
 	getDesktopResolution(horizontal, vertical);
 
+	initFlippers();
+
 	std::vector<WhitekastObject*> whitekastObjects = initVision();
 	for (auto wkObject : whitekastObjects) {
 		GameObject* gameObject = new GameObject();
 		gameObject->addComponent(wkObject);
 		objects.push_back(gameObject);
 	}
+
+	initObjects();
 
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
@@ -58,6 +63,7 @@ void Game::initGlut(const char * title, int argc, char * argv[])
 	glutKeyboardFunc([](unsigned char key, int mouseX, int mouseY) { World::getWorld()->keyboard(key, mouseX, mouseY); });
 	glutKeyboardUpFunc([](unsigned char key, int mouseX, int mouseY) { World::getWorld()->keyboardUp(key, mouseX, mouseY); });
 	glutPassiveMotionFunc([](int mouseX, int mouseY) {World::getWorld()->mousePassiveMotion(mouseX, mouseY); });
+	glutMouseFunc([](int button, int state, int mouseX, int mouseY) {World::getWorld()->mouseClick(button, state, mouseX, mouseY); });
 }
 
 void Game::handleEvents() 
@@ -79,10 +85,12 @@ void Game::getDesktopResolution(int& horizontal, int& vertical)
 	vertical = desktop.bottom;
 }
 
+
 void Game::initObjects()
 {
 	GameObject* testCube = new GameObject();
 	testCube->addComponent(new CubeComponent(1));
+	testCube->addComponent(new FlipComponent());
 	testCube->position = ::Vec3f(0, 0, -3);
 	objects.push_back(testCube);
 
@@ -95,4 +103,19 @@ void Game::initObjects()
 void Game::clean() 
 {
 
+}
+
+void Game::initFlippers()
+{
+	::Vec3f scale = ::Vec3f(0.1, 0.1, 0.1);
+	GameObject* flipperLeft = new GameObject("Models/Flippers/flipperblend.obj");
+	flipperLeft->position = ::Vec3f(0, 0, 0);
+	flipperLeft->scale = scale;
+	flipperLeft->addComponent(new FlipComponent());
+	objects.push_back(flipperLeft);
+	GameObject* flipperRight = new GameObject("Models/Flippers/flipperblend.obj");
+	flipperRight->position = ::Vec3f(0, 0, 5);
+	flipperRight->scale = scale;
+	flipperRight->addComponent(new FlipComponent());
+	objects.push_back(flipperRight);
 }

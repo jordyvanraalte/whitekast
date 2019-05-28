@@ -1,11 +1,13 @@
 #include "World.h"
 #include "GameObject.h"
 #include "WhitekastObject.h"
+#include "WhitekastVision.h"
 #include "CubeComponent.h"
 #include <GL/freeglut.h>
 #include <iostream>
 
 std::list<GameObject*> gameObjects;
+float deltaTime;
 float lastFrameTime;
 
 float lookAtX;
@@ -13,6 +15,8 @@ float lookAtY;
 bool keys[255];
 static World* world;
 int width, height;
+
+bool flippingLeft = false;
 
 struct Camera
 {
@@ -102,7 +106,7 @@ void World::move(const float angle, const float fac)
 void World::idle(void)
 {
 	float frameTime = glutGet(GLUT_ELAPSED_TIME) / 1000.0f;
-	float deltaTime = frameTime - lastFrameTime;
+	deltaTime = frameTime - lastFrameTime;
 	lastFrameTime = frameTime;
 
 	const float speed = 3;
@@ -114,7 +118,9 @@ void World::idle(void)
 	if (keys['e']) camera.posZ -= deltaTime * speed;
 
 	for (auto o : gameObjects)
+	{
 		o->update(deltaTime);
+	}
 
 	glutPostRedisplay();
 }
@@ -154,4 +160,11 @@ void World::mousePassiveMotion(int x, int y)
 	}
 	else
 		justMovedMouse = false;
+}
+
+void World::mouseClick(int button, int state, int x, int y)
+{
+	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
+
+	}
 }

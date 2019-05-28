@@ -70,7 +70,7 @@ void WhitekastObject::draw() {
 	int sizeVariable = 4;
 	float scale = sizeVariable / CAMERA_HEIGHT;
 	if (objectColor == WHITE) {
-		float backgroundY = -2.01f;
+		float backgroundY = -0.11f;
 		glBegin(GL_QUADS);
 			glVertex3f(0, backgroundY, 0);
 			glVertex3f(CAMERA_WIDTH * scale, backgroundY, 0);
@@ -79,7 +79,7 @@ void WhitekastObject::draw() {
 		glEnd();
 	}
 	else {
-		float minObjectY = -2.0f;
+		float minObjectY = -0.1f;
 		float maxObjectY = minObjectY + 0.05f * sizeVariable;
 		glBegin(GL_TRIANGLE_STRIP);
 			for (int i = 0; i < coordinates.size() - 1; i++) {
