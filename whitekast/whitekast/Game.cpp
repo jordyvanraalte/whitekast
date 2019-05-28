@@ -49,10 +49,13 @@ void Game::startGame()
 void Game::initGlut(const char * title, int argc, char * argv[])
 {
 	getDesktopResolution(horizontal, vertical);
+	glEnable(GL_DEPTH_TEST);
+
 	Vision vision = Vision();
 	std::vector<WhitekastObject*> whitekastObjects = vision.initVision();
 
-	for (auto wkObject : whitekastObjects) {
+	for (auto wkObject : whitekastObjects) 
+	{
 		GameObject* gameObject = new GameObject(true);
 		gameObject->addComponent(wkObject);
 		gameObject->position = ::Vec3f(wkObject->getSize() * -0.5, worldSize * -0.1, worldSize * -0.7);
@@ -63,8 +66,6 @@ void Game::initGlut(const char * title, int argc, char * argv[])
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
 	glutInitWindowSize(horizontal, vertical);
 	glutCreateWindow(title);
-
-	glEnable(GL_DEPTH_TEST);
 
 	glutIdleFunc([]()
 	{

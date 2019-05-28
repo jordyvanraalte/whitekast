@@ -109,7 +109,7 @@ void WhitekastObject::draw()
 		glVertex3f(widthBoard, -10, size);
 		glVertex3f(0, -10, size);
 		glEnd();
-
+		glColor3f(1, 1, 1);
 	}
 	else 
 	{
@@ -142,6 +142,7 @@ void WhitekastObject::draw()
 			glVertex3f(coordinates[0].x * scale, minObjectY, coordinates[0].y * scale);
 			glVertex3f(lastX, minObjectY, lastY);
 		glEnd();
+		glColor3f(1, 1, 1);
 	}
 }
 
