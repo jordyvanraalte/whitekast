@@ -7,7 +7,6 @@
 class Texture
 {
 public:
-
 	GLuint textureId;
 
 	Texture(const std::string &filename);

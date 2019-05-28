@@ -1,11 +1,11 @@
 #pragma once
+
 #include "WhitekastObject.h"
 
 class World;
 class AudioManager;
 class GameObject;
 class StateManager;
-
 
 class Game
 {
@@ -24,8 +24,7 @@ public:
 
 private:
 	bool isRunning;
-
+	int worldSize = 10;
 	std::list<GameObject*> objects;
 	AudioManager* audiomanager;
 };
-

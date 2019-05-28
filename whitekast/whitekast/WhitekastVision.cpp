@@ -13,7 +13,7 @@ Mat redFrame, greenFrame, blueFrame;
 vector<WhitekastObject*> visionObjects;
 VideoCapture vCap(0);
 
-vector<WhitekastObject*> initVision()
+vector<WhitekastObject*> Vision::initVision()
 {
 	if (!vCap.isOpened())
 	{
@@ -39,7 +39,8 @@ vector<WhitekastObject*> initVision()
 	return visionObjects;
 }
 
-int captureFrames() {
+int Vision::captureFrames() 
+{
 	Mat videoFrame;
 	vCap.read(videoFrame);
 
@@ -78,7 +79,7 @@ int captureFrames() {
 	return 1;
 }
 
-void createBorder()
+void Vision::createBorder()
 {
 	WhitekastObject* object = new WhitekastObject(WHITE);
 	double cx = CAMERA_WIDTH / 2.0;
@@ -88,7 +89,8 @@ void createBorder()
 	visionObjects.push_back(object);
 }
 
-void findObjectsByFrame(const Mat frame, const ObjectColor objectColor) {
+void Vision::findObjectsByFrame(const Mat frame, const ObjectColor objectColor) 
+{
 	threshold(frame, frame, 100, 255, 0);
 
 	vector<vector<Point>> contours;

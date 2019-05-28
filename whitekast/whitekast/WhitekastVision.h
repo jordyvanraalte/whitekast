@@ -1,5 +1,6 @@
 #pragma once
 #ifndef DEFINITIONS
+
 #define H_MIN_RED 160
 #define H_MAX_RED 20
 
@@ -19,7 +20,11 @@
 #define CAMERA_HEIGHT 480.0f
 #endif
 
-std::vector<WhitekastObject*> initVision();
-int captureFrames();
-void createBorder();
-void findObjectsByFrame(const Mat, const ObjectColor);
+class Vision
+{
+public:	
+	std::vector<WhitekastObject*> initVision();
+	int captureFrames();
+	void createBorder();
+	void findObjectsByFrame(const Mat, const ObjectColor);
+};
