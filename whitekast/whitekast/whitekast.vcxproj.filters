@@ -117,9 +117,6 @@
     <ClInclude Include="WhitekastVision.h">
       <Filter>Header Files\vision</Filter>
     </ClInclude>
-    <ClInclude Include="Wall.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="AudioManager.h">
       <Filter>Header Files\game\audio</Filter>
     </ClInclude>

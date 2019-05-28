@@ -62,6 +62,11 @@ inline ::Vec2f operator -(const ::Vec2f& lhs, const ::Vec2f& rhs)
 	return ::Vec2f(lhs.x - rhs.x, lhs.y - rhs.y);
 }
 
+inline ::Vec2f operator *(const int value, const ::Vec2f& rhs)
+{
+	return ::Vec2f(value * rhs.x, value * rhs.y);
+}
+
 inline ::Vec2f rotateVector(::Vec2f& v, const float angle)
 {
 	auto radAngle = static_cast<float>(angle * DEG_TO_RAD);
