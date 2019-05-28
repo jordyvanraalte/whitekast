@@ -120,6 +120,7 @@ void World::idle(void)
 	for (auto o : gameObjects)
 	{
 		o->update(deltaTime);
+		o->handleEvent(deltaTime);
 	}
 
 	glutPostRedisplay();
@@ -165,6 +166,13 @@ void World::mousePassiveMotion(int x, int y)
 void World::mouseClick(int button, int state, int x, int y)
 {
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
-
+		for (auto o : gameObjects)
+		{
+			for (auto c : o->getComponents())
+			{
+				c->setHandle(true);
+			}
+		
+		}
 	}
 }

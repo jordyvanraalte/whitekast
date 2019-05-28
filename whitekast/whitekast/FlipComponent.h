@@ -5,12 +5,15 @@
 
 class FlipComponent : public Component
 {
-	float speed = 30.0f;
-	bool flipping = false;
+	float speed = 100.0f;
+	bool up = true;
+	bool flipping = true;
 public:
 	FlipComponent();
 	~FlipComponent();
 	bool isFlipping() const;
-	void setFlipping (const bool flipping);
+	bool isUp() const;
+	void setUp(const bool up);
 	virtual void handleEvent(float elapsedTime) override;
+	virtual void setHandle(bool handle) override;
 };

@@ -16,23 +16,44 @@ bool FlipComponent::isFlipping() const
 	return flipping;
 }
 
-void FlipComponent::setFlipping(const bool flipping)
+bool FlipComponent::isUp() const
 {
-	this->flipping = flipping;
+	return up;
+}
+
+void FlipComponent::setUp(const bool up)
+{
+	this->up = up;
 }
 
 void FlipComponent::handleEvent(float elapsedTime)
 {
 	if (flipping)
 	{
-		gameObject->rotation.y += elapsedTime * speed;
-	}
-	else
-	{
-		gameObject->rotation.y -= elapsedTime * speed;
-	}
+		if (up)
+		{
+			gameObject->rotation.y += elapsedTime * speed;
+		}
+		else
+		{
+			gameObject->rotation.y -= elapsedTime * speed;
+		}
 
-	if (gameObject->rotation.y >= 45)
-		flipping = false;
+		if (gameObject->rotation.y >= 45)
+		{
+			up = false;
+		}
+		else if (gameObject->rotation.y < 0)
+		{
+			up = true;
+			flipping = false;
+			gameObject->rotation.y = 0;
+		}
+	}
+}
+
+void FlipComponent::setHandle(bool handle)
+{
+	this->flipping = handle;
 }
 
