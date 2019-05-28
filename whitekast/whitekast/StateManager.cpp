@@ -16,15 +16,18 @@ void StateManager::setState(State *state)
 	this->state = state;
 }
 
+
 State* StateManager::getState()
 {
 	return this->state;
 }
 
-void StateManager::handle()
+void StateManager::handle(Game* game)
 {
-	this->state->handle();
+	this->state->handle(game);
 }
+
+
 
 StateManager* StateManager::getInstance()
 {

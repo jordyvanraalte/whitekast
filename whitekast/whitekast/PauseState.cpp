@@ -10,6 +10,8 @@ PauseState::~PauseState()
 {
 }
 
-void PauseState::handle()
+void PauseState::handle(Game* game)
 {
 }
+
+

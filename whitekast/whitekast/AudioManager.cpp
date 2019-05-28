@@ -3,7 +3,6 @@
 
 #pragma comment(lib, "irrKlang.lib") //link with irrKlang.dll
 
-
 static AudioManager* instance;
 
 irrklang::ISoundEngine* engine;

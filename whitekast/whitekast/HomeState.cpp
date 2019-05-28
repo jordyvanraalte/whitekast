@@ -10,6 +10,8 @@ HomeState::~HomeState()
 {
 }
 
-void HomeState::handle()
+void HomeState::handle(Game* game)
 {
 }
+
+
