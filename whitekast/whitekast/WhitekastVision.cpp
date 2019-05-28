@@ -31,7 +31,7 @@ vector<WhitekastObject*> Vision::initVision()
 
 	waitKey(0);
 
-	createBorder();
+	//createBorder();
 	findObjectsByFrame(redFrame, RED);
 	findObjectsByFrame(greenFrame, GREEN);
 	findObjectsByFrame(blueFrame, BLUE);

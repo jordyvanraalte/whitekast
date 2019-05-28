@@ -127,8 +127,6 @@ void World::idle(void)
 		o->handleEvent(deltaTime);
 	}
 
-	
-
 	glutPostRedisplay();
 }
 

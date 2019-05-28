@@ -52,7 +52,6 @@ void Game::initGlut(const char * title, int argc, char * argv[])
 	Vision vision = Vision();
 	std::vector<WhitekastObject*> whitekastObjects = vision.initVision();
 
-	initFlippers();
 
 	for (auto wkObject : whitekastObjects) {
 		GameObject* gameObject = new GameObject(true);
@@ -116,6 +115,8 @@ void Game::clean()
 
 void Game::initObjects()
 {
+	initFlippers();
+
 	GameObject* testball = new GameObject(false);
 	testball->addComponent(new BallComponent());
 	testball->position = ::Vec3f(0, 0, -3);
@@ -123,7 +124,7 @@ void Game::initObjects()
 
 	Texture texture1 = Texture("Textures/LeftWall.png");
 	Texture texture2 = Texture("Textures/RightWall.png");
-	Texture texture3 = Texture("Textures/Floor.png");
+	Texture texture3 = Texture("Textures/floor.png");
 	Texture texture4 = Texture("Textures/Cealing.png");
 	Texture texture5 = Texture("Textures/FrontWall.png");
 
@@ -141,13 +142,13 @@ Game* Game::getInstance()
 void Game::initFlippers()
 {
 	::Vec3f scale = ::Vec3f(0.1, 0.1, 0.1);
-	GameObject* flipperLeft = new GameObject("Models/Flippers/flipperblend.obj");
+	GameObject* flipperLeft = new GameObject(std::string("Models/Flippers/flipperblend.obj"));
 	flipperLeft->position = ::Vec3f(0, 0, 0);
 	flipperLeft->scale = scale;
 	flipperLeft->addComponent(new FlipComponent());
 	objects.push_back(flipperLeft);
 
-	GameObject* flipperRight = new GameObject("Models/Flippers/flipperblend.obj");
+	GameObject* flipperRight = new GameObject(std::string("Models/Flippers/flipperblend.obj"));
 	flipperRight->position = ::Vec3f(0, 0, 5);
 	flipperRight->scale = scale;
 	flipperRight->addComponent(new FlipComponent());

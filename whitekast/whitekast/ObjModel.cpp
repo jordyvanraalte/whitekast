@@ -185,8 +185,9 @@ void ObjModel::draw()
 			for (auto& vertex : face.vertices)
 			{
 				::Vec3f& vec = vertices[vertex.position];
-				::Vec2f& tex = texcoords[vertex.texcoord];
-				glTexCoord2fv(tex.v); glVertex3fv(vec.v);
+				//::Vec2f& tex = texcoords[vertex.texcoord];
+				//glTexCoord2fv(tex.v); 
+				glVertex3fv(vec.v);
 			}
 		}
 		glEnd();

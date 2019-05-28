@@ -109,7 +109,6 @@ void WhitekastObject::draw()
 		glVertex3f(widthBoard, -10, size);
 		glVertex3f(0, -10, size);
 		glEnd();
-
 	}
 	else 
 	{

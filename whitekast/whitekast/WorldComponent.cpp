@@ -11,7 +11,6 @@ WorldComponent::WorldComponent(float size, Texture texture1, Texture texture2, T
 	this->texture5 = texture5;
 }
 
-
 WorldComponent::~WorldComponent()
 {
 
