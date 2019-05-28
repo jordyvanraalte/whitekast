@@ -9,9 +9,12 @@
 
 class World
 {
+
 public:
 	World(int horizontal, int vertical, std::list<GameObject*>& objectlist);
 	~World();
+
+	float deltaTime;
 
 	void idle(void);
 	void display();

@@ -6,8 +6,10 @@
 #include "WhitekastVision.h"
 #include "CubeComponent.h"
 #include "WorldComponent.h"
-#include "BallComponent.h"
 #include "GravityComponent.h"
+#include "ModelComponent.h"
+#include "CollideComponent.h"
+#include "CircleCollideComponent.h"
 #include "Vec.h"
 #include <vector>
 #include <iostream>
@@ -78,10 +80,10 @@ void Game::makeObjects()
 	objects.push_back(roomCube);*/
 
 	GameObject* testball = new GameObject();
-	testball->addComponent(new BallComponent());
+	testball->addComponent(new ModelComponent("Models/Pinballs/pinball_3.1.obj"));
 	testball->addComponent(new GravityComponent(::Vec3f(0, 0, 0.981)));
 	testball->position = ::Vec3f(0, 0, -3);
-	testball->velocity = ::Vec3f(0, 0, -3);
+	//testball->addComponent(new CircleCollideComponent());
 	objects.push_back(testball);
 }
 

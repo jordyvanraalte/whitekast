@@ -102,7 +102,7 @@ void World::move(const float angle, const float fac)
 void World::idle(void)
 {
 	float frameTime = glutGet(GLUT_ELAPSED_TIME) / 1000.0f;
-	float deltaTime = frameTime - lastFrameTime;
+	deltaTime = frameTime - lastFrameTime;
 	lastFrameTime = frameTime;
 
 	const float speed = 3;
@@ -116,7 +116,6 @@ void World::idle(void)
 	for (auto o : gameObjects)
 		o->update(deltaTime);
 
-	//printf("bruh %f", deltaTime);
 	glutPostRedisplay();
 }
 

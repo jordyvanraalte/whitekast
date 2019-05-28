@@ -13,6 +13,7 @@
 class ObjModel
 {
 private:
+
 	class Vertex
 	{
 	public:
@@ -57,8 +58,11 @@ private:
 	void loadMaterialFile(const std::string &fileName, const std::string &dirName);
 
 public:
-	ObjModel(const std::string &filename);
+	float radius;
+
+	ObjModel();
 	~ObjModel(void);
 
+	void load(const std::string &filename);
 	void draw();
 };

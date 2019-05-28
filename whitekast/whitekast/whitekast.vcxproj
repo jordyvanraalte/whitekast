@@ -167,18 +167,21 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AudioManager.h" />
-    <ClInclude Include="BallComponent.h" />
+    <ClInclude Include="CircleCollideComponent.h" />
+    <ClInclude Include="CollideComponent.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="CubeComponent.h" />
     <ClInclude Include="DrawComponent.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GravityComponent.h" />
+    <ClInclude Include="HitBox.h" />
+    <ClInclude Include="LineColliderComponent.h" />
+    <ClInclude Include="ModelComponent.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="HomeState.h" />
     <ClInclude Include="ObjModel.h" />
     <ClInclude Include="PauseState.h" />
-    <ClInclude Include="PlayerComponent.h" />
     <ClInclude Include="PlayState.h" />
     <ClInclude Include="StateManager.h" />
     <ClInclude Include="stbi.h" />
@@ -192,13 +195,17 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AudioManager.cpp" />
-    <ClCompile Include="BallComponent.cpp" />
+    <ClCompile Include="CircleCollideComponent.cpp" />
+    <ClCompile Include="CollideComponent.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="CubeComponent.cpp" />
     <ClCompile Include="DrawComponent.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GravityComponent.cpp" />
+    <ClCompile Include="HitBox.cpp" />
+    <ClCompile Include="LineColliderComponent.cpp" />
+    <ClCompile Include="ModelComponent.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="HomeState.cpp" />
     <ClCompile Include="ObjModel.cpp" />
