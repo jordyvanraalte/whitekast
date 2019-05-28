@@ -1,28 +1,36 @@
 #pragma once
 
 #include <list>
+#include <string>
 #include "Vec.h"
+#include "ObjModel.h"
 
 class Component;
 class DrawComponent;
+class FlipComponent;
 
 class GameObject
 {
 	DrawComponent* drawComponent = nullptr;
-	std::list<Component*> components;
+	FlipComponent* flipComponent = nullptr;
+	ObjModel* model = nullptr;
 
+	std::list<Component*> components;
 public:
 	GameObject(bool isVisionObject);
+	GameObject(std::string fileName);
 	~GameObject();
 
 	bool isVisionObject;
 	::Vec3f position;
 	::Vec3f rotation;
 	::Vec3f scale = ::Vec3f(1, 1, 1);
+	::Vec3f rotationPoint;
 	
 	void addComponent(Component* component);
 	std::list<Component*> getComponents();
 	void update(float elapsedTime);
+	void handleEvent(float elapsedTime);
 	void draw();
 
 	template<class T>

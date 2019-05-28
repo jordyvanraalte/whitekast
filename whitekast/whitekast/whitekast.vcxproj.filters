@@ -55,6 +55,9 @@
     <Filter Include="Resource Files\Models\Pinballs">
       <UniqueIdentifier>{6660ac3c-0815-473f-a817-ce476e30a01d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Models\Flippers">
+      <UniqueIdentifier>{b1fac535-9fc5-4ac5-8fd8-eafaa79686de}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -132,6 +135,9 @@
     <ClInclude Include="GameOverState.h">
       <Filter>Header Files\game\states</Filter>
     </ClInclude>
+    <ClInclude Include="FlipComponent.h">
+      <Filter>Header Files\game\components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -203,6 +209,9 @@
     <ClCompile Include="DeathState.cpp">
       <Filter>Source Files\game\states</Filter>
     </ClCompile>
+    <ClCompile Include="FlipComponent.cpp">
+      <Filter>Source Files\game\components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Object Include="Models\Pinballs\pinball_1.0.obj">
@@ -213,6 +222,9 @@
     </Object>
     <Object Include="Models\Pinballs\pinball_3.0.obj">
       <Filter>Resource Files\Models\Pinballs</Filter>
+    </Object>
+    <Object Include="Models\Flippers\flipperblend.obj">
+      <Filter>Resource Files\Models\Flippers</Filter>
     </Object>
   </ItemGroup>
 </Project>
