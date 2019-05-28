@@ -82,32 +82,29 @@ void WhitekastObject::draw()
 	if (objectColor == WHITE) 
 	{
 		float backgroundY = -2.01f;
+
 		glBegin(GL_QUADS);
+			glColor3f(0.3, 0.3, 0.3);
 			glVertex3f(0, backgroundY, 0);
 			glVertex3f(CAMERA_WIDTH * scale, backgroundY, 0);
 			glVertex3f(CAMERA_WIDTH * scale, backgroundY, size);
 			glVertex3f(0, backgroundY, size);
-		glEnd();
 		
-		glBegin(GL_QUADS);
-		glVertex3f(0, -2, 0);
-		glVertex3f(0, -2, size);
-		glVertex3f(0, -10, size);
-		glVertex3f(0, -10, 0);
-		glEnd();
+			glVertex3f(0, -2, 0);
+			glVertex3f(0, -2, size);
+			glVertex3f(0, -10, size);
+			glVertex3f(0, -10, 0);
 
-		glBegin(GL_QUADS);
-		glVertex3f(widthBoard, -2, 0);
-		glVertex3f(widthBoard, -2, size);
-		glVertex3f(widthBoard, -10, size);
-		glVertex3f(widthBoard, -10, 0);
-		glEnd();
+			glVertex3f(widthBoard, -2, 0);
+			glVertex3f(widthBoard, -2, size);
+			glVertex3f(widthBoard, -10, size);
+			glVertex3f(widthBoard, -10, 0);
 
-		glBegin(GL_QUADS);
-		glVertex3f(0, -2, size);
-		glVertex3f(widthBoard, -2, size);
-		glVertex3f(widthBoard, -10, size);
-		glVertex3f(0, -10, size);
+			glVertex3f(0, -2, size);
+			glVertex3f(widthBoard, -2, size);
+			glVertex3f(widthBoard, -10, size);
+			glVertex3f(0, -10, size);
+
 		glEnd();
 		glColor3f(1, 1, 1);
 	}
