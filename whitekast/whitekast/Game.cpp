@@ -92,10 +92,10 @@ void Game::initObjects()
 	testCube->addComponent(new CubeComponent(1));
 	testCube->addComponent(new FlipComponent());
 	testCube->position = ::Vec3f(0, 0, -3);
+	testCube->rotationPoint = ::Vec3f(testCube->position.x + 1, testCube->position.y, testCube->position.z + 1);
 	objects.push_back(testCube);
 
-	//GameObject* roomCube = new GameObject();
-	//roomCube->addComponent(new WorldComponent(10));
+	//GameObject* roomCube = new GameObject();	//roomCube->addComponent(new WorldComponent(10));
 	//roomCube->position = ::Vec3f(0, 0, 0);
 	//objects.push_back(roomCube);
 }

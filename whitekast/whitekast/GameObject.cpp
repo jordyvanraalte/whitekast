@@ -7,12 +7,14 @@ GameObject::GameObject()
 {
 	position = Vec3f(0, 0, 0);
 	rotation = Vec3f(0, 0, 0);
+	rotationPoint = position;
 }
 
 GameObject::GameObject(std::string fileName)
 {
 	position = Vec3f(0, 0, 0);
 	rotation = Vec3f(0, 0, 0);
+	rotationPoint = position;
 	model = new ObjModel(fileName);
 }
 
@@ -45,10 +47,11 @@ void GameObject::draw()
 			return;
 
 		glPushMatrix();
-		glTranslatef(position.x, position.y, position.z);
+		glTranslatef(rotationPoint.x, rotationPoint.y, rotationPoint.z);
 		glRotatef(rotation.x, 1, 0, 0);
 		glRotatef(rotation.y, 0, 1, 0);
 		glRotatef(rotation.z, 0, 0, 1);
+		glTranslatef(position.x - rotationPoint.x, position.y - rotationPoint.y, position.z - rotationPoint.z);
 		glScalef(scale.x, scale.y, scale.z);
 		drawComponent->draw();
 		glPopMatrix();
