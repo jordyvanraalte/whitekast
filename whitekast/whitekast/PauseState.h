@@ -1,8 +1,12 @@
 #pragma once
-class PauseState
+#include "State.h"
+
+class PauseState : public State
 {
 public:
 	PauseState();
 	~PauseState();
+	void handle(Game* game) override;
+
 };
 

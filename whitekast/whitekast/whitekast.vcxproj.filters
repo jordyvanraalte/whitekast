@@ -50,10 +50,13 @@
       <UniqueIdentifier>{362d744f-e14b-4fbc-921a-6317eca272b4}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resource Files\Models">
-      <UniqueIdentifier>{afda6b80-975e-4cf1-9aa6-b9ea8258d824}</UniqueIdentifier>
+      <UniqueIdentifier>{344753d2-b85e-4fff-92eb-30e05ce33ffc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Models\Pinballs">
+      <UniqueIdentifier>{6660ac3c-0815-473f-a817-ce476e30a01d}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resource Files\Models\Flippers">
-      <UniqueIdentifier>{d396293f-5e5b-4b36-b128-d2a7fe14d26f}</UniqueIdentifier>
+      <UniqueIdentifier>{62ad31e1-db73-4b21-b776-292cac4d07bc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -62,9 +65,6 @@
     </ClInclude>
     <ClInclude Include="World.h">
       <Filter>Header Files\game</Filter>
-    </ClInclude>
-    <ClInclude Include="GameState.h">
-      <Filter>Header Files\game\states</Filter>
     </ClInclude>
     <ClInclude Include="PlayState.h">
       <Filter>Header Files\game\states</Filter>
@@ -120,6 +120,21 @@
     <ClInclude Include="AudioManager.h">
       <Filter>Header Files\game\audio</Filter>
     </ClInclude>
+    <ClInclude Include="StateManager.h">
+      <Filter>Header Files\game\states</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>Header Files\game\states</Filter>
+    </ClInclude>
+    <ClInclude Include="BallComponent.h">
+      <Filter>Header Files\game\components</Filter>
+    </ClInclude>
+    <ClInclude Include="DeathState.h">
+      <Filter>Header Files\game\states</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOverState.h">
+      <Filter>Header Files\game\states</Filter>
+    </ClInclude>
     <ClInclude Include="FlipComponent.h">
       <Filter>Header Files\game\components</Filter>
     </ClInclude>
@@ -133,9 +148,6 @@
     </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameState.cpp">
-      <Filter>Source Files\game\states</Filter>
     </ClCompile>
     <ClCompile Include="PlayState.cpp">
       <Filter>Source Files\game\states</Filter>
@@ -182,11 +194,35 @@
     <ClCompile Include="AudioManager.cpp">
       <Filter>Source Files\game\audio</Filter>
     </ClCompile>
+    <ClCompile Include="StateManager.cpp">
+      <Filter>Source Files\game\states</Filter>
+    </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>Source Files\game\states</Filter>
+    </ClCompile>
+    <ClCompile Include="BallComponent.cpp">
+      <Filter>Source Files\game\components</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOverState.cpp">
+      <Filter>Source Files\game\states</Filter>
+    </ClCompile>
+    <ClCompile Include="DeathState.cpp">
+      <Filter>Source Files\game\states</Filter>
+    </ClCompile>
     <ClCompile Include="FlipComponent.cpp">
       <Filter>Source Files\game\components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <Object Include="Models\Pinballs\pinball_1.0.obj">
+      <Filter>Resource Files\Models\Pinballs</Filter>
+    </Object>
+    <Object Include="Models\Pinballs\pinball_2.0.obj">
+      <Filter>Resource Files\Models\Pinballs</Filter>
+    </Object>
+    <Object Include="Models\Pinballs\pinball_3.0.obj">
+      <Filter>Resource Files\Models\Pinballs</Filter>
+    </Object>
     <Object Include="Models\Flippers\flipperblend.obj">
       <Filter>Resource Files\Models\Flippers</Filter>
     </Object>

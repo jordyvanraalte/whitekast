@@ -3,11 +3,12 @@
 #include "FlipComponent.h"
 #include <GL/freeglut.h>
 
-GameObject::GameObject()
+GameObject::GameObject(bool isVisionObject)
 {
 	position = Vec3f(0, 0, 0);
 	rotation = Vec3f(0, 0, 0);
 	rotationPoint = position;
+	this->isVisionObject = isVisionObject;
 }
 
 GameObject::GameObject(std::string fileName)
@@ -15,12 +16,13 @@ GameObject::GameObject(std::string fileName)
 	position = Vec3f(0, 0, 0);
 	rotation = Vec3f(0, 0, 0);
 	rotationPoint = position;
+	this->isVisionObject = false;
 	model = new ObjModel(fileName);
 }
 
-
 GameObject::~GameObject()
 {
+
 }
 
 void GameObject::addComponent(Component* component)
@@ -82,4 +84,3 @@ void GameObject::update(float elapsedTime)
 	for (auto c : components)
 		c->update(elapsedTime);
 }
-

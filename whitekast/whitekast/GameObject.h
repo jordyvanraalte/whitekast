@@ -16,17 +16,17 @@ class GameObject
 	ObjModel* model = nullptr;
 
 	std::list<Component*> components;
+
 public:
-	GameObject();
+	GameObject(bool isVisionObject);
 	GameObject(std::string fileName);
 	~GameObject();
 
-
+	bool isVisionObject;
 	::Vec3f position;
 	::Vec3f rotation;
 	::Vec3f scale = ::Vec3f(1, 1, 1);
 	::Vec3f rotationPoint;
-
 
 	void addComponent(Component* component);
 	std::list<Component*> getComponents();
@@ -56,5 +56,3 @@ public:
 	}
 
 };
-
-

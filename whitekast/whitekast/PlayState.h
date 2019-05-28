@@ -1,8 +1,11 @@
 #pragma once
-class PlayState
+#include "State.h"
+
+class PlayState : public State
 {
 public:
 	PlayState();
 	~PlayState();
+	void handle(Game* game) override;
 };
 
