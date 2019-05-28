@@ -94,6 +94,20 @@ void WhitekastObject::draw() {
 		glVertex3f(0, -10, 0);
 		glEnd();
 
+		glBegin(GL_QUADS);
+		glVertex3f(widthBoard, -2, 0);
+		glVertex3f(widthBoard, -2, size);
+		glVertex3f(widthBoard, -10, size);
+		glVertex3f(widthBoard, -10, 0);
+		glEnd();
+
+		glBegin(GL_QUADS);
+		glVertex3f(0, -2, size);
+		glVertex3f(widthBoard, -2, size);
+		glVertex3f(widthBoard, -10, size);
+		glVertex3f(0, -10, size);
+		glEnd();
+
 	}
 	else {
 		float minObjectY = -2.0f;
