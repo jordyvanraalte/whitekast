@@ -14,10 +14,13 @@ using namespace std;
 using namespace std::this_thread; 
 using namespace std::chrono;
 
+const int minMotion = -15000;
+
 Mat redFrame, greenFrame, blueFrame;
 vector<WhitekastObject> redObjects, greenObjects, blueObjects;
 VideoCapture vCap(1);
-bool moving;
+bool movingLeft;
+bool movingRight;
 Ptr<SimpleBlobDetector> detector;
 
 int main()
@@ -32,7 +35,6 @@ int main()
 	while (running) {
 		running = captureFrames();
 	}
-	waitKey(0);
 
 	findObjectsByFrame(redFrame, &redObjects, RED);
 	findObjectsByFrame(greenFrame, &greenObjects, GREEN);
@@ -48,7 +50,7 @@ int main()
 	while (running)
 	{
 		captureMovement();
-		cout << moving;
+		cout << movingRight;
 	}
 	
 	waitKey(0);
@@ -56,37 +58,38 @@ int main()
 	return 0;
 }
 
+//This method is checking any motion 
 int captureMovement() {
-	vector<KeyPoint> keypoints, keypoints2;
-	Mat videoFrame, videoFrame2, binaryFrame2;
+	Mat videoFrame, videoFrame2;
 	vCap.read(videoFrame);
 	cvtColor(videoFrame, videoFrame, COLOR_BGR2GRAY);
 	imshow("move1", videoFrame);
 	threshold(videoFrame, videoFrame, 100, 255, THRESH_BINARY_INV);
 	imshow("move1", videoFrame);
-	//detector->detect(videoFrame, keypoints);
 
-	//sleep_for(milliseconds(500));
 	vCap.read(videoFrame2);
 	cvtColor(videoFrame2, videoFrame2, COLOR_BGR2GRAY);
-	threshold(videoFrame2, binaryFrame2, 100, 255, THRESH_BINARY_INV);
-	imshow("move2", binaryFrame2);
-	//detector->detect(binaryFrame2, keypoints2);
-	//drawKeypoints(videoFrame2, keypoints, keypoints, Scalar(0, 0, 255), DrawMatchesFlags::DRAW_RICH_KEYPOINTS);
+	threshold(videoFrame2, videoFrame2, 100, 255, THRESH_BINARY_INV);
+	imshow("move2", videoFrame2);
+	
 
-	if (getWhitePixels(videoFrame) - getWhitePixels(binaryFrame2) >= 5000 || getWhitePixels(videoFrame) - getWhitePixels(binaryFrame2) <= -5000)
+	if (getWhitePixelsLeft(videoFrame) - getWhitePixelsLeft(videoFrame2) <= minMotion)
 	{
-		moving = true;
+		movingLeft = true;
 	}
 	else
 	{
-		moving = false;
+		movingLeft = false;
 	}	
 
-	/*int rows = frame.rows;
-	croppedFrame = Mat::zeros(200, 640, CV_8UC3);;
-	imshow("frame", frame);
-	imshow("cropped", croppedFrame);*/
+	if (getWhitePixelsRight(videoFrame) - getWhitePixelsRight(videoFrame2) <= minMotion)
+	{
+		movingRight = true;
+	}
+	else
+	{
+		movingRight = false;
+	}
 
 	if (waitKey(1) == 27) {
 		return 0;
@@ -94,14 +97,31 @@ int captureMovement() {
 	return 1;
 }
 
-int getWhitePixels(Mat mat)
+//This method will return the count of white pixels on the left side of the picture(mat) 
+int getWhitePixelsLeft(Mat mat)
 {
 	int count = 0;
 	for (int x = 0; x < mat.rows; x++)
 	{
-		for (int y = 0; y < mat.cols; y++)
+		for (int y = 0; y < mat.cols/2; y++)
 		{
-			int h = mat.at<uchar>(x, y);
+			if (mat.at<uchar>(x, y) == 255)
+			{
+				count++;
+			}
+		}
+	}
+	return count;
+}
+
+//This method returns the count of white pixels on the right side of the picture(mat) 
+int getWhitePixelsRight(Mat mat)
+{
+	int count = 0;
+	for (int x = 0; x < mat.rows; x++)
+	{
+		for (int y = mat.cols/2; y < mat.cols; y++)
+		{
 			if (mat.at<uchar>(x, y) == 255)
 			{
 				count++;

@@ -16,6 +16,7 @@
 	#define V_MAX 230
 #endif
 int captureMovement();
-int getWhitePixels(Mat mat);
+int getWhitePixelsLeft(Mat mat);
+int getWhitePixelsRight(Mat mat);
 int captureFrames();
 void findObjectsByFrame(Mat, std::vector<WhitekastObject>*, ObjectColor);
