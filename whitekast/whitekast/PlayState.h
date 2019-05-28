@@ -6,6 +6,6 @@ class PlayState : public State
 public:
 	PlayState();
 	~PlayState();
-	void handle() override;
+	void handle(Game* game) override;
 };
 

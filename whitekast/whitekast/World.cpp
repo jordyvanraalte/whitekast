@@ -120,6 +120,8 @@ void World::idle(void)
 	for (auto o : gameObjects)
 		o->update(deltaTime);
 
+	
+
 	glutPostRedisplay();
 }
 

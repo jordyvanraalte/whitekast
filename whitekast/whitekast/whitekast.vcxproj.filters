@@ -126,6 +126,12 @@
     <ClInclude Include="BallComponent.h">
       <Filter>Header Files\game\components</Filter>
     </ClInclude>
+    <ClInclude Include="DeathState.h">
+      <Filter>Header Files\game\states</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOverState.h">
+      <Filter>Header Files\game\states</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -190,6 +196,12 @@
     </ClCompile>
     <ClCompile Include="BallComponent.cpp">
       <Filter>Source Files\game\components</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOverState.cpp">
+      <Filter>Source Files\game\states</Filter>
+    </ClCompile>
+    <ClCompile Include="DeathState.cpp">
+      <Filter>Source Files\game\states</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

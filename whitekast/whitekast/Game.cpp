@@ -14,28 +14,33 @@
 #include <GL/freeglut.h>
 #include "AudioManager.h"
 #include "StateManager.h"
+#include "HomeState.h"
 
 std::list<GameObject*> objects;
 static World* world;
+static Game* instance;
 
 int horizontal = 0;
 int vertical = 0;
 
 Game::Game(const char * title, int argc, char * argv[])
 {
+	instance = this;
 	initGlut(title, argc, argv);
 	initObjects();
 	world = new World(horizontal, vertical, objects);
 
+
 	audiomanager = AudioManager::getInstance();
 	audiomanager->playSound("audio/test.mpeg");
 	audiomanager->playSound("audio/bumper_hit.wav");
-
-	StateManager::getInstance();
 }
 
 Game::~Game()
 {
+	delete world;
+	delete instance;
+
 }
 
 void Game::startGame()
@@ -54,6 +59,7 @@ void Game::initGlut(const char * title, int argc, char * argv[])
 		gameObject->position = ::Vec3f(wkObject->getSize() * -0.5, worldSize * -0.1, worldSize * -0.7);
 		objects.push_back(gameObject);
 	}
+
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
 	glutInitWindowSize(horizontal, vertical);
@@ -61,7 +67,12 @@ void Game::initGlut(const char * title, int argc, char * argv[])
 
 	glEnable(GL_DEPTH_TEST);
 
-	glutIdleFunc([]() { World::getWorld()->idle();  });
+	glutIdleFunc([]()
+	{
+		World::getWorld()->idle();
+		Game::getInstance()->handleEvents();
+		
+	});
 	glutDisplayFunc([]() { World::getWorld()->display(); });
 	
 	glutReshapeFunc([](int horizontal, int vertical) { World::getWorld()->reshape(horizontal, vertical); });
@@ -72,12 +83,13 @@ void Game::initGlut(const char * title, int argc, char * argv[])
 
 void Game::handleEvents() 
 {
-
+	StateManager::getInstance()->handle(this);
 }
 
-void Game::update()	
+void Game::reset()
 {
-
+	lives = 3;
+	StateManager::getInstance()->setState(new HomeState());
 }
 
 void Game::getDesktopResolution(int& horizontal, int& vertical) 
@@ -89,9 +101,9 @@ void Game::getDesktopResolution(int& horizontal, int& vertical)
 	vertical = desktop.bottom;
 }
 
-void Game::clean() 
+void Game::stop() 
 {
-
+	delete this;
 }
 
 void Game::initObjects()
@@ -113,4 +125,9 @@ void Game::initObjects()
 	testball->position = ::Vec3f(0, 0, -3);
 	objects.push_back(testball);
 
+}
+
+Game* Game::getInstance()
+{
+	return instance;
 }

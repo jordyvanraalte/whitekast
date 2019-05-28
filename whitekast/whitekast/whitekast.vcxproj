@@ -170,9 +170,11 @@
     <ClInclude Include="BallComponent.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="CubeComponent.h" />
+    <ClInclude Include="DeathState.h" />
     <ClInclude Include="DrawComponent.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameOverState.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="HomeState.h" />
     <ClInclude Include="ObjModel.h" />
@@ -194,9 +196,11 @@
     <ClCompile Include="BallComponent.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="CubeComponent.cpp" />
+    <ClCompile Include="DeathState.cpp" />
     <ClCompile Include="DrawComponent.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GameOverState.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="HomeState.cpp" />
     <ClCompile Include="ObjModel.cpp" />
