@@ -28,6 +28,11 @@ void CircleHitbox::shiftColliders(Vec3f pos)
 	circle.y = pos.z;
 }
 
+LinesHitbox::LinesHitbox()
+{
+	
+}
+
 Hitbox* LinesHitbox::getHitbox() const
 {
 	return lineHitbox;

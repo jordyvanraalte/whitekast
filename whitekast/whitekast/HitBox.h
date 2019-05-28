@@ -22,6 +22,9 @@ public:
 class CircleHitbox : public Hitbox
 {
 
+
+public:
+
 	CircleHitbox* cirlceHitbox;
 
 	struct Circle
@@ -31,8 +34,8 @@ class CircleHitbox : public Hitbox
 
 	Circle circle;
 
-public:
-	
+
+	CircleHitbox();
 	CircleHitbox(::Vec3f pos, float radius); 
 	~CircleHitbox();
 
@@ -43,6 +46,9 @@ public:
 class LinesHitbox : public Hitbox
 {
 
+public:
+
+
 	LinesHitbox* lineHitbox;
 
 	struct Hitline
@@ -52,8 +58,6 @@ class LinesHitbox : public Hitbox
 	};
 
 	std::list<Hitline> hitlines;
-
-public:
 
 	LinesHitbox();
 	~LinesHitbox();

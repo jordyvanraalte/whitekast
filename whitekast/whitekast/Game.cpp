@@ -17,6 +17,7 @@
 #include <GL/freeglut.h>
 #include "AudioManager.h"
 #include "StateManager.h"
+#include "CollisionManager.h"
 
 std::list<GameObject*> objects;
 static World* world;
@@ -36,6 +37,10 @@ Game::Game(const char * title, int argc, char * argv[])
 	audiomanager->playSound("audio/bumper_hit.wav");
 
 	StateManager::getInstance();
+
+	CollisionManager* collision = new CollisionManager();
+	
+
 }
 
 Game::~Game()
@@ -123,4 +128,5 @@ void Game::initObjects()
 	Texture texture3 = Texture("Texture/floor");
 	Texture texture4 = Texture("Texture/Cealing");
 	Texture texture5 = Texture("Texture/FrontWall");
-}
+
+}

@@ -162,6 +162,9 @@
     <ClInclude Include="WorldComponent.h">
       <Filter>Header Files\game\components\DrawComponents</Filter>
     </ClInclude>
+    <ClInclude Include="CollisionManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -241,6 +244,9 @@
     </ClCompile>
     <ClCompile Include="WorldComponent.cpp">
       <Filter>Source Files\game\components\DrawComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionManager.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

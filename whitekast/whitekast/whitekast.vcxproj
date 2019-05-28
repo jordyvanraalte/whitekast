@@ -169,6 +169,7 @@
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="CircleCollideComponent.h" />
     <ClInclude Include="CollideComponent.h" />
+    <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="CubeComponent.h" />
     <ClInclude Include="DrawComponent.h" />
@@ -197,6 +198,7 @@
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="CircleCollideComponent.cpp" />
     <ClCompile Include="CollideComponent.cpp" />
+    <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="CubeComponent.cpp" />
     <ClCompile Include="DrawComponent.cpp" />
