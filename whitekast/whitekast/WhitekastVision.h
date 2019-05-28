@@ -22,4 +22,4 @@
 std::vector<WhitekastObject*> initVision();
 int captureFrames();
 void createBorder();
-void findObjectsByFrame(const Mat, const ObjectColor);
+void findObjectsByFrame(const cv::Mat, const ObjectColor);

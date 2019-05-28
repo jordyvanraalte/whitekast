@@ -3,36 +3,41 @@
 #include "DrawComponent.h"
 #include "GL/freeglut.h"
 
-std::vector<Point> coordinates;
-Point center;
+std::vector<cv::Point> coordinates;
+cv::Point center;
 ObjectColor objectColor;
 
-WhitekastObject::WhitekastObject(ObjectColor color) : DrawComponent() {
+int sizeVariable = 4;
+float scale = sizeVariable / CAMERA_HEIGHT;
+
+WhitekastObject::WhitekastObject(ObjectColor color) {
 	
 	objectColor = color;
 }
 
 WhitekastObject::~WhitekastObject() {}
 
-std::vector<Point> WhitekastObject::getCoordinates()
+std::vector<cv::Point> WhitekastObject::getCoordinates()
 {
 	return coordinates;
 }
 
-void WhitekastObject::setCoordinates(std::vector<Point> newCoordinates)
+void WhitekastObject::setCoordinates(std::vector<cv::Point> newCoordinates)
 {
 	//coordinates = newCoordinates;
 	for (int i = 0; i < newCoordinates.size(); i += 2) {
 		coordinates.push_back(newCoordinates.at(i));
 	}
+
+	hitbox = new LinesHitbox(coordinates, scale);
 }
 
-Point WhitekastObject::getCenter()
+cv::Point WhitekastObject::getCenter()
 {
 	return center;
 }
 
-void WhitekastObject::setCenter(Point centerPoint)
+void WhitekastObject::setCenter(cv::Point centerPoint)
 {
 	center = centerPoint;
 }
@@ -67,8 +72,6 @@ void WhitekastObject::setDrawingColor()
 
 void WhitekastObject::draw() {
 	setDrawingColor();
-	int sizeVariable = 4;
-	float scale = sizeVariable / CAMERA_HEIGHT;
 	if (objectColor == WHITE) {
 		float backgroundY = -2.01f;
 		glBegin(GL_QUADS);
@@ -107,5 +110,10 @@ void WhitekastObject::draw() {
 			glVertex3f(lastX, minObjectY, lastY);
 		glEnd();
 	}
+}
+
+Hitbox* WhitekastObject::getHitbox()
+{
+	return nullptr;
 }
 

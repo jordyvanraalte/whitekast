@@ -23,14 +23,34 @@ Hitbox* CircleHitbox::getHitbox() const
 
 void CircleHitbox::shiftColliders(Vec3f pos)
 {
-	currentHitbox = this;
+	cirlceHitbox = this;
 	circle.x = pos.x;
 	circle.y = pos.z;
 }
 
-LinesHitbox::LinesHitbox()
+LinesHitbox::LinesHitbox(std::vector<cv::Point> coordinates, float scale)
 {
-	
+	lineHitbox = this;
+	bool point1 = true;
+
+	for (const cv::Point point : coordinates)
+	{
+		if(point1)
+		{
+			point1 = false;
+			hitline.point1.x = point.x*scale;
+			hitline.point1.y = point.y*scale;
+
+		}
+		else
+		{
+			point1 = true;
+			hitline.point2.x = point.x*scale;
+			hitline.point2.y = point.y*scale;
+
+			hitlines.push_back(hitline);
+		}
+	}
 }
 
 Hitbox* LinesHitbox::getHitbox() const

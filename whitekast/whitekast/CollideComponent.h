@@ -1,8 +1,10 @@
 #pragma once
-#include "Component.h"
-#include "HitBox.h"
 
-class CollideComponent : public Component
+#include "HitBox.h"
+#include "Component.h"
+
+class Component;
+class CollideComponent : virtual public Component
 {
 
 protected:

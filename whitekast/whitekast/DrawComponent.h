@@ -2,7 +2,8 @@
 
 #include "Component.h"
 
-class DrawComponent : public Component
+class Component;
+class DrawComponent : virtual public Component
 {
 
 public:

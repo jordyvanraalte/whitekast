@@ -90,6 +90,14 @@ void Game::makeObjects()
 	testball->position = ::Vec3f(0, 0, -3);
 	testball->addComponent(new CircleCollideComponent(testball));
 	objects.push_back(testball);
+
+	GameObject* testplate = new GameObject();
+	testplate->addComponent(new WhitekastObject(WHITE));
+	testplate->position = ::Vec3f(0, 0, -3);
+	objects.push_back(testplate);
+
+	testplate->getHitbox();
+	testball->getHitbox();
 }
 
 void Game::handleEvents() 

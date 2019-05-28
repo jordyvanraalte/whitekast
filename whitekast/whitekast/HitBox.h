@@ -1,21 +1,19 @@
 #pragma once
 #include <list>
 #include "Vec.h"
+#include <vector>
+#include <opencv2/core/affine.hpp>
 
 class Hitbox
 {
-
-protected:
-
-	Hitbox* currentHitbox;
 
 public:
 
 	Hitbox();
 	~Hitbox();
 
-	virtual void shiftColliders(::Vec3f pos) {};
-	virtual Hitbox* getHitbox() const { return currentHitbox; };
+	virtual void shiftColliders(::Vec3f pos) = 0;
+	virtual Hitbox* getHitbox() const = 0;
 
 };
 
@@ -39,6 +37,8 @@ public:
 	CircleHitbox(::Vec3f pos, float radius); 
 	~CircleHitbox();
 
+	Circle circle;
+
 	Hitbox* getHitbox() const override;
 	void shiftColliders(::Vec3f pos) override;
 };
@@ -61,6 +61,9 @@ public:
 
 	LinesHitbox();
 	~LinesHitbox();
+
+	Hitline hitline;
+	std::list<Hitline> hitlines;
 
 	Hitbox* getHitbox() const override;
 	void shiftColliders(::Vec3f pos) override;
