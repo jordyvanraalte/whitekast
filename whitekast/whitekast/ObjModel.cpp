@@ -72,7 +72,6 @@ ObjModel::ObjModel(const std::string &fileName)
 	if (fileName == dirName)
 		dirName = "";
 
-
 	std::ifstream pFile(fileName.c_str());
 
 	if (!pFile.is_open())
@@ -81,10 +80,8 @@ ObjModel::ObjModel(const std::string &fileName)
 		return;
 	}
 
-
 	ObjGroup* currentGroup = new ObjGroup();
 	currentGroup->materialIndex = -1;
-
 
 	while (!pFile.eof())
 	{

@@ -23,5 +23,3 @@ public:
 	static World* getWorld();
 	void makePlatform();
 };
-
-

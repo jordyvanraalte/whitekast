@@ -9,9 +9,9 @@ GameObject::GameObject(bool isVisionObject)
 	this->isVisionObject = isVisionObject;
 }
 
-
 GameObject::~GameObject()
 {
+
 }
 
 void GameObject::addComponent(Component* component)

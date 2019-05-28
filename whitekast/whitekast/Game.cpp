@@ -46,7 +46,8 @@ void Game::startGame()
 void Game::initGlut(const char * title, int argc, char * argv[])
 {
 	getDesktopResolution(horizontal, vertical);
-	std::vector<WhitekastObject*> whitekastObjects = initVision();
+	Vision vision = Vision();
+	std::vector<WhitekastObject*> whitekastObjects = vision.initVision();
 
 	for (auto wkObject : whitekastObjects) {
 		GameObject* gameObject = new GameObject(true);
