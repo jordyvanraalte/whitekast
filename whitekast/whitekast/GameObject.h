@@ -22,7 +22,7 @@ public:
 	GameObject();
 	~GameObject();
 
-	::ObjModel* objModel;
+	ObjModel *model;
 
 	::Vec3f velocity;
 	::Vec3f position;
@@ -30,7 +30,7 @@ public:
 	::Vec3f scale = ::Vec3f(1, 1, 1);
 
 	void addComponent(Component* component);
-
+	void loadModel(const std::string& fileName);
 	std::list<Component*> getComponents();
 
 	void update(float elapsedTime);

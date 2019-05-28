@@ -63,7 +63,7 @@ static inline std::string cleanLine(std::string line)
 
 ObjModel::ObjModel()
 {
-	
+	diameter = 0;
 }
 
 ObjModel::~ObjModel(void)
@@ -176,7 +176,7 @@ void ObjModel::load(const std::string& fileName)
 				std::cout << "Could not find material name " << params[1] << std::endl;
 		}
 	}
-	radius = (highestVec.x - lowestVec.x);
+	diameter = (highestVec.x - lowestVec.x);
 	groups.push_back(currentGroup);
 }
 

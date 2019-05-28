@@ -6,11 +6,9 @@
 class ModelComponent : public DrawComponent
 {
 
-	ObjModel *model;
-
 public:
 
-	ModelComponent(const std::string path);
+	ModelComponent(const std::string path, GameObject *gameObject);
 	~ModelComponent();
 
 	void draw() override;

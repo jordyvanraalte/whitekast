@@ -1,9 +1,10 @@
 #include "ModelComponent.h"
 
-ModelComponent::ModelComponent(std::string path)
+ModelComponent::ModelComponent(std::string path, GameObject* gameobject)
 {
-	model = new ObjModel();
-	model->load(path);
+	this->gameObject = gameobject;
+	gameObject->model = new ObjModel();
+	gameObject->model->load(path);
 }
 
 ModelComponent::~ModelComponent()
@@ -11,5 +12,5 @@ ModelComponent::~ModelComponent()
 
 void ModelComponent::draw()
 {
-	model->draw();
+	gameObject->model->draw();
 }

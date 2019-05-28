@@ -80,10 +80,10 @@ void Game::makeObjects()
 	objects.push_back(roomCube);*/
 
 	GameObject* testball = new GameObject();
-	testball->addComponent(new ModelComponent("Models/Pinballs/pinball_3.1.obj"));
+	testball->addComponent(new ModelComponent("Models/Pinballs/pinball_3.1.obj", testball));
 	testball->addComponent(new GravityComponent(::Vec3f(0, 0, 0.981)));
 	testball->position = ::Vec3f(0, 0, -3);
-	//testball->addComponent(new CircleCollideComponent());
+	testball->addComponent(new CircleCollideComponent(testball));
 	objects.push_back(testball);
 }
 

@@ -49,16 +49,17 @@ private:
 	};
 
 
-	std::vector<::Vec3f>	vertices;
-	std::vector<::Vec3f>	normals;
-	std::vector<::Vec2f>	texcoords;
-	std::vector<ObjGroup*> groups;
-	std::vector<MaterialInfo*> materials;
+	std::vector<::Vec3f>		vertices;
+	std::vector<::Vec3f>		normals;
+	std::vector<::Vec2f>		texcoords;
+	std::vector<ObjGroup*>		groups;
+	std::vector<MaterialInfo*>	materials;
 
 	void loadMaterialFile(const std::string &fileName, const std::string &dirName);
 
 public:
-	float radius;
+
+	float diameter;
 
 	ObjModel();
 	~ObjModel(void);

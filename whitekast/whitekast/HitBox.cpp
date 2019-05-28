@@ -1,22 +1,19 @@
 #include "Hitbox.h"
 
-
-
 Hitbox::Hitbox()
 {
 }
-
 
 Hitbox::~Hitbox()
 {
 }
 
-CircleHitbox::CircleHitbox(Vec3f pos, float radius)
+CircleHitbox::CircleHitbox(Vec3f pos, float d)
 {
 	cirlceHitbox = this;
 	circle.x = pos.x;
 	circle.y = pos.y;
-	circle.r = radius;
+	circle.r = (d/2);
 }
 
 Hitbox* CircleHitbox::getHitbox() const
@@ -28,7 +25,7 @@ void CircleHitbox::shiftColliders(Vec3f pos)
 {
 	currentHitbox = this;
 	circle.x = pos.x;
-	circle.y = pos.y;
+	circle.y = pos.z;
 }
 
 Hitbox* LinesHitbox::getHitbox() const

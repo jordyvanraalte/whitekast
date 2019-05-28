@@ -5,7 +5,6 @@
 
 GameObject::GameObject()
 {
-	objModel = new ObjModel();
 	position = Vec3f(0, 0, 0);
 	rotation = Vec3f(0, 0, 0);
 }
@@ -24,6 +23,10 @@ void GameObject::addComponent(Component* component)
 
 	if (!collideComponent)
 		collideComponent = dynamic_cast<CollideComponent*>(component);
+}
+
+void GameObject::loadModel(const std::string& fileName)
+{
 }
 
 std::list<Component*> GameObject::getComponents()
