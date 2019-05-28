@@ -165,8 +165,8 @@ void ObjModel::draw()
 		auto& material = materials[group->materialIndex];
 		if (material->texture)
 		{
-			material->texture->bind();
 			glEnable(GL_TEXTURE_2D);
+			material->texture->bind();
 			glColor3f(1, 1, 1);
 		}
 		else
@@ -185,7 +185,9 @@ void ObjModel::draw()
 				glTexCoord2fv(tex.v); glVertex3fv(vec.v);
 			}
 		}
+		glBindTexture(GL_TEXTURE_2D, 0);
 		glEnd();
+		glColor3f(1, 1, 1);
 	}
 }
 

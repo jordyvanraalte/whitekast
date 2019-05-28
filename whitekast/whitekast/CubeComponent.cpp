@@ -50,5 +50,7 @@ void CubeComponent::draw()
 	glVertex3f(size, size, size);
 	glVertex3f(size, -size, size);
 
+	glBindTexture(GL_TEXTURE_2D, 0);
 	glEnd();
+	glColor3f(1, 1, 1);
 }
