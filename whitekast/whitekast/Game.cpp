@@ -30,10 +30,8 @@ Game::Game(const char * title, int argc, char * argv[])
 	initObjects();
 	world = new World(horizontal, vertical, objects);
 
-
 	audiomanager = AudioManager::getInstance();
-	audiomanager->playSound("audio/test.mpeg");
-	audiomanager->playSound("audio/bumper_hit.wav");
+	audiomanager->playSound("audio/busta_loop.WAV");
 }
 
 Game::~Game()
