@@ -20,6 +20,8 @@
 #include "StateManager.h"
 #include "HomeState.h"
 #include "CollisionManager.h"
+#include "PointCounter.h"
+#include "LivesCounter.h"
 
 std::list<GameObject*> objects;
 static World* world;
@@ -36,6 +38,9 @@ Game::Game(const char * title, int argc, char * argv[])
 	world = new World(horizontal, vertical, objects);
 
 	audiomanager = AudioManager::getInstance();
+	pointCounter = PointCounter::getInstance();
+	livesCounter = LivesCounter::getInstance();
+
 	StateManager::getInstance();
 
 	CollisionManager* collision = new CollisionManager();
@@ -46,7 +51,6 @@ Game::~Game()
 {
 	delete world;
 	delete instance;
-
 }
 
 void Game::startGame()
@@ -63,6 +67,7 @@ void Game::initGlut(const char * title, int argc, char * argv[])
 	std::vector<WhitekastObject*> whitekastObjects = vision.initVision();
 
 	initFlippers();
+	
 
 	for (auto wkObject : whitekastObjects) 
 	{
@@ -94,12 +99,15 @@ void Game::initGlut(const char * title, int argc, char * argv[])
 
 void Game::handleEvents() 
 {
+	pointCounter->hitFlipper();
 	StateManager::getInstance()->handle(this);
+	
 }
 
 void Game::reset()
 {
-	lives = 3;
+	livesCounter->resetLives();
+	pointCounter->resetPoints();
 	StateManager::getInstance()->setState(new HomeState());
 }
 
@@ -136,7 +144,6 @@ void Game::initObjects()
 	objects.push_back(roomCube);
 }
 
-
 void Game::initFlippers()
 {
 	::Vec3f scale = ::Vec3f(0.1, 0.1, 0.1);
@@ -157,6 +164,7 @@ void Game::initFlippers()
 	flipperRight->addComponent(new FlipComponent());
 	objects.push_back(flipperRight);
 }
+
 
 Game* Game::getInstance()
 {

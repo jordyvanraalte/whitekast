@@ -1,5 +1,6 @@
 #include "DeathState.h"
 #include "GameOverState.h"
+#include "LivesCounter.h"
 
 
 DeathState::DeathState()
@@ -13,9 +14,9 @@ DeathState::~DeathState()
 
 void DeathState::handle(Game* game)
 {
-	if (game->lives > 1)
+	if (LivesCounter::getInstance()->getLives() > 1)
 	{
-		game->lives--;
+		LivesCounter::getInstance()->loseLive();
 		StateManager::getInstance()->setState(new PlayState());
 	}
 	else

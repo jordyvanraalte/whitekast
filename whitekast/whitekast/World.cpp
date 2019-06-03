@@ -1,9 +1,13 @@
 #include "World.h"
 #include "GameObject.h"
+#include "PointCounter.h"
+#include "LivesCounter.h"
 #include "WhitekastObject.h"
 #include "CubeComponent.h"
 #include <GL/freeglut.h>
 #include <iostream>
+#include <cstring>
+
 
 std::list<GameObject*> gameObjects;
 float lastFrameTime;
@@ -30,7 +34,6 @@ World::World(int horizontal, int vertical, std::list<GameObject*>& objectlist)
 	height = vertical;
 	lastFrameTime = 0;
 	gameObjects = objectlist;
-
 	glEnable(GL_DEPTH_TEST);
 	ZeroMemory(keys, sizeof(keys));
 }
@@ -87,7 +90,7 @@ void World::display()
 		object->draw();
 		glPopMatrix();
 	}
-
+	displayUI(PointCounter::getInstance()->getPoints(), LivesCounter::getInstance()->getLives());
 	glutSwapBuffers();
 }
 
@@ -173,4 +176,40 @@ void World::mouseClick(int button, int state, int x, int y)
 			}
 		}
 	}
+}
+
+void World::displayUI(int points, int lifepoints)
+{
+
+	glMatrixMode(GL_PROJECTION);
+	glPushMatrix();
+	glLoadIdentity();
+	glOrtho(0.0, width, height, 0.0, -1.0, 10.0);
+	glMatrixMode(GL_MODELVIEW);
+	//glPushMatrix();        ----Not sure if I need this
+	glLoadIdentity();
+	glDisable(GL_CULL_FACE);
+
+	glClear(GL_DEPTH_BUFFER_BIT);
+	glRotatef(180, 1, 0, 0);
+	glTranslatef(0, -25, 0);
+	glScalef(0.2, 0.2, 0.2);
+	std::string tempString = "score: ";
+	tempString = tempString + std::to_string(points);
+	unsigned char score[256];
+	std::copy(tempString.begin(), tempString.end(), score);
+	score[tempString.length()] = 0;
+	glutStrokeString(GLUT_STROKE_ROMAN, score);
+	tempString = " lives: ";
+	tempString = tempString + std::to_string(lifepoints);
+	unsigned char lives[256];
+	std::copy(tempString.begin(), tempString.end(), lives);
+	lives[tempString.length()] = 0;
+	glutStrokeString(GLUT_STROKE_ROMAN, lives);
+	
+	// Making sure we can render 3d again
+	glMatrixMode(GL_PROJECTION);
+	glPopMatrix();
+	glMatrixMode(GL_MODELVIEW);
+	//glPopMatrix();        ----and this?
 }
