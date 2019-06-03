@@ -63,6 +63,7 @@ void Game::initGlut(const char * title, int argc, char * argv[])
 	std::vector<WhitekastObject*> whitekastObjects = vision.initVision();
 
 	initFlippers();
+	
 
 	for (auto wkObject : whitekastObjects) 
 	{
@@ -154,6 +155,7 @@ void Game::initFlippers()
 	flipperRight->addComponent(new FlipComponent());
 	objects.push_back(flipperRight);
 }
+
 
 Game* Game::getInstance()
 {

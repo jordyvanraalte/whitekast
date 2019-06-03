@@ -177,28 +177,25 @@ void World::mouseClick(int button, int state, int x, int y)
 
 void World::initUI()
 {
+
 	glMatrixMode(GL_PROJECTION);
 	glPushMatrix();
 	glLoadIdentity();
-	glOrtho(0.0, height, width, 0.0, -1.0, 10.0);
+	glOrtho(0.0, width, height, 0.0, -1.0, 10.0);
 	glMatrixMode(GL_MODELVIEW);
-	glPushMatrix();
+	//glPushMatrix();        ----Not sure if I need this
 	glLoadIdentity();
 	glDisable(GL_CULL_FACE);
 
 	glClear(GL_DEPTH_BUFFER_BIT);
-
-	glBegin(GL_QUADS);
-	glColor3f(1.0f, 0.0f, 0.0);
-	glVertex2f(0.0, 0.0);
-	glVertex2f(100.0f, 0.0f);
-	glVertex2f(100.0f, 100.0f);
-	glVertex2f(0.0f, 100.0f);
-	glEnd();
-
+	glRotatef(180, 1, 0, 0);
+	glTranslatef(0, -20, 0);
+	glScalef(0.2, 0.2, 0.2);
+	glutStrokeString(GLUT_STROKE_ROMAN, (unsigned char*)"score:");
+	
 	// Making sure we can render 3d again
 	glMatrixMode(GL_PROJECTION);
 	glPopMatrix();
 	glMatrixMode(GL_MODELVIEW);
-	glPopMatrix(); 
+	//glPopMatrix();        ----and this?
 }
