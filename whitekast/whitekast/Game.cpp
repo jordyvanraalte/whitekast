@@ -126,8 +126,8 @@ void Game::initObjects()
 {
 	GameObject* testball = new GameObject(false);
 	testball->addComponent(new ModelComponent("Models/Pinballs/pinball_3.1.obj", testball));
-	testball->position = ::Vec3f(0, -3, -6);
-	testball->scale = ::Vec3f(1, 1, 1);
+	testball->position = ::Vec3f(2, -3, -6);
+	testball->scale = ::Vec3f(0.1f, 0.1f, 0.1f);
 	testball->addComponent(new GravityComponent(::Vec3f(0, 0, 0.981)));
 	testball->addComponent(new CircleCollideComponent(testball));
 	ball = testball;
