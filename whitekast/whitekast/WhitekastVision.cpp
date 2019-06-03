@@ -17,12 +17,12 @@ vector<WhitekastObject*> Vision::initVision()
 {
 	if (!vCap.isOpened())
 	{
-		cout << "Cannot open the video cam" << endl;
+		std::cout << "Cannot open the video cam" << std::endl;
 		exit(0);
 	}
 	double dWidth = vCap.get(CV_CAP_PROP_FRAME_WIDTH);
 	double dHeight = vCap.get(CV_CAP_PROP_FRAME_HEIGHT);
-	cout << "Frame size : " << dWidth << " x " << dHeight << endl;
+	std::cout << "Frame size : " << dWidth << " x " << dHeight << std::endl;
 
 	int running = 1;
 	while (running) {

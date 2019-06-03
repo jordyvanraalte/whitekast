@@ -13,6 +13,7 @@
 class ObjModel
 {
 private:
+
 	class Vertex
 	{
 	public:
@@ -48,17 +49,21 @@ private:
 	};
 
 
-	std::vector<::Vec3f>	vertices;
-	std::vector<::Vec3f>	normals;
-	std::vector<::Vec2f>	texcoords;
-	std::vector<ObjGroup*> groups;
-	std::vector<MaterialInfo*> materials;
+	std::vector<::Vec3f>		vertices;
+	std::vector<::Vec3f>		normals;
+	std::vector<::Vec2f>		texcoords;
+	std::vector<ObjGroup*>		groups;
+	std::vector<MaterialInfo*>	materials;
 
 	void loadMaterialFile(const std::string &fileName, const std::string &dirName);
 
 public:
-	ObjModel(const std::string &filename);
+
+	float diameter;
+
+	ObjModel();
 	~ObjModel(void);
 
+	void load(const std::string &filename);
 	void draw();
 };

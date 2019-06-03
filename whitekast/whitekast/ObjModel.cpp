@@ -61,8 +61,21 @@ static inline std::string cleanLine(std::string line)
 }
 
 
-ObjModel::ObjModel(const std::string &fileName)
+ObjModel::ObjModel()
 {
+	diameter = 0;
+}
+
+ObjModel::~ObjModel(void)
+{
+}
+
+void ObjModel::load(const std::string& fileName)
+{
+	Vec2f currentVec;
+	Vec2f highestVec;
+	Vec2f lowestVec;
+
 	std::cout << "Loading " << fileName << std::endl;
 	std::string dirName = fileName;
 	if (dirName.rfind("/") != std::string::npos)
@@ -95,7 +108,17 @@ ObjModel::ObjModel(const std::string &fileName)
 		params[0] = toLower(params[0]);
 
 		if (params[0] == "v")
+		{
 			vertices.push_back(::Vec3f((float)atof(params[1].c_str()), (float)atof(params[2].c_str()), (float)atof(params[3].c_str())));
+
+			currentVec = Vec2f(static_cast<float>(atof(params[1].c_str())), static_cast<float>(atof(params[2].c_str())));
+			if (currentVec.x > highestVec.x)
+				highestVec = currentVec;
+			if (currentVec.x < lowestVec.x)
+				lowestVec = currentVec;
+
+			printf("Highest %f:%f and Lowest %f:%f \n", highestVec.x, highestVec.y, lowestVec.x, lowestVec.y);
+		}
 		else if (params[0] == "vn")
 			normals.push_back(::Vec3f((float)atof(params[1].c_str()), (float)atof(params[2].c_str()), (float)atof(params[3].c_str())));
 		else if (params[0] == "vt")
@@ -125,7 +148,7 @@ ObjModel::ObjModel(const std::string &fileName)
 				currentGroup->faces.push_back(face);
 			}
 		}
-		else if (params[0] == "s") {	}
+		else if (params[0] == "s") {}
 		else if (params[0] == "mtllib")
 		{
 			loadMaterialFile(dirName + "/" + params[1], dirName);
@@ -150,11 +173,8 @@ ObjModel::ObjModel(const std::string &fileName)
 				std::cout << "Could not find material name " << params[1] << std::endl;
 		}
 	}
+	diameter = (highestVec.x - lowestVec.x);
 	groups.push_back(currentGroup);
-}
-
-ObjModel::~ObjModel(void)
-{
 }
 
 

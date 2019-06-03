@@ -2,28 +2,41 @@
 
 #include <list>
 #include "Vec.h"
+#include "ObjModel.h"
+#include "HitBox.h"
 
 class Component;
 class DrawComponent;
+class CollideComponent;
 
 class GameObject
 {
 	DrawComponent* drawComponent = nullptr;
+	CollideComponent* collideComponent = nullptr;
+
 	std::list<Component*> components;
+	::Vec3f vectemp;
 
 public:
 	GameObject(bool isVisionObject);
 	~GameObject();
 
 	bool isVisionObject;
+	ObjModel *model;
+
+	::Vec3f velocity;
 	::Vec3f position;
 	::Vec3f rotation;
 	::Vec3f scale = ::Vec3f(1, 1, 1);
-	
+
 	void addComponent(Component* component);
+	void loadModel(const std::string& fileName);
 	std::list<Component*> getComponents();
+
 	void update(float elapsedTime);
 	void draw();
+
+	Hitbox* getHitbox() const;
 
 	template<class T>
 	T* getComponent()
@@ -45,5 +58,4 @@ public:
 				return t != nullptr;
 			});
 	}
-
 };

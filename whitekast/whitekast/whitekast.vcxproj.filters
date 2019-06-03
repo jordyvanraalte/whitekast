@@ -55,6 +55,30 @@
     <Filter Include="Resource Files\Models\Pinballs">
       <UniqueIdentifier>{6660ac3c-0815-473f-a817-ce476e30a01d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\game\GameObject">
+      <UniqueIdentifier>{973cb865-137f-4e5e-87f6-ae87011a91bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\game\GameObject">
+      <UniqueIdentifier>{f8a337e3-1dd9-4c26-bb6c-6298aa4c30cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\math">
+      <UniqueIdentifier>{cad2b1dd-eec9-4b82-92e2-ed061bbc17b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\math">
+      <UniqueIdentifier>{06edb840-bf8d-452c-80c6-0418245517ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\game\components\CollisionComponents">
+      <UniqueIdentifier>{82444d00-32de-40ce-8885-64c9499cfb4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\game\components\DrawComponents">
+      <UniqueIdentifier>{8fa52780-d4fd-40b7-a402-58cb67031036}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\game\components\CollisionComponents">
+      <UniqueIdentifier>{21d662d8-98cc-428f-bb9e-6921caf4539e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\game\components\DrawComponents">
+      <UniqueIdentifier>{53e40fbe-680e-4132-9038-712f3f58113c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -84,35 +108,14 @@
     <ClInclude Include="Component.h">
       <Filter>Header Files\game\components</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Header Files\game\components</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerComponent.h">
-      <Filter>Header Files\game\components</Filter>
-    </ClInclude>
-    <ClInclude Include="CubeComponent.h">
-      <Filter>Header Files\game\components</Filter>
-    </ClInclude>
-    <ClInclude Include="DrawComponent.h">
-      <Filter>Header Files\game\components</Filter>
-    </ClInclude>
-    <ClInclude Include="Vec.h">
-      <Filter>Header Files\game\components</Filter>
-    </ClInclude>
     <ClInclude Include="Vec.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="WorldComponent.h">
-      <Filter>Header Files\game\components</Filter>
     </ClInclude>
     <ClInclude Include="WhitekastObject.h">
       <Filter>Header Files\vision</Filter>
     </ClInclude>
     <ClInclude Include="WhitekastVision.h">
       <Filter>Header Files\vision</Filter>
-    </ClInclude>
-    <ClInclude Include="Wall.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AudioManager.h">
       <Filter>Header Files\game\audio</Filter>
@@ -123,8 +126,41 @@
     <ClInclude Include="State.h">
       <Filter>Header Files\game\states</Filter>
     </ClInclude>
-    <ClInclude Include="BallComponent.h">
+    <ClInclude Include="GravityComponent.h">
       <Filter>Header Files\game\components</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Header Files\game\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Vec.h">
+      <Filter>Header Files\math</Filter>
+    </ClInclude>
+    <ClInclude Include="HitBox.h">
+      <Filter>Header Files\math</Filter>
+    </ClInclude>
+    <ClInclude Include="CircleCollideComponent.h">
+      <Filter>Header Files\game\components\CollisionComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="CollideComponent.h">
+      <Filter>Header Files\game\components\CollisionComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="LineColliderComponent.h">
+      <Filter>Header Files\game\components\CollisionComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="CubeComponent.h">
+      <Filter>Header Files\game\components\DrawComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelComponent.h">
+      <Filter>Header Files\game\components\DrawComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawComponent.h">
+      <Filter>Header Files\game\components\DrawComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldComponent.h">
+      <Filter>Header Files\game\components\DrawComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionManager.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DeathState.h">
       <Filter>Header Files\game\states</Filter>
@@ -161,23 +197,8 @@
     <ClCompile Include="Component.cpp">
       <Filter>Source Files\game\components</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>Source Files\game\components</Filter>
-    </ClCompile>
-    <ClCompile Include="CubeComponent.cpp">
-      <Filter>Source Files\game\components</Filter>
-    </ClCompile>
-    <ClCompile Include="DrawComponent.cpp">
-      <Filter>Source Files\game\components</Filter>
-    </ClCompile>
-    <ClCompile Include="Vec.cpp">
-      <Filter>Source Files\game\components</Filter>
-    </ClCompile>
     <ClCompile Include="Vec.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="WorldComponent.cpp">
-      <Filter>Source Files\game\components</Filter>
     </ClCompile>
     <ClCompile Include="WhitekastObject.cpp">
       <Filter>Source Files\vision</Filter>
@@ -194,8 +215,41 @@
     <ClCompile Include="State.cpp">
       <Filter>Source Files\game\states</Filter>
     </ClCompile>
-    <ClCompile Include="BallComponent.cpp">
+    <ClCompile Include="GravityComponent.cpp">
       <Filter>Source Files\game\components</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Source Files\game\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec.cpp">
+      <Filter>Source Files\math</Filter>
+    </ClCompile>
+    <ClCompile Include="HitBox.cpp">
+      <Filter>Source Files\math</Filter>
+    </ClCompile>
+    <ClCompile Include="CircleCollideComponent.cpp">
+      <Filter>Source Files\game\components\CollisionComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="CollideComponent.cpp">
+      <Filter>Source Files\game\components\CollisionComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="LineColliderComponent.cpp">
+      <Filter>Source Files\game\components\CollisionComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="CubeComponent.cpp">
+      <Filter>Source Files\game\components\DrawComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawComponent.cpp">
+      <Filter>Source Files\game\components\DrawComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelComponent.cpp">
+      <Filter>Source Files\game\components\DrawComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldComponent.cpp">
+      <Filter>Source Files\game\components\DrawComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionManager.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GameOverState.cpp">
       <Filter>Source Files\game\states</Filter>
@@ -212,6 +266,15 @@
       <Filter>Resource Files\Models\Pinballs</Filter>
     </Object>
     <Object Include="Models\Pinballs\pinball_3.0.obj">
+      <Filter>Resource Files\Models\Pinballs</Filter>
+    </Object>
+    <Object Include="Models\Pinballs\pinball_1.1.obj">
+      <Filter>Resource Files\Models\Pinballs</Filter>
+    </Object>
+    <Object Include="Models\Pinballs\pinball_2.1.obj">
+      <Filter>Resource Files\Models\Pinballs</Filter>
+    </Object>
+    <Object Include="Models\Pinballs\pinball_3.1.obj">
       <Filter>Resource Files\Models\Pinballs</Filter>
     </Object>
   </ItemGroup>

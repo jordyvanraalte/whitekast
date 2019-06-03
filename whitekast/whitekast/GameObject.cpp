@@ -1,5 +1,6 @@
 #include "GameObject.h"
 #include "DrawComponent.h"
+#include "CollideComponent.h"
 #include <GL/freeglut.h>
 
 GameObject::GameObject(bool isVisionObject)
@@ -21,6 +22,13 @@ void GameObject::addComponent(Component* component)
 
 	if (!drawComponent)
 		drawComponent = dynamic_cast<DrawComponent*>(component);
+
+	if (!collideComponent)
+		collideComponent = dynamic_cast<CollideComponent*>(component);
+}
+
+void GameObject::loadModel(const std::string& fileName)
+{
 }
 
 std::list<Component*> GameObject::getComponents()
@@ -43,8 +51,21 @@ void GameObject::draw()
 	glPopMatrix();
 }
 
+Hitbox* GameObject::getHitbox() const
+{
+	if (!collideComponent)
+		return nullptr;
+
+	return collideComponent->getHitbox();
+}
+
 void GameObject::update(float elapsedTime)
 {
+	vectemp = velocity;
+	vectemp.applyTime(elapsedTime);
+
 	for (auto c : components)
 		c->update(elapsedTime);
+
+	position = position + vectemp;
 }
