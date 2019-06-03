@@ -88,24 +88,6 @@ void Game::initGlut(const char * title, int argc, char * argv[])
 	glutPassiveMotionFunc([](int mouseX, int mouseY) {World::getWorld()->mousePassiveMotion(mouseX, mouseY); });
 }
 
-void Game::makeObjects()
-{
-	/*GameObject* testCube = new GameObject();
-	testCube->addComponent(new CubeComponent(1));
-	testCube->position = ::Vec3f(0, 0, -3);
-	objects.push_back(testCube);
-
-	GameObject* roomCube = new GameObject();
-	roomCube->addComponent(new CubeComponent(10));
-	roomCube->position = ::Vec3f(0, 0, 0);
-	objects.push_back(roomCube);*/
-
-	GameObject* testball = new GameObject();
-	testball->addComponent(new BallComponent());
-	testball->position = ::Vec3f(0, 0, -3);
-	objects.push_back(testball);
-}
-
 void Game::handleEvents() 
 {
 	StateManager::getInstance()->handle(this);
@@ -134,7 +116,7 @@ void Game::stop()
 void Game::initObjects()
 {
 	GameObject* testball = new GameObject(false);
-	testball->addComponent(new BallComponent());
+	testball->addComponent(new ModelComponent("Models/Pinballs/pinball_3.1.obj", testball));
 	testball->position = ::Vec3f(0, 0, -3);
 	objects.push_back(testball);
 

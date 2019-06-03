@@ -6,17 +6,13 @@
 std::vector<cv::Point> coordinates;
 cv::Point center;
 ObjectColor objectColor;
-int size = 6;
+int size = 4;
 float widthBoard;
-float scale;
-
-int sizeVariable = 4;
-float scale = sizeVariable / CAMERA_HEIGHT;
+float scale = size / CAMERA_HEIGHT;
 
 WhitekastObject::WhitekastObject(ObjectColor color) {
 	
 	objectColor = color;
-	scale = size / CAMERA_HEIGHT;
 	widthBoard = scale * CAMERA_WIDTH;
 }
 

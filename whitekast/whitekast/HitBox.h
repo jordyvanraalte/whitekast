@@ -32,12 +32,9 @@ public:
 
 	Circle circle;
 
-
 	CircleHitbox();
 	CircleHitbox(::Vec3f pos, float radius); 
 	~CircleHitbox();
-
-	Circle circle;
 
 	Hitbox* getHitbox() const override;
 	void shiftColliders(::Vec3f pos) override;
@@ -60,10 +57,10 @@ public:
 	std::list<Hitline> hitlines;
 
 	LinesHitbox();
+	LinesHitbox(std::vector<cv::Point> coordinates, float scale);
 	~LinesHitbox();
 
 	Hitline hitline;
-	std::list<Hitline> hitlines;
 
 	Hitbox* getHitbox() const override;
 	void shiftColliders(::Vec3f pos) override;

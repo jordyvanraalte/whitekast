@@ -52,7 +52,7 @@ bool CollisionManager::isColliding(GameObject bal, GameObject object)
 	return false;
 }
 
-bool CollisionManager::isPointInLine(Vec2f point1, Vec2f point2, float px, float py)
+bool CollisionManager::isPointOnLine(Vec2f point1, Vec2f point2, float px, float py)
 {
 
 	float x1 = point1.x;
@@ -73,7 +73,7 @@ bool CollisionManager::isPointInLine(Vec2f point1, Vec2f point2, float px, float
 	
 }
 
-bool isPointInCircle(Vec2f point, float cx, float cy, float r)
+bool CollisionManager::isPointInCircle(Vec2f point, float cx, float cy, float r)
 {
 	float distX = point.x - cx;
 	float distY = point.y - cy;
