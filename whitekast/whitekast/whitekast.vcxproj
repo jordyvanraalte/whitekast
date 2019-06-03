@@ -180,6 +180,7 @@
     <ClInclude Include="GravityComponent.h" />
     <ClInclude Include="HitBox.h" />
     <ClInclude Include="LineColliderComponent.h" />
+    <ClInclude Include="LivesCounter.h" />
     <ClInclude Include="ModelComponent.h" />
     <ClInclude Include="GameOverState.h" />
     <ClInclude Include="PointCounter.h" />
@@ -212,6 +213,7 @@
     <ClCompile Include="GravityComponent.cpp" />
     <ClCompile Include="HitBox.cpp" />
     <ClCompile Include="LineColliderComponent.cpp" />
+    <ClCompile Include="LivesCounter.cpp" />
     <ClCompile Include="ModelComponent.cpp" />
     <ClCompile Include="GameOverState.cpp" />
     <ClCompile Include="PointCounter.cpp" />

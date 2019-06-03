@@ -21,6 +21,7 @@
 #include "HomeState.h"
 #include "CollisionManager.h"
 #include "PointCounter.h"
+#include "LivesCounter.h"
 
 std::list<GameObject*> objects;
 static World* world;
@@ -38,6 +39,7 @@ Game::Game(const char * title, int argc, char * argv[])
 
 	audiomanager = AudioManager::getInstance();
 	pointCounter = PointCounter::getInstance();
+	livesCounter = LivesCounter::getInstance();
 
 	StateManager::getInstance();
 
@@ -104,7 +106,7 @@ void Game::handleEvents()
 
 void Game::reset()
 {
-	lives = 3;
+	livesCounter->resetLives();
 	pointCounter->resetPoints();
 	StateManager::getInstance()->setState(new HomeState());
 }

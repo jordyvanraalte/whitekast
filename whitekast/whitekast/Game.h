@@ -8,6 +8,7 @@ class AudioManager;
 class GameObject;
 class StateManager;
 class PointCounter;
+class LivesCounter;
 
 class Game
 {
@@ -34,4 +35,5 @@ private:
 	std::list<GameObject*> objects;
 	AudioManager* audiomanager;
 	PointCounter* pointCounter;
+	LivesCounter* livesCounter;
 };

@@ -26,5 +26,5 @@ public:
 	void mouseClick(int button, int state, int x, int y);
 	static World* getWorld();
 	void makePlatform();
-	void displayUI(int points);
+	void displayUI(int points, int lifepoints);
 };

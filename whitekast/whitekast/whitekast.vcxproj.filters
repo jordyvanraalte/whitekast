@@ -177,6 +177,9 @@
     <ClInclude Include="PointCounter.h">
       <Filter>Header Files\game</Filter>
     </ClInclude>
+    <ClInclude Include="LivesCounter.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -270,6 +273,9 @@
       <Filter>Source Files\game\components</Filter>
     </ClCompile>
     <ClCompile Include="PointCounter.cpp">
+      <Filter>Source Files\game</Filter>
+    </ClCompile>
+    <ClCompile Include="LivesCounter.cpp">
       <Filter>Source Files\game</Filter>
     </ClCompile>
   </ItemGroup>
