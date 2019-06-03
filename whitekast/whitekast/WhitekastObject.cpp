@@ -116,6 +116,10 @@ void WhitekastObject::draw()
 	{
 		float minObjectY = -2.0f;
 		float maxObjectY = minObjectY + 0.05f * size;
+		glTranslatef(size / 5, 0, widthBoard);
+		glScalef(1, 1, -1);
+
+
 		glBegin(GL_TRIANGLE_STRIP);
 			for (int i = 0; i < coordinates.size() - 1; i++) 
 			{
@@ -143,6 +147,7 @@ void WhitekastObject::draw()
 			glVertex3f(coordinates[0].y * scale, minObjectY, coordinates[0].x * scale);
 			glVertex3f(lastY, minObjectY, lastX);
 		glEnd();
+		glTranslatef(-size / 5, 0, -widthBoard);
 		glColor3f(1, 1, 1);
 	}
 }
