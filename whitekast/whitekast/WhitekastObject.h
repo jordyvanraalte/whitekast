@@ -11,7 +11,7 @@
 
 enum ObjectColor { RED, GREEN, BLUE, WHITE };
 
-class WhitekastObject : public DrawComponent , public CollideComponent {
+class WhitekastObject : public DrawComponent{
 	ObjectColor objectColor;
 	std::vector<cv::Point> coordinates;
 	cv::Point center;
@@ -25,6 +25,8 @@ public:
 	cv::Point getCenter();
 	void setCenter(cv::Point centerPoint);
 
+	float getScale();
+
 	ObjectColor getObjectColor();
 	void setObjectColor(ObjectColor color);
 
@@ -32,6 +34,4 @@ public:
 	float getSize();
 
 	virtual void draw() override;
-	
-	Hitbox* getHitbox() override;
 };

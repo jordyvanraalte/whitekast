@@ -72,8 +72,8 @@ void Game::initGlut(const char * title, int argc, char * argv[])
 		GameObject* gameObject = new GameObject(true);
 		gameObject->addComponent(wkObject);
 		gameObject->position = ::Vec3f(wkObject->getSize() * -0.5, worldSize * -0.1, worldSize * -0.7);
-		gameObject->addComponent(new LineCollideComponent(gameObject));
 		gameObject->setCoordinates(wkObject->getCoordinates());
+		gameObject->addComponent(new LineCollideComponent(gameObject, wkObject->getScale()));
 		objects.push_back(gameObject);
 	}
 
@@ -126,7 +126,7 @@ void Game::initObjects()
 {
 	GameObject* testball = new GameObject(false);
 	testball->addComponent(new ModelComponent("Models/Pinballs/pinball_3.1.obj", testball));
-	testball->position = ::Vec3f(0, -2, -6);
+	testball->position = ::Vec3f(0, -3, -6);
 	testball->scale = ::Vec3f(0.1f, 0.1f, 0.1f);
 	testball->addComponent(new GravityComponent(::Vec3f(0, 0, 0.981)));
 	testball->addComponent(new CircleCollideComponent(testball));

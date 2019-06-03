@@ -41,6 +41,11 @@ void WhitekastObject::setCenter(cv::Point centerPoint)
 	center = centerPoint;
 }
 
+float WhitekastObject::getScale()
+{
+	return scale;
+}
+
 ObjectColor WhitekastObject::getObjectColor()
 {
 	return objectColor;
@@ -148,10 +153,5 @@ void WhitekastObject::draw()
 		glTranslatef(-size / 5, 0, -widthBoard);
 		glColor3f(1, 1, 1);
 	}
-}
-
-Hitbox* WhitekastObject::getHitbox()
-{
-	return nullptr;
 }
 

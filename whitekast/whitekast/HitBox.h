@@ -56,7 +56,7 @@ public:
 	std::list<Hitline> hitlines;
 
 	LinesHitbox();
-	LinesHitbox(std::vector<cv::Point> coordinates, ::Vec3f scale);
+	LinesHitbox(std::vector<cv::Point> coordinates, ::Vec3f scale, float wkscale);
 	~LinesHitbox();
 
 	Hitline hitline;

@@ -9,13 +9,13 @@ CollisionManager::~CollisionManager()
 {
 }
 
-bool CollisionManager::isColliding(GameObject ball, GameObject object)
+bool CollisionManager::isColliding(GameObject *ball, GameObject *object)
 {
-	if (object.getHitbox() == nullptr)
+	if (object->getHitbox() == nullptr)
 		return false;
 
-	CircleHitbox *circle = dynamic_cast<CircleHitbox*>(ball.getHitbox());
-	LinesHitbox *lines = dynamic_cast<LinesHitbox*>(object.getHitbox());
+	CircleHitbox *circle = dynamic_cast<CircleHitbox*>(ball->getHitbox());
+	LinesHitbox *lines = dynamic_cast<LinesHitbox*>(object->getHitbox());
 
 	for (auto line : lines->hitlines)
 	{

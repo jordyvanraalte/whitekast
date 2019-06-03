@@ -3,8 +3,9 @@
 
 class LineCollideComponent : public CollideComponent
 {
+	Hitbox* hitbox;
 public:
-	LineCollideComponent(GameObject *gameobject);
+	LineCollideComponent(GameObject* gameobject, float wkscale);
 	~LineCollideComponent();
 
 	Hitbox* getHitbox() override;
