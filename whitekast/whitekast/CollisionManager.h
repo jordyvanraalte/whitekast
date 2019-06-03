@@ -13,5 +13,5 @@ public:
 
 	bool isColliding(GameObject bal, GameObject object);
 	bool isPointInCircle(Vec2f point, float cx, float cy, float r);
+	::Vec2f mirrorVectorInLine(::Vec2f d, LinesHitbox::Hitline b)
 };
-

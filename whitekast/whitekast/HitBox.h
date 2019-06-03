@@ -48,6 +48,8 @@ public:
 
 	LinesHitbox* lineHitbox;
 
+public:
+
 	struct Hitline
 	{
 		::Vec2f point1;

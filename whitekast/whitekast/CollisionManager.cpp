@@ -1,11 +1,9 @@
 #include "CollisionManager.h"
 
 
-
 CollisionManager::CollisionManager()
 {
 }
-
 
 CollisionManager::~CollisionManager()
 {
@@ -81,4 +79,15 @@ bool CollisionManager::isPointInCircle(Vec2f point, float cx, float cy, float r)
 	float distance = sqrt(pow(distX, 2) + pow(distY, 2));
 
 	return distance <= r;
+}
+
+::Vec2f CollisionManager::mirrorVectorInLine(::Vec2f d, LinesHitbox::Hitline b)
+{
+	float dx = b.point1.x - b.point2.x, dy = b.point2.y - b.point1.y;
+	float lal = sqrt((pow(dx, 2) + pow(dy, 2)));
+	float dxNormalized = b.point1.x / lal;
+	float dyNormalized = b.point1.y / lal;
+	::Vec2f n(-dyNormalized, dxNormalized);
+	::Vec2f mirroredVec = d - (2 * ((d.x * n.x) + (d.y * n.y)) * n);
+	return mirroredVec;
 }
