@@ -6,6 +6,9 @@
 std::vector<cv::Point> coordinates;
 cv::Point center;
 ObjectColor objectColor;
+int size = 6;
+float widthBoard;
+float scale;
 
 int sizeVariable = 4;
 float scale = sizeVariable / CAMERA_HEIGHT;
@@ -13,6 +16,8 @@ float scale = sizeVariable / CAMERA_HEIGHT;
 WhitekastObject::WhitekastObject(ObjectColor color) {
 	
 	objectColor = color;
+	scale = size / CAMERA_HEIGHT;
+	widthBoard = scale * CAMERA_WIDTH;
 }
 
 WhitekastObject::~WhitekastObject() {}
@@ -70,22 +75,52 @@ void WhitekastObject::setDrawingColor()
 	}
 }
 
-void WhitekastObject::draw() {
+float WhitekastObject::getSize()
+{
+	return widthBoard;
+}
+
+void WhitekastObject::draw() 
+{
 	setDrawingColor();
 	if (objectColor == WHITE) {
 		float backgroundY = -2.01f;
 		glBegin(GL_QUADS);
 			glVertex3f(0, backgroundY, 0);
 			glVertex3f(CAMERA_WIDTH * scale, backgroundY, 0);
-			glVertex3f(CAMERA_WIDTH * scale, backgroundY, sizeVariable);
-			glVertex3f(0, backgroundY, sizeVariable);
+			glVertex3f(CAMERA_WIDTH * scale, backgroundY, size);
+			glVertex3f(0, backgroundY, size);
 		glEnd();
+		
+		glBegin(GL_QUADS);
+		glVertex3f(0, -2, 0);
+		glVertex3f(0, -2, size);
+		glVertex3f(0, -10, size);
+		glVertex3f(0, -10, 0);
+		glEnd();
+
+		glBegin(GL_QUADS);
+		glVertex3f(widthBoard, -2, 0);
+		glVertex3f(widthBoard, -2, size);
+		glVertex3f(widthBoard, -10, size);
+		glVertex3f(widthBoard, -10, 0);
+		glEnd();
+
+		glBegin(GL_QUADS);
+		glVertex3f(0, -2, size);
+		glVertex3f(widthBoard, -2, size);
+		glVertex3f(widthBoard, -10, size);
+		glVertex3f(0, -10, size);
+		glEnd();
+		glColor3f(1, 1, 1);
 	}
-	else {
+	else 
+	{
 		float minObjectY = -2.0f;
-		float maxObjectY = minObjectY + 0.05f * sizeVariable;
+		float maxObjectY = minObjectY + 0.05f * size;
 		glBegin(GL_TRIANGLE_STRIP);
-			for (int i = 0; i < coordinates.size() - 1; i++) {
+			for (int i = 0; i < coordinates.size() - 1; i++) 
+			{
 				glVertex3f(coordinates[i].x * scale, maxObjectY, coordinates[i].y * scale);
 				glVertex3f(coordinates[i + 1].x * scale, maxObjectY, coordinates[i + 1].y * scale);
 				glVertex3f(center.x * scale, maxObjectY, center.y * scale);
@@ -98,7 +133,8 @@ void WhitekastObject::draw() {
 		glEnd();
 
 		glBegin(GL_QUADS);
-			for (int i = 0; i < coordinates.size() - 1; i++) {
+			for (int i = 0; i < coordinates.size() - 1; i++) 
+			{
 				glVertex3f(coordinates[i].x * scale, maxObjectY, coordinates[i].y * scale);
 				glVertex3f(coordinates[i + 1].x * scale, maxObjectY, coordinates[i + 1].y * scale);
 				glVertex3f(coordinates[i + 1].x * scale, minObjectY, coordinates[i + 1].y * scale);
@@ -109,6 +145,7 @@ void WhitekastObject::draw() {
 			glVertex3f(coordinates[0].x * scale, minObjectY, coordinates[0].y * scale);
 			glVertex3f(lastX, minObjectY, lastY);
 		glEnd();
+		glColor3f(1, 1, 1);
 	}
 }
 

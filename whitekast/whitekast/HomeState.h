@@ -7,6 +7,6 @@ class HomeState : public State
 public:
 	HomeState();
 	~HomeState();
-	void handle() override;
+	void handle(Game* game) override;
 };
 

@@ -6,6 +6,7 @@ class PauseState : public State
 public:
 	PauseState();
 	~PauseState();
-	void handle() override;
+	void handle(Game* game) override;
+
 };
 

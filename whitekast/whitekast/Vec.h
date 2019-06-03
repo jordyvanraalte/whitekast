@@ -1,4 +1,5 @@
 #pragma once
+
 #include <math.h>
 
 #define PI 3.14159265
@@ -49,7 +50,6 @@ public:
 	Vec2f(const float x, const float y);
 	Vec2f(const Vec2f& other);
 	float& operator [](int);
-
 };
 
 inline ::Vec2f operator +(const ::Vec2f& lhs, const ::Vec2f& rhs)
@@ -70,6 +70,7 @@ inline ::Vec2f operator *(const int value, const ::Vec2f& rhs)
 inline ::Vec2f rotateVector(::Vec2f& v, const float angle)
 {
 	auto radAngle = static_cast<float>(angle * DEG_TO_RAD);
+
 	return ::Vec2f(
 		static_cast<float>(v.x * cos(radAngle) - v.y * sin(radAngle)),
 		static_cast<float>(v.x * sin(radAngle) + v.y * cos(radAngle))

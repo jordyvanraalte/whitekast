@@ -172,6 +172,7 @@
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="CubeComponent.h" />
+    <ClInclude Include="DeathState.h" />
     <ClInclude Include="DrawComponent.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
@@ -179,6 +180,7 @@
     <ClInclude Include="HitBox.h" />
     <ClInclude Include="LineColliderComponent.h" />
     <ClInclude Include="ModelComponent.h" />
+    <ClInclude Include="GameOverState.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="HomeState.h" />
     <ClInclude Include="ObjModel.h" />
@@ -200,6 +202,7 @@
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="CubeComponent.cpp" />
+    <ClCompile Include="DeathState.cpp" />
     <ClCompile Include="DrawComponent.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -207,6 +210,7 @@
     <ClCompile Include="HitBox.cpp" />
     <ClCompile Include="LineColliderComponent.cpp" />
     <ClCompile Include="ModelComponent.cpp" />
+    <ClCompile Include="GameOverState.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="HomeState.cpp" />
     <ClCompile Include="ObjModel.cpp" />

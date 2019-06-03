@@ -18,10 +18,10 @@ class GameObject
 	::Vec3f vectemp;
 
 public:
-
-	GameObject();
+	GameObject(bool isVisionObject);
 	~GameObject();
 
+	bool isVisionObject;
 	ObjModel *model;
 
 	::Vec3f velocity;
@@ -59,5 +59,3 @@ public:
 			});
 	}
 };
-
-

@@ -2,6 +2,7 @@
 #include "Vec.h"
 
 class GameObject;
+
 class Component
 {
 protected:

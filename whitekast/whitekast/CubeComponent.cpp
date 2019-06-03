@@ -6,9 +6,9 @@ CubeComponent::CubeComponent(const float size)
 	this->size = size;
 }
 
-
 CubeComponent::~CubeComponent()
 {
+
 }
 
 void CubeComponent::draw()

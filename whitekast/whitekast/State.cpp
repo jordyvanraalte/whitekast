@@ -11,7 +11,8 @@ State::~State()
 {
 }
 
-void State::handle()
+void State::handle(Game* game)
 {
-	
 }
+
+

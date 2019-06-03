@@ -12,4 +12,3 @@ public:
 	~DrawComponent();
 	virtual void draw() = 0;
 };
-

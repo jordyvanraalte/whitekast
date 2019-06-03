@@ -10,6 +10,6 @@ PlayState::~PlayState()
 {
 }
 
-void PlayState::handle()
+void PlayState::handle(Game* game)
 {
 }

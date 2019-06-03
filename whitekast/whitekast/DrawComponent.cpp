@@ -3,9 +3,10 @@
 
 DrawComponent::DrawComponent() : Component()
 {
-}
 
+}
 
 DrawComponent::~DrawComponent()
 {
+
 }

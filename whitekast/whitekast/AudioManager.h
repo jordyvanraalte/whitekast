@@ -5,7 +5,6 @@
 
 class AudioManager
 {
-
 private: 
 	AudioManager();
 
@@ -15,4 +14,3 @@ public:
 	void playSound(const char* name);
 	void playMusic(const char* name);
 };
-

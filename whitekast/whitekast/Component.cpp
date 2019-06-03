@@ -2,8 +2,10 @@
 
 Component::Component()
 {
+
 }
 
 Component::~Component()
 {
+
 }

@@ -3,14 +3,16 @@
 #include "CollideComponent.h"
 #include <GL/freeglut.h>
 
-GameObject::GameObject()
+GameObject::GameObject(bool isVisionObject)
 {
 	position = Vec3f(0, 0, 0);
 	rotation = Vec3f(0, 0, 0);
+	this->isVisionObject = isVisionObject;
 }
 
 GameObject::~GameObject()
 {
+
 }
 
 void GameObject::addComponent(Component* component)
