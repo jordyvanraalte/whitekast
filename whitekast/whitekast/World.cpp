@@ -20,7 +20,7 @@ struct Camera
 	float posY = 0;
 	float rotX = 40;
 	float rotY = 0;
-	float posZ = 0;
+	float posZ = -4;
 } camera;
 
 World::World(int horizontal, int vertical, std::list<GameObject*>& objectlist)
@@ -106,7 +106,7 @@ void World::move(const float angle, const float fac)
 void World::idle(void)
 {
 	float frameTime = glutGet(GLUT_ELAPSED_TIME) / 1000.0f;
-	float deltaTime = frameTime - lastFrameTime;
+	deltaTime = frameTime - lastFrameTime;
 	lastFrameTime = frameTime;
 
 	const float speed = 3;

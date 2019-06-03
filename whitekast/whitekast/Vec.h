@@ -21,6 +21,8 @@ public:
 	Vec3f(const Vec3f& other);
 	Vec3f(const float x, const float y, const float z);
 	float& operator [](int);
+
+	void applyTime(const float elapsedtime);
 };
 
 inline ::Vec3f operator +(const ::Vec3f& lhs, const ::Vec3f& rhs)
@@ -58,6 +60,11 @@ inline ::Vec2f operator +(const ::Vec2f& lhs, const ::Vec2f& rhs)
 inline ::Vec2f operator -(const ::Vec2f& lhs, const ::Vec2f& rhs)
 {
 	return ::Vec2f(lhs.x - rhs.x, lhs.y - rhs.y);
+}
+
+inline ::Vec2f operator *(const int value, const ::Vec2f& rhs)
+{
+	return ::Vec2f(value * rhs.x, value * rhs.y);
 }
 
 inline ::Vec2f rotateVector(::Vec2f& v, const float angle)

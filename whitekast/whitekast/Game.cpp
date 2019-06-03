@@ -6,8 +6,11 @@
 #include "WhitekastVision.h"
 #include "CubeComponent.h"
 #include "WorldComponent.h"
-#include "BallComponent.h"
 #include "FlipComponent.h"
+#include "GravityComponent.h"
+#include "ModelComponent.h"
+#include "CollideComponent.h"
+#include "CircleCollideComponent.h"
 #include "Vec.h"
 #include <vector>
 #include <iostream>
@@ -16,6 +19,7 @@
 #include "AudioManager.h"
 #include "StateManager.h"
 #include "HomeState.h"
+#include "CollisionManager.h"
 
 std::list<GameObject*> objects;
 static World* world;
@@ -32,7 +36,10 @@ Game::Game(const char * title, int argc, char * argv[])
 	world = new World(horizontal, vertical, objects);
 
 	audiomanager = AudioManager::getInstance();
-	//audiomanager->playSound("audio/busta_loop.WAV");
+	StateManager::getInstance();
+
+	CollisionManager* collision = new CollisionManager();
+	audiomanager->playSound("audio/busta_loop.WAV");
 }
 
 Game::~Game()
@@ -112,10 +119,10 @@ void Game::stop()
 
 void Game::initObjects()
 {
-	/*GameObject* testball = new GameObject(false);
-	testball->addComponent(new BallComponent());
+	GameObject* testball = new GameObject(false);
+	testball->addComponent(new ModelComponent("Models/Pinballs/pinball_3.1.obj", testball));
 	testball->position = ::Vec3f(0, 0, -3);
-	objects.push_back(testball);*/
+	objects.push_back(testball);
 
 	Texture texture1 = Texture("Textures/LeftWall.png");
 	Texture texture2 = Texture("Textures/RightWall.png");

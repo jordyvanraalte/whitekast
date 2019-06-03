@@ -26,6 +26,13 @@ float& Vec3f::operator [](int index)
 	return v[index];
 }
 
+void Vec3f::applyTime(const float elapsedtime)
+{
+	this->x = this->x * elapsedtime;
+	this->y = this->y * elapsedtime;
+	this->z = this->z * elapsedtime;
+}
+
 Vec2f::Vec2f(const float x, const float y)
 {
 	this->x = x;

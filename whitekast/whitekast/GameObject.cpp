@@ -1,6 +1,7 @@
 #include "GameObject.h"
 #include "FlipComponent.h"
 #include "DrawComponent.h"
+#include "CollideComponent.h"
 #include <GL/freeglut.h>
 
 GameObject::GameObject(bool isVisionObject)
@@ -18,7 +19,8 @@ GameObject::GameObject(std::string fileName)
 	rotation = Vec3f(0, 0, 0);
 	this->isVisionObject = false;
 	rotationPoint = position;
-	model = new ObjModel(fileName);
+	model = new ObjModel();
+	model->load(fileName);
 }
 
 GameObject::~GameObject()
@@ -36,6 +38,13 @@ void GameObject::addComponent(Component* component)
 
 	if (!flipComponent)
 		flipComponent = dynamic_cast<FlipComponent*>(component);
+
+	if (!collideComponent)
+		collideComponent = dynamic_cast<CollideComponent*>(component);
+}
+
+void GameObject::loadModel(const std::string& fileName)
+{
 }
 
 std::list<Component*> GameObject::getComponents()
@@ -72,10 +81,23 @@ void GameObject::draw()
 	}
 }
 
+Hitbox* GameObject::getHitbox() const
+{
+	if (!collideComponent)
+		return nullptr;
+
+	return collideComponent->getHitbox();
+}
+
 void GameObject::update(float elapsedTime)
 {
+	vectemp = velocity;
+	vectemp.applyTime(elapsedTime);
+
 	for (auto c : components)
 		c->update(elapsedTime);
+
+	position = position + vectemp;
 }
 
 void GameObject::handleEvent(float elapsedTime)
