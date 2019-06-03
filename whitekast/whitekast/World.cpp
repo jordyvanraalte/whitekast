@@ -73,6 +73,7 @@ void World::display()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
+	ball->draw();
 	for (auto object : gameObjects) 
 	{
 		glPushMatrix();
@@ -113,15 +114,14 @@ void World::idle(void)
 	if (keys['Q']) camera.posZ += deltaTime * speed;
 	if (keys['E']) camera.posZ -= deltaTime * speed;
 
-	
-
+	ball->update(deltaTime);
 	for (auto o : gameObjects)
 	{
 		collisionManager->isColliding(ball, o);
 		o->update(deltaTime);
 		o->handleEvent(deltaTime);
 	}
-
+		
 	glutPostRedisplay();
 }
 
