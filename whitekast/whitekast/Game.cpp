@@ -10,6 +10,7 @@
 #include "ModelComponent.h"
 #include "CollideComponent.h"
 #include "CircleCollideComponent.h"
+#include "LineColliderComponent.h"
 #include "Vec.h"
 #include <vector>
 #include <iostream>
@@ -66,6 +67,7 @@ void Game::initGlut(const char * title, int argc, char * argv[])
 		GameObject* gameObject = new GameObject(true);
 		gameObject->addComponent(wkObject);
 		gameObject->position = ::Vec3f(wkObject->getSize() * -0.5, worldSize * -0.1, worldSize * -0.7);
+		gameObject->addComponent(new LineCollideComponent(gameObject));
 		objects.push_back(gameObject);
 	}
 
@@ -118,6 +120,7 @@ void Game::initObjects()
 	GameObject* testball = new GameObject(false);
 	testball->addComponent(new ModelComponent("Models/Pinballs/pinball_3.1.obj", testball));
 	testball->position = ::Vec3f(0, 0, -3);
+	testball->addComponent(new CircleCollideComponent(testball));
 	objects.push_back(testball);
 
 	Texture texture1 = Texture("Textures/LeftWall.png");

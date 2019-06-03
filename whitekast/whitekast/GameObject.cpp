@@ -7,6 +7,7 @@ GameObject::GameObject(bool isVisionObject)
 {
 	position = Vec3f(0, 0, 0);
 	rotation = Vec3f(0, 0, 0);
+	scale = Vec3f(1, 1, 1);
 	this->isVisionObject = isVisionObject;
 }
 
