@@ -1,11 +1,14 @@
 #include "World.h"
 #include "GameObject.h"
 #include "WhitekastObject.h"
+#include "WhitekastVision.h"
 #include "CubeComponent.h"
+#include "FlipComponent.h"
 #include <GL/freeglut.h>
 #include <iostream>
 
 std::list<GameObject*> gameObjects;
+WhitekastVision vision;
 float lastFrameTime;
 
 float lookAtX;
@@ -23,14 +26,14 @@ struct Camera
 	float posZ = -4;
 } camera;
 
-World::World(int horizontal, int vertical, std::list<GameObject*>& objectlist)
+World::World(int horizontal, int vertical, std::list<GameObject*>& objectlist, WhitekastVision whitekastVision)
 {
 	world = this;
 	width = horizontal;
 	height = vertical;
 	lastFrameTime = 0;
 	gameObjects = objectlist;
-
+	vision = whitekastVision;
 	glEnable(GL_DEPTH_TEST);
 	ZeroMemory(keys, sizeof(keys));
 }
@@ -121,6 +124,38 @@ void World::idle(void)
 		o->update(deltaTime);
 		o->handleEvent(deltaTime);
 	}
+	if (vision.getMotionLeft())
+	{
+		for (auto o : gameObjects)
+		{
+			for (Component* c : o->getComponents())
+			{
+				if (FlipComponent* f = dynamic_cast<FlipComponent*>(c))
+				{
+					if (f->isLeft())
+					{
+						c->setHandle(true);
+					}					
+				}
+			}
+		}
+	}
+	if (vision.getMotionRight())
+	{
+		for (auto o : gameObjects)
+		{
+			for (Component* c : o->getComponents())
+			{
+				if (FlipComponent* f = dynamic_cast<FlipComponent*>(c))
+				{
+					if (!f->isLeft())
+					{
+						c->setHandle(true);
+					}
+				}
+			}
+		}
+	}
 
 	glutPostRedisplay();
 }
@@ -164,7 +199,7 @@ void World::mousePassiveMotion(int x, int y)
 
 void World::mouseClick(int button, int state, int x, int y)
 {
-	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
+	/*if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
 		for (auto o : gameObjects)
 		{
 			for (auto c : o->getComponents())
@@ -172,5 +207,5 @@ void World::mouseClick(int button, int state, int x, int y)
 				c->setHandle(true);
 			}
 		}
-	}
+	}*/
 }

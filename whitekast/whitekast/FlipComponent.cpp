@@ -2,8 +2,9 @@
 #include "GameObject.h"
 #include <GL/freeglut.h>
 
-FlipComponent::FlipComponent()
+FlipComponent::FlipComponent(const bool l)
 {
+	left = l;
 }
 
 FlipComponent::~FlipComponent()
@@ -20,6 +21,11 @@ bool FlipComponent::isUp() const
 	return up;
 }
 
+bool FlipComponent::isLeft() const
+{
+	return left;
+}
+
 void FlipComponent::setUp(const bool up)
 {
 	this->up = up;
@@ -27,26 +33,54 @@ void FlipComponent::setUp(const bool up)
 
 void FlipComponent::handleEvent(float elapsedTime)
 {
-	if (flipping)
+	if (left)
 	{
-		if (up)
+		if (flipping)
 		{
-			gameObject->rotation.y += elapsedTime * speed;
-		}
-		else
-		{
-			gameObject->rotation.y -= elapsedTime * speed;
-		}
+			if (up)
+			{
+				gameObject->rotation.y += elapsedTime * (speed * 2);
+			}
+			else
+			{
+				gameObject->rotation.y -= elapsedTime * speed;
+			}
 
-		if (gameObject->rotation.y >= 45)
-		{
-			up = false;
+			if (gameObject->rotation.y >= 315)
+			{
+				up = false;
+			}
+			else if (gameObject->rotation.y < 270)
+			{
+				up = true;
+				flipping = false;
+				gameObject->rotation.y = 270;
+			}
 		}
-		else if (gameObject->rotation.y < 0)
+	}
+	else
+	{
+		if (flipping)
 		{
-			up = true;
-			flipping = false;
-			gameObject->rotation.y = 0;
+			if (up)
+			{
+				gameObject->rotation.y -= elapsedTime * (speed * 2);
+			}
+			else
+			{
+				gameObject->rotation.y += elapsedTime * speed;
+			}
+
+			if (gameObject->rotation.y <= 45)
+			{
+				up = false;
+			}
+			else if (gameObject->rotation.y > 90)
+			{
+				up = true;
+				flipping = false;
+				gameObject->rotation.y = 90;
+			}
 		}
 	}
 }

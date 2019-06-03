@@ -1,19 +1,34 @@
-#include <opencv2/opencv.hpp>
-#include "opencv2/imgproc/imgproc.hpp" 
-#include "opencv2/highgui/highgui.hpp"
 #include "WhitekastObject.h"
 #include <iostream>
 #include <string>
 #include "WhitekastVision.h"
+#include <stdlib.h>
+#include <chrono>
+#include <thread>
+#include <atomic>
 
 using namespace cv;
 using namespace std;
+using namespace std::this_thread;
+using namespace std::chrono;
 
 Mat redFrame, greenFrame, blueFrame;
 vector<WhitekastObject*> visionObjects;
-VideoCapture vCap(0);
+VideoCapture vCap(1);
 
-vector<WhitekastObject*> Vision::initVision()
+std::atomic<bool> movingLeft;
+std::atomic<bool> movingRight;
+const int minMotion = -15000;
+
+WhitekastVision::WhitekastVision()
+{
+}
+
+WhitekastVision::~WhitekastVision()
+{
+}
+
+vector<WhitekastObject*> WhitekastVision::initVision()
 {
 	if (!vCap.isOpened())
 	{
@@ -29,8 +44,6 @@ vector<WhitekastObject*> Vision::initVision()
 		running = captureFrames();
 	}
 
-	waitKey(0);
-
 	createBorder();
 	findObjectsByFrame(redFrame, RED);
 	findObjectsByFrame(greenFrame, GREEN);
@@ -39,7 +52,100 @@ vector<WhitekastObject*> Vision::initVision()
 	return visionObjects;
 }
 
-int Vision::captureFrames() 
+void WhitekastVision::startThread()
+{
+	while (1)
+	{
+		captureMovement();
+	}
+}
+
+int WhitekastVision::captureMovement()
+{
+	Mat videoFrame, videoFrame2;
+	vCap.read(videoFrame);
+	cvtColor(videoFrame, videoFrame, COLOR_BGR2GRAY);
+	imshow("move1", videoFrame);
+	threshold(videoFrame, videoFrame, 100, 255, THRESH_BINARY_INV);
+	imshow("move1", videoFrame);
+
+	vCap.read(videoFrame2);
+	cvtColor(videoFrame2, videoFrame2, COLOR_BGR2GRAY);
+	threshold(videoFrame2, videoFrame2, 100, 255, THRESH_BINARY_INV);
+	imshow("move2", videoFrame2);
+
+
+	if (getWhitePixelsLeft(videoFrame) - getWhitePixelsLeft(videoFrame2) <= minMotion)
+	{
+		movingLeft = true;
+	}
+	else
+	{
+		movingLeft = false;
+	}
+
+	if (getWhitePixelsRight(videoFrame) - getWhitePixelsRight(videoFrame2) <= minMotion)
+	{
+		movingRight = true;
+	}
+	else
+	{
+		movingRight = false;
+	}
+
+	
+	if (waitKey(1) == 27) {
+		return 0;
+	}
+
+	return 1;
+}
+
+//This method will return the count of white pixels on the left side of the picture(mat) 
+int WhitekastVision::getWhitePixelsLeft(const Mat mat)
+{
+	int count = 0;
+	for (int x = 0; x < mat.rows; x++)
+	{
+		for (int y = 0; y < mat.cols / 2; y++)
+		{
+			if (mat.at<uchar>(x, y) == 255)
+			{
+				count++;
+			}
+		}
+	}
+	return count;
+}
+
+//This method returns the count of white pixels on the right side of the picture(mat) 
+int WhitekastVision::getWhitePixelsRight(const Mat mat)
+{
+	int count = 0;
+	for (int x = 0; x < mat.rows; x++)
+	{
+		for (int y = mat.cols / 2; y < mat.cols; y++)
+		{
+			if (mat.at<uchar>(x, y) == 255)
+			{
+				count++;
+			}
+		}
+	}
+	return count;
+}
+
+bool WhitekastVision::getMotionLeft()
+{
+	return movingLeft;
+}
+
+bool WhitekastVision::getMotionRight()
+{
+	return movingRight;
+}
+
+int WhitekastVision::captureFrames() 
 {
 	Mat videoFrame;
 	vCap.read(videoFrame);
@@ -79,7 +185,7 @@ int Vision::captureFrames()
 	return 1;
 }
 
-void Vision::createBorder()
+void WhitekastVision::createBorder()
 {
 	WhitekastObject* object = new WhitekastObject(WHITE);
 	double cx = CAMERA_WIDTH / 2.0;
@@ -89,7 +195,7 @@ void Vision::createBorder()
 	visionObjects.push_back(object);
 }
 
-void Vision::findObjectsByFrame(const Mat frame, const ObjectColor objectColor) 
+void WhitekastVision::findObjectsByFrame(const Mat frame, const ObjectColor objectColor) 
 {
 	threshold(frame, frame, 100, 255, 0);
 

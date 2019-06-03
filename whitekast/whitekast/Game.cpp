@@ -20,6 +20,7 @@
 #include "StateManager.h"
 #include "HomeState.h"
 #include "CollisionManager.h"
+#include <thread> 
 
 std::list<GameObject*> objects;
 static World* world;
@@ -33,7 +34,7 @@ Game::Game(const char * title, int argc, char * argv[])
 	instance = this;
 	initGlut(title, argc, argv);
 	initObjects();
-	world = new World(horizontal, vertical, objects);
+	world = new World(horizontal, vertical, objects, vision);
 
 	audiomanager = AudioManager::getInstance();
 	StateManager::getInstance();
@@ -54,12 +55,17 @@ void Game::startGame()
 	glutMainLoop();
 }
 
+void Game::startVisionThread()
+{
+	vision.startThread();
+}
+
 void Game::initGlut(const char * title, int argc, char * argv[])
 {
 	getDesktopResolution(horizontal, vertical);
 	glEnable(GL_DEPTH_TEST);
 
-	Vision vision = Vision();
+	vision = WhitekastVision();
 	std::vector<WhitekastObject*> whitekastObjects = vision.initVision();
 
 	initFlippers();
@@ -144,14 +150,16 @@ void Game::initFlippers()
 	flipperLeft->position = ::Vec3f(0, 0, 0);	
 	flipperLeft->rotationPoint = ::Vec3f(flipperLeft->position.x - 0.2f, flipperLeft->position.y, flipperLeft->position.z);
 	flipperLeft->scale = scale;
-	flipperLeft->addComponent(new FlipComponent());
+	flipperLeft->rotation.y = 270;
+	flipperLeft->addComponent(new FlipComponent(true));
 	objects.push_back(flipperLeft);
 
 	GameObject* flipperRight = new GameObject(std::string("Models/Flippers/flipperblend.obj"));
 	flipperRight->position = ::Vec3f(0, 0, 5);
 	flipperRight->scale = scale;
 	flipperRight->rotationPoint = ::Vec3f(flipperRight->position.x - 0.2f, flipperRight->position.y, flipperRight->position.z);
-	flipperRight->addComponent(new FlipComponent());
+	flipperRight->rotation.y = 90;
+	flipperRight->addComponent(new FlipComponent(false));
 	objects.push_back(flipperRight);
 }
 

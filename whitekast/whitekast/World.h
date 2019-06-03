@@ -3,6 +3,7 @@
 #include <iostream>
 #include "GameObject.h"
 #include "WhitekastObject.h"
+#include "WhitekastVision.h"
 
 #define _USE_MATH_DEFINES
 #include <math.h>
@@ -11,7 +12,7 @@ class World
 {
 
 public:
-	World(int horizontal, int vertical, std::list<GameObject*>& objectlist);
+	World(int horizontal, int vertical, std::list<GameObject*>& objectlist, WhitekastVision whitekastVision);
 	~World();
 
 	float deltaTime;

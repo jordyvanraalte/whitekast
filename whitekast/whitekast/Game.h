@@ -1,6 +1,7 @@
 #pragma once
 
 #include "WhitekastObject.h"
+#include "WhitekastVision.h"
 #include "DeathState.h"
 
 class World;
@@ -17,6 +18,7 @@ public:
 	~Game();
 
 	void startGame();
+	void startVisionThread();
 	void initGlut(const char* title, int argc, char* argv[]);
 	void handleEvents();
 	void reset();
@@ -32,4 +34,5 @@ private:
 	int worldSize = 10;
 	std::list<GameObject*> objects;
 	AudioManager* audiomanager;
+	WhitekastVision vision;
 };
