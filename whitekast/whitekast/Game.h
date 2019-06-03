@@ -23,6 +23,7 @@ public:
 	void getDesktopResolution(int& horizontal, int& vertical);
 	void stop();
 	void initObjects();
+	void initFlippers();
 	bool running() { return isRunning; }
 	static Game* getInstance();
 

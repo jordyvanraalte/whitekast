@@ -182,18 +182,18 @@ void ObjModel::draw()
 {
 	for (auto group : groups)
 	{
-		auto& material = materials[group->materialIndex];
+		/*auto& material = materials[group->materialIndex];
 		if (material->texture)
 		{
-			material->texture->bind();
 			glEnable(GL_TEXTURE_2D);
+			material->texture->bind();
 			glColor3f(1, 1, 1);
 		}
 		else
 		{
 			glColor3fv(material->diffuse.v);
 			glDisable(GL_TEXTURE_2D);
-		}
+		}*/
 
 		glBegin(GL_TRIANGLES);
 		for (auto& face : group->faces)
@@ -201,11 +201,14 @@ void ObjModel::draw()
 			for (auto& vertex : face.vertices)
 			{
 				::Vec3f& vec = vertices[vertex.position];
-				::Vec2f& tex = texcoords[vertex.texcoord];
-				glTexCoord2fv(tex.v); glVertex3fv(vec.v);
+				/*::Vec2f& tex = texcoords[vertex.texcoord];
+				glTexCoord2fv(tex.v);*/ 
+				glVertex3fv(vec.v);
 			}
 		}
+		glBindTexture(GL_TEXTURE_2D, 0);
 		glEnd();
+		glColor3f(1, 1, 1);
 	}
 }
 

@@ -6,6 +6,7 @@
 #include "WhitekastVision.h"
 #include "CubeComponent.h"
 #include "WorldComponent.h"
+#include "FlipComponent.h"
 #include "GravityComponent.h"
 #include "ModelComponent.h"
 #include "CollideComponent.h"
@@ -64,6 +65,8 @@ void Game::initGlut(const char * title, int argc, char * argv[])
 	Vision vision = Vision();
 	std::vector<WhitekastObject*> whitekastObjects = vision.initVision();
 
+	initFlippers();
+
 	for (auto wkObject : whitekastObjects) 
 	{
 		GameObject* gameObject = new GameObject(true);
@@ -91,6 +94,7 @@ void Game::initGlut(const char * title, int argc, char * argv[])
 	glutKeyboardFunc([](unsigned char key, int mouseX, int mouseY) { World::getWorld()->keyboard(key, mouseX, mouseY); });
 	glutKeyboardUpFunc([](unsigned char key, int mouseX, int mouseY) { World::getWorld()->keyboardUp(key, mouseX, mouseY); });
 	glutPassiveMotionFunc([](int mouseX, int mouseY) {World::getWorld()->mousePassiveMotion(mouseX, mouseY); });
+	glutMouseFunc([](int button, int state, int x, int y) {World::getWorld()->mouseClick(button, state, x, y); });
 }
 
 void Game::handleEvents() 
@@ -134,11 +138,32 @@ void Game::initObjects()
 	Texture texture4 = Texture("Textures/Cealing.png");
 	Texture texture5 = Texture("Textures/FrontWall.png");
 
-
 	GameObject* roomCube = new GameObject(false);
 	roomCube->addComponent(new WorldComponent(10, texture1, texture2, texture3, texture4, texture5));
 	roomCube->position = ::Vec3f(0, 0, 0);
 	objects.push_back(roomCube);
+}
+
+
+void Game::initFlippers()
+{
+	::Vec3f scale = ::Vec3f(0.1, 0.1, 0.1);
+	GameObject* flipperLeft = new GameObject(true);
+	flipperLeft->addComponent(new ModelComponent("Models/Flippers/flipperblend.obj", flipperLeft));	
+	flipperLeft->position = ::Vec3f(0, 0, 0);	
+	flipperLeft->rotationPoint = ::Vec3f(flipperLeft->position.x - 0.2f, flipperLeft->position.y, flipperLeft->position.z);
+	flipperLeft->scale = scale;
+	flipperLeft->addComponent(new FlipComponent());
+	objects.push_back(flipperLeft);
+
+	GameObject* flipperRight = new GameObject(true);
+	flipperRight->addComponent(new ModelComponent("Models/Flippers/flipperblend.obj", flipperRight));
+
+	flipperRight->position = ::Vec3f(0, 0, 5);
+	flipperRight->scale = scale;
+	flipperRight->rotationPoint = ::Vec3f(flipperRight->position.x - 0.2f, flipperRight->position.y, flipperRight->position.z);
+	flipperRight->addComponent(new FlipComponent());
+	objects.push_back(flipperRight);
 }
 
 Game* Game::getInstance()
