@@ -182,6 +182,7 @@
     <ClInclude Include="LineColliderComponent.h" />
     <ClInclude Include="ModelComponent.h" />
     <ClInclude Include="GameOverState.h" />
+    <ClInclude Include="PointCounter.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="HomeState.h" />
     <ClInclude Include="ObjModel.h" />
@@ -213,6 +214,7 @@
     <ClCompile Include="LineColliderComponent.cpp" />
     <ClCompile Include="ModelComponent.cpp" />
     <ClCompile Include="GameOverState.cpp" />
+    <ClCompile Include="PointCounter.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="HomeState.cpp" />
     <ClCompile Include="ObjModel.cpp" />

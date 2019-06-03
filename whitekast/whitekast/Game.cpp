@@ -20,6 +20,7 @@
 #include "StateManager.h"
 #include "HomeState.h"
 #include "CollisionManager.h"
+#include "PointCounter.h"
 
 std::list<GameObject*> objects;
 static World* world;
@@ -36,6 +37,8 @@ Game::Game(const char * title, int argc, char * argv[])
 	world = new World(horizontal, vertical, objects);
 
 	audiomanager = AudioManager::getInstance();
+	pointCounter = PointCounter::getInstance();
+
 	StateManager::getInstance();
 
 	CollisionManager* collision = new CollisionManager();
@@ -46,7 +49,6 @@ Game::~Game()
 {
 	delete world;
 	delete instance;
-
 }
 
 void Game::startGame()
@@ -100,6 +102,7 @@ void Game::handleEvents()
 void Game::reset()
 {
 	lives = 3;
+	pointCounter->resetPoints();
 	StateManager::getInstance()->setState(new HomeState());
 }
 
@@ -135,7 +138,6 @@ void Game::initObjects()
 	roomCube->position = ::Vec3f(0, 0, 0);
 	objects.push_back(roomCube);
 }
-
 
 void Game::initFlippers()
 {
