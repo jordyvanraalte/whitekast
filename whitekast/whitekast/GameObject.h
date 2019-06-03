@@ -38,6 +38,7 @@ public:
 	void update(float elapsedTime);
 	void draw();
 
+	void setCoordinates(std::vector<cv::Point> coordinates);
 	Hitbox* getHitbox() const;
 
 	template<class T>

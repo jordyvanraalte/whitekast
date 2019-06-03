@@ -70,6 +70,7 @@ void Game::initGlut(const char * title, int argc, char * argv[])
 		gameObject->addComponent(wkObject);
 		gameObject->position = ::Vec3f(wkObject->getSize() * -0.5, worldSize * -0.1, worldSize * -0.7);
 		gameObject->addComponent(new LineCollideComponent(gameObject));
+		gameObject->setCoordinates(wkObject->getCoordinates());
 		objects.push_back(gameObject);
 	}
 

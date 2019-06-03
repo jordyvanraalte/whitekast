@@ -52,6 +52,11 @@ void GameObject::draw()
 	glPopMatrix();
 }
 
+void GameObject::setCoordinates(std::vector<cv::Point> coordinates)
+{
+	this->coordinates = coordinates;
+}
+
 Hitbox* GameObject::getHitbox() const
 {
 	if (!collideComponent)
