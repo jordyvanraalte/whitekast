@@ -40,7 +40,7 @@ Game::Game(const char * title, int argc, char * argv[])
 	StateManager::getInstance();
 
 	CollisionManager* collision = new CollisionManager();
-	audiomanager->playSound("audio/busta_loop.WAV");
+	//audiomanager->playSound("audio/busta_loop.WAV");
 }
 
 Game::~Game()
@@ -146,7 +146,8 @@ void Game::initObjects()
 void Game::initFlippers()
 {
 	::Vec3f scale = ::Vec3f(0.1, 0.1, 0.1);
-	GameObject* flipperLeft = new GameObject(std::string("Models/Flippers/flipperblend.obj"));
+	GameObject* flipperLeft = new GameObject(true);
+	flipperLeft->addComponent(new ModelComponent("Models/Flippers/flipperblend.obj", flipperLeft));	
 	flipperLeft->position = ::Vec3f(0, 0, 0);	
 	flipperLeft->rotationPoint = ::Vec3f(flipperLeft->position.x - 0.2f, flipperLeft->position.y, flipperLeft->position.z);
 	flipperLeft->scale = scale;
@@ -154,7 +155,9 @@ void Game::initFlippers()
 	flipperLeft->addComponent(new FlipComponent(true));
 	objects.push_back(flipperLeft);
 
-	GameObject* flipperRight = new GameObject(std::string("Models/Flippers/flipperblend.obj"));
+	GameObject* flipperRight = new GameObject(true);
+	flipperRight->addComponent(new ModelComponent("Models/Flippers/flipperblend.obj", flipperRight));
+
 	flipperRight->position = ::Vec3f(0, 0, 5);
 	flipperRight->scale = scale;
 	flipperRight->rotationPoint = ::Vec3f(flipperRight->position.x - 0.2f, flipperRight->position.y, flipperRight->position.z);
