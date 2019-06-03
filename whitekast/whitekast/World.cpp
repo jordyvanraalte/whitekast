@@ -73,7 +73,10 @@ void World::display()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
+	glColor3f(1, 0, 0);
 	ball->draw();
+
+	glColor3f(0, 0, 0);
 	for (auto object : gameObjects) 
 	{
 		glPushMatrix();
@@ -114,6 +117,7 @@ void World::idle(void)
 	if (keys['Q']) camera.posZ += deltaTime * speed;
 	if (keys['E']) camera.posZ -= deltaTime * speed;
 
+	printf("BALL %f, %f \n", ball->velocity.x, ball->velocity.z);
 	ball->update(deltaTime);
 	for (auto o : gameObjects)
 	{
@@ -174,3 +178,4 @@ void World::mouseClick(int button, int state, int x, int y)
 		}
 	}
 }
+

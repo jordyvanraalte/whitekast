@@ -53,3 +53,8 @@ float& Vec2f::operator [](int index)
 {
 	return v[index];
 }
+
+float Vec2f::vectorDotProduct(::Vec2f& v1, ::Vec2f& v2)
+{
+	return (v1.x * v2.x) + (v1.y * v2.y);
+}

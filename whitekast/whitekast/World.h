@@ -39,4 +39,6 @@ public:
 	void mouseClick(int button, int state, int x, int y);
 	static World* getWorld();
 	void makePlatform();
+	Vec2f mirrorVectorInLine(::Vec2f d, LinesHitbox::Hitline b) const;
+
 };

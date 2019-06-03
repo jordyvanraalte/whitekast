@@ -49,7 +49,10 @@ public:
 	Vec2f();
 	Vec2f(const float x, const float y);
 	Vec2f(const Vec2f& other);
+	
 	float& operator [](int);
+	static float vectorDotProduct(::Vec2f& v1, ::Vec2f& v2);
+
 };
 
 inline ::Vec2f operator +(const ::Vec2f& lhs, const ::Vec2f& rhs)
@@ -62,9 +65,14 @@ inline ::Vec2f operator -(const ::Vec2f& lhs, const ::Vec2f& rhs)
 	return ::Vec2f(lhs.x - rhs.x, lhs.y - rhs.y);
 }
 
-inline ::Vec2f operator *(const int value, const ::Vec2f& rhs)
+inline ::Vec2f operator *(const ::Vec2f& v, float f)
 {
-	return ::Vec2f(value * rhs.x, value * rhs.y);
+	return ::Vec2f(v.x * f , v.y * f);
+}
+
+inline ::Vec2f operator *(float f, const ::Vec2f& v)
+{
+	return ::Vec2f(v.x * f, v.y * f);
 }
 
 inline ::Vec2f rotateVector(::Vec2f& v, const float angle)
