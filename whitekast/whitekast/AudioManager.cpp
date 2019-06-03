@@ -3,11 +3,8 @@
 
 #pragma comment(lib, "irrKlang.lib") //link with irrKlang.dll
 
-static AudioManager* instance;
+static AudioManager* audioManagerInstance;
 
-irrklang::ISoundEngine* engine;
-irrklang::ISound* music;
-std::map<const char*, irrklang::ISound*> audioMap;
 
 AudioManager::AudioManager()
 {
@@ -29,10 +26,10 @@ AudioManager::~AudioManager()
 
 AudioManager* AudioManager::getInstance()
 {
-	if (instance == nullptr)
-		instance = new AudioManager();
+	if (audioManagerInstance == nullptr)
+		audioManagerInstance = new AudioManager();
 	
-	return instance;
+	return audioManagerInstance;
 }
 
 void AudioManager::playSound(const char* name)
