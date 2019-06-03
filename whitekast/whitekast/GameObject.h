@@ -15,6 +15,7 @@ class GameObject
 	CollideComponent* collideComponent = nullptr;
 
 	std::list<Component*> components;
+	
 	::Vec3f vectemp;
 
 public:
@@ -23,6 +24,7 @@ public:
 
 	bool isVisionObject;
 	ObjModel *model;
+	std::vector<cv::Point> coordinates;
 
 	::Vec3f velocity;
 	::Vec3f position;

@@ -8,17 +8,12 @@ Hitbox::~Hitbox()
 {
 }
 
-CircleHitbox::CircleHitbox(Vec3f pos, float d)
+CircleHitbox::CircleHitbox(Vec3f pos, float d, Vec3f scale)
 {
 	cirlceHitbox = this;
 	circle.x = pos.x;
 	circle.y = pos.y;
-	circle.r = (d/2);
-}
-
-Hitbox* CircleHitbox::getHitbox() const
-{
-	return cirlceHitbox;
+	circle.r = (d/2)*scale.x;
 }
 
 void CircleHitbox::shiftColliders(Vec3f pos)
@@ -28,7 +23,7 @@ void CircleHitbox::shiftColliders(Vec3f pos)
 	circle.y = pos.z;
 }
 
-LinesHitbox::LinesHitbox(std::vector<cv::Point> coordinates, float scale)
+LinesHitbox::LinesHitbox(std::vector<cv::Point> coordinates, Vec3f scale)
 {
 	lineHitbox = this;
 	bool point1 = true;
@@ -38,24 +33,19 @@ LinesHitbox::LinesHitbox(std::vector<cv::Point> coordinates, float scale)
 		if(point1)
 		{
 			point1 = false;
-			hitline.point1.x = point.x*scale;
-			hitline.point1.y = point.y*scale;
+			hitline.point1.x = point.x*scale.x;
+			hitline.point1.y = point.y*scale.y;
 
 		}
 		else
 		{
 			point1 = true;
-			hitline.point2.x = point.x*scale;
-			hitline.point2.y = point.y*scale;
+			hitline.point2.x = point.x*scale.x;
+			hitline.point2.y = point.y*scale.y;
 
 			hitlines.push_back(hitline);
 		}
 	}
-}
-
-Hitbox* LinesHitbox::getHitbox() const
-{
-	return lineHitbox;
 }
 
 void LinesHitbox::shiftColliders(Vec3f pos)

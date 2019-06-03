@@ -13,7 +13,6 @@ public:
 	~Hitbox();
 
 	virtual void shiftColliders(::Vec3f pos) = 0;
-	virtual Hitbox* getHitbox() const = 0;
 
 };
 
@@ -33,10 +32,9 @@ public:
 	Circle circle;
 
 	CircleHitbox();
-	CircleHitbox(::Vec3f pos, float radius); 
+	CircleHitbox(::Vec3f pos, float radius, ::Vec3f scale); 
 	~CircleHitbox();
 
-	Hitbox* getHitbox() const override;
 	void shiftColliders(::Vec3f pos) override;
 };
 
@@ -44,7 +42,6 @@ class LinesHitbox : public Hitbox
 {
 
 public:
-
 
 	LinesHitbox* lineHitbox;
 
@@ -59,11 +56,10 @@ public:
 	std::list<Hitline> hitlines;
 
 	LinesHitbox();
-	LinesHitbox(std::vector<cv::Point> coordinates, float scale);
+	LinesHitbox(std::vector<cv::Point> coordinates, ::Vec3f scale);
 	~LinesHitbox();
 
 	Hitline hitline;
 
-	Hitbox* getHitbox() const override;
 	void shiftColliders(::Vec3f pos) override;
 };

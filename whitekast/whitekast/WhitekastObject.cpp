@@ -29,8 +29,6 @@ void WhitekastObject::setCoordinates(std::vector<cv::Point> newCoordinates)
 	for (int i = 0; i < newCoordinates.size(); i += 2) {
 		coordinates.push_back(newCoordinates.at(i));
 	}
-
-	hitbox = new LinesHitbox(coordinates, scale);
 }
 
 cv::Point WhitekastObject::getCenter()
