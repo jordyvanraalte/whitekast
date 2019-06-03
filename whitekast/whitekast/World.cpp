@@ -1,9 +1,12 @@
 #include "World.h"
 #include "GameObject.h"
+#include "PointCounter.h"
 #include "WhitekastObject.h"
 #include "CubeComponent.h"
 #include <GL/freeglut.h>
 #include <iostream>
+#include <cstring>
+
 
 std::list<GameObject*> gameObjects;
 float lastFrameTime;
@@ -30,7 +33,6 @@ World::World(int horizontal, int vertical, std::list<GameObject*>& objectlist)
 	height = vertical;
 	lastFrameTime = 0;
 	gameObjects = objectlist;
-
 	glEnable(GL_DEPTH_TEST);
 	ZeroMemory(keys, sizeof(keys));
 }
@@ -87,7 +89,7 @@ void World::display()
 		object->draw();
 		glPopMatrix();
 	}
-	initUI();
+	displayUI(PointCounter::getInstance()->getPoints());
 	glutSwapBuffers();
 }
 
@@ -175,7 +177,7 @@ void World::mouseClick(int button, int state, int x, int y)
 	}
 }
 
-void World::initUI()
+void World::displayUI(int points)
 {
 
 	glMatrixMode(GL_PROJECTION);
@@ -191,7 +193,12 @@ void World::initUI()
 	glRotatef(180, 1, 0, 0);
 	glTranslatef(0, -20, 0);
 	glScalef(0.2, 0.2, 0.2);
-	glutStrokeString(GLUT_STROKE_ROMAN, (unsigned char*)"score:");
+	std::string score = "score: ";
+	score = score + std::to_string(points);
+	unsigned char trap[256];
+	std::copy(score.begin(), score.end(), trap);
+	trap[score.length()] = 0;
+	glutStrokeString(GLUT_STROKE_ROMAN, trap);
 	
 	// Making sure we can render 3d again
 	glMatrixMode(GL_PROJECTION);
