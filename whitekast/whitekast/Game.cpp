@@ -22,6 +22,8 @@
 #include "CollisionManager.h"
 
 std::list<GameObject*> objects;
+GameObject* ball;
+
 static World* world;
 static Game* instance;
 
@@ -33,7 +35,7 @@ Game::Game(const char * title, int argc, char * argv[])
 	instance = this;
 	initGlut(title, argc, argv);
 	initObjects();
-	world = new World(horizontal, vertical, objects);
+	world = new World(horizontal, vertical, objects, ball);
 
 	audiomanager = AudioManager::getInstance();
 	StateManager::getInstance();
@@ -121,8 +123,9 @@ void Game::initObjects()
 	testball->addComponent(new ModelComponent("Models/Pinballs/pinball_3.1.obj", testball));
 	testball->position = ::Vec3f(0, -2, -6);
 	testball->scale = ::Vec3f(0.1f, 0.1f, 0.1f);
+	testball->addComponent(new GravityComponent(::Vec3f(0, 0, 0.981)));
 	testball->addComponent(new CircleCollideComponent(testball));
-	objects.push_back(testball);
+	ball = testball;
 
 	Texture texture1 = Texture("Textures/LeftWall.png");
 	Texture texture2 = Texture("Textures/RightWall.png");

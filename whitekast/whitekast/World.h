@@ -3,6 +3,7 @@
 #include <iostream>
 #include "GameObject.h"
 #include "WhitekastObject.h"
+#include "CollisionManager.h"
 
 #define _USE_MATH_DEFINES
 #include <math.h>
@@ -10,8 +11,20 @@
 class World
 {
 
+	std::list<GameObject*> gameObjects;
+	GameObject* ball;
+	CollisionManager* collisionManager;
+
+	float lastFrameTime;
+
+	float lookAtX;
+	float lookAtY;
+	bool keys[255];
+	int width, height;
+
 public:
-	World(int horizontal, int vertical, std::list<GameObject*>& objectlist);
+
+	World(int horizontal, int vertical, std::list<GameObject*>& objectlist, GameObject* ball);
 	~World();
 
 	float deltaTime;

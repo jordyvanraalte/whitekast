@@ -5,15 +5,6 @@
 #include <GL/freeglut.h>
 #include <iostream>
 
-std::list<GameObject*> gameObjects;
-float lastFrameTime;
-
-float lookAtX;
-float lookAtY;
-bool keys[255];
-static World* world;
-int width, height;
-
 struct Camera
 {
 	float posX = 0;
@@ -23,13 +14,18 @@ struct Camera
 	float posZ = -4;
 } camera;
 
-World::World(int horizontal, int vertical, std::list<GameObject*>& objectlist)
+static World* world;
+World::World(int horizontal, int vertical, std::list<GameObject*>& objectlist, GameObject* ball)
 {
 	world = this;
 	width = horizontal;
 	height = vertical;
 	lastFrameTime = 0;
+	
 	gameObjects = objectlist;
+	this->ball = ball;
+
+	collisionManager = new CollisionManager();
 
 	glEnable(GL_DEPTH_TEST);
 	ZeroMemory(keys, sizeof(keys));
@@ -117,10 +113,14 @@ void World::idle(void)
 	if (keys['Q']) camera.posZ += deltaTime * speed;
 	if (keys['E']) camera.posZ -= deltaTime * speed;
 
-	for (auto o : gameObjects)
-		o->update(deltaTime);
-
 	
+
+	for (auto o : gameObjects)
+	{
+		collisionManager->isColliding(ball, o);
+		o->update(deltaTime);
+	}
+		
 
 	glutPostRedisplay();
 }

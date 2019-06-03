@@ -9,9 +9,9 @@ CollisionManager::~CollisionManager()
 {
 }
 
-bool CollisionManager::isColliding(GameObject bal, GameObject object)
+bool CollisionManager::isColliding(GameObject ball, GameObject object)
 {
-	CircleHitbox *circle = dynamic_cast<CircleHitbox*>(bal.getHitbox());
+	CircleHitbox *circle = dynamic_cast<CircleHitbox*>(ball.getHitbox());
 	LinesHitbox *lines = dynamic_cast<LinesHitbox*>(object.getHitbox());
 
 	for (auto line : lines->hitlines)
@@ -26,12 +26,17 @@ bool CollisionManager::isColliding(GameObject bal, GameObject object)
 		float r = circle->circle.r;
 
 		if (isPointInCircle(line.point1, cx, cy, r))
+		{
+			printf("kanker!");
 			return true;
+			
+		}
 		else if (isPointInCircle(line.point2, cx, cy, r))
+		{
+			printf("kanker!");
 			return true;
-
-
-
+		}
+			
 		float length = sqrt(pow((x1 - x2), 2) + pow((y1 - y2), 2));
 		float dot = (((cx - x1)*(x2 - x1)) + ((cy - y1)*(y2 - y1))) / pow(length,2);
 
@@ -44,7 +49,10 @@ bool CollisionManager::isColliding(GameObject bal, GameObject object)
 			float distY = closestY - cy;
 			float distance = sqrt(pow(distX, 2) + pow(distY, 2));
 			if(distance <= r)
+			{
+				printf("kanker!");
 				return true;
+			}
 		}
 	}
 	return false;
