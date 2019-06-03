@@ -174,6 +174,7 @@
     <ClInclude Include="CubeComponent.h" />
     <ClInclude Include="DeathState.h" />
     <ClInclude Include="DrawComponent.h" />
+    <ClInclude Include="FlipComponent.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GravityComponent.h" />
@@ -204,6 +205,7 @@
     <ClCompile Include="CubeComponent.cpp" />
     <ClCompile Include="DeathState.cpp" />
     <ClCompile Include="DrawComponent.cpp" />
+    <ClCompile Include="FlipComponent.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GravityComponent.cpp" />
@@ -226,6 +228,9 @@
     <ClCompile Include="WorldComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Object Include="Models\Flippers\flipperblend.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Object>
     <Object Include="Models\Pinballs\pinball_1.0.obj">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>

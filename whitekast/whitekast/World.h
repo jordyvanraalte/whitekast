@@ -23,6 +23,7 @@ public:
 	void keyboard(unsigned char key, int mouseX, int mouseY);
 	void keyboardUp(unsigned char key, int mouseX, int mouseY);
 	void mousePassiveMotion(int x, int y);
+	void mouseClick(int button, int state, int x, int y);
 	static World* getWorld();
 	void makePlatform();
 };
