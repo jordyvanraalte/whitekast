@@ -39,7 +39,7 @@ Game::Game(const char * title, int argc, char * argv[])
 	StateManager::getInstance();
 
 	CollisionManager* collision = new CollisionManager();
-	audiomanager->playSound("audio/busta_loop.WAV");
+	audiomanager->playMusic("Audio/busta_loop.WAV");
 }
 
 Game::~Game()
@@ -119,7 +119,8 @@ void Game::initObjects()
 {
 	GameObject* testball = new GameObject(false);
 	testball->addComponent(new ModelComponent("Models/Pinballs/pinball_3.1.obj", testball));
-	testball->position = ::Vec3f(0, 0, -3);
+	testball->position = ::Vec3f(0, -2, -6);
+	testball->scale = ::Vec3f(0.1f, 0.1f, 0.1f);
 	testball->addComponent(new CircleCollideComponent(testball));
 	objects.push_back(testball);
 
