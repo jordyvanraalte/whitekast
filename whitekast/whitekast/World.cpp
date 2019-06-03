@@ -117,7 +117,6 @@ void World::idle(void)
 	if (keys['Q']) camera.posZ += deltaTime * speed;
 	if (keys['E']) camera.posZ -= deltaTime * speed;
 
-	printf("BALL %f, %f \n", ball->velocity.x, ball->velocity.z);
 	ball->update(deltaTime);
 	for (auto o : gameObjects)
 	{

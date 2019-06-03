@@ -1,4 +1,5 @@
 #include "CollisionManager.h"
+#include <iostream>
 
 
 CollisionManager::CollisionManager()
@@ -33,8 +34,6 @@ bool CollisionManager::isColliding(GameObject *ball, GameObject *object)
 			Vec2f temp = Vec2f(ball->velocity.x, ball->velocity.z);
 			Vec2f temp2 = mirrorVectorInLine(temp, line);
 			ball->velocity = Vec3f(temp2.x, 0, temp2.y);
-
-			printf("kanker!");
 			return true;
 		}
 		else if (isPointInCircle(line.point2, cx, cy, r))
@@ -42,8 +41,6 @@ bool CollisionManager::isColliding(GameObject *ball, GameObject *object)
 			Vec2f temp = Vec2f(ball->velocity.x, ball->velocity.z);
 			Vec2f temp2 = mirrorVectorInLine(temp, line);
 			ball->velocity = Vec3f(temp2.x, 0, temp2.y);
-
-			printf("kanker!");
 			return true;
 		}
 			
@@ -63,8 +60,6 @@ bool CollisionManager::isColliding(GameObject *ball, GameObject *object)
 				Vec2f temp = Vec2f(ball->velocity.x, ball->velocity.z);
 				Vec2f temp2 = mirrorVectorInLine(temp, line);
 				ball->velocity = Vec3f(temp2.x, 0, temp2.y);
-
-				printf("kanker!");
 				return true;
 			}
 		}
@@ -104,13 +99,13 @@ bool CollisionManager::isPointInCircle(Vec2f point, float cx, float cy, float r)
 
 Vec2f CollisionManager::mirrorVectorInLine(::Vec2f d, LinesHitbox::Hitline b) const
 {
-	float dx = b.point1.x - b.point2.x, dy = b.point2.y - b.point1.y;
-	float lal = sqrt((pow(dx, 2) + pow(dy, 2)));
-	float dxNormalized = b.point1.x / lal;
-	float dyNormalized = b.point1.y / lal;
-
-	::Vec2f n(-dyNormalized, dxNormalized);
-
+	std::cout << "vector xy : " << d.x << "," << d.y << "\n";
+	std::cout << "b.point1 : " << b.point1.x << "," << b.point1.y << "\n";
+	std::cout << "b.point2 : " << b.point2.x << "," << b.point2.y << "'\n";
+	
+	float dx = b.point2.x - b.point1.x, dy = b.point2.y - b.point1.y;
+	
+	::Vec2f n(-dy, dx);
 	::Vec2f mirroredVec = -1 * (2 * Vec2f::vectorDotProduct(n, d)*n - d);
 
 	return mirroredVec;
