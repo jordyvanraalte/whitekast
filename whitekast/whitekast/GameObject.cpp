@@ -12,17 +12,6 @@ GameObject::GameObject(bool isVisionObject)
 	rotationPoint = position;
 }
 
-
-GameObject::GameObject(std::string fileName)
-{
-	position = Vec3f(0, 0, 0);
-	rotation = Vec3f(0, 0, 0);
-	this->isVisionObject = true;
-	rotationPoint = position;
-	model = new ObjModel();
-	model->load(fileName);
-}
-
 GameObject::~GameObject()
 {
 

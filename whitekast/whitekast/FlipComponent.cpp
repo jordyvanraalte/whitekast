@@ -46,15 +46,15 @@ void FlipComponent::handleEvent(float elapsedTime)
 				gameObject->rotation.y -= elapsedTime * speed;
 			}
 
-			if (gameObject->rotation.y >= 315)
+			if (gameObject->rotation.y >= 405)
 			{
 				up = false;
 			}
-			else if (gameObject->rotation.y < 270)
+			else if (gameObject->rotation.y < 360)
 			{
 				up = true;
 				flipping = false;
-				gameObject->rotation.y = 270;
+				gameObject->rotation.y = 360;
 			}
 		}
 	}
@@ -71,15 +71,15 @@ void FlipComponent::handleEvent(float elapsedTime)
 				gameObject->rotation.y += elapsedTime * speed;
 			}
 
-			if (gameObject->rotation.y <= 45)
+			if (gameObject->rotation.y <= 135)
 			{
 				up = false;
 			}
-			else if (gameObject->rotation.y > 90)
+			else if (gameObject->rotation.y > 180)
 			{
 				up = true;
 				flipping = false;
-				gameObject->rotation.y = 90;
+				gameObject->rotation.y = 180;
 			}
 		}
 	}
