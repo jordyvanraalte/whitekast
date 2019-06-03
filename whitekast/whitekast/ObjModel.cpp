@@ -178,7 +178,7 @@ void ObjModel::load(const std::string& fileName)
 
 void ObjModel::draw()
 {
-	for (auto group : groups)
+	for (auto group : groups)	
 	{
 		/*auto& material = materials[group->materialIndex];
 		if (material->texture)

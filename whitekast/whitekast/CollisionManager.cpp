@@ -69,7 +69,6 @@ bool CollisionManager::isPointOnLine(Vec2f point1, Vec2f point2, float px, float
 	float y1 = point1.y;
 	float y2 = point2.y;
 	
-
 	//get distance from the point tot the two end of the line
 	float d1 = sqrt(pow((px - x1),2) + pow((py - y1), 2));
 	float d2 = sqrt(pow((px - x2), 2) + pow((py - y2), 2));
@@ -97,8 +96,10 @@ bool CollisionManager::isPointInCircle(Vec2f point, float cx, float cy, float r)
 	float dx = b.point1.x - b.point2.x, dy = b.point2.y - b.point1.y;
 	float lal = sqrt((pow(dx, 2) + pow(dy, 2)));
 	float dxNormalized = b.point1.x / lal;
-	float dyNormalized = b.point1.y / lal;
+	float dyNormalized = b.point1.y / lal;
+
 	::Vec2f n(-dyNormalized, dxNormalized);
-	::Vec2f mirroredVec = d - (2 * ((d.x * n.x) + (d.y * n.y)) * n);
+	::Vec2f mirroredVec = d - (2 * ((d.x * n.x) + (d.y * n.y)) * n);
+
 	return mirroredVec;
 }
