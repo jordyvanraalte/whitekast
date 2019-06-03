@@ -39,7 +39,7 @@ Game::Game(const char * title, int argc, char * argv[])
 	StateManager::getInstance();
 
 	CollisionManager* collision = new CollisionManager();
-	audiomanager->playSound("audio/busta_loop.WAV");
+	//audiomanager->playSound("audio/busta_loop.WAV");
 }
 
 Game::~Game()
