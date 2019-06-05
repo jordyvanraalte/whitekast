@@ -31,6 +31,8 @@ static Game* instance;
 int horizontal = 0;
 int vertical = 0;
 
+
+
 Game::Game(const char * title, int argc, char * argv[])
 {
 	instance = this;
@@ -64,7 +66,8 @@ void Game::initGlut(const char * title, int argc, char * argv[])
 
 	Vision vision = Vision();
 	std::vector<WhitekastObject*> whitekastObjects = vision.initVision();
-
+	boardWidth = whitekastObjects.at(0)->getWidth();
+	boardHeight = whitekastObjects.at(0)->getSize();
 	initFlippers();
 
 	for (auto wkObject : whitekastObjects) 
@@ -126,9 +129,9 @@ void Game::initObjects()
 {
 	GameObject* testball = new GameObject(false);
 	testball->addComponent(new ModelComponent("Models/Pinballs/pinball_3.1.obj", testball));
-	testball->position = ::Vec3f(2, 0, 0);
+	testball->position = ::Vec3f(boardWidth, -2, 0.1);
 	testball->scale = ::Vec3f(0.1f, 0.1f, 0.1f);
-	testball->addComponent(new GravityComponent(::Vec3f(0, 0, 0.5)));
+	testball->addComponent(new GravityComponent(::Vec3f(0, 0, 0.25)));
 	testball->addComponent(new CircleCollideComponent(testball));
 	ball = testball;
 

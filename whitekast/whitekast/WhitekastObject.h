@@ -32,6 +32,7 @@ public:
 
 	void setDrawingColor();
 	float getSize();
+	float getWidth();
 
 	virtual void draw() override;
 };

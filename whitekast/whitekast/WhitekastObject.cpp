@@ -74,31 +74,43 @@ void WhitekastObject::setDrawingColor()
 	}
 }
 
+
+
 float WhitekastObject::getSize()
 {
 	return size;
+}
+
+float WhitekastObject::getWidth()
+{
+	return widthBoard;
 }
 
 void WhitekastObject::draw() 
 {
 	setDrawingColor();
 	if (objectColor == WHITE) {
-		float backgroundY = -2.01f;
+		float backgroundY = -2.0f;
 
+		glColor3f(1, 1, 1);
 		glBegin(GL_QUADS);
 
+		
 		glVertex3f(0, backgroundY, 0);
 		glVertex3f(CAMERA_WIDTH * scale, backgroundY, 0);
 		glVertex3f(CAMERA_WIDTH * scale, backgroundY, size);
 		glVertex3f(0, backgroundY, size);
+		glEnd();
 
-		glVertex3f(0, -2, 0);
-		glVertex3f(0, -2, size);
+		glColor3f(0, 1, 0);
+		glBegin(GL_QUADS);
+		glVertex3f(0, -1, 0);
+		glVertex3f(0, -1, size);
 		glVertex3f(0, -10, size);
 		glVertex3f(0, -10, 0);
 
-		glVertex3f(widthBoard, -2, 0);
-		glVertex3f(widthBoard, -2, size);
+		glVertex3f(widthBoard, -1, 0);
+		glVertex3f(widthBoard, -1, size);
 		glVertex3f(widthBoard, -10, size);
 		glVertex3f(widthBoard, -10, 0);
 
@@ -107,8 +119,12 @@ void WhitekastObject::draw()
 		glVertex3f(widthBoard, -10, size);
 		glVertex3f(0, -10, size);
 
+		glVertex3f(0, -1, 0);
+		glVertex3f(widthBoard, -1, 0);
+		glVertex3f(widthBoard, -10, 0);
+		glVertex3f(0, -10, 0);
+
 		glEnd();
-		glColor3f(1, 1, 1);
 	}
 	else 
 	{
@@ -140,7 +156,7 @@ void WhitekastObject::draw()
 				glVertex3f(coordinates[i + 1].x * scale, minObjectY, coordinates[i + 1].y * scale);
 				glVertex3f(coordinates[i].x * scale, minObjectY, coordinates[i].y * scale);
 			}
-			glVertex3f(lastX, maxObjectY, lastY);
+			glVertex3f(lastX, maxObjectY, lastY);				
 			glVertex3f(coordinates[0].x * scale, maxObjectY, coordinates[0].y * scale);
 			glVertex3f(coordinates[0].x * scale, minObjectY, coordinates[0].y * scale);
 			glVertex3f(lastX, minObjectY, lastY);
