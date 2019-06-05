@@ -32,6 +32,8 @@ public:
 
 	::Vec3f velocity;
 	::Vec3f position;
+	::Vec3f lastPosition;
+	bool hasCollided;
 	::Vec3f rotation;
 	::Vec3f scale = ::Vec3f(1, 1, 1);
 	::Vec3f rotationPoint;

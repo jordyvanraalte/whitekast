@@ -3,6 +3,7 @@
 #include "DrawComponent.h"
 #include "CollideComponent.h"
 #include <GL/freeglut.h>
+#include <iostream>
 
 GameObject::GameObject(bool isVisionObject)
 {
@@ -103,6 +104,7 @@ void GameObject::update(float elapsedTime)
 	for (auto c : components)
 		c->update(elapsedTime);
 
+	lastPosition = position;
 	position = position + vectemp;
 }
 

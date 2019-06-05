@@ -31,16 +31,22 @@ bool CollisionManager::isColliding(GameObject *ball, GameObject *object)
 
 		if (isPointInCircle(line.point1, cx, cy, r))
 		{
+			//ball->position = ball->position - Vec3f(0, 0, 0.1);
+			std::cout << "kanker 1" << "\n";
 			Vec2f temp = Vec2f(ball->velocity.x, ball->velocity.z);
 			Vec2f temp2 = mirrorVectorInLine(temp, line);
 			ball->velocity = Vec3f(temp2.x, 0, temp2.y);
+			
 			return true;
 		}
 		else if (isPointInCircle(line.point2, cx, cy, r))
 		{
+			//ball->position = ball->position - Vec3f(0, 0, 0.1);
+			std::cout << "kanker 2" << "\n";
 			Vec2f temp = Vec2f(ball->velocity.x, ball->velocity.z);
 			Vec2f temp2 = mirrorVectorInLine(temp, line);
 			ball->velocity = Vec3f(temp2.x, 0, temp2.y);
+	
 			return true;
 		}
 			
@@ -57,9 +63,12 @@ bool CollisionManager::isColliding(GameObject *ball, GameObject *object)
 			float distance = sqrt(pow(distX, 2) + pow(distY, 2));
 			if(distance <= r)
 			{
+				//ball->position = ball->position - Vec3f(0, 0, 0.1);
+				std::cout << "kanker 3" << "\n";
 				Vec2f temp = Vec2f(ball->velocity.x, ball->velocity.z);
 				Vec2f temp2 = mirrorVectorInLine(temp, line);
 				ball->velocity = Vec3f(temp2.x, 0, temp2.y);
+			
 				return true;
 			}
 		}
@@ -100,13 +109,25 @@ bool CollisionManager::isPointInCircle(Vec2f point, float cx, float cy, float r)
 Vec2f CollisionManager::mirrorVectorInLine(::Vec2f d, LinesHitbox::Hitline b) const
 {
 	std::cout << "vector xy : " << d.x << "," << d.y << "\n";
-	std::cout << "b.point1 : " << b.point1.x << "," << b.point1.y << "\n";
-	std::cout << "b.point2 : " << b.point2.x << "," << b.point2.y << "'\n";
-	
-	float dx = b.point2.x - b.point1.x, dy = b.point2.y - b.point1.y;
-	
-	::Vec2f n(-dy, dx);
+	//std::cout << "b.point1 : " << b.point1.x << "," << b.point1.y << "\n";
+	//std::cout << "b.point2 : " << b.point2.x << "," << b.point2.y << "'\n";
+
+	//this is our x value.
+	float slope = (b.point2.y - b.point1.y) / (b.point2.x - b.point1.x);
+
+	//Then our normal value is
+	::Vec2f n(slope, -1);
+
+	//float dx = b.point2.x - b.point1.x, dy = b.point2.y - b.point1.y;
+	//::Vec2f n(-dy, dx);
+
+	//Test Formula 1
 	::Vec2f mirroredVec = -1 * (2 * Vec2f::vectorDotProduct(n, d)*n - d);
+
+	//Test Formula 2
+	//::Vec2f mirroredVec = d - 2 * Vec2f::vectorDotProduct(d, n);
+
+	std::cout << "Mirrored vector xy : " << mirroredVec.x << "," << mirroredVec.y << "\n";
 
 	return mirroredVec;
 }

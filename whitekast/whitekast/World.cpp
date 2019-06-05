@@ -117,13 +117,17 @@ void World::idle(void)
 	if (keys['Q']) camera.posZ += deltaTime * speed;
 	if (keys['E']) camera.posZ -= deltaTime * speed;
 
-	ball->update(deltaTime);
 	for (auto o : gameObjects)
 	{
-		collisionManager->isColliding(ball, o);
+		if (collisionManager->isColliding(ball, o))
+		{
+			ball->position = ball->lastPosition;
+		}
+		
 		o->update(deltaTime);
 		o->handleEvent(deltaTime);
 	}
+	ball->update(deltaTime);
 		
 	glutPostRedisplay();
 }
