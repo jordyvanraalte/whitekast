@@ -77,6 +77,7 @@ void Game::initGlut(const char * title, int argc, char * argv[])
 		gameObject->position = ::Vec3f(0, 0, 0);
 		gameObject->setCoordinates(wkObject->getCoordinates());
 		gameObject->addComponent(new LineCollideComponent(gameObject, wkObject->getScale()));
+		gameObject->isCollider = true;
 		objects.push_back(gameObject);
 	}
 

@@ -73,7 +73,7 @@ void World::display()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	glColor3f(1, 0, 0);
+	glColor3f(0, 0, 1);
 	ball->draw();
 
 	glColor3f(0, 0, 0);
@@ -116,18 +116,15 @@ void World::idle(void)
 	if (keys['S']) move(270, deltaTime*speed);
 	if (keys['Q']) camera.posZ += deltaTime * speed;
 	if (keys['E']) camera.posZ -= deltaTime * speed;
-
+	
+	ball->update(deltaTime);
 	for (auto o : gameObjects)
 	{
-		if (collisionManager->isColliding(ball, o))
-		{
-			ball->position = ball->lastPosition;
-		}
-		
+		collisionManager->isColliding(ball, o);
 		o->update(deltaTime);
 		o->handleEvent(deltaTime);
 	}
-	ball->update(deltaTime);
+	
 		
 	glutPostRedisplay();
 }
