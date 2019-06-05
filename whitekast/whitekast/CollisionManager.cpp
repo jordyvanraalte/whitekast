@@ -123,23 +123,18 @@ bool CollisionManager::isPointInCircle(Vec2f point, float cx, float cy, float r)
 Vec2f CollisionManager::mirrorVectorInLine(::Vec2f d, LinesHitbox::Hitline b) const
 {
 	std::cout << "vector xy : " << d.x << "," << d.y << "\n";
-	//std::cout << "b.point1 : " << b.point1.x << "," << b.point1.y << "\n";
-	//std::cout << "b.point2 : " << b.point2.x << "," << b.point2.y << "'\n";
 
-	//this is our x value.
+	//this is our slop value.
 	float slope = (b.point2.y - b.point1.y) / (b.point2.x - b.point1.x);
 
 	//Then our normal value is
 	::Vec2f n(slope, -1);
 
-	//float dx = b.point2.x - b.point1.x, dy = b.point2.y - b.point1.y;
-	//::Vec2f n(-dy, dx);
-
-	//Test Formula 1
-	::Vec2f mirroredVec = -1 * (2 * Vec2f::vectorDotProduct(n, d)*n - d);
+	//Our normal normalised
+	::Vec2f normal(Vec2f::vectorNormalised(n));
 
 	//Test Formula 2
-	//::Vec2f mirroredVec = d - 2 * Vec2f::vectorDotProduct(d, n);
+	::Vec2f mirroredVec = d - 2 * normal * (Vec2f::vectorDotProduct(normal, d));
 
 	std::cout << "Mirrored vector xy : " << mirroredVec.x << "," << mirroredVec.y << "\n";
 
