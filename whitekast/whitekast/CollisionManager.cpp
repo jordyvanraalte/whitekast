@@ -31,22 +31,30 @@ bool CollisionManager::isColliding(GameObject *ball, GameObject *object)
 
 		if (isPointInCircle(line.point1, cx, cy, r))
 		{
-			//ball->position = ball->position - Vec3f(0, 0, 0.1);
-			std::cout << "kanker 1" << "\n";
-			Vec2f temp = Vec2f(ball->velocity.x, ball->velocity.z);
-			Vec2f temp2 = mirrorVectorInLine(temp, line);
-			ball->velocity = Vec3f(temp2.x, 0, temp2.y);
-			
+			if(ball->isColliding == false && object->isColliding == false)
+			{
+				//ball->position = ball->position - Vec3f(0, 0, 0.1);
+				std::cout << "kanker 1" << "\n";
+				Vec2f temp = Vec2f(ball->velocity.x, ball->velocity.z);
+				Vec2f temp2 = mirrorVectorInLine(temp, line);
+				ball->velocity = Vec3f(temp2.x, 0, temp2.y);
+			}
+			ball->isColliding = true;
+			object->isColliding = true;
 			return true;
 		}
 		else if (isPointInCircle(line.point2, cx, cy, r))
 		{
-			//ball->position = ball->position - Vec3f(0, 0, 0.1);
-			std::cout << "kanker 2" << "\n";
-			Vec2f temp = Vec2f(ball->velocity.x, ball->velocity.z);
-			Vec2f temp2 = mirrorVectorInLine(temp, line);
-			ball->velocity = Vec3f(temp2.x, 0, temp2.y);
-	
+			if (ball->isColliding == false && object->isColliding == false)
+			{
+				//ball->position = ball->position - Vec3f(0, 0, 0.1);
+				std::cout << "kanker 2" << "\n";
+				Vec2f temp = Vec2f(ball->velocity.x, ball->velocity.z);
+				Vec2f temp2 = mirrorVectorInLine(temp, line);
+				ball->velocity = Vec3f(temp2.x, 0, temp2.y);
+			}
+			ball->isColliding = true;
+			object->isColliding = true;
 			return true;
 		}
 			
@@ -63,16 +71,22 @@ bool CollisionManager::isColliding(GameObject *ball, GameObject *object)
 			float distance = sqrt(pow(distX, 2) + pow(distY, 2));
 			if(distance <= r)
 			{
-				//ball->position = ball->position - Vec3f(0, 0, 0.1);
-				std::cout << "kanker 3" << "\n";
-				Vec2f temp = Vec2f(ball->velocity.x, ball->velocity.z);
-				Vec2f temp2 = mirrorVectorInLine(temp, line);
-				ball->velocity = Vec3f(temp2.x, 0, temp2.y);
-			
+				if (ball->isColliding == false && object->isColliding == false)
+				{
+					//ball->position = ball->position - Vec3f(0, 0, 0.1);
+					std::cout << "kanker 3" << "\n";
+					Vec2f temp = Vec2f(ball->velocity.x, ball->velocity.z);
+					Vec2f temp2 = mirrorVectorInLine(temp, line);
+					ball->velocity = Vec3f(temp2.x, 0, temp2.y);
+				}
+				ball->isColliding = true;
+				object->isColliding = true;
 				return true;
 			}
 		}
 	}
+	ball->isColliding = false;
+	object->isColliding = false;
 	return false;
 }
 

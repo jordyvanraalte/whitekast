@@ -12,6 +12,8 @@ GameObject::GameObject(bool isVisionObject)
 	scale = Vec3f(1, 1, 1);
 	this->isVisionObject = isVisionObject;
 	rotationPoint = position;
+	isCollider = false;
+	isColliding = false;
 }
 
 
@@ -23,6 +25,8 @@ GameObject::GameObject(std::string fileName)
 	rotationPoint = position;
 	model = new ObjModel();
 	model->load(fileName);
+	isCollider = false;
+	isColliding = false;
 }
 
 GameObject::~GameObject()
@@ -98,13 +102,12 @@ Hitbox* GameObject::getHitbox() const
 
 void GameObject::update(float elapsedTime)
 {
-	vectemp = velocity;
-	vectemp.applyTime(elapsedTime);
-
 	for (auto c : components)
 		c->update(elapsedTime);
 
-	lastPosition = position;
+	vectemp = velocity;
+	vectemp.applyTime(elapsedTime);
+
 	position = position + vectemp;
 }
 
