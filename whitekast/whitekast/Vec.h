@@ -52,6 +52,7 @@ public:
 	
 	float& operator [](int);
 	static float vectorDotProduct(::Vec2f& v1, ::Vec2f& v2);
+	static Vec2f vectorNormalised(::Vec2f& v);
 
 };
 
