@@ -16,19 +16,6 @@ GameObject::GameObject(bool isVisionObject)
 	isColliding = false;
 }
 
-
-GameObject::GameObject(std::string fileName)
-{
-	position = Vec3f(0, 0, 0);
-	rotation = Vec3f(0, 0, 0);
-	this->isVisionObject = false;
-	rotationPoint = position;
-	model = new ObjModel();
-	model->load(fileName);
-	isCollider = false;
-	isColliding = false;
-}
-
 GameObject::~GameObject()
 {
 

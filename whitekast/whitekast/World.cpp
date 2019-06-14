@@ -30,7 +30,6 @@ struct Camera
 	float posZ = -4;
 } camera;
 
-static World* world;
 World::World(int horizontal, int vertical, std::list<GameObject*>& objectlist, WhitekastVision whitekastVision, GameObject* ball)
 {
 	world = this;
