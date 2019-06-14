@@ -1,11 +1,15 @@
 #include "World.h"
 #include "GameObject.h"
+#include "PointCounter.h"
+#include "LivesCounter.h"
 #include "WhitekastObject.h"
 #include "WhitekastVision.h"
 #include "CubeComponent.h"
 #include "FlipComponent.h"
 #include <GL/freeglut.h>
 #include <iostream>
+#include <cstring>
+
 
 std::list<GameObject*> gameObjects;
 WhitekastVision vision;
@@ -26,14 +30,20 @@ struct Camera
 	float posZ = -4;
 } camera;
 
-World::World(int horizontal, int vertical, std::list<GameObject*>& objectlist, WhitekastVision whitekastVision)
+static World* world;
+World::World(int horizontal, int vertical, std::list<GameObject*>& objectlist, WhitekastVision whitekastVision, GameObject* ball)
 {
 	world = this;
 	width = horizontal;
 	height = vertical;
 	lastFrameTime = 0;
+	
 	gameObjects = objectlist;
 	vision = whitekastVision;
+	this->ball = ball;
+
+	collisionManager = new CollisionManager();
+
 	glEnable(GL_DEPTH_TEST);
 	ZeroMemory(keys, sizeof(keys));
 }
@@ -80,6 +90,10 @@ void World::display()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
+	glColor3f(0, 0, 1);
+	ball->draw();
+
+	glColor3f(0, 0, 0);
 	for (auto object : gameObjects) 
 	{
 		glPushMatrix();
@@ -90,7 +104,7 @@ void World::display()
 		object->draw();
 		glPopMatrix();
 	}
-
+	displayUI(PointCounter::getInstance()->getPoints(), LivesCounter::getInstance()->getLives());
 	glutSwapBuffers();
 }
 
@@ -119,8 +133,11 @@ void World::idle(void)
 	if (keys['S']) move(270, deltaTime*speed);
 	if (keys['Q']) camera.posZ += deltaTime * speed;
 	if (keys['E']) camera.posZ -= deltaTime * speed;
-
-	for (auto o : gameObjects) {
+	
+	ball->update(deltaTime);
+	for (auto o : gameObjects)
+	{
+		collisionManager->isColliding(ball, o);
 		o->update(deltaTime);
 		o->handleEvent(deltaTime);
 	}
@@ -208,4 +225,40 @@ void World::mouseClick(int button, int state, int x, int y)
 			}
 		}
 	}*/
+}
+
+void World::displayUI(int points, int lifepoints)
+{
+
+	glMatrixMode(GL_PROJECTION);
+	glPushMatrix();
+	glLoadIdentity();
+	glOrtho(0.0, width, height, 0.0, -1.0, 10.0);
+	glMatrixMode(GL_MODELVIEW);
+	//glPushMatrix();        ----Not sure if I need this
+	glLoadIdentity();
+	glDisable(GL_CULL_FACE);
+
+	glClear(GL_DEPTH_BUFFER_BIT);
+	glRotatef(180, 1, 0, 0);
+	glTranslatef(0, -25, 0);
+	glScalef(0.2, 0.2, 0.2);
+	std::string tempString = "score: ";
+	tempString = tempString + std::to_string(points);
+	unsigned char score[256];
+	std::copy(tempString.begin(), tempString.end(), score);
+	score[tempString.length()] = 0;
+	glutStrokeString(GLUT_STROKE_ROMAN, score);
+	tempString = " lives: ";
+	tempString = tempString + std::to_string(lifepoints);
+	unsigned char lives[256];
+	std::copy(tempString.begin(), tempString.end(), lives);
+	lives[tempString.length()] = 0;
+	glutStrokeString(GLUT_STROKE_ROMAN, lives);
+	
+	// Making sure we can render 3d again
+	glMatrixMode(GL_PROJECTION);
+	glPopMatrix();
+	glMatrixMode(GL_MODELVIEW);
+	//glPopMatrix();        ----and this?
 }

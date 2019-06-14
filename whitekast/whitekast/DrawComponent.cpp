@@ -1,6 +1,5 @@
 #include "DrawComponent.h"
 
-
 DrawComponent::DrawComponent() : Component()
 {
 

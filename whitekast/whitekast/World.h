@@ -4,6 +4,7 @@
 #include "GameObject.h"
 #include "WhitekastObject.h"
 #include "WhitekastVision.h"
+#include "CollisionManager.h"
 
 #define _USE_MATH_DEFINES
 #include <math.h>
@@ -11,8 +12,19 @@
 class World
 {
 
+	std::list<GameObject*> gameObjects;
+	GameObject* ball;
+	CollisionManager* collisionManager;
+
+	float lastFrameTime;
+
+	float lookAtX;
+	float lookAtY;
+	bool keys[255];
+	int width, height;
+
 public:
-	World(int horizontal, int vertical, std::list<GameObject*>& objectlist, WhitekastVision whitekastVision);
+	World(int horizontal, int vertical, std::list<GameObject*>& objectlist, WhitekastVision whitekastVision, GameObject* ball);
 	~World();
 
 	float deltaTime;
@@ -27,4 +39,7 @@ public:
 	void mouseClick(int button, int state, int x, int y);
 	static World* getWorld();
 	void makePlatform();
+	Vec2f mirrorVectorInLine(::Vec2f d, LinesHitbox::Hitline b) const;
+
+	void displayUI(int points, int lifepoints);
 };

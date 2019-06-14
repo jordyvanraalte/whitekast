@@ -8,6 +8,8 @@ class World;
 class AudioManager;
 class GameObject;
 class StateManager;
+class PointCounter;
+class LivesCounter;
 
 class Game
 {
@@ -31,8 +33,13 @@ public:
 
 private:
 	bool isRunning;
-	int worldSize = 10;
+	const int worldSize = 10;
+	int boardWidth;
+	int boardHeight;
+	
 	std::list<GameObject*> objects;
 	AudioManager* audiomanager;
+	PointCounter* pointCounter;
+	LivesCounter* livesCounter;
 	WhitekastVision vision;
 };

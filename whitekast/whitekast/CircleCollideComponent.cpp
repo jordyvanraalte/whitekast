@@ -4,11 +4,10 @@
 CircleCollideComponent::CircleCollideComponent(GameObject* gameobject)
 {
 	this->gameObject = gameobject;
-	hitbox = new CircleHitbox(gameObject->position, gameObject->model->diameter);
+	hitbox = new CircleHitbox(gameObject->position, gameObject->model->diameter, gameobject->scale);
 }
 
-CircleCollideComponent::~CircleCollideComponent()
-= default;
+CircleCollideComponent::~CircleCollideComponent() = default;
 
 Hitbox* CircleCollideComponent::getHitbox()
 {

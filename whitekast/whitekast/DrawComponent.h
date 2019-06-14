@@ -5,7 +5,6 @@
 class Component;
 class DrawComponent : virtual public Component
 {
-
 public:
 
 	DrawComponent();

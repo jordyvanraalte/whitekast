@@ -23,7 +23,7 @@
     <ProjectGuid>{F1497797-C759-4EE8-BA8F-C1B2E2D2ABF8}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>whitekast</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -180,8 +180,10 @@
     <ClInclude Include="GravityComponent.h" />
     <ClInclude Include="HitBox.h" />
     <ClInclude Include="LineColliderComponent.h" />
+    <ClInclude Include="LivesCounter.h" />
     <ClInclude Include="ModelComponent.h" />
     <ClInclude Include="GameOverState.h" />
+    <ClInclude Include="PointCounter.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="HomeState.h" />
     <ClInclude Include="ObjModel.h" />
@@ -211,8 +213,10 @@
     <ClCompile Include="GravityComponent.cpp" />
     <ClCompile Include="HitBox.cpp" />
     <ClCompile Include="LineColliderComponent.cpp" />
+    <ClCompile Include="LivesCounter.cpp" />
     <ClCompile Include="ModelComponent.cpp" />
     <ClCompile Include="GameOverState.cpp" />
+    <ClCompile Include="PointCounter.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="HomeState.cpp" />
     <ClCompile Include="ObjModel.cpp" />
@@ -228,10 +232,6 @@
     <ClCompile Include="WorldComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Object Include="Models\Flippers\flipperblend.obj">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </Object>
     <Object Include="Models\Pinballs\pinball_1.0.obj">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>

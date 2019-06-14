@@ -1,8 +1,14 @@
 #pragma once
-class LineColliderComponent
+#include "CollideComponent.h"
+
+class LineCollideComponent : public CollideComponent
 {
+	Hitbox* hitbox;
 public:
-	LineColliderComponent();
-	~LineColliderComponent();
+	LineCollideComponent(GameObject* gameobject, float wkscale);
+	~LineCollideComponent();
+
+	Hitbox* getHitbox() override;
+	void update(float elapsedTime) override;
 };
 

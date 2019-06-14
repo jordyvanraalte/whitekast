@@ -11,6 +11,7 @@
 #include "ModelComponent.h"
 #include "CollideComponent.h"
 #include "CircleCollideComponent.h"
+#include "LineColliderComponent.h"
 #include "Vec.h"
 #include <vector>
 #include <iostream>
@@ -20,34 +21,42 @@
 #include "StateManager.h"
 #include "HomeState.h"
 #include "CollisionManager.h"
+#include "PointCounter.h"
+#include "LivesCounter.h"
 #include <thread> 
 
 std::list<GameObject*> objects;
+GameObject* ball;
+
 static World* world;
 static Game* instance;
 
 int horizontal = 0;
 int vertical = 0;
 
+
+
 Game::Game(const char * title, int argc, char * argv[])
 {
 	instance = this;
 	initGlut(title, argc, argv);
 	initObjects();
-	world = new World(horizontal, vertical, objects, vision);
+	world = new World(horizontal, vertical, objects, vision, ball);
 
 	audiomanager = AudioManager::getInstance();
+	pointCounter = PointCounter::getInstance();
+	livesCounter = LivesCounter::getInstance();
+
 	StateManager::getInstance();
 
 	CollisionManager* collision = new CollisionManager();
-	//audiomanager->playSound("audio/busta_loop.WAV");
+	audiomanager->playMusic("Audio/busta_loop.WAV");
 }
 
 Game::~Game()
 {
 	delete world;
 	delete instance;
-
 }
 
 void Game::startGame()
@@ -67,14 +76,19 @@ void Game::initGlut(const char * title, int argc, char * argv[])
 
 	vision = WhitekastVision();
 	std::vector<WhitekastObject*> whitekastObjects = vision.initVision();
-
+	boardWidth = whitekastObjects.at(0)->getWidth();
+	boardHeight = whitekastObjects.at(0)->getSize();
 	initFlippers();
+	
 
 	for (auto wkObject : whitekastObjects) 
 	{
 		GameObject* gameObject = new GameObject(true);
 		gameObject->addComponent(wkObject);
-		gameObject->position = ::Vec3f(wkObject->getSize() * -0.5, worldSize * -0.1, worldSize * -0.7);
+		gameObject->position = ::Vec3f(0, 0, 0);
+		gameObject->setCoordinates(wkObject->getCoordinates());
+		gameObject->addComponent(new LineCollideComponent(gameObject, wkObject->getScale()));
+		gameObject->isCollider = true;
 		objects.push_back(gameObject);
 	}
 
@@ -100,12 +114,15 @@ void Game::initGlut(const char * title, int argc, char * argv[])
 
 void Game::handleEvents() 
 {
+	pointCounter->hitFlipper();
 	StateManager::getInstance()->handle(this);
+	
 }
 
 void Game::reset()
 {
-	lives = 3;
+	livesCounter->resetLives();
+	pointCounter->resetPoints();
 	StateManager::getInstance()->setState(new HomeState());
 }
 
@@ -125,10 +142,13 @@ void Game::stop()
 
 void Game::initObjects()
 {
-	/*GameObject* testball = new GameObject(false);
+	GameObject* testball = new GameObject(false);
 	testball->addComponent(new ModelComponent("Models/Pinballs/pinball_3.1.obj", testball));
-	testball->position = ::Vec3f(0, 0, -3);
-	objects.push_back(testball);*/
+	testball->position = ::Vec3f(boardWidth, -2, 0.1);
+	testball->scale = ::Vec3f(0.1f, 0.1f, 0.1f);
+	testball->addComponent(new GravityComponent(::Vec3f(0, 0, 0.25)));
+	testball->addComponent(new CircleCollideComponent(testball));
+	ball = testball;
 
 	Texture texture1 = Texture("Textures/LeftWall.png");
 	Texture texture2 = Texture("Textures/RightWall.png");
@@ -141,7 +161,6 @@ void Game::initObjects()
 	roomCube->position = ::Vec3f(0, 0, 0);
 	objects.push_back(roomCube);
 }
-
 
 void Game::initFlippers()
 {
@@ -164,6 +183,7 @@ void Game::initFlippers()
 	flipperRight->addComponent(new FlipComponent(false));
 	objects.push_back(flipperRight);
 }
+
 
 Game* Game::getInstance()
 {

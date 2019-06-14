@@ -1,20 +1,22 @@
 #include "CollisionManager.h"
-
+#include <iostream>
 
 
 CollisionManager::CollisionManager()
 {
 }
 
-
 CollisionManager::~CollisionManager()
 {
 }
 
-bool CollisionManager::isColliding(GameObject bal, GameObject object)
+bool CollisionManager::isColliding(GameObject *ball, GameObject *object)
 {
-	CircleHitbox *circle = dynamic_cast<CircleHitbox*>(bal.getHitbox());
-	LinesHitbox *lines = dynamic_cast<LinesHitbox*>(object.getHitbox());
+	if (object->getHitbox() == nullptr)
+		return false;
+
+	CircleHitbox *circle = dynamic_cast<CircleHitbox*>(ball->getHitbox());
+	LinesHitbox *lines = dynamic_cast<LinesHitbox*>(object->getHitbox());
 
 	for (auto line : lines->hitlines)
 	{
@@ -28,12 +30,33 @@ bool CollisionManager::isColliding(GameObject bal, GameObject object)
 		float r = circle->circle.r;
 
 		if (isPointInCircle(line.point1, cx, cy, r))
+		{
+			if(ball->isColliding == false && object->isColliding == false)
+			{
+				//ball->position = ball->position - Vec3f(0, 0, 0.1);
+				Vec2f temp = Vec2f(ball->velocity.x, ball->velocity.z);
+				Vec2f temp2 = mirrorVectorInLine(temp, line);
+				ball->velocity = Vec3f(temp2.x, 0, temp2.y);
+			}
+			ball->isColliding = true;
+			object->isColliding = true;
 			return true;
+		}
 		else if (isPointInCircle(line.point2, cx, cy, r))
+		{
+			if (ball->isColliding == false && object->isColliding == false)
+			{
+				//ball->position = ball->position - Vec3f(0, 0, 0.1);
+				std::cout << "kanker 2" << "\n";
+				Vec2f temp = Vec2f(ball->velocity.x, ball->velocity.z);
+				Vec2f temp2 = mirrorVectorInLine(temp, line);
+				ball->velocity = Vec3f(temp2.x, 0, temp2.y);
+			}
+			ball->isColliding = true;
+			object->isColliding = true;
 			return true;
-
-
-
+		}
+			
 		float length = sqrt(pow((x1 - x2), 2) + pow((y1 - y2), 2));
 		float dot = (((cx - x1)*(x2 - x1)) + ((cy - y1)*(y2 - y1))) / pow(length,2);
 
@@ -46,9 +69,23 @@ bool CollisionManager::isColliding(GameObject bal, GameObject object)
 			float distY = closestY - cy;
 			float distance = sqrt(pow(distX, 2) + pow(distY, 2));
 			if(distance <= r)
+			{
+				if (ball->isColliding == false && object->isColliding == false)
+				{
+					//ball->position = ball->position - Vec3f(0, 0, 0.1);
+					std::cout << "kanker 3" << "\n";
+					Vec2f temp = Vec2f(ball->velocity.x, ball->velocity.z);
+					Vec2f temp2 = mirrorVectorInLine(temp, line);
+					ball->velocity = Vec3f(temp2.x, 0, temp2.y);
+				}
+				ball->isColliding = true;
+				object->isColliding = true;
 				return true;
+			}
 		}
 	}
+	ball->isColliding = false;
+	object->isColliding = false;
 	return false;
 }
 
@@ -60,7 +97,6 @@ bool CollisionManager::isPointOnLine(Vec2f point1, Vec2f point2, float px, float
 	float y1 = point1.y;
 	float y2 = point2.y;
 	
-
 	//get distance from the point tot the two end of the line
 	float d1 = sqrt(pow((px - x1),2) + pow((py - y1), 2));
 	float d2 = sqrt(pow((px - x2), 2) + pow((py - y2), 2));
@@ -82,3 +118,25 @@ bool CollisionManager::isPointInCircle(Vec2f point, float cx, float cy, float r)
 
 	return distance <= r;
 }
+
+Vec2f CollisionManager::mirrorVectorInLine(::Vec2f d, LinesHitbox::Hitline b) const
+{
+	std::cout << "vector xy : " << d.x << "," << d.y << "\n";
+
+	//this is our slop value.
+	float slope = (b.point2.y - b.point1.y) / (b.point2.x - b.point1.x);
+
+	//Then our normal value is
+	::Vec2f n(slope, -1);
+
+	//Our normal normalised
+	::Vec2f normal(Vec2f::vectorNormalised(n));
+
+	//Test Formula 2
+	::Vec2f mirroredVec = d - 2 * normal * (Vec2f::vectorDotProduct(normal, d));
+
+	std::cout << "Mirrored vector xy : " << mirroredVec.x << "," << mirroredVec.y << "\n";
+
+	return mirroredVec;
+}
+
