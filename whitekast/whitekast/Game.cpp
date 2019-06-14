@@ -11,6 +11,7 @@
 #include "ModelComponent.h"
 #include "CollideComponent.h"
 #include "CircleCollideComponent.h"
+#include "LineColliderComponent.h"
 #include "Vec.h"
 #include <vector>
 #include <iostream>
@@ -24,18 +25,22 @@
 #include "LivesCounter.h"
 
 std::list<GameObject*> objects;
+GameObject* ball;
+
 static World* world;
 static Game* instance;
 
 int horizontal = 0;
 int vertical = 0;
 
+
+
 Game::Game(const char * title, int argc, char * argv[])
 {
 	instance = this;
 	initGlut(title, argc, argv);
 	initObjects();
-	world = new World(horizontal, vertical, objects);
+	world = new World(horizontal, vertical, objects, ball);
 
 	audiomanager = AudioManager::getInstance();
 	pointCounter = PointCounter::getInstance();
@@ -44,7 +49,7 @@ Game::Game(const char * title, int argc, char * argv[])
 	StateManager::getInstance();
 
 	CollisionManager* collision = new CollisionManager();
-	//audiomanager->playSound("audio/busta_loop.WAV");
+	audiomanager->playMusic("Audio/busta_loop.WAV");
 }
 
 Game::~Game()
@@ -65,7 +70,8 @@ void Game::initGlut(const char * title, int argc, char * argv[])
 
 	Vision vision = Vision();
 	std::vector<WhitekastObject*> whitekastObjects = vision.initVision();
-
+	boardWidth = whitekastObjects.at(0)->getWidth();
+	boardHeight = whitekastObjects.at(0)->getSize();
 	initFlippers();
 	
 
@@ -73,7 +79,10 @@ void Game::initGlut(const char * title, int argc, char * argv[])
 	{
 		GameObject* gameObject = new GameObject(true);
 		gameObject->addComponent(wkObject);
-		gameObject->position = ::Vec3f(wkObject->getSize() * -0.5, worldSize * -0.1, worldSize * -0.7);
+		gameObject->position = ::Vec3f(0, 0, 0);
+		gameObject->setCoordinates(wkObject->getCoordinates());
+		gameObject->addComponent(new LineCollideComponent(gameObject, wkObject->getScale()));
+		gameObject->isCollider = true;
 		objects.push_back(gameObject);
 	}
 
@@ -129,8 +138,11 @@ void Game::initObjects()
 {
 	GameObject* testball = new GameObject(false);
 	testball->addComponent(new ModelComponent("Models/Pinballs/pinball_3.1.obj", testball));
-	testball->position = ::Vec3f(0, 0, -3);
-	objects.push_back(testball);
+	testball->position = ::Vec3f(boardWidth, -2, 0.1);
+	testball->scale = ::Vec3f(0.1f, 0.1f, 0.1f);
+	testball->addComponent(new GravityComponent(::Vec3f(0, 0, 0.25)));
+	testball->addComponent(new CircleCollideComponent(testball));
+	ball = testball;
 
 	Texture texture1 = Texture("Textures/LeftWall.png");
 	Texture texture2 = Texture("Textures/RightWall.png");

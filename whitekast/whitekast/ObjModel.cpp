@@ -116,8 +116,6 @@ void ObjModel::load(const std::string& fileName)
 				highestVec = currentVec;
 			if (currentVec.x < lowestVec.x)
 				lowestVec = currentVec;
-
-			printf("Highest %f:%f and Lowest %f:%f \n", highestVec.x, highestVec.y, lowestVec.x, lowestVec.y);
 		}
 		else if (params[0] == "vn")
 			normals.push_back(::Vec3f((float)atof(params[1].c_str()), (float)atof(params[2].c_str()), (float)atof(params[3].c_str())));
@@ -180,7 +178,7 @@ void ObjModel::load(const std::string& fileName)
 
 void ObjModel::draw()
 {
-	for (auto group : groups)
+	for (auto group : groups)	
 	{
 		/*auto& material = materials[group->materialIndex];
 		if (material->texture)

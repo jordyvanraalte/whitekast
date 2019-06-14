@@ -27,13 +27,19 @@ struct Camera
 	float posZ = -4;
 } camera;
 
-World::World(int horizontal, int vertical, std::list<GameObject*>& objectlist)
+static World* world;
+World::World(int horizontal, int vertical, std::list<GameObject*>& objectlist, GameObject* ball)
 {
 	world = this;
 	width = horizontal;
 	height = vertical;
 	lastFrameTime = 0;
+	
 	gameObjects = objectlist;
+	this->ball = ball;
+
+	collisionManager = new CollisionManager();
+
 	glEnable(GL_DEPTH_TEST);
 	ZeroMemory(keys, sizeof(keys));
 }
@@ -80,6 +86,10 @@ void World::display()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
+	glColor3f(0, 0, 1);
+	ball->draw();
+
+	glColor3f(0, 0, 0);
 	for (auto object : gameObjects) 
 	{
 		glPushMatrix();
@@ -119,12 +129,16 @@ void World::idle(void)
 	if (keys['S']) move(270, deltaTime*speed);
 	if (keys['Q']) camera.posZ += deltaTime * speed;
 	if (keys['E']) camera.posZ -= deltaTime * speed;
-
-	for (auto o : gameObjects) {
+	
+	ball->update(deltaTime);
+	for (auto o : gameObjects)
+	{
+		collisionManager->isColliding(ball, o);
 		o->update(deltaTime);
 		o->handleEvent(deltaTime);
 	}
-
+	
+		
 	glutPostRedisplay();
 }
 

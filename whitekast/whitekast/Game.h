@@ -31,7 +31,10 @@ public:
 
 private:
 	bool isRunning;
-	int worldSize = 10;
+	const int worldSize = 10;
+	int boardWidth;
+	int boardHeight;
+	
 	std::list<GameObject*> objects;
 	AudioManager* audiomanager;
 	PointCounter* pointCounter;

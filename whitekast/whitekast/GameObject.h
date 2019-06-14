@@ -25,6 +25,7 @@ class GameObject
 	CollideComponent* collideComponent = nullptr;
 
 	std::list<Component*> components;
+	
 	::Vec3f vectemp;
 
 public:
@@ -34,12 +35,17 @@ public:
 
 	bool isVisionObject;
 	ObjModel *model;
+	std::vector<cv::Point> coordinates;
 
 	::Vec3f velocity;
 	::Vec3f position;
 	::Vec3f rotation;
 	::Vec3f scale = ::Vec3f(1, 1, 1);
 	::Vec3f rotationPoint;
+
+	::Vec3f lastPosition;
+	bool isColliding;
+	bool isCollider;
 	
 	/*
 		Adds a component to the component list.
@@ -89,6 +95,7 @@ public:
 	*/
 	void draw();
 
+	void setCoordinates(std::vector<cv::Point> coordinates);
 	Hitbox* getHitbox() const;
 
 	template<class T>

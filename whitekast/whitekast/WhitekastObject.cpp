@@ -29,8 +29,6 @@ void WhitekastObject::setCoordinates(std::vector<cv::Point> newCoordinates)
 	for (int i = 0; i < newCoordinates.size(); i += 2) {
 		coordinates.push_back(newCoordinates.at(i));
 	}
-
-	hitbox = new LinesHitbox(coordinates, scale);
 }
 
 cv::Point WhitekastObject::getCenter()
@@ -41,6 +39,11 @@ cv::Point WhitekastObject::getCenter()
 void WhitekastObject::setCenter(cv::Point centerPoint)
 {
 	center = centerPoint;
+}
+
+float WhitekastObject::getScale()
+{
+	return scale;
 }
 
 ObjectColor WhitekastObject::getObjectColor()
@@ -71,89 +74,95 @@ void WhitekastObject::setDrawingColor()
 	}
 }
 
+
+
 float WhitekastObject::getSize()
 {
 	return size;
+}
+
+float WhitekastObject::getWidth()
+{
+	return widthBoard;
 }
 
 void WhitekastObject::draw() 
 {
 	setDrawingColor();
 	if (objectColor == WHITE) {
-		float backgroundY = -2.01f;
+		float backgroundY = -2.0f;
 
+		glColor3f(1, 1, 1);
 		glBegin(GL_QUADS);
 
-			//top
-			glColor3f(0.3, 0.3, 0.3);
-			glVertex3f(0, backgroundY, 0);
-			glVertex3f(0, backgroundY, CAMERA_WIDTH * scale);
-			glVertex3f(size, backgroundY, CAMERA_WIDTH * scale);
-			glVertex3f(size, backgroundY, 0);
 		
-			//left
-			glVertex3f(0, -2, 0);
-			glVertex3f(0, -2, widthBoard);
-			glVertex3f(0, -10, widthBoard);
-			glVertex3f(0, -10, 0);
-			
-			//right
-			glVertex3f(size, -2, 0);
-			glVertex3f(size, -2, widthBoard);
-			glVertex3f(size, -10, widthBoard);
-			glVertex3f(size, -10, 0);
+		glVertex3f(0, backgroundY, 0);
+		glVertex3f(CAMERA_WIDTH * scale, backgroundY, 0);
+		glVertex3f(CAMERA_WIDTH * scale, backgroundY, size);
+		glVertex3f(0, backgroundY, size);
+		glEnd();
 
-			//
-			glVertex3f(0,-2, widthBoard);
-			glVertex3f(size, -2, widthBoard);
-			glVertex3f(size, -10, widthBoard);
-			glVertex3f(0, -10, widthBoard);
+		glColor3f(0, 1, 0);
+		glBegin(GL_QUADS);
+		glVertex3f(0, -1, 0);
+		glVertex3f(0, -1, size);
+		glVertex3f(0, -10, size);
+		glVertex3f(0, -10, 0);
+
+		glVertex3f(widthBoard, -1, 0);
+		glVertex3f(widthBoard, -1, size);
+		glVertex3f(widthBoard, -10, size);
+		glVertex3f(widthBoard, -10, 0);
+
+		glVertex3f(0, -2, size);
+		glVertex3f(widthBoard, -2, size);
+		glVertex3f(widthBoard, -10, size);
+		glVertex3f(0, -10, size);
+
+		glVertex3f(0, -1, 0);
+		glVertex3f(widthBoard, -1, 0);
+		glVertex3f(widthBoard, -10, 0);
+		glVertex3f(0, -10, 0);
 
 		glEnd();
-		glColor3f(1, 1, 1);
 	}
 	else 
 	{
 		float minObjectY = -2.0f;
 		float maxObjectY = minObjectY + 0.05f * size;
-		glTranslatef(size / 5, 0, widthBoard);
-		glScalef(1, 1, -1);
+		//glTranslatef(size / 5, 0, widthBoard);
+		//glScalef(1, 1, -1);
 
 
 		glBegin(GL_TRIANGLE_STRIP);
 			for (int i = 0; i < coordinates.size() - 1; i++) 
 			{
-				glVertex3f(coordinates[i].y * scale, maxObjectY, coordinates[i].x * scale);
-				glVertex3f(coordinates[i + 1].y * scale, maxObjectY, coordinates[i + 1].x * scale);
-				glVertex3f(center.y * scale, maxObjectY, center.x * scale);
+				glVertex3f(coordinates[i].x * scale, maxObjectY, coordinates[i].y * scale);
+				glVertex3f(coordinates[i + 1].x * scale, maxObjectY, coordinates[i + 1].y * scale);
+				glVertex3f(center.x * scale, maxObjectY, center.y * scale);
 			}
 			float lastX = coordinates[coordinates.size() - 1].x * scale;
 			float lastY = coordinates[coordinates.size() - 1].y * scale;
-			glVertex3f(lastY, maxObjectY, lastX);
-			glVertex3f(coordinates[0].y * scale, maxObjectY, coordinates[0].x * scale);
-			glVertex3f(center.y * scale, maxObjectY, center.x * scale);
+			glVertex3f(lastX, maxObjectY, lastY);
+			glVertex3f(coordinates[0].x * scale, maxObjectY, coordinates[0].y * scale);
+			glVertex3f(center.x * scale, maxObjectY, center.y * scale);
 		glEnd();
 
 		glBegin(GL_QUADS);
 			for (int i = 0; i < coordinates.size() - 1; i++) 
 			{
-				glVertex3f(coordinates[i].y * scale, maxObjectY, coordinates[i].x * scale);
-				glVertex3f(coordinates[i + 1].y * scale, maxObjectY, coordinates[i + 1].x * scale);
-				glVertex3f(coordinates[i + 1].y * scale, minObjectY, coordinates[i + 1].x * scale);
-				glVertex3f(coordinates[i].y * scale, minObjectY, coordinates[i].x * scale);
+				glVertex3f(coordinates[i].x * scale, maxObjectY, coordinates[i].y * scale);
+				glVertex3f(coordinates[i + 1].x * scale, maxObjectY, coordinates[i + 1].y * scale);
+				glVertex3f(coordinates[i + 1].x * scale, minObjectY, coordinates[i + 1].y * scale);
+				glVertex3f(coordinates[i].x * scale, minObjectY, coordinates[i].y * scale);
 			}
-			glVertex3f(lastY, maxObjectY, lastX);
-			glVertex3f(coordinates[0].y * scale, maxObjectY, coordinates[0].x * scale);
-			glVertex3f(coordinates[0].y * scale, minObjectY, coordinates[0].x * scale);
-			glVertex3f(lastY, minObjectY, lastX);
+			glVertex3f(lastX, maxObjectY, lastY);				
+			glVertex3f(coordinates[0].x * scale, maxObjectY, coordinates[0].y * scale);
+			glVertex3f(coordinates[0].x * scale, minObjectY, coordinates[0].y * scale);
+			glVertex3f(lastX, minObjectY, lastY);
 		glEnd();
-		glTranslatef(-size / 5, 0, -widthBoard);
+		//glTranslatef(-size / 5, 0, -widthBoard);
 		glColor3f(1, 1, 1);
 	}
-}
-
-Hitbox* WhitekastObject::getHitbox()
-{
-	return nullptr;
 }
 

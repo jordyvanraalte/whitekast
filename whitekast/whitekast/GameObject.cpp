@@ -3,13 +3,17 @@
 #include "DrawComponent.h"
 #include "CollideComponent.h"
 #include <GL/freeglut.h>
+#include <iostream>
 
 GameObject::GameObject(bool isVisionObject)
 {
 	position = Vec3f(0, 0, 0);
 	rotation = Vec3f(0, 0, 0);
+	scale = Vec3f(1, 1, 1);
 	this->isVisionObject = isVisionObject;
 	rotationPoint = position;
+	isCollider = false;
+	isColliding = false;
 }
 
 
@@ -21,6 +25,8 @@ GameObject::GameObject(std::string fileName)
 	rotationPoint = position;
 	model = new ObjModel();
 	model->load(fileName);
+	isCollider = false;
+	isColliding = false;
 }
 
 GameObject::~GameObject()
@@ -81,6 +87,11 @@ void GameObject::draw()
 	}
 }
 
+void GameObject::setCoordinates(std::vector<cv::Point> coordinates)
+{
+	this->coordinates = coordinates;
+}
+
 Hitbox* GameObject::getHitbox() const
 {
 	if (!collideComponent)
@@ -91,11 +102,11 @@ Hitbox* GameObject::getHitbox() const
 
 void GameObject::update(float elapsedTime)
 {
-	vectemp = velocity;
-	vectemp.applyTime(elapsedTime);
-
 	for (auto c : components)
 		c->update(elapsedTime);
+
+	vectemp = velocity;
+	vectemp.applyTime(elapsedTime);
 
 	position = position + vectemp;
 }
