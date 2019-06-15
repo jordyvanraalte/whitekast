@@ -26,24 +26,29 @@ void CircleHitbox::shiftColliders(Vec3f pos)
 LinesHitbox::LinesHitbox(std::vector<cv::Point> coordinates, Vec3f scale, float wkscale)
 {
 	lineHitbox = this;
-	bool point1 = true;
+	Hitline hitline2 = Hitline();
+
+	bool first = true;
+	bool point2 = false;
 
 	for (const cv::Point point : coordinates)
 	{
-		if(point1)
+		if(first)
 		{
-			point1 = false;
+			first = false;
 			hitline.point1.x = (point.x*wkscale)*scale.x;
 			hitline.point1.y = (point.y*wkscale)*scale.y;
 
 		}
 		else
 		{
-			point1 = true;
 			hitline.point2.x = (point.x*wkscale)*scale.x;
 			hitline.point2.y = (point.y*wkscale)*scale.y;
 
 			hitlines.push_back(hitline);
+
+			hitline.point1.x = (point.x*wkscale)*scale.x;
+			hitline.point1.y = (point.y*wkscale)*scale.y;
 		}
 	}
 }
