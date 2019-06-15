@@ -20,10 +20,22 @@
 #define CAMERA_HEIGHT 480.0f
 #endif
 
-class Vision
+#include <opencv2/opencv.hpp>
+#include "opencv2/imgproc/imgproc.hpp" 
+#include "opencv2/highgui/highgui.hpp"
+
+class WhitekastVision
 {
 public:	
+	WhitekastVision();
+	~WhitekastVision();
 	std::vector<WhitekastObject*> initVision();
+	void startThread();
+	int captureMovement();
+	int getWhitePixelsLeft(const cv::Mat mat);
+	int getWhitePixelsRight(const cv::Mat mat);
+	bool getMotionLeft();
+	bool getMotionRight();
 	int captureFrames();
 	void createBorder();
 	void findObjectsByFrame(const cv::Mat, const ObjectColor);

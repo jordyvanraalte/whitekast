@@ -8,8 +8,9 @@ class FlipComponent : public Component
 	float speed = 100.0f;
 	bool up = true;
 	bool flipping = true;
+	bool left = true;
 public:
-	FlipComponent();
+	FlipComponent(const bool l);
 	~FlipComponent();
 
 	/*
@@ -27,6 +28,8 @@ public:
 		@return bool.
 	*/
 	bool isUp() const;
+	
+	bool isLeft() const;
 
 	/*
 		Returns a boolean, that says if the flipper is currently set up.

@@ -30,7 +30,6 @@ class GameObject
 
 public:
 	GameObject(bool isVisionObject);
-	GameObject(std::string fileName);
 	~GameObject();
 
 	bool isVisionObject;

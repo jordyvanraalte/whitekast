@@ -90,7 +90,7 @@ void WhitekastObject::draw()
 {
 	setDrawingColor();
 	if (objectColor == WHITE) {
-		float backgroundY = -2.0f;
+        float backgroundY = -2.0f;
 
 		glColor3f(1, 1, 1);
 		glBegin(GL_QUADS);

@@ -3,13 +3,16 @@
 #include "PointCounter.h"
 #include "LivesCounter.h"
 #include "WhitekastObject.h"
+#include "WhitekastVision.h"
 #include "CubeComponent.h"
+#include "FlipComponent.h"
 #include <GL/freeglut.h>
 #include <iostream>
 #include <cstring>
 
 
 std::list<GameObject*> gameObjects;
+WhitekastVision vision;
 float lastFrameTime;
 
 float lookAtX;
@@ -27,8 +30,7 @@ struct Camera
 	float posZ = -4;
 } camera;
 
-static World* world;
-World::World(int horizontal, int vertical, std::list<GameObject*>& objectlist, GameObject* ball)
+World::World(int horizontal, int vertical, std::list<GameObject*>& objectlist, WhitekastVision whitekastVision, GameObject* ball)
 {
 	world = this;
 	width = horizontal;
@@ -36,6 +38,7 @@ World::World(int horizontal, int vertical, std::list<GameObject*>& objectlist, G
 	lastFrameTime = 0;
 	
 	gameObjects = objectlist;
+	vision = whitekastVision;
 	this->ball = ball;
 
 	collisionManager = new CollisionManager();
@@ -137,8 +140,39 @@ void World::idle(void)
 		o->update(deltaTime);
 		o->handleEvent(deltaTime);
 	}
-	
-		
+	if (vision.getMotionLeft())
+	{
+		for (auto o : gameObjects)
+		{
+			for (Component* c : o->getComponents())
+			{
+				if (FlipComponent* f = dynamic_cast<FlipComponent*>(c))
+				{
+					if (f->isLeft())
+					{
+						c->setHandle(true);
+					}					
+				}
+			}
+		}
+	}
+	if (vision.getMotionRight())
+	{
+		for (auto o : gameObjects)
+		{
+			for (Component* c : o->getComponents())
+			{
+				if (FlipComponent* f = dynamic_cast<FlipComponent*>(c))
+				{
+					if (!f->isLeft())
+					{
+						c->setHandle(true);
+					}
+				}
+			}
+		}
+	}
+
 	glutPostRedisplay();
 }
 
@@ -181,7 +215,7 @@ void World::mousePassiveMotion(int x, int y)
 
 void World::mouseClick(int button, int state, int x, int y)
 {
-	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
+	/*if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
 		for (auto o : gameObjects)
 		{
 			for (auto c : o->getComponents())
@@ -189,7 +223,7 @@ void World::mouseClick(int button, int state, int x, int y)
 				c->setHandle(true);
 			}
 		}
-	}
+	}*/
 }
 
 void World::displayUI(int points, int lifepoints)
