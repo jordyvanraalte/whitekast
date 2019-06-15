@@ -34,6 +34,7 @@ void GameObject::addComponent(Component* component)
 
 	if (!collideComponent)
 		collideComponent = dynamic_cast<CollideComponent*>(component);
+	
 }
 
 void GameObject::loadModel(const std::string& fileName)

@@ -47,7 +47,7 @@ bool CollisionManager::isColliding(GameObject *ball, GameObject *object)
 			if (ball->isColliding == false && object->isColliding == false)
 			{
 				//ball->position = ball->position - Vec3f(0, 0, 0.1);
-				std::cout << "kanker 2" << "\n";
+				std::cout << "collision 2" << "\n";
 				Vec2f temp = Vec2f(ball->velocity.x, ball->velocity.z);
 				Vec2f temp2 = mirrorVectorInLine(temp, line);
 				ball->velocity = Vec3f(temp2.x, 0, temp2.y);
@@ -73,7 +73,7 @@ bool CollisionManager::isColliding(GameObject *ball, GameObject *object)
 				if (ball->isColliding == false && object->isColliding == false)
 				{
 					//ball->position = ball->position - Vec3f(0, 0, 0.1);
-					std::cout << "kanker 3" << "\n";
+					std::cout << "collision 3" << "\n";
 					Vec2f temp = Vec2f(ball->velocity.x, ball->velocity.z);
 					Vec2f temp2 = mirrorVectorInLine(temp, line);
 					ball->velocity = Vec3f(temp2.x, 0, temp2.y);

@@ -1,6 +1,8 @@
 #include "FlipComponent.h"
+#include "LineColliderComponent.h"
 #include "GameObject.h"
 #include <GL/freeglut.h>
+#include <math.h>  
 
 FlipComponent::FlipComponent(const bool l)
 {
@@ -33,6 +35,7 @@ void FlipComponent::setUp(const bool up)
 
 void FlipComponent::handleEvent(float elapsedTime)
 {
+	float radius = 0.5f;
 	if (left)
 	{
 		if (flipping)
@@ -40,10 +43,20 @@ void FlipComponent::handleEvent(float elapsedTime)
 			if (up)
 			{
 				gameObject->rotation.y += elapsedTime * (speed * 2);
+				
+				
 			}
 			else
 			{
 				gameObject->rotation.y -= elapsedTime * speed;
+			}
+
+			for (Component* c : gameObject->getComponents())
+			{
+				if (LineCollideComponent* l = dynamic_cast<LineCollideComponent*>(c))
+				{
+					l->flipHitbox((cos(gameObject->rotation.y) * radius) * 100, (sin(gameObject->rotation.y) * radius) * 100);
+				}
 			}
 
 			if (gameObject->rotation.y >= 300)
@@ -65,10 +78,24 @@ void FlipComponent::handleEvent(float elapsedTime)
 			if (up)
 			{
 				gameObject->rotation.y -= elapsedTime * (speed * 2);
+				for (Component* c : gameObject->getComponents())
+				{
+					if (LineCollideComponent* l = dynamic_cast<LineCollideComponent*>(c))
+					{
+						l->flipHitbox((cos(gameObject->rotation.y) * radius) * 100, (sin(gameObject->rotation.y) * radius) * 100);
+					}
+				}
 			}
 			else
 			{
 				gameObject->rotation.y += elapsedTime * speed;
+				for (Component* c : gameObject->getComponents())
+				{
+					if (LineCollideComponent* l = dynamic_cast<LineCollideComponent*>(c))
+					{
+						l->flipHitbox((cos(gameObject->rotation.y) * radius) * 100, (sin(gameObject->rotation.y) * radius) * 100);
+					}
+				}
 			}
 
 			if (gameObject->rotation.y <= 50)
@@ -81,6 +108,7 @@ void FlipComponent::handleEvent(float elapsedTime)
 				flipping = false;
 				gameObject->rotation.y = 105;
 			}
+			
 		}
 	}
 }
