@@ -144,7 +144,7 @@ void Game::initObjects()
 	ball->addComponent(new ModelComponent("Models/Pinballs/pinball_3.1.obj", ball));
 	ball->position = ::Vec3f(boardWidth, -2, 0.1);
 	ball->scale = ::Vec3f(0.1f, 0.1f, 0.1f);
-	ball->addComponent(new GravityComponent(::Vec3f(0, 0, 0.25)));
+	ball->addComponent(new GravityComponent(::Vec3f(-0.25, 0, 0)));
 	ball->addComponent(new CircleCollideComponent(ball));
 
 	Texture texture1 = Texture("Textures/LeftWall.png");

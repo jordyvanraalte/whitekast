@@ -10,7 +10,6 @@
 #include <iostream>
 #include <cstring>
 
-
 std::list<GameObject*> gameObjects;
 WhitekastVision vision;
 float lastFrameTime;
@@ -97,8 +96,11 @@ void World::display()
 	{
 		glPushMatrix();
 		
-		if (object->isVisionObject == false)
+		if (object->isVisionObject == false) {
+			glRotatef(-90, 0, 1, 0);
 			glRotatef(-10, 1, 0, 0);
+			glTranslatef(2, 0, 0);
+		}
 
 		object->draw();
 		glPopMatrix();

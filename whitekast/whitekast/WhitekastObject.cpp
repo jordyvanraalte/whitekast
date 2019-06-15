@@ -134,6 +134,9 @@ void WhitekastObject::draw()
 		float lastX = coordinates[coordinates.size() - 1].x * scale;
 		float lastY = coordinates[coordinates.size() - 1].y * scale;
 
+		if (objectColor == GREEN)
+			maxObjectY+=0.05f;
+
 		if (center.x != 0 && center.y != 0){
 			glBegin(GL_TRIANGLE_STRIP);
 			for (int i = 0; i < coordinates.size() - 1; i++)
@@ -161,7 +164,6 @@ void WhitekastObject::draw()
 			glVertex3f(coordinates[0].x * scale, minObjectY, coordinates[0].y * scale);
 			glVertex3f(lastX, minObjectY, lastY);
 		glEnd();
-		//glTranslatef(-size / 5, 0, -widthBoard);
 		glColor3f(1, 1, 1);
 	}
 }
