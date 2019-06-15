@@ -206,7 +206,6 @@ void ObjModel::draw()
 		}
 		glBindTexture(GL_TEXTURE_2D, 0);
 		glEnd();
-		glColor3f(1, 1, 1);
 	}
 }
 

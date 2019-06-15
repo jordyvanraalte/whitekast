@@ -58,6 +58,7 @@ void GameObject::draw()
 		glRotatef(rotation.z, 0, 0, 1);
 		glTranslatef(position.x - rotationPoint.x, position.y - rotationPoint.y, position.z - rotationPoint.z);
 		glScalef(scale.x, scale.y, scale.z);
+		glColor3f(color.x, color.y, color.z);
 		drawComponent->draw();
 		glPopMatrix();
 	}

@@ -34,8 +34,6 @@ static Game* instance;
 int horizontal = 0;
 int vertical = 0;
 
-
-
 Game::Game(const char * title, int argc, char * argv[])
 {
 	instance = this;
@@ -142,13 +140,12 @@ void Game::stop()
 
 void Game::initObjects()
 {
-	GameObject* testball = new GameObject(false);
-	testball->addComponent(new ModelComponent("Models/Pinballs/pinball_3.1.obj", testball));
-	testball->position = ::Vec3f(boardWidth, -2, 0.1);
-	testball->scale = ::Vec3f(0.1f, 0.1f, 0.1f);
-	testball->addComponent(new GravityComponent(::Vec3f(0, 0, 0.25)));
-	testball->addComponent(new CircleCollideComponent(testball));
-	ball = testball;
+	ball = new GameObject(false);
+	ball->addComponent(new ModelComponent("Models/Pinballs/pinball_3.1.obj", ball));
+	ball->position = ::Vec3f(boardWidth, -2, 0.1);
+	ball->scale = ::Vec3f(0.1f, 0.1f, 0.1f);
+	ball->addComponent(new GravityComponent(::Vec3f(0, 0, 0.25)));
+	ball->addComponent(new CircleCollideComponent(ball));
 
 	Texture texture1 = Texture("Textures/LeftWall.png");
 	Texture texture2 = Texture("Textures/RightWall.png");
@@ -166,20 +163,22 @@ void Game::initFlippers()
 {
 	::Vec3f scale = ::Vec3f(0.1, 0.1, 0.1);
 	GameObject* flipperLeft = new GameObject(true);
+	flipperLeft->color = ::Vec3f(0.0f, 0.0f, 0.0f);
 	flipperLeft->addComponent(new ModelComponent("Models/Flippers/flipperblend.obj", flipperLeft));
-	flipperLeft->position = ::Vec3f(-0.40, -3, -2.2);
+	flipperLeft->position = ::Vec3f(0.875, -2, 1.4f);
 	flipperLeft->rotationPoint = ::Vec3f(flipperLeft->position.x - 0.2f, flipperLeft->position.y, flipperLeft->position.z);
 	flipperLeft->scale = scale;
-	flipperLeft->rotation.y = 0;
+	flipperLeft->rotation.y = -105;
 	flipperLeft->addComponent(new FlipComponent(true));
 	objects.push_back(flipperLeft);
 
 	GameObject* flipperRight = new GameObject(true);
+	flipperRight->color = ::Vec3f(0.0f, 0.0f, 0.0f);
 	flipperRight->addComponent(new ModelComponent("Models/Flippers/flipperblend.obj", flipperRight));
-	flipperRight->position = ::Vec3f(0.75, -3, -2.2);
+	flipperRight->position = ::Vec3f(0.875, -2, 2.595f);
 	flipperRight->scale = scale;
 	flipperRight->rotationPoint = ::Vec3f(flipperRight->position.x - 0.2f, flipperRight->position.y, flipperRight->position.z);
-	flipperRight->rotation.y = 180;
+	flipperRight->rotation.y = 105;
 	flipperRight->addComponent(new FlipComponent(false));
 	objects.push_back(flipperRight);
 }
