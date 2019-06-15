@@ -19,3 +19,8 @@ void LineCollideComponent::update(float elapsedTime)
 {
 	hitbox->shiftColliders(gameObject->position);
 }
+
+void LineCollideComponent::flipHitbox(float x, float z)
+{
+	hitbox->flipColliders(::Vec3f(x, 0, z));
+}
