@@ -20,7 +20,7 @@ public:
 	~WhitekastObject(void);
 
 	std::vector<cv::Point> getCoordinates();
-	void setCoordinates(std::vector<cv::Point> newCoordinates);
+	void setCoordinates(std::vector<cv::Point> newCoordinates, bool filterCoordinates);
 
 	cv::Point getCenter();
 	void setCenter(cv::Point centerPoint);

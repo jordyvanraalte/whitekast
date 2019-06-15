@@ -298,5 +298,8 @@
     <Object Include="Models\Pinballs\pinball_3.1.obj">
       <Filter>Resource Files\Models\Pinballs</Filter>
     </Object>
+    <Object Include="Models\Flippers\flipperblend.obj">
+      <Filter>Resource Files\Models\Flippers</Filter>
+    </Object>
   </ItemGroup>
 </Project>
