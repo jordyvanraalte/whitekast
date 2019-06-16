@@ -12,6 +12,7 @@ HomeState::~HomeState()
 
 void HomeState::handle(Game* game)
 {
+	
 }
 
 

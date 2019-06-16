@@ -9,6 +9,8 @@
 #include <GL/freeglut.h>
 #include <iostream>
 #include <cstring>
+#include "Game.h"
+#include "HomeState.h"
 
 std::list<GameObject*> gameObjects;
 WhitekastVision vision;
@@ -139,9 +141,15 @@ void World::idle(void)
 	
 		ball->position = Vec3f(5.0f, -2, 1.5f);
 		ball->velocity = Vec3f(0, 0, 0);
-	} 
-	
-	ball->update(deltaTime);
+	}
+	if(keys['B'])
+	{
+		StateManager::getInstance()->setState(new PlayState());
+	}
+
+	if(!dynamic_cast<HomeState*>(StateManager::getInstance()->getState()))
+		ball->update(deltaTime);
+
 	for (auto o : gameObjects)
 	{
 		collisionManager->isColliding(ball, o);
@@ -179,6 +187,11 @@ void World::idle(void)
 				}
 			}
 		}
+	}
+
+	if(ball->position.x < 0)
+	{
+		StateManager::getInstance()->setState(new DeathState());
 	}
 
 	glutPostRedisplay();

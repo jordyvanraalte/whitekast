@@ -17,7 +17,8 @@ void DeathState::handle(Game* game)
 	if (LivesCounter::getInstance()->getLives() > 1)
 	{
 		LivesCounter::getInstance()->loseLive();
-		StateManager::getInstance()->setState(new PlayState());
+		StateManager::getInstance()->setState(new HomeState());
+		Game::getInstance()->death();
 	}
 	else
 	{

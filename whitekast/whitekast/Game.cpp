@@ -120,8 +120,13 @@ void Game::initGlut(const char * title, int argc, char * argv[])
 void Game::handleEvents() 
 {
 	pointCounter->hitFlipper();
-	StateManager::getInstance()->handle(this);
-	
+	StateManager::getInstance()->handle(this);	
+}
+
+void Game::death()
+{
+	ball->position = Vec3f(5.0f, -2, 1.5f);
+	ball->velocity = Vec3f(0, 0, 0);
 }
 
 void Game::reset()

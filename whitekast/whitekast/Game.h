@@ -23,6 +23,7 @@ public:
 	void startVisionThread();
 	void initGlut(const char* title, int argc, char* argv[]);
 	void handleEvents();
+	void death();
 	void reset();
 	void getDesktopResolution(int& horizontal, int& vertical);
 	void stop();

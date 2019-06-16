@@ -12,4 +12,5 @@ PlayState::~PlayState()
 
 void PlayState::handle(Game* game)
 {
+	
 }
