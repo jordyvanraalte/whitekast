@@ -10,6 +10,7 @@ GameObject::GameObject(bool isVisionObject)
 	position = Vec3f(0, 0, 0);
 	rotation = Vec3f(0, 0, 0);
 	scale = Vec3f(1, 1, 1);
+	bounceFactor = 1.0f;
 	this->isVisionObject = isVisionObject;
 	rotationPoint = position;
 	isCollider = false;
@@ -81,12 +82,52 @@ void GameObject::setCoordinates(std::vector<cv::Point> coordinates)
 	this->coordinates = coordinates;
 }
 
+double GameObject::getRadius()
+{
+	bool first = true;
+	cv::Point highest1, highest2;
+
+	for (const cv::Point point1 : this->coordinates)
+	{
+		for (const cv::Point point2 : this ->coordinates)
+		{
+			double length = sqrt((point2.x - point1.x) ^ 2 + (point2.y - point1.y));
+			if (!first)
+			{
+				double lengthHighest = sqrt((highest2.x - highest1.x) ^ 2 + (highest2.y - highest1.y));
+				if(length > lengthHighest)
+				{
+					highest1 = point1;
+					highest2 = point2;
+				}
+			} 
+			else
+			{
+				highest1 = point1;
+				highest2 = point2;
+				first = false;
+			}
+		}
+	}
+
+	return 2;
+
+}
+
 Hitbox* GameObject::getHitbox() const
 {
 	if (!collideComponent)
 		return nullptr;
 
 	return collideComponent->getHitbox();
+}
+
+Hitbox* GameObject::getCircleBox() const
+{
+	if (!collideComponent)
+		return nullptr;
+
+	return collideComponent->getCirclebox();
 }
 
 void GameObject::update(float elapsedTime)

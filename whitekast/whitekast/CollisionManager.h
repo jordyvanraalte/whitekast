@@ -14,4 +14,6 @@ public:
 	bool isColliding(GameObject *ball, GameObject *object);
 	bool isPointInCircle(Vec2f point, float cx, float cy, float r);
 	Vec2f mirrorVectorInLine(::Vec2f d, LinesHitbox::Hitline b) const;
+	bool checkCircleCollision(CircleHitbox* a, CircleHitbox* b);
+	static double distanceSquared(int x1, int y1, int x2, int y2);
 };

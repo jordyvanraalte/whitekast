@@ -38,6 +38,7 @@ public:
 
 	::Vec3f velocity;
 	::Vec3f position;
+	float bounceFactor;
 	::Vec3f rotation;
 	::Vec3f scale = ::Vec3f(1, 1, 1);
 	::Vec3f color = ::Vec3f(1, 1, 1);
@@ -96,7 +97,10 @@ public:
 	void draw();
 
 	void setCoordinates(std::vector<cv::Point> coordinates);
+	double getRadius();
+
 	Hitbox* getHitbox() const;
+	Hitbox* getCircleBox() const;
 
 	template<class T>
 	T* getComponent()

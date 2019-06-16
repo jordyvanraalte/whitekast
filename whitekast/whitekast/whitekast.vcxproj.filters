@@ -111,9 +111,6 @@
     <ClInclude Include="Component.h">
       <Filter>Header Files\game\components</Filter>
     </ClInclude>
-    <ClInclude Include="Vec.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="WhitekastObject.h">
       <Filter>Header Files\vision</Filter>
     </ClInclude>
@@ -180,6 +177,9 @@
     <ClInclude Include="LivesCounter.h">
       <Filter>Header Files\game</Filter>
     </ClInclude>
+    <ClInclude Include="Vec.h">
+      <Filter>Header Files\math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -208,9 +208,6 @@
     </ClCompile>
     <ClCompile Include="Component.cpp">
       <Filter>Source Files\game\components</Filter>
-    </ClCompile>
-    <ClCompile Include="Vec.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="WhitekastObject.cpp">
       <Filter>Source Files\vision</Filter>
@@ -277,6 +274,9 @@
     </ClCompile>
     <ClCompile Include="LivesCounter.cpp">
       <Filter>Source Files\game</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec.cpp">
+      <Filter>Source Files\math</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

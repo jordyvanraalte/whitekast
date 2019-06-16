@@ -49,7 +49,7 @@ Game::Game(const char * title, int argc, char * argv[])
 	StateManager::getInstance();
 
 	CollisionManager* collision = new CollisionManager();
-	audiomanager->playMusic("Audio/busta_loop.WAV");
+	//audiomanager->playMusic("Audio/busta_loop.WAV");
 }
 
 Game::~Game()
@@ -87,6 +87,12 @@ void Game::initGlut(const char * title, int argc, char * argv[])
 		gameObject->position = ::Vec3f(0, 0, 0);
 		gameObject->setCoordinates(wkObject->getCoordinates());
 		gameObject->addComponent(new LineCollideComponent(gameObject, wkObject->getScale()));
+		if(wkObject->getObjectColor() == RED)
+		{
+			gameObject->bounceFactor = 1.5f;
+		}
+		else
+			gameObject->bounceFactor = 1.0f;
 		gameObject->isCollider = true;
 		objects.push_back(gameObject);
 	}
@@ -143,9 +149,9 @@ void Game::initObjects()
 {
 	ball = new GameObject(true);
 	ball->addComponent(new ModelComponent("Models/Pinballs/pinball_3.1.obj", ball));
-	ball->position = ::Vec3f(4, -2, 1.5f);
+	ball->position = ::Vec3f(3, -2, 3.5f);
 	ball->scale = ::Vec3f(0.1f, 0.1f, 0.1f);
-	ball->addComponent(new GravityComponent(::Vec3f(-0.25, 0, 0)));
+	ball->addComponent(new GravityComponent(::Vec3f(-0.3, 0, 0)));
 	ball->addComponent(new CircleCollideComponent(ball));
 
 	Texture texture1 = Texture("Textures/LeftWall.png");
@@ -170,6 +176,7 @@ void Game::initFlippers()
 	flipperLeft->rotationPoint = ::Vec3f(flipperLeft->position.x - 0.2f, flipperLeft->position.y, flipperLeft->position.z);
 	flipperLeft->scale = scale;
 	flipperLeft->rotation.y = -105;
+	flipperLeft->bounceFactor = 2.0f;
 	flipperLeft->addComponent(new FlipComponent(true));
 	std::vector<cv::Point> flipperLeftCoordinates;
 	/*flipperLeftCoordinates.push_back(cv::Point((flipperLeft->rotationPoint.x + 0.1)*100, flipperLeft->rotationPoint.z*100));
@@ -187,6 +194,7 @@ void Game::initFlippers()
 	flipperRight->scale = scale;
 	flipperRight->rotationPoint = ::Vec3f(flipperRight->position.x - 0.2f, flipperRight->position.y, flipperRight->position.z);
 	flipperRight->rotation.y = 105;
+	flipperRight->bounceFactor = 2.0f;
 	flipperRight->addComponent(new FlipComponent(false));
 	std::vector<cv::Point> flipperRightCoordinates;
 	/*flipperRightCoordinates.push_back(cv::Point((flipperRight->rotationPoint.x + 0.1) *100, flipperRight->rotationPoint.z*100));

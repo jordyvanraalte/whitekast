@@ -15,75 +15,86 @@ bool CollisionManager::isColliding(GameObject *ball, GameObject *object)
 	if (object->getHitbox() == nullptr)
 		return false;
 
-	CircleHitbox *circle = dynamic_cast<CircleHitbox*>(ball->getHitbox());
-	LinesHitbox *lines = dynamic_cast<LinesHitbox*>(object->getHitbox());
+	CircleHitbox* circleball = dynamic_cast<CircleHitbox*>(ball->getCircleBox());
+	CircleHitbox* circleobject = dynamic_cast<CircleHitbox*>(object->getCircleBox());
 
-	for (auto line : lines->hitlines)
+	//Check if the circle collide, then enter loop. This increases performance
+	//checkCircleCollision(circleball, circleobject)
+	if(checkCircleCollision(circleball, circleobject))
 	{
-		float x1 = line.point1.x;
-		float x2 = line.point2.x;
-		float y1 = line.point1.y;
-		float y2 = line.point2.y;
+		CircleHitbox *circle = dynamic_cast<CircleHitbox*>(ball->getHitbox());
+		LinesHitbox *lines = dynamic_cast<LinesHitbox*>(object->getHitbox());
 
-		float cx = circle->circle.x;
-		float cy = circle->circle.y;
-		float r = circle->circle.r;
-
-		if (isPointInCircle(line.point1, cx, cy, r))
+		for (auto line : lines->hitlines)
 		{
-			if(ball->isColliding == false && object->isColliding == false)
-			{
-				//ball->position = ball->position - Vec3f(0, 0, 0.1);
-				Vec2f temp = Vec2f(ball->velocity.x, ball->velocity.z);
-				Vec2f temp2 = mirrorVectorInLine(temp, line);
-				ball->velocity = Vec3f(temp2.x, 0, temp2.y);
-			}
-			ball->isColliding = true;
-			object->isColliding = true;
-			return true;
-		}
-		else if (isPointInCircle(line.point2, cx, cy, r))
-		{
-			if (ball->isColliding == false && object->isColliding == false)
-			{
-				//ball->position = ball->position - Vec3f(0, 0, 0.1);
-				std::cout << "collision 2" << "\n";
-				Vec2f temp = Vec2f(ball->velocity.x, ball->velocity.z);
-				Vec2f temp2 = mirrorVectorInLine(temp, line);
-				ball->velocity = Vec3f(temp2.x, 0, temp2.y);
-			}
-			ball->isColliding = true;
-			object->isColliding = true;
-			return true;
-		}
-			
-		float length = sqrt(pow((x1 - x2), 2) + pow((y1 - y2), 2));
-		float dot = (((cx - x1)*(x2 - x1)) + ((cy - y1)*(y2 - y1))) / pow(length,2);
+			float x1 = line.point1.x;
+			float x2 = line.point2.x;
+			float y1 = line.point1.y;
+			float y2 = line.point2.y;
 
-		float closestX = x1 + (dot * (x2 - x1));
-		float closestY = y1 + (dot * (y2 - y1));
+			float cx = circle->circle.x;
+			float cy = circle->circle.y;
+			float r = circle->circle.r;
 
-		if (isPointOnLine(line.point1, line.point2, closestX, closestY))
-		{
-			float distX = closestX - cx;
-			float distY = closestY - cy;
-			float distance = sqrt(pow(distX, 2) + pow(distY, 2));
-			if(distance <= r)
+			if (isPointInCircle(line.point1, cx, cy, r))
 			{
 				if (ball->isColliding == false && object->isColliding == false)
 				{
-					//ball->position = ball->position - Vec3f(0, 0, 0.1);
-					std::cout << "collision 3" << "\n";
 					Vec2f temp = Vec2f(ball->velocity.x, ball->velocity.z);
 					Vec2f temp2 = mirrorVectorInLine(temp, line);
+					temp2 = temp2 * object->bounceFactor;
 					ball->velocity = Vec3f(temp2.x, 0, temp2.y);
 				}
 				ball->isColliding = true;
 				object->isColliding = true;
 				return true;
 			}
+			else if (isPointInCircle(line.point2, cx, cy, r))
+			{
+				if (ball->isColliding == false && object->isColliding == false)
+				{
+					std::cout << "collision 2" << "\n";
+					Vec2f temp = Vec2f(ball->velocity.x, ball->velocity.z);
+					Vec2f temp2 = mirrorVectorInLine(temp, line);
+					temp2 = temp2 * object->bounceFactor;
+					ball->velocity = Vec3f(temp2.x, 0, temp2.y);
+					
+				}
+				ball->isColliding = true;
+				object->isColliding = true;
+				return true;
+			}
+
+			float length = sqrt(pow((x1 - x2), 2) + pow((y1 - y2), 2));
+			float dot = (((cx - x1)*(x2 - x1)) + ((cy - y1)*(y2 - y1))) / pow(length, 2);
+
+			float closestX = x1 + (dot * (x2 - x1));
+			float closestY = y1 + (dot * (y2 - y1));
+
+			if (isPointOnLine(line.point1, line.point2, closestX, closestY))
+			{
+				float distX = closestX - cx;
+				float distY = closestY - cy;
+				float distance = sqrt(pow(distX, 2) + pow(distY, 2));
+				if (distance <= r)
+				{
+					if (ball->isColliding == false && object->isColliding == false)
+					{
+						std::cout << "collision 3" << "\n";
+						Vec2f temp = Vec2f(ball->velocity.x, ball->velocity.z);
+						Vec2f temp2 = mirrorVectorInLine(temp, line);
+						temp2 = temp2 * object->bounceFactor;
+						ball->velocity = Vec3f(temp2.x, 0, temp2.y);
+					}
+					ball->isColliding = true;
+					object->isColliding = true;
+					return true;
+				}
+			}
 		}
+
 	}
+
 	ball->isColliding = false;
 	object->isColliding = false;
 	return false;
@@ -122,12 +133,18 @@ bool CollisionManager::isPointInCircle(Vec2f point, float cx, float cy, float r)
 Vec2f CollisionManager::mirrorVectorInLine(::Vec2f d, LinesHitbox::Hitline b) const
 {
 	std::cout << "vector xy : " << d.x << "," << d.y << "\n";
+	std::cout << "point1 xy : " << b.point1.x << "," << b.point1.y << "\n";
+	std::cout << "point2 xy : " << b.point2.x << "," << b.point2.y << "\n";
 
 	//this is our slop value.
 	float slope = (b.point2.y - b.point1.y) / (b.point2.x - b.point1.x);
 
+	//test
+	float dx = b.point2.x - b.point1.x;
+	float dy = b.point2.y - b.point1.y;
+
 	//Then our normal value is
-	::Vec2f n(slope, -1);
+	::Vec2f n(dy, -dx);
 
 	//Our normal normalised
 	::Vec2f normal(Vec2f::vectorNormalised(n));
@@ -138,5 +155,29 @@ Vec2f CollisionManager::mirrorVectorInLine(::Vec2f d, LinesHitbox::Hitline b) co
 	std::cout << "Mirrored vector xy : " << mirroredVec.x << "," << mirroredVec.y << "\n";
 
 	return mirroredVec;
+}
+
+bool CollisionManager::checkCircleCollision(CircleHitbox* a, CircleHitbox* b)
+{
+	//Calculate total radius squared
+	int totalRadiusSquared = a->circle.r + b->circle.r;
+	totalRadiusSquared = totalRadiusSquared * totalRadiusSquared;
+
+	//If the distance between the centers of the circles is less than the sum of their radii
+	if (distanceSquared(a->circle.x, a->circle.y, b->circle.x, b->circle.y) < (totalRadiusSquared))
+	{
+		//The circles have collided
+		return true;
+	}
+
+	//If not
+	return false;
+}
+
+double CollisionManager::distanceSquared(int x1, int y1, int x2, int y2)
+{
+	int deltaX = x2 - x1;
+	int deltaY = y2 - y1;
+	return deltaX * deltaX + deltaY * deltaY;
 }
 

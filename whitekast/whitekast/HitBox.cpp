@@ -13,7 +13,7 @@ CircleHitbox::CircleHitbox(Vec3f pos, float d, Vec3f scale)
 {
 	cirlceHitbox = this;
 	circle.x = pos.x;
-	circle.y = pos.y;
+	circle.y = pos.z;
 	circle.r = (d/2)*scale.x;
 }
 
@@ -27,10 +27,9 @@ void CircleHitbox::shiftColliders(Vec3f pos)
 LinesHitbox::LinesHitbox(std::vector<cv::Point> coordinates, Vec3f scale, float wkscale)
 {
 	lineHitbox = this;
-	Hitline hitline2 = Hitline();
+	int firstX = 0, firstY = 0;
 
 	bool first = true;
-	bool point2 = false;
 
 	for (const cv::Point point : coordinates)
 	{
@@ -39,6 +38,9 @@ LinesHitbox::LinesHitbox(std::vector<cv::Point> coordinates, Vec3f scale, float 
 			first = false;
 			hitline.point1.x = (point.x*wkscale)*scale.x;
 			hitline.point1.y = (point.y*wkscale)*scale.y;
+
+			firstX = (point.x*wkscale)*scale.x;
+			firstY = (point.y*wkscale)*scale.y;
 		}
 		else
 		{
@@ -51,6 +53,11 @@ LinesHitbox::LinesHitbox(std::vector<cv::Point> coordinates, Vec3f scale, float 
 			hitline.point1.y = (point.y*wkscale)*scale.y;
 		}
 	}
+
+	hitline.point2.x = firstX;
+	hitline.point2.y = firstY;
+	
+	hitlines.push_back(hitline);
 }
 
 void LinesHitbox::shiftColliders(Vec3f pos)
