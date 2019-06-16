@@ -136,6 +136,7 @@ void GameObject::update(float elapsedTime)
 		c->update(elapsedTime);
 
 	vectemp = velocity;
+
 	vectemp.applyTime(elapsedTime);
 
 	position = position + vectemp;

@@ -89,10 +89,10 @@ void Game::initGlut(const char * title, int argc, char * argv[])
 		gameObject->addComponent(new LineCollideComponent(gameObject, wkObject->getScale()));
 		if(wkObject->getObjectColor() == RED)
 		{
-			gameObject->bounceFactor = 1.5f;
+			gameObject->bounceFactor = 1.2f;
 		}
 		else
-			gameObject->bounceFactor = 1.0f;
+			gameObject->bounceFactor = 0.8f;
 		gameObject->isCollider = true;
 		objects.push_back(gameObject);
 	}

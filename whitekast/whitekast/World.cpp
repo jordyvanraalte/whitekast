@@ -134,6 +134,12 @@ void World::idle(void)
 	if (keys['S']) move(270, deltaTime*speed);
 	if (keys['Q']) camera.posZ += deltaTime * speed;
 	if (keys['E']) camera.posZ -= deltaTime * speed;
+	if (keys['R'])
+	{
+	
+		ball->position = Vec3f(4.5f, -2, 3.5f);
+		ball->velocity = Vec3f(0, 0, 0);
+	} 
 	
 	ball->update(deltaTime);
 	for (auto o : gameObjects)

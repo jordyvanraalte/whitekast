@@ -43,7 +43,7 @@ bool CollisionManager::isColliding(GameObject *ball, GameObject *object)
 					Vec2f temp = Vec2f(ball->velocity.x, ball->velocity.z);
 					Vec2f temp2 = mirrorVectorInLine(temp, line);
 					temp2 = temp2 * object->bounceFactor;
-					ball->velocity = Vec3f(temp2.x, 0, temp2.y);
+					ball->velocity = Vec3f(checkSpeed(temp2.x), 0, checkSpeed(temp2.y));
 				}
 				ball->isColliding = true;
 				object->isColliding = true;
@@ -57,7 +57,7 @@ bool CollisionManager::isColliding(GameObject *ball, GameObject *object)
 					Vec2f temp = Vec2f(ball->velocity.x, ball->velocity.z);
 					Vec2f temp2 = mirrorVectorInLine(temp, line);
 					temp2 = temp2 * object->bounceFactor;
-					ball->velocity = Vec3f(temp2.x, 0, temp2.y);
+					ball->velocity = Vec3f(checkSpeed(temp2.x), 0, checkSpeed(temp2.y));
 					
 				}
 				ball->isColliding = true;
@@ -84,7 +84,7 @@ bool CollisionManager::isColliding(GameObject *ball, GameObject *object)
 						Vec2f temp = Vec2f(ball->velocity.x, ball->velocity.z);
 						Vec2f temp2 = mirrorVectorInLine(temp, line);
 						temp2 = temp2 * object->bounceFactor;
-						ball->velocity = Vec3f(temp2.x, 0, temp2.y);
+						ball->velocity = Vec3f(checkSpeed(temp2.x), 0, checkSpeed(temp2.y));
 					}
 					ball->isColliding = true;
 					object->isColliding = true;
@@ -102,7 +102,6 @@ bool CollisionManager::isColliding(GameObject *ball, GameObject *object)
 
 bool CollisionManager::isPointOnLine(Vec2f point1, Vec2f point2, float px, float py)
 {
-
 	float x1 = point1.x;
 	float x2 = point2.x;
 	float y1 = point1.y;
@@ -179,5 +178,25 @@ double CollisionManager::distanceSquared(int x1, int y1, int x2, int y2)
 	int deltaX = x2 - x1;
 	int deltaY = y2 - y1;
 	return deltaX * deltaX + deltaY * deltaY;
+}
+
+float CollisionManager::checkSpeed(float velocity)
+{
+	if (!abs(velocity) < 2.5f)
+	{
+		if (velocity < 0)
+			return -2.5;
+		else
+			return 2.5;
+	}
+	else if (!abs(velocity) < 0.25f)
+	{
+		if (velocity < 0)
+			return -0.25;
+		else
+			return 0.25;
+	}
+	else
+		return velocity;
 }
 

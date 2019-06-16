@@ -16,4 +16,5 @@ public:
 	Vec2f mirrorVectorInLine(::Vec2f d, LinesHitbox::Hitline b) const;
 	bool checkCircleCollision(CircleHitbox* a, CircleHitbox* b);
 	static double distanceSquared(int x1, int y1, int x2, int y2);
+	float checkSpeed(float velocity);
 };
