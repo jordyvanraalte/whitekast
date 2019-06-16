@@ -24,6 +24,7 @@
 #include "PointCounter.h"
 #include "LivesCounter.h"
 #include <thread> 
+#include <math.h>  
 
 std::list<GameObject*> objects;
 GameObject* ball;
@@ -33,8 +34,6 @@ static Game* instance;
 
 int horizontal = 0;
 int vertical = 0;
-
-
 
 Game::Game(const char * title, int argc, char * argv[])
 {
@@ -50,7 +49,7 @@ Game::Game(const char * title, int argc, char * argv[])
 	StateManager::getInstance();
 
 	CollisionManager* collision = new CollisionManager();
-	audiomanager->playMusic("Audio/busta_loop.WAV");
+	//audiomanager->playMusic("Audio/busta_loop.WAV");
 }
 
 Game::~Game()
@@ -88,6 +87,12 @@ void Game::initGlut(const char * title, int argc, char * argv[])
 		gameObject->position = ::Vec3f(0, 0, 0);
 		gameObject->setCoordinates(wkObject->getCoordinates());
 		gameObject->addComponent(new LineCollideComponent(gameObject, wkObject->getScale()));
+		if(wkObject->getObjectColor() == RED)
+		{
+			gameObject->bounceFactor = 1.5f;
+		}
+		else
+			gameObject->bounceFactor = 1.0f;
 		gameObject->isCollider = true;
 		objects.push_back(gameObject);
 	}
@@ -142,13 +147,12 @@ void Game::stop()
 
 void Game::initObjects()
 {
-	GameObject* testball = new GameObject(false);
-	testball->addComponent(new ModelComponent("Models/Pinballs/pinball_3.1.obj", testball));
-	testball->position = ::Vec3f(boardWidth, -2, 0.1);
-	testball->scale = ::Vec3f(0.1f, 0.1f, 0.1f);
-	testball->addComponent(new GravityComponent(::Vec3f(0, 0, 0.25)));
-	testball->addComponent(new CircleCollideComponent(testball));
-	ball = testball;
+	ball = new GameObject(true);
+	ball->addComponent(new ModelComponent("Models/Pinballs/pinball_3.1.obj", ball));
+	ball->position = ::Vec3f(3, -2, 3.5f);
+	ball->scale = ::Vec3f(0.1f, 0.1f, 0.1f);
+	ball->addComponent(new GravityComponent(::Vec3f(-0.3, 0, 0)));
+	ball->addComponent(new CircleCollideComponent(ball));
 
 	Texture texture1 = Texture("Textures/LeftWall.png");
 	Texture texture2 = Texture("Textures/RightWall.png");
@@ -159,28 +163,46 @@ void Game::initObjects()
 	GameObject* roomCube = new GameObject(false);
 	roomCube->addComponent(new WorldComponent(10, texture1, texture2, texture3, texture4, texture5));
 	roomCube->position = ::Vec3f(0, 0, 0);
-	objects.push_back(roomCube);
+	//objects.push_back(roomCube);
 }
 
 void Game::initFlippers()
 {
 	::Vec3f scale = ::Vec3f(0.1, 0.1, 0.1);
 	GameObject* flipperLeft = new GameObject(true);
+	flipperLeft->color = ::Vec3f(0.0f, 0.0f, 0.0f);
 	flipperLeft->addComponent(new ModelComponent("Models/Flippers/flipperblend.obj", flipperLeft));
-	flipperLeft->position = ::Vec3f(-0.40, -3, -2.2);
+	flipperLeft->position = ::Vec3f(0.875f, -2, 1.4f);
 	flipperLeft->rotationPoint = ::Vec3f(flipperLeft->position.x - 0.2f, flipperLeft->position.y, flipperLeft->position.z);
 	flipperLeft->scale = scale;
-	flipperLeft->rotation.y = 0;
+	flipperLeft->rotation.y = -105;
+	flipperLeft->bounceFactor = 2.0f;
 	flipperLeft->addComponent(new FlipComponent(true));
+	std::vector<cv::Point> flipperLeftCoordinates;
+	/*flipperLeftCoordinates.push_back(cv::Point((flipperLeft->rotationPoint.x + 0.1)*100, flipperLeft->rotationPoint.z*100));
+	flipperLeftCoordinates.push_back(cv::Point((flipperLeft->rotationPoint.x + 0.1 - (sin(15)*0.3f)) *100,(flipperLeft->rotationPoint.z + (cos(15) *0.3f))*100));*/
+	flipperLeftCoordinates.push_back(cv::Point((flipperLeft->rotationPoint.x + 0.1)*100, flipperLeft->rotationPoint.z*100));
+	flipperLeftCoordinates.push_back(cv::Point((flipperLeft->rotationPoint.x + 0.1) *100,(flipperLeft->rotationPoint.z + 0.3f)*100));
+	flipperLeft->setCoordinates(flipperLeftCoordinates);
+	flipperLeft->addComponent(new LineCollideComponent(flipperLeft, 0.1));
 	objects.push_back(flipperLeft);
 
 	GameObject* flipperRight = new GameObject(true);
+	flipperRight->color = ::Vec3f(0.0f, 0.0f, 0.0f);
 	flipperRight->addComponent(new ModelComponent("Models/Flippers/flipperblend.obj", flipperRight));
-	flipperRight->position = ::Vec3f(0.75, -3, -2.2);
+	flipperRight->position = ::Vec3f(0.875f, -2, 2.595f);
 	flipperRight->scale = scale;
 	flipperRight->rotationPoint = ::Vec3f(flipperRight->position.x - 0.2f, flipperRight->position.y, flipperRight->position.z);
-	flipperRight->rotation.y = 180;
+	flipperRight->rotation.y = 105;
+	flipperRight->bounceFactor = 2.0f;
 	flipperRight->addComponent(new FlipComponent(false));
+	std::vector<cv::Point> flipperRightCoordinates;
+	/*flipperRightCoordinates.push_back(cv::Point((flipperRight->rotationPoint.x + 0.1) *100, flipperRight->rotationPoint.z*100));
+	flipperRightCoordinates.push_back(cv::Point((flipperRight->rotationPoint.x + 0.1 - (sin(15)*0.3f)) * 100, (flipperRight->rotationPoint.z - (cos(15) *0.3f)) * 100));*/
+	flipperRightCoordinates.push_back(cv::Point((flipperRight->rotationPoint.x + 0.1) *100, flipperRight->rotationPoint.z*100));
+	flipperRightCoordinates.push_back(cv::Point((flipperRight->rotationPoint.x + 0.1) * 100, (flipperRight->rotationPoint.z - 0.3f) * 100));
+	flipperRight->setCoordinates(flipperRightCoordinates);
+	flipperRight->addComponent(new LineCollideComponent(flipperRight, 0.1f));
 	objects.push_back(flipperRight);
 }
 

@@ -13,6 +13,7 @@ public:
 	~Hitbox();
 
 	virtual void shiftColliders(::Vec3f pos) = 0;
+	virtual void flipColliders(::Vec3f pos) {};
 
 };
 
@@ -53,7 +54,7 @@ public:
 		::Vec2f point2;
 	};
 
-	std::list<Hitline> hitlines;
+	std::vector<Hitline> hitlines;
 
 	LinesHitbox();
 	LinesHitbox(std::vector<cv::Point> coordinates, ::Vec3f scale, float wkscale);
@@ -62,4 +63,5 @@ public:
 	Hitline hitline;
 
 	void shiftColliders(::Vec3f pos) override;
+	void flipColliders(::Vec3f pos) override;
 };

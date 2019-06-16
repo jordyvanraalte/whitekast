@@ -7,7 +7,7 @@ class FlipComponent : public Component
 {
 	float speed = 100.0f;
 	bool up = true;
-	bool flipping = true;
+	bool flipping = false;
 	bool left = true;
 public:
 	FlipComponent(const bool l);

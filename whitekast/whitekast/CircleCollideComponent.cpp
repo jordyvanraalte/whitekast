@@ -14,6 +14,11 @@ Hitbox* CircleCollideComponent::getHitbox()
 	return hitbox;
 }
 
+Hitbox* CircleCollideComponent::getCirclebox()
+{
+	return hitbox;
+}
+
 void CircleCollideComponent::update(float elapsedTime)
 {
 	hitbox->shiftColliders(gameObject->position);

@@ -8,7 +8,10 @@ class CircleCollideComponent : public CollideComponent
 public:
 	CircleCollideComponent(GameObject *gameobject);
 	~CircleCollideComponent();
+
 	Hitbox* getHitbox() override;
+	Hitbox* getCirclebox() override;
+
 	void update(float elapsedTime) override;
 };
 

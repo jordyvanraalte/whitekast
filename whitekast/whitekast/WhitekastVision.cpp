@@ -65,14 +65,14 @@ int WhitekastVision::captureMovement()
 	Mat videoFrame, videoFrame2;
 	vCap.read(videoFrame);
 	cvtColor(videoFrame, videoFrame, COLOR_BGR2GRAY);
-	imshow("move1", videoFrame);
+	//imshow("move1", videoFrame);
 	threshold(videoFrame, videoFrame, 100, 255, THRESH_BINARY_INV);
-	imshow("move1", videoFrame);
+	//imshow("move1", videoFrame);
 
 	vCap.read(videoFrame2);
 	cvtColor(videoFrame2, videoFrame2, COLOR_BGR2GRAY);
 	threshold(videoFrame2, videoFrame2, 100, 255, THRESH_BINARY_INV);
-	imshow("move2", videoFrame2);
+	//imshow("move2", videoFrame2);
 
 
 	if (getWhitePixelsLeft(videoFrame) - getWhitePixelsLeft(videoFrame2) <= minMotion)
@@ -93,7 +93,6 @@ int WhitekastVision::captureMovement()
 		movingRight = false;
 	}
 
-	
 	if (waitKey(1) == 27) {
 		return 0;
 	}
@@ -188,11 +187,46 @@ int WhitekastVision::captureFrames()
 void WhitekastVision::createBorder()
 {
 	WhitekastObject* object = new WhitekastObject(WHITE);
-	double cx = CAMERA_WIDTH / 2.0;
-	double cy = CAMERA_HEIGHT / 2.0;
-	Point centerPoint = Point(cx, cy);
-	object->setCenter(centerPoint);
 	visionObjects.push_back(object);
+
+	WhitekastObject* bottomLeftWall = new WhitekastObject(GREEN);
+	WhitekastObject* leftWall = new WhitekastObject(GREEN);
+	WhitekastObject* topWall = new WhitekastObject(GREEN);
+	WhitekastObject* rightWall = new WhitekastObject(GREEN);
+	WhitekastObject* bottomRightWall = new WhitekastObject(GREEN);
+	vector<Point> coordinates1, coordinates2, coordinates3, coordinates4, coordinates5;
+
+	coordinates1.push_back(Point(0.0f, (3.5f*CAMERA_HEIGHT) / 10.0f));
+	coordinates1.push_back(Point((1.0f*CAMERA_WIDTH) / 7.0f, (3.5f*CAMERA_HEIGHT) / 10.0f));
+	coordinates1.push_back(Point((2.0f*CAMERA_WIDTH) / 7.0f, 0.0f));
+	coordinates1.push_back(Point(0.0f, 0.0f));
+	bottomLeftWall->setCenter(Point((1.0f*CAMERA_WIDTH) / 12.0f, (1.0f*CAMERA_HEIGHT) / 5.0f));
+	bottomLeftWall->setCoordinates(coordinates1, false);
+
+	coordinates2.push_back(Point((1.0f*CAMERA_WIDTH) / 6.0f, 0.0f));
+	coordinates2.push_back(Point(CAMERA_WIDTH, 0.0f));
+	leftWall->setCoordinates(coordinates2, false);
+
+	coordinates3.push_back(Point(CAMERA_WIDTH, 0.0f));
+	coordinates3.push_back(Point(CAMERA_WIDTH, CAMERA_HEIGHT));
+	topWall->setCoordinates(coordinates3, false);
+
+	coordinates4.push_back(Point(CAMERA_WIDTH, CAMERA_HEIGHT));
+	coordinates4.push_back(Point((1.0f*CAMERA_WIDTH) / 6.0f, CAMERA_HEIGHT));
+	rightWall->setCoordinates(coordinates4, false);
+
+	coordinates5.push_back(Point((2.0f*CAMERA_WIDTH) / 7.0f, CAMERA_HEIGHT));
+	coordinates5.push_back(Point(0.0f, CAMERA_HEIGHT));
+	coordinates5.push_back(Point(0.0f, (6.5f*CAMERA_HEIGHT) / 10.0f));
+	coordinates5.push_back(Point((1.0f*CAMERA_WIDTH) / 7.0f, (6.5f*CAMERA_HEIGHT) / 10.0f));
+	bottomRightWall->setCenter(Point((1.0f*CAMERA_WIDTH) / 12.0f, (4.0f*CAMERA_HEIGHT) / 5.0f));
+	bottomRightWall->setCoordinates(coordinates5, false);
+
+	visionObjects.push_back(bottomLeftWall);
+	visionObjects.push_back(leftWall);
+	visionObjects.push_back(topWall);
+	visionObjects.push_back(rightWall);
+	visionObjects.push_back(bottomRightWall);
 }
 
 void WhitekastVision::findObjectsByFrame(const Mat frame, const ObjectColor objectColor) 
@@ -214,7 +248,7 @@ void WhitekastVision::findObjectsByFrame(const Mat frame, const ObjectColor obje
 			//drawContours(contourFrame, contours, (int)i, color, 2, LINE_8, hierarchy, 0);
 
 			WhitekastObject* object = new WhitekastObject(objectColor);
-			object->setCoordinates(contours[i]);
+			object->setCoordinates(contours[i], true);
 			Rect rect = boundingRect(contours[i]);
 			double cx = rect.x + rect.width / 2.0;
 			double cy = rect.y + rect.height / 2.0;

@@ -10,7 +10,6 @@
 #include <iostream>
 #include <cstring>
 
-
 std::list<GameObject*> gameObjects;
 WhitekastVision vision;
 float lastFrameTime;
@@ -23,11 +22,11 @@ int width, height;
 
 struct Camera
 {
-	float posX = 0;
-	float posY = 0;
-	float rotX = 40;
-	float rotY = 0;
-	float posZ = -4;
+	float posX = 1.5;
+	float posY = -2;
+	float posZ = -2;
+	float rotX = -20;
+	float rotY = 90;
 } camera;
 
 World::World(int horizontal, int vertical, std::list<GameObject*>& objectlist, WhitekastVision whitekastVision, GameObject* ball)
@@ -97,8 +96,11 @@ void World::display()
 	{
 		glPushMatrix();
 		
-		if (object->isVisionObject == false)
+		if (object->isVisionObject == false) {
+			glRotatef(-90, 0, 1, 0);
 			glRotatef(-10, 1, 0, 0);
+			glTranslatef(2, 0, 0);
+		}
 
 		object->draw();
 		glPopMatrix();
@@ -201,8 +203,22 @@ void World::mousePassiveMotion(int x, int y)
 	int dy = y - height / 2;
 	if ((dx != 0 || dy != 0) && abs(dx) < 400 && abs(dy) < 400 && !justMovedMouse)
 	{
+		if (camera.rotY <= 20) {
+			camera.rotY = 20;
+		}
+		else if (camera.rotY >= 160) {
+			camera.rotY = 160;
+		}
 		camera.rotY += dx / 10.0f;
+
+		if (camera.rotX <= -40) {
+			camera.rotX = -40;
+		}
+		else if (camera.rotX >= 90) {
+			camera.rotX = 90;
+		}
 		camera.rotX += dy / 10.0f;
+	
 	}
 	if (!justMovedMouse)
 	{
