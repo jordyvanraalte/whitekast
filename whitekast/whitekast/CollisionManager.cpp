@@ -189,7 +189,7 @@ double CollisionManager::distanceSquared(int x1, int y1, int x2, int y2)
 
 Vec2f CollisionManager::checkSpeed(Vec2f b, GameObject *object)
 {
-	if(b.magnitude() > 0.3 && b.magnitude() < 10)
+	if(b.magnitude() > 0.3 && b.magnitude() < 6)
 	{
 		b = b * object->bounceFactor;
 	}
