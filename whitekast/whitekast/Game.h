@@ -10,6 +10,7 @@ class GameObject;
 class StateManager;
 class PointCounter;
 class LivesCounter;
+class HighScore;
 
 class Game
 {
@@ -42,5 +43,6 @@ private:
 	AudioManager* audiomanager;
 	PointCounter* pointCounter;
 	LivesCounter* livesCounter;
+	HighScore*	  highScore;
 	WhitekastVision vision;
 };

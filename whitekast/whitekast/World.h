@@ -41,5 +41,5 @@ public:
 	void makePlatform();
 	Vec2f mirrorVectorInLine(::Vec2f d, LinesHitbox::Hitline b) const;
 
-	void displayUI(int points, int lifepoints);
+	void displayUI(int points, int lifepoints, int highScore);
 };

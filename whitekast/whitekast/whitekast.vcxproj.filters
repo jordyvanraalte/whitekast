@@ -180,6 +180,9 @@
     <ClInclude Include="Vec.h">
       <Filter>Header Files\math</Filter>
     </ClInclude>
+    <ClInclude Include="HighScore.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -277,6 +280,9 @@
     </ClCompile>
     <ClCompile Include="Vec.cpp">
       <Filter>Source Files\math</Filter>
+    </ClCompile>
+    <ClCompile Include="HighScore.cpp">
+      <Filter>Source Files\game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

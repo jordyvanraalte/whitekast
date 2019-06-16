@@ -23,6 +23,7 @@
 #include "CollisionManager.h"
 #include "PointCounter.h"
 #include "LivesCounter.h"
+#include "HighScore.h"
 #include <thread> 
 #include <math.h>  
 
@@ -45,7 +46,7 @@ Game::Game(const char * title, int argc, char * argv[])
 	audiomanager = AudioManager::getInstance();
 	pointCounter = PointCounter::getInstance();
 	livesCounter = LivesCounter::getInstance();
-
+	highScore =	   HighScore::getInstance();
 	StateManager::getInstance();
 
 	CollisionManager* collision = new CollisionManager();

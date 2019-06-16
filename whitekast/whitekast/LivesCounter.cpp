@@ -1,6 +1,6 @@
 #include "LivesCounter.h"
 
-static LivesCounter* instance;
+static LivesCounter* livesCounterInstance;
 
 LivesCounter::LivesCounter()
 {
@@ -34,8 +34,8 @@ void LivesCounter::setLives(int lives)
 
 LivesCounter* LivesCounter::getInstance()
 {
-	if (instance == nullptr)
-		instance = new LivesCounter();
+	if (livesCounterInstance == nullptr)
+		livesCounterInstance = new LivesCounter();
 
-	return instance;
+	return livesCounterInstance;
 }
