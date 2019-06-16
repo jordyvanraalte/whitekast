@@ -16,16 +16,8 @@ void GravityComponent::update(const float elapsedTime)
 	vectemp.applyTime(elapsedTime);
 
 	
-	std::cout << abs(gameObject->velocity.x) << std::endl;
+	std::cout << abs(gameObject->velocity.z) << std::endl;
 
-	if(!abs(gameObject->velocity.x) < 3.0f)
-	{
-		gameObject->velocity = gameObject->velocity + vectemp;
-	}
-
-
-
-
-
+	gameObject->velocity = gameObject->velocity + vectemp;
 }
 

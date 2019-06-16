@@ -182,7 +182,11 @@ double CollisionManager::distanceSquared(int x1, int y1, int x2, int y2)
 
 float CollisionManager::checkSpeed(float velocity)
 {
-	if (!abs(velocity) < 2.5f)
+	if(velocity == 0)
+	{
+		return 0;
+	}
+	else if (!abs(velocity) < 2.5f)
 	{
 		if (velocity < 0)
 			return -2.5;
