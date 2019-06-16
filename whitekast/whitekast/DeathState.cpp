@@ -1,7 +1,8 @@
 #include "DeathState.h"
 #include "GameOverState.h"
 #include "LivesCounter.h"
-
+#include "HighScore.h"
+#include "PointCounter.h"
 
 DeathState::DeathState()
 {
@@ -22,6 +23,7 @@ void DeathState::handle(Game* game)
 	}
 	else
 	{
+		HighScore::getInstance()->setHighScore(PointCounter::getInstance()->getPoints());
 		Game::getInstance()->reset();
 	}
 }

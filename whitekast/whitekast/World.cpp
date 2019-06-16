@@ -2,6 +2,7 @@
 #include "GameObject.h"
 #include "PointCounter.h"
 #include "LivesCounter.h"
+#include "HighScore.h"
 #include "WhitekastObject.h"
 #include "WhitekastVision.h"
 #include "CubeComponent.h"
@@ -107,7 +108,7 @@ void World::display()
 		object->draw();
 		glPopMatrix();
 	}
-	displayUI(PointCounter::getInstance()->getPoints(), LivesCounter::getInstance()->getLives());
+	displayUI(PointCounter::getInstance()->getPoints(), LivesCounter::getInstance()->getLives(), HighScore::getInstance()->getHighScore());
 	glutSwapBuffers();
 }
 
@@ -261,7 +262,7 @@ void World::mouseClick(int button, int state, int x, int y)
 	}*/
 }
 
-void World::displayUI(int points, int lifepoints)
+void World::displayUI(int points, int lifepoints, int highScore)
 {
 
 	glMatrixMode(GL_PROJECTION);
@@ -281,6 +282,7 @@ void World::displayUI(int points, int lifepoints)
 	tempString = tempString + std::to_string(points);
 	unsigned char score[256];
 	std::copy(tempString.begin(), tempString.end(), score);
+
 	score[tempString.length()] = 0;
 	glutStrokeString(GLUT_STROKE_ROMAN, score);
 	tempString = " lives: ";
@@ -289,7 +291,14 @@ void World::displayUI(int points, int lifepoints)
 	std::copy(tempString.begin(), tempString.end(), lives);
 	lives[tempString.length()] = 0;
 	glutStrokeString(GLUT_STROKE_ROMAN, lives);
-	
+
+	tempString = " Highscore: ";
+	tempString = tempString + std::to_string(highScore);
+	unsigned char high[256];
+	std::copy(tempString.begin(), tempString.end(), high);
+	high[tempString.length()] = 0;
+	glutStrokeString(GLUT_STROKE_ROMAN, high);
+
 	// Making sure we can render 3d again
 	glMatrixMode(GL_PROJECTION);
 	glPopMatrix();

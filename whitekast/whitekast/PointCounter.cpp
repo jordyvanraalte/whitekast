@@ -1,6 +1,6 @@
 #include "PointCounter.h"
 
-static PointCounter* instance;
+static PointCounter* pointCounterInstance;
 
 PointCounter::PointCounter()
 {
@@ -37,8 +37,8 @@ void PointCounter::setPoints(int points)
 
 PointCounter* PointCounter::getInstance()
 {
-	if (instance == nullptr)
-		instance = new PointCounter();
+	if (pointCounterInstance == nullptr)
+		pointCounterInstance = new PointCounter();
 
-	return instance;
+	return pointCounterInstance;
 }
