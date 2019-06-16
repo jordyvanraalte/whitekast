@@ -20,9 +20,11 @@ public:
 	::Vec3f();
 	Vec3f(const Vec3f& other);
 	Vec3f(const float x, const float y, const float z);
-	float& operator [](int);
 
+	float& operator [](int);
 	void applyTime(const float elapsedtime);
+
+	double magnitude() const;
 };
 
 inline ::Vec3f operator +(const ::Vec3f& lhs, const ::Vec3f& rhs)
@@ -54,6 +56,7 @@ public:
 	static float vectorDotProduct(::Vec2f& v1, ::Vec2f& v2);
 	static Vec2f vectorNormalised(::Vec2f& v);
 
+	double magnitude() const;
 };
 
 inline ::Vec2f operator +(const ::Vec2f& lhs, const ::Vec2f& rhs)

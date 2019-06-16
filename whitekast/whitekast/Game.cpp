@@ -89,7 +89,7 @@ void Game::initGlut(const char * title, int argc, char * argv[])
 		gameObject->addComponent(new LineCollideComponent(gameObject, wkObject->getScale()));
 		if(wkObject->getObjectColor() == RED)
 		{
-			gameObject->bounceFactor = 1.2f;
+			gameObject->bounceFactor = 1.5f;
 		}
 		else
 			gameObject->bounceFactor = 0.8f;
@@ -149,9 +149,9 @@ void Game::initObjects()
 {
 	ball = new GameObject(true);
 	ball->addComponent(new ModelComponent("Models/Pinballs/pinball_3.1.obj", ball));
-	ball->position = ::Vec3f(3, -2, 3.5f);
+	ball->position = ::Vec3f(5, -2, 3.5f);
 	ball->scale = ::Vec3f(0.1f, 0.1f, 0.1f);
-	ball->addComponent(new GravityComponent(::Vec3f(-0.3, 0, 0)));
+	ball->addComponent(new GravityComponent(::Vec3f(-0.8, 0, 0)));
 	ball->addComponent(new CircleCollideComponent(ball));
 
 	Texture texture1 = Texture("Textures/LeftWall.png");
