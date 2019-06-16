@@ -22,6 +22,6 @@ void DeathState::handle(Game* game)
 	}
 	else
 	{
-		StateManager::getInstance()->setState(new GameOverState());
+		Game::getInstance()->reset();
 	}
 }

@@ -133,6 +133,8 @@ void Game::reset()
 {
 	livesCounter->resetLives();
 	pointCounter->resetPoints();
+	ball->position = Vec3f(5.0f, -2, 1.5f);
+	ball->velocity = Vec3f(0, 0, 0);
 	StateManager::getInstance()->setState(new HomeState());
 }
 
