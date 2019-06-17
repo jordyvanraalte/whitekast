@@ -12,6 +12,11 @@ PointCounter::~PointCounter()
 
 }
 
+void PointCounter::hitSpecial()
+{
+	points += specialPoints;
+}
+
 void PointCounter::hitBumper()
 {
 	points = points + bumperPoints;

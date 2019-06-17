@@ -44,8 +44,17 @@ bool CollisionManager::isColliding(GameObject *ball, GameObject *object)
 					temp2 = checkSpeed(temp2, object);
 
 					ball->velocity = Vec3f(temp2.x, 0, temp2.y);
-					PointCounter::getInstance()->hitBumper();
-					AudioManager::getInstance()->playSound("audio/bumper_hit.wav");
+
+					if (object->bounceFactor == 1.5)
+					{
+						PointCounter::getInstance()->hitBumper();
+						AudioManager::getInstance()->playSound("audio/bumper_hit.wav");
+					}
+					else if (object->bounceFactor == 1.0)
+					{
+						PointCounter::getInstance()->hitSpecial();
+						AudioManager::getInstance()->playSound("audio/bumper_hit.wav");
+					}
 				}
 
 				ball->isColliding = true;
@@ -63,8 +72,17 @@ bool CollisionManager::isColliding(GameObject *ball, GameObject *object)
 					temp2 = checkSpeed(temp2, object);
 
 					ball->velocity = Vec3f(temp2.x, 0, temp2.y);
-					PointCounter::getInstance()->hitBumper();
-					AudioManager::getInstance()->playSound("audio/bumper_hit.wav");
+
+					if(object->bounceFactor == 1.5)
+					{
+						PointCounter::getInstance()->hitBumper();
+						AudioManager::getInstance()->playSound("audio/bumper_hit.wav");
+					}
+					else if (object->bounceFactor == 1.0)
+					{
+						PointCounter::getInstance()->hitSpecial();
+						AudioManager::getInstance()->playSound("audio/bumper_hit.wav");
+					}
 				}
 
 				ball->isColliding = true;
@@ -94,8 +112,16 @@ bool CollisionManager::isColliding(GameObject *ball, GameObject *object)
 						temp2 = checkSpeed(temp2, object);
 
 						ball->velocity = Vec3f(temp2.x, 0, temp2.y);
-						PointCounter::getInstance()->hitBumper();
-						AudioManager::getInstance()->playSound("audio/bumper_hit.wav");
+						if (object->bounceFactor == 1.5)
+						{
+							PointCounter::getInstance()->hitBumper();
+							AudioManager::getInstance()->playSound("audio/bumper_hit.wav");
+						}
+						else if (object->bounceFactor == 1.0)
+						{
+							PointCounter::getInstance()->hitSpecial();
+							AudioManager::getInstance()->playSound("audio/bumper_hit.wav");
+						}
 					}
 
 					ball->isColliding = true;
