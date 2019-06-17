@@ -48,6 +48,7 @@ public:
 		@return bool.
 	*/
 	bool isPointInCircle(Vec2f point, float cx, float cy, float r);
+	Vec2f mirrorVectorInLine(::Vec2f d, LinesHitbox::Hitline b, GameObject* obj) const;
 
 	/*
 		Returns a mirrored version of a given vector in a given hitbox line.

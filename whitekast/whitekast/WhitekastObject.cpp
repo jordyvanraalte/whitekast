@@ -103,7 +103,7 @@ void WhitekastObject::draw()
 	{
         float backgroundY = -2.0f;
 
-		glColor3f(1, 1, 1);
+		glColor3f(0.7, 0.7, 0.7);
 		glBegin(GL_QUADS);
 
 		glVertex3f(-(2.0f * widthBoard) / 7.0f, backgroundY, 0);
@@ -112,6 +112,7 @@ void WhitekastObject::draw()
 		glVertex3f(-(2.0f * widthBoard) / 7.0f, backgroundY, playingfieldSize);
 		glEnd();
 
+		glColor3f(0.5, 0.5, 0.5);
 		glBegin(GL_QUADS);
 		glVertex3f(-(2.0f * widthBoard) / 7.0f, -2, 0);
 		glVertex3f(-(2.0f * widthBoard) / 7.0f, -2, playingfieldSize);
@@ -136,26 +137,29 @@ void WhitekastObject::draw()
 			lastY = coordinates[coordinates.size() - 1].y * scale;
 
 		if (objectColor == GREEN)
-			maxObjectY+=0.05f;
-
-		if (center.x != 0 && center.y != 0)
 		{
-			glBegin(GL_TRIANGLE_STRIP);
-
-			int size = static_cast<int>(coordinates.size());
-			for (int i = 0; i < (size - 1); i++)
+			maxObjectY += 0.05f;
+			if (center.x != 0 && center.y != 0)
 			{
-				glVertex3f(coordinates[i].x * scale, maxObjectY, coordinates[i].y * scale);
-				glVertex3f(coordinates[i + 1].x * scale, maxObjectY, coordinates[i + 1].y * scale);
+				glBegin(GL_TRIANGLES);
+
+				int size = static_cast<int>(coordinates.size());
+				for (int i = 0; i < (size - 1); i++)
+				{
+					glVertex3f(coordinates[i].x * scale, maxObjectY, coordinates[i].y * scale);
+					glVertex3f(coordinates[i + 1].x * scale, maxObjectY, coordinates[i + 1].y * scale);
+					glVertex3f(center.x * scale, maxObjectY, center.y * scale);
+				}
+
+				glVertex3f(lastX, maxObjectY, lastY);
+				glVertex3f(coordinates[0].x * scale, maxObjectY, coordinates[0].y * scale);
 				glVertex3f(center.x * scale, maxObjectY, center.y * scale);
+
+				glEnd();
 			}
-
-			glVertex3f(lastX, maxObjectY, lastY);
-			glVertex3f(coordinates[0].x * scale, maxObjectY, coordinates[0].y * scale);
-			glVertex3f(center.x * scale, maxObjectY, center.y * scale);
-
-			glEnd();
 		}
+
+		
 
 		glBegin(GL_QUADS);
 
@@ -174,6 +178,7 @@ void WhitekastObject::draw()
 		glVertex3f(lastX, minObjectY, lastY);
 
 		glEnd();
+
 		glColor3f(1, 1, 1);
 	}
 }

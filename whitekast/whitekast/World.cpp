@@ -242,14 +242,14 @@ void World::displayUI(int points, int lifepoints, int highScore)
 	glRotatef(180, 1, 0, 0);
 	glTranslatef(0, -25, 0);
 	glScalef(0.2f, 0.2f, 0.2f);
-	std::string tempString = "score: ";
+	std::string tempString = " Score: ";
 	tempString = tempString + std::to_string(points);
 	unsigned char score[256];
 	std::copy(tempString.begin(), tempString.end(), score);
 
 	score[tempString.length()] = 0;
 	glutStrokeString(GLUT_STROKE_ROMAN, score);
-	tempString = " lives: ";
+	tempString = " Lives: ";
 	tempString = tempString + std::to_string(lifepoints);
 	unsigned char lives[256];
 	std::copy(tempString.begin(), tempString.end(), lives);
