@@ -1,13 +1,16 @@
-#include "CollisionManager.h"
 #include <iostream>
 
+#include "CollisionManager.h"
+#include "PointCounter.h"
 
 CollisionManager::CollisionManager()
 {
+
 }
 
 CollisionManager::~CollisionManager()
 {
+
 }
 
 bool CollisionManager::isColliding(GameObject *ball, GameObject *object)
@@ -47,6 +50,7 @@ bool CollisionManager::isColliding(GameObject *ball, GameObject *object)
 					temp2 = checkSpeed(temp2, object);
 
 					ball->velocity = Vec3f(temp2.x, 0, temp2.y);
+					PointCounter::getInstance()->hitBumper();
 				}
 				ball->isColliding = true;
 				object->isColliding = true;
@@ -63,7 +67,7 @@ bool CollisionManager::isColliding(GameObject *ball, GameObject *object)
 					temp2 = checkSpeed(temp2, object);
 
 					ball->velocity = Vec3f(temp2.x, 0, temp2.y);
-					
+					PointCounter::getInstance()->hitBumper();
 				}
 				ball->isColliding = true;
 				object->isColliding = true;
@@ -92,6 +96,7 @@ bool CollisionManager::isColliding(GameObject *ball, GameObject *object)
 						temp2 = checkSpeed(temp2, object);
 
 						ball->velocity = Vec3f(temp2.x, 0, temp2.y);
+						PointCounter::getInstance()->hitBumper();
 					}
 					ball->isColliding = true;
 					object->isColliding = true;

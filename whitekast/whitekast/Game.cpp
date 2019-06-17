@@ -120,7 +120,6 @@ void Game::initGlut(const char * title, int argc, char * argv[])
 
 void Game::handleEvents() 
 {
-	pointCounter->hitFlipper();
 	StateManager::getInstance()->handle(this);	
 }
 
