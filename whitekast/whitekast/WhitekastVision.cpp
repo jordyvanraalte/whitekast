@@ -165,14 +165,14 @@ void WhitekastVision::createBorder()
 	WhitekastObject* bottomRightWall = new WhitekastObject(GREEN);
 	vector<Point> coordinates1, coordinates2, coordinates3, coordinates4, coordinates5;
 
-	coordinates1.push_back(Point(0, (int)((3.5f * CAMERA_HEIGHT) / 10.0f)));
-	coordinates1.push_back(Point((int)((1.0f * CAMERA_WIDTH) / 7.0f), (int)((3.5f * CAMERA_HEIGHT) / 10.0f)));
-	coordinates1.push_back(Point((int)((2.0f * CAMERA_WIDTH) / 7.0f), 0));
+	coordinates1.push_back(Point(-(int)((2.0f * CAMERA_WIDTH) / 7.0f), (int)((3.5f * CAMERA_HEIGHT) / 10.0f)));
+	coordinates1.push_back(Point(-(int)((1.0f * CAMERA_WIDTH) / 7.0f), (int)((3.5f * CAMERA_HEIGHT) / 10.0f)));
 	coordinates1.push_back(Point(0, 0));
-	bottomLeftWall->setCenter(Point((int)((1.0f * CAMERA_WIDTH) / 12.0f), (int)((1.0f * CAMERA_HEIGHT) / 5.0f)));
+	coordinates1.push_back(Point(-(int)((2.0f * CAMERA_WIDTH) / 7.0f), 0));
+	bottomLeftWall->setCenter(Point(-(int)((3.0f * CAMERA_WIDTH) / 14.0f), (int)((1.0f * CAMERA_HEIGHT) / 5.0f)));
 	bottomLeftWall->setCoordinates(coordinates1, false);
 
-	coordinates2.push_back(Point((int)((1.0f * CAMERA_WIDTH) / 6.0f), 0));
+	coordinates2.push_back(Point(-(int)((1.0f * CAMERA_WIDTH) / 6.0f), 0));
 	coordinates2.push_back(Point((int)CAMERA_WIDTH, 0));
 	leftWall->setCoordinates(coordinates2, false);
 
@@ -181,14 +181,14 @@ void WhitekastVision::createBorder()
 	topWall->setCoordinates(coordinates3, false);
 
 	coordinates4.push_back(Point((int)CAMERA_WIDTH, (int)CAMERA_HEIGHT));
-	coordinates4.push_back(Point((int)((1.0f * CAMERA_WIDTH) / 6.0f), (int)CAMERA_HEIGHT));
+	coordinates4.push_back(Point(-(int)((1.0f * CAMERA_WIDTH) / 6.0f), (int)CAMERA_HEIGHT));
 	rightWall->setCoordinates(coordinates4, false);
 
-	coordinates5.push_back(Point((int)((2.0f*CAMERA_WIDTH) / 7.0f), (int)CAMERA_HEIGHT));
 	coordinates5.push_back(Point(0, (int)CAMERA_HEIGHT));
-	coordinates5.push_back(Point(0, (int)((6.5f * CAMERA_HEIGHT) / 10.0f)));
-	coordinates5.push_back(Point((int)((1.0f * CAMERA_WIDTH) / 7.0f), (int)((6.5f*CAMERA_HEIGHT) / 10.0f)));
-	bottomRightWall->setCenter(Point((int)((1.0f * CAMERA_WIDTH) / 12.0f), (int)((4.0f * CAMERA_HEIGHT) / 5.0f)));
+	coordinates5.push_back(Point(-(int)((2.0f * CAMERA_WIDTH) / 7.0f), (int)CAMERA_HEIGHT));
+	coordinates5.push_back(Point(-(int)((2.0f * CAMERA_WIDTH) / 7.0f), (int)((6.5f * CAMERA_HEIGHT) / 10.0f)));
+	coordinates5.push_back(Point(-(int)((1.0f * CAMERA_WIDTH) / 7.0f), (int)((6.5f*CAMERA_HEIGHT) / 10.0f)));
+	bottomRightWall->setCenter(Point(-(int)((3.0f * CAMERA_WIDTH) / 14.0f), (int)((4.0f * CAMERA_HEIGHT) / 5.0f)));
 	bottomRightWall->setCoordinates(coordinates5, false);
 
 	visionObjects.push_back(bottomLeftWall);

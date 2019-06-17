@@ -25,11 +25,11 @@ int width, height;
 
 struct Camera
 {
-	float posX = 1.5;
-	float posY = -2;
+	float posX = 2.5;
+	float posY = -2.2;
 	float posZ = -2;
-	float rotX = -20;
-	float rotY = 90;
+	float rotX = 36.4;
+	float rotY = 90.2;
 } camera;
 
 
@@ -169,7 +169,7 @@ void World::idle(void)
 					if (!f->isLeft())
 						c->setHandle(true);
 
-	if(ball->position.x < 0)
+	if(ball->position.x < -(2.0f * 4 * CAMERA_WIDTH / CAMERA_HEIGHT) / 7.0f)
 		StateManager::getInstance()->setState(new DeathState());
 
 	glutPostRedisplay();
@@ -197,7 +197,7 @@ void World::keyboardUp(unsigned char key, int mouseX, int mouseY)
 bool justMovedMouse = false;
 void World::mousePassiveMotion(int x, int y)
 {
-	int dx = x - width / 2,
+	/*int dx = x - width / 2,
 		dy = y - height / 2;
 	if ((dx != 0 || dy != 0) && abs(dx) < 400 && abs(dy) < 400 && !justMovedMouse)
 	{
@@ -222,20 +222,7 @@ void World::mousePassiveMotion(int x, int y)
 		justMovedMouse = true;
 	}
 	else
-		justMovedMouse = false;
-}
-
-void World::mouseClick(int button, int state, int x, int y)
-{
-	/*if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
-		for (auto o : gameObjects)
-		{
-			for (auto c : o->getComponents())
-			{
-				c->setHandle(true);
-			}
-		}
-	}*/
+		justMovedMouse = false;*/
 }
 
 void World::displayUI(int points, int lifepoints, int highScore)

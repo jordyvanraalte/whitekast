@@ -116,7 +116,6 @@ void Game::initGlut(const char * title, int argc, char * argv[])
 	glutKeyboardFunc([](unsigned char key, int mouseX, int mouseY) { World::getWorld()->keyboard(key, mouseX, mouseY); });
 	glutKeyboardUpFunc([](unsigned char key, int mouseX, int mouseY) { World::getWorld()->keyboardUp(key, mouseX, mouseY); });
 	glutPassiveMotionFunc([](int mouseX, int mouseY) {World::getWorld()->mousePassiveMotion(mouseX, mouseY); });
-	glutMouseFunc([](int button, int state, int x, int y) {World::getWorld()->mouseClick(button, state, x, y); });
 }
 
 void Game::handleEvents() 
@@ -180,7 +179,7 @@ void Game::initFlippers()
 	GameObject* flipperLeft = new GameObject(true);
 	flipperLeft->color = ::Vec3f(0.0f, 0.0f, 0.0f);
 	flipperLeft->addComponent(new ModelComponent("Models/Flippers/flipperblend.obj", flipperLeft));
-	flipperLeft->position = ::Vec3f(0.875f, -2, 1.4f);
+	flipperLeft->position = ::Vec3f(0.875f - (2.0f * 4 * CAMERA_WIDTH / CAMERA_HEIGHT) / 7.0f, -2, 1.4f);
 	flipperLeft->rotationPoint = ::Vec3f(flipperLeft->position.x - 0.2f, flipperLeft->position.y, flipperLeft->position.z);
 	flipperLeft->scale = scale;
 	flipperLeft->rotation.y = -105;
@@ -198,7 +197,7 @@ void Game::initFlippers()
 	GameObject* flipperRight = new GameObject(true);
 	flipperRight->color = ::Vec3f(0, 0, 0);
 	flipperRight->addComponent(new ModelComponent("Models/Flippers/flipperblend.obj", flipperRight));
-	flipperRight->position = ::Vec3f(0.875f, -2, 2.595f);
+	flipperRight->position = ::Vec3f(0.875f - (2.0f * 4 * CAMERA_WIDTH / CAMERA_HEIGHT) / 7.0f, -2, 2.595f);
 	flipperRight->scale = scale;
 	flipperRight->rotationPoint = ::Vec3f(flipperRight->position.x - 0.2f, flipperRight->position.y, flipperRight->position.z);
 	flipperRight->rotation.y = 105;

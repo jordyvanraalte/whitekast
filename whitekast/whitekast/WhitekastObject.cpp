@@ -106,32 +106,27 @@ void WhitekastObject::draw()
 		glColor3f(1, 1, 1);
 		glBegin(GL_QUADS);
 
-		glVertex3f(0, backgroundY, 0);
-		glVertex3f(CAMERA_WIDTH * scale, backgroundY, 0);
-		glVertex3f(CAMERA_WIDTH * scale, backgroundY, playingfieldSize);
-		glVertex3f(0, backgroundY, playingfieldSize);
+		glVertex3f(-(2.0f * widthBoard) / 7.0f, backgroundY, 0);
+		glVertex3f(widthBoard, backgroundY, 0);
+		glVertex3f(widthBoard, backgroundY, playingfieldSize);
+		glVertex3f(-(2.0f * widthBoard) / 7.0f, backgroundY, playingfieldSize);
 		glEnd();
 
 		glBegin(GL_QUADS);
-		glVertex3f(0, -2, 0);
-		glVertex3f(0, -2, playingfieldSize);
-		glVertex3f(0, -10, playingfieldSize);
-		glVertex3f(0, -10, 0);
+		glVertex3f(-(2.0f * widthBoard) / 7.0f, -2, 0);
+		glVertex3f(-(2.0f * widthBoard) / 7.0f, -2, playingfieldSize);
+		glVertex3f(-(2.0f * widthBoard) / 7.0f, -10, playingfieldSize);
+		glVertex3f(-(2.0f * widthBoard) / 7.0f, -10, 0);
 
-		glVertex3f(widthBoard, -2, 0);
+		glVertex3f(-(2.0f * widthBoard) / 7.0f, -2, playingfieldSize);
 		glVertex3f(widthBoard, -2, playingfieldSize);
 		glVertex3f(widthBoard, -10, playingfieldSize);
-		glVertex3f(widthBoard, -10, 0);
+		glVertex3f(-(2.0f * widthBoard) / 7.0f, -10, playingfieldSize);
 
-		glVertex3f(0, -2, playingfieldSize);
-		glVertex3f(widthBoard, -2, playingfieldSize);
-		glVertex3f(widthBoard, -10, playingfieldSize);
-		glVertex3f(0, -10, playingfieldSize);
-
-		glVertex3f(0, -2, 0);
+		glVertex3f(-(2.0f * widthBoard) / 7.0f, -2, 0);
 		glVertex3f(widthBoard, -2, 0);
 		glVertex3f(widthBoard, -10, 0);
-		glVertex3f(0, -10, 0);
+		glVertex3f(-(2.0f * widthBoard) / 7.0f, -10, 0);
 
 		glEnd();
 	}
