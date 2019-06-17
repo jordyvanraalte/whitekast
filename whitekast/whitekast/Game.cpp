@@ -1,6 +1,11 @@
-#include "wtypes.h"
-#include "Game.h"
+#include <GL/freeglut.h>
 #include <math.h>
+#include <vector>
+#include <iostream>
+#include <thread> 
+#include <math.h>
+#include "Game.h"
+#include "wtypes.h"
 #include "GameObject.h"
 #include "WhitekastObject.h"
 #include "WhitekastVision.h"
@@ -13,10 +18,7 @@
 #include "CircleCollideComponent.h"
 #include "LineColliderComponent.h"
 #include "Vec.h"
-#include <vector>
-#include <iostream>
 #include "World.h"
-#include <GL/freeglut.h>
 #include "AudioManager.h"
 #include "StateManager.h"
 #include "HomeState.h"
@@ -34,6 +36,7 @@ static Game* instance;
 
 int horizontal = 0;
 int vertical = 0;
+
 
 Game::Game(const char * title, int argc, char * argv[])
 {
@@ -75,8 +78,8 @@ void Game::initGlut(const char * title, int argc, char * argv[])
 
 	vision = WhitekastVision();
 	std::vector<WhitekastObject*> whitekastObjects = vision.initVision();
-	boardWidth = whitekastObjects.at(0)->getWidth();
-	boardHeight = whitekastObjects.at(0)->getSize();
+	boardWidth = (int)whitekastObjects.at(0)->getWidth();
+	boardHeight = (int)whitekastObjects.at(0)->getSize();
 	initFlippers();
 	
 
@@ -114,12 +117,10 @@ void Game::initGlut(const char * title, int argc, char * argv[])
 	glutKeyboardFunc([](unsigned char key, int mouseX, int mouseY) { World::getWorld()->keyboard(key, mouseX, mouseY); });
 	glutKeyboardUpFunc([](unsigned char key, int mouseX, int mouseY) { World::getWorld()->keyboardUp(key, mouseX, mouseY); });
 	glutPassiveMotionFunc([](int mouseX, int mouseY) {World::getWorld()->mousePassiveMotion(mouseX, mouseY); });
-	glutMouseFunc([](int button, int state, int x, int y) {World::getWorld()->mouseClick(button, state, x, y); });
 }
 
 void Game::handleEvents() 
 {
-	pointCounter->hitFlipper();
 	StateManager::getInstance()->handle(this);	
 }
 
@@ -176,11 +177,11 @@ void Game::initObjects()
 
 void Game::initFlippers()
 {
-	::Vec3f scale = ::Vec3f(0.1, 0.1, 0.1);
+	::Vec3f scale = ::Vec3f(0.1f, 0.1f, 0.1f);
 	GameObject* flipperLeft = new GameObject(true);
 	flipperLeft->color = ::Vec3f(0.0f, 1.0f, 1.0f);
 	flipperLeft->addComponent(new ModelComponent("Models/Flippers/flipperblend.obj", flipperLeft));
-	flipperLeft->position = ::Vec3f(0.875f, -2, 1.4f);
+	flipperLeft->position = ::Vec3f(0.875f - (2.0f * 4 * CAMERA_WIDTH / CAMERA_HEIGHT) / 7.0f, -2, 1.4f);
 	flipperLeft->rotationPoint = ::Vec3f(flipperLeft->position.x - 0.2f, flipperLeft->position.y, flipperLeft->position.z);
 	flipperLeft->scale = scale;
 	flipperLeft->rotation.y = -105;
@@ -191,8 +192,8 @@ void Game::initFlippers()
 	flipperLeftCoordinates.push_back(cv::Point((flipperLeft->rotationPoint.x + 0.03f) * 100, (flipperLeft->rotationPoint.z - 0.03f) * 100));
 	flipperLeft->setCoordinates(flipperLeftCoordinates);
 	LineCollideComponent* l = new LineCollideComponent(flipperLeft, 0.1f);
-	float newX = -(sin((flipperLeft->rotation.y - 90) * DEG_TO_RAD) * 0.4f);
-	float newZ = -(cos((flipperLeft->rotation.y - 90) * DEG_TO_RAD) * 0.4f);
+	float newX = -(sin((flipperLeft->rotation.y - 90) * DEG_TO_RAD) * 0.43f);
+	float newZ = -(cos((flipperLeft->rotation.y - 90) * DEG_TO_RAD) * 0.43f);
 	l->flipHitbox(newX, newZ);
 	flipperLeft->addComponent(l);
 	objects.push_back(flipperLeft);
@@ -200,7 +201,7 @@ void Game::initFlippers()
 	GameObject* flipperRight = new GameObject(true);
 	flipperRight->color = ::Vec3f(0.0f, 1.0f, 1.0f);
 	flipperRight->addComponent(new ModelComponent("Models/Flippers/flipperblend.obj", flipperRight));
-	flipperRight->position = ::Vec3f(0.875f, -2, 2.595f);
+	flipperRight->position = ::Vec3f(0.875f - (2.0f * 4 * CAMERA_WIDTH / CAMERA_HEIGHT) / 7.0f, -2, 2.595f);
 	flipperRight->scale = scale;
 	flipperRight->rotationPoint = ::Vec3f(flipperRight->position.x - 0.2f, flipperRight->position.y, flipperRight->position.z);
 	flipperRight->rotation.y = 105;
@@ -211,8 +212,8 @@ void Game::initFlippers()
 	flipperRightCoordinates.push_back(cv::Point((flipperRight->rotationPoint.x + 0.03f) * 100, (flipperRight->rotationPoint.z + 0.03f) * 100));
 	flipperRight->setCoordinates(flipperRightCoordinates);
 	l = new LineCollideComponent(flipperRight, 0.1f);
-	newX = -(sin((flipperRight->rotation.y - 90) * DEG_TO_RAD) * 0.4f);
-	newZ = -(cos((flipperRight->rotation.y - 90) * DEG_TO_RAD) * 0.4f);
+	newX = -(sin((flipperRight->rotation.y - 90) * DEG_TO_RAD) * 0.43f);
+	newZ = -(cos((flipperRight->rotation.y - 90) * DEG_TO_RAD) * 0.43f);
 	l->flipHitbox(newX, newZ);
 	flipperRight->addComponent(l);
 	objects.push_back(flipperRight);

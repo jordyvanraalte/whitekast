@@ -1,13 +1,9 @@
-#include "Hitbox.h"
 #include <GL/freeglut.h>
+#include "Hitbox.h"
 
-Hitbox::Hitbox()
-{
-}
+Hitbox::Hitbox() { }
 
-Hitbox::~Hitbox()
-{
-}
+Hitbox::~Hitbox() { }
 
 CircleHitbox::CircleHitbox(Vec3f pos, float d, Vec3f scale)
 {
@@ -19,11 +15,11 @@ CircleHitbox::CircleHitbox(Vec3f pos, float d, Vec3f scale)
 
 void CircleHitbox::drawColliders()
 {
-	//glColor3f(0, 0, 1);
+	glColor3f(0, 0, 1);
 	glBegin(GL_LINES);
 
-	glVertex3f(circle.x, -1.8, circle.y);
-	glVertex3f(circle.x-circle.r, -1.8, circle.y+circle.r);
+	glVertex3f(circle.x, -1.8f, circle.y);
+	glVertex3f(circle.x-circle.r, -1.8f, circle.y+circle.r);
 
 	glEnd();
 }
@@ -78,8 +74,8 @@ void LinesHitbox::drawColliders()
 		glColor3f(0, 0, 1);
 		glBegin(GL_LINES);
 
-		glVertex3f(line.point1.x, -1.8, line.point1.y);
-		glVertex3f(line.point2.x, -1.8, line.point2.y);
+		glVertex3f(line.point1.x, -1.8f, line.point1.y);
+		glVertex3f(line.point2.x, -1.8f, line.point2.y);
 
 		glEnd();
 	}

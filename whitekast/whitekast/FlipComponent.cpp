@@ -35,7 +35,7 @@ void FlipComponent::setUp(const bool up)
 
 void FlipComponent::handleEvent(float elapsedTime)
 {
-	float radius = 0.4f;
+	float radius = 0.43f;
 	if (left)
 	{
 		if (flipping)
@@ -43,7 +43,7 @@ void FlipComponent::handleEvent(float elapsedTime)
 			if (up)
 			{
 				gameObject->rotation.y += elapsedTime * (speed * 2);
-				gameObject->bounceFactor = 2.0f;
+				gameObject->bounceFactor = 2.5f;
 			}
 			else
 			{
@@ -80,7 +80,7 @@ void FlipComponent::handleEvent(float elapsedTime)
 			if (up)
 			{
 				gameObject->rotation.y -= elapsedTime * (speed * 2);
-				gameObject->bounceFactor = 2.0f;
+				gameObject->bounceFactor = 2.5f;
 			}
 			else
 			{

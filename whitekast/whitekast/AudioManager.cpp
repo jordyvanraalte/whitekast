@@ -38,7 +38,10 @@ void AudioManager::playSound(const char* name)
 		engine->play2D(name, false, false, true);
 	else 
 	{
-		irrklang::ISound* sound = engine->play2D(name, false, false, true);
+		irrklang::ISoundSource* source = engine->getSoundSource(name, true);
+		source->setDefaultVolume(0.25f);
+		
+		irrklang::ISound* sound = engine->play2D(source, false, false, true);
 		audioMap.insert(std::pair<const char*, irrklang::ISound*>(name, sound));
 	}
 }

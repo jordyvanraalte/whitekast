@@ -66,7 +66,7 @@ float Vec2f::vectorDotProduct(::Vec2f& v1, ::Vec2f& v2)
 
 Vec2f Vec2f::vectorNormalised(::Vec2f& v)
 {
-	float magnitude = sqrt((v.x*v.x) + (v.y*v.y));
+	float magnitude = (float)sqrt(((v.x * v.x) + (v.y * v.y)));
 	return Vec2f((v.x / magnitude), (v.y / magnitude));
 }
 

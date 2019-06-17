@@ -1,3 +1,6 @@
+#include <GL/freeglut.h>
+#include <iostream>
+#include <cstring>
 #include "World.h"
 #include "GameObject.h"
 #include "PointCounter.h"
@@ -7,9 +10,6 @@
 #include "WhitekastVision.h"
 #include "CubeComponent.h"
 #include "FlipComponent.h"
-#include <GL/freeglut.h>
-#include <iostream>
-#include <cstring>
 #include "Game.h"
 #include "HomeState.h"
 
@@ -25,12 +25,13 @@ int width, height;
 
 struct Camera
 {
-	float posX = 1.5;
-	float posY = -2;
+	float posX = 2.5;
+	float posY = -2.2;
 	float posZ = -2;
-	float rotX = -20;
-	float rotY = 90;
+	float rotX = 36.4;
+	float rotY = 90.2;
 } camera;
+
 
 World::World(int horizontal, int vertical, std::list<GameObject*>& objectlist, WhitekastVision whitekastVision, GameObject* ball)
 {
@@ -56,9 +57,6 @@ World::~World()
 
 World* World::getWorld()
 {
-	//if (world != NULL) {
-		//world = new World(1920, 1080);
-	//}
 	return world;
 }
 
@@ -66,6 +64,7 @@ void World::makePlatform()
 {
 	glMatrixMode(GL_MODELVIEW);
 	glBegin(GL_QUADS);
+
 	glColor4f(1, 0, 1, 1);
 	glVertex3f(-10, 0, -10);
 	glVertex3f(-10, 0,  10);
@@ -99,7 +98,8 @@ void World::display()
 	{
 		glPushMatrix();
 		
-		if (object->isVisionObject == false) {
+		if (object->isVisionObject == false)
+		{
 			glRotatef(-90, 0, 1, 0);
 			glRotatef(-10, 1, 0, 0);
 			glTranslatef(2, 0, 0);
@@ -108,6 +108,7 @@ void World::display()
 		object->draw();
 		glPopMatrix();
 	}
+
 	displayUI(PointCounter::getInstance()->getPoints(), LivesCounter::getInstance()->getLives(), HighScore::getInstance()->getHighScore());
 	glutSwapBuffers();
 }
@@ -120,8 +121,8 @@ void World::reshape(int horizontal, int vertical)
 
 void World::move(const float angle, const float fac)
 {
-	camera.posX += cosf((camera.rotY + angle) / 180 * M_PI) * fac;
-	camera.posY += sinf((camera.rotY + angle) / 180 * M_PI) * fac;
+	camera.posX += cosf(((((camera.rotY + angle) / 180.0f) * (float) M_PI) * fac));
+	camera.posY += sinf(((((camera.rotY + angle) / 180.0f) * (float) M_PI) * fac));
 }
 
 void World::idle(void)
@@ -137,16 +138,12 @@ void World::idle(void)
 	if (keys['S']) move(270, deltaTime*speed);
 	if (keys['Q']) camera.posZ += deltaTime * speed;
 	if (keys['E']) camera.posZ -= deltaTime * speed;
-	if (keys['R'])
+	if (keys['r'])
 	{
-	
 		ball->position = Vec3f(1.5f, -2, 3.5f);
 		ball->velocity = Vec3f(0, 0, 0);
 	}
-	if(keys['B'])
-	{
-		StateManager::getInstance()->setState(new PlayState());
-	}
+	if(keys['b']) StateManager::getInstance()->setState(new PlayState());
 
 	if(!dynamic_cast<HomeState*>(StateManager::getInstance()->getState()))
 		ball->update(deltaTime);
@@ -157,43 +154,23 @@ void World::idle(void)
 		o->update(deltaTime);
 		o->handleEvent(deltaTime);
 	}
-	if (vision.getMotionLeft())
-	{
-		for (auto o : gameObjects)
-		{
-			for (Component* c : o->getComponents())
-			{
-				if (FlipComponent* f = dynamic_cast<FlipComponent*>(c))
-				{
-					if (f->isLeft())
-					{
-						c->setHandle(true);
-					}					
-				}
-			}
-		}
-	}
-	if (vision.getMotionRight())
-	{
-		for (auto o : gameObjects)
-		{
-			for (Component* c : o->getComponents())
-			{
-				if (FlipComponent* f = dynamic_cast<FlipComponent*>(c))
-				{
-					if (!f->isLeft())
-					{
-						c->setHandle(true);
-					}
-				}
-			}
-		}
-	}
 
-	if(ball->position.x < 0)
-	{
+	if (vision.getMotionLeft())
+		for (auto o : gameObjects)
+			for (Component* c : o->getComponents())
+				if (FlipComponent* f = dynamic_cast<FlipComponent*>(c))
+					if (f->isLeft())
+						c->setHandle(true);
+
+	if (vision.getMotionRight())
+		for (auto o : gameObjects)
+			for (Component* c : o->getComponents())
+				if (FlipComponent* f = dynamic_cast<FlipComponent*>(c))
+					if (!f->isLeft())
+						c->setHandle(true);
+
+	if(ball->position.x < -(2.0f * 4 * CAMERA_WIDTH / CAMERA_HEIGHT) / 7.0f)
 		StateManager::getInstance()->setState(new DeathState());
-	}
 
 	glutPostRedisplay();
 }
@@ -208,6 +185,7 @@ void World::keyboard(unsigned char key, int mouseX, int mouseY)
 		default:
 			break;
 	}
+
 	keys[key] = true;
 }
 
@@ -219,47 +197,32 @@ void World::keyboardUp(unsigned char key, int mouseX, int mouseY)
 bool justMovedMouse = false;
 void World::mousePassiveMotion(int x, int y)
 {
-	int dx = x - width / 2;
-	int dy = y - height / 2;
+	/*int dx = x - width / 2,
+		dy = y - height / 2;
 	if ((dx != 0 || dy != 0) && abs(dx) < 400 && abs(dy) < 400 && !justMovedMouse)
 	{
-		if (camera.rotY <= 20) {
+		if (camera.rotY <= 20)
 			camera.rotY = 20;
-		}
-		else if (camera.rotY >= 160) {
+		else if (camera.rotY >= 160)
 			camera.rotY = 160;
-		}
+
 		camera.rotY += dx / 10.0f;
 
-		if (camera.rotX <= -40) {
+		if (camera.rotX <= -40)
 			camera.rotX = -40;
-		}
-		else if (camera.rotX >= 90) {
+		else if (camera.rotX >= 90)
 			camera.rotX = 90;
-		}
+
 		camera.rotX += dy / 10.0f;
-	
 	}
+
 	if (!justMovedMouse)
 	{
 		glutWarpPointer(width / 2, height / 2);
 		justMovedMouse = true;
 	}
 	else
-		justMovedMouse = false;
-}
-
-void World::mouseClick(int button, int state, int x, int y)
-{
-	/*if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
-		for (auto o : gameObjects)
-		{
-			for (auto c : o->getComponents())
-			{
-				c->setHandle(true);
-			}
-		}
-	}*/
+		justMovedMouse = false;*/
 }
 
 void World::displayUI(int points, int lifepoints, int highScore)
@@ -270,6 +233,7 @@ void World::displayUI(int points, int lifepoints, int highScore)
 	glLoadIdentity();
 	glOrtho(0.0, width, height, 0.0, -1.0, 10.0);
 	glMatrixMode(GL_MODELVIEW);
+
 	//glPushMatrix();        ----Not sure if I need this
 	glLoadIdentity();
 	glDisable(GL_CULL_FACE);
@@ -277,7 +241,7 @@ void World::displayUI(int points, int lifepoints, int highScore)
 	glClear(GL_DEPTH_BUFFER_BIT);
 	glRotatef(180, 1, 0, 0);
 	glTranslatef(0, -25, 0);
-	glScalef(0.2, 0.2, 0.2);
+	glScalef(0.2f, 0.2f, 0.2f);
 	std::string tempString = "score: ";
 	tempString = tempString + std::to_string(points);
 	unsigned char score[256];
@@ -299,7 +263,7 @@ void World::displayUI(int points, int lifepoints, int highScore)
 	high[tempString.length()] = 0;
 	glutStrokeString(GLUT_STROKE_ROMAN, high);
 
-	// Making sure we can render 3d again
+	// making sure we can render 3d again
 	glMatrixMode(GL_PROJECTION);
 	glPopMatrix();
 	glMatrixMode(GL_MODELVIEW);
