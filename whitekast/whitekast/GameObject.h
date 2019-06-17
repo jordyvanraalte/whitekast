@@ -87,6 +87,7 @@ public:
 		@return bool.
 	*/
 	void handleEvent(float elapsedTime);
+	void CheckSpeed(float elapsedTime);
 
 	/*
 		Draws the gameObject.

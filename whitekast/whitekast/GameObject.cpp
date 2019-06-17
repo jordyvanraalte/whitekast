@@ -142,19 +142,6 @@ void GameObject::update(float elapsedTime)
 
 	b.applyTime(elapsedTime);
 
-	::Vec2f temp = ::Vec2f(b.x, b.z);
-	if (temp.magnitude() < 0.8f) {
-		temp = ::Vec2f::vectorNormalised(temp);
-		temp = temp * 0.8f;
-	}
-	else if (temp.magnitude() > 3.0f) {
-		temp = ::Vec2f::vectorNormalised(temp);
-		temp = temp * 3.0f;
-	}
-
-	b.x = temp.x;
-	b.z = temp.y;
-
 	position = position + b;
 }
 
@@ -164,4 +151,9 @@ void GameObject::handleEvent(float elapsedTime)
 		return;
 
 	flipComponent->handleEvent(elapsedTime);
+}
+
+void GameObject::CheckSpeed(float elapsedTime)
+{
+	
 }
