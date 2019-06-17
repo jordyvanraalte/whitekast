@@ -15,6 +15,8 @@ public:
 	virtual void shiftColliders(::Vec3f pos) = 0;
 	virtual void flipColliders(::Vec3f pos) {};
 
+	virtual void drawColliders() = 0;
+
 };
 
 class CircleHitbox : public Hitbox
@@ -36,6 +38,7 @@ public:
 	CircleHitbox(::Vec3f pos, float radius, ::Vec3f scale); 
 	~CircleHitbox();
 
+	void drawColliders() override;
 	void shiftColliders(::Vec3f pos) override;
 };
 
@@ -61,6 +64,8 @@ public:
 	~LinesHitbox();
 
 	Hitline hitline;
+
+	void drawColliders() override;
 
 	void shiftColliders(::Vec3f pos) override;
 	void flipColliders(::Vec3f pos) override;

@@ -14,6 +14,8 @@ public:
 	Hitbox* getHitbox() override;
 	Hitbox* getCirclebox() override;
 
+	void drawHitbox() override;
+
 	void update(float elapsedTime) override;
 	void flipHitbox(float x, float y) override;
 };

@@ -10,6 +10,7 @@ class GameObject;
 class StateManager;
 class PointCounter;
 class LivesCounter;
+class HighScore;
 
 class Game
 {
@@ -23,6 +24,7 @@ public:
 	void startVisionThread();
 	void initGlut(const char* title, int argc, char* argv[]);
 	void handleEvents();
+	void death();
 	void reset();
 	void getDesktopResolution(int& horizontal, int& vertical);
 	void stop();
@@ -41,5 +43,6 @@ private:
 	AudioManager* audiomanager;
 	PointCounter* pointCounter;
 	LivesCounter* livesCounter;
+	HighScore*	  highScore;
 	WhitekastVision vision;
 };

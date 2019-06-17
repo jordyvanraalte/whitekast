@@ -20,7 +20,7 @@ bool CollisionManager::isColliding(GameObject *ball, GameObject *object)
 
 	//Check if the circle collide, then enter loop. This increases performance
 	//checkCircleCollision(circleball, circleobject)
-	if(checkCircleCollision(circleball, circleobject))
+	if(true)
 	{
 		CircleHitbox *circle = dynamic_cast<CircleHitbox*>(ball->getHitbox());
 		LinesHitbox *lines = dynamic_cast<LinesHitbox*>(object->getHitbox());
@@ -40,9 +40,12 @@ bool CollisionManager::isColliding(GameObject *ball, GameObject *object)
 			{
 				if (ball->isColliding == false && object->isColliding == false)
 				{
+					std::cout << "collision 1" << "\n";
 					Vec2f temp = Vec2f(ball->velocity.x, ball->velocity.z);
 					Vec2f temp2 = mirrorVectorInLine(temp, line);
-					temp2 = temp2 * object->bounceFactor;
+
+					temp2 = checkSpeed(temp2, object);
+
 					ball->velocity = Vec3f(temp2.x, 0, temp2.y);
 				}
 				ball->isColliding = true;
@@ -56,7 +59,9 @@ bool CollisionManager::isColliding(GameObject *ball, GameObject *object)
 					std::cout << "collision 2" << "\n";
 					Vec2f temp = Vec2f(ball->velocity.x, ball->velocity.z);
 					Vec2f temp2 = mirrorVectorInLine(temp, line);
-					temp2 = temp2 * object->bounceFactor;
+
+					temp2 = checkSpeed(temp2, object);
+
 					ball->velocity = Vec3f(temp2.x, 0, temp2.y);
 					
 				}
@@ -83,7 +88,9 @@ bool CollisionManager::isColliding(GameObject *ball, GameObject *object)
 						std::cout << "collision 3" << "\n";
 						Vec2f temp = Vec2f(ball->velocity.x, ball->velocity.z);
 						Vec2f temp2 = mirrorVectorInLine(temp, line);
-						temp2 = temp2 * object->bounceFactor;
+
+						temp2 = checkSpeed(temp2, object);
+
 						ball->velocity = Vec3f(temp2.x, 0, temp2.y);
 					}
 					ball->isColliding = true;
@@ -102,7 +109,6 @@ bool CollisionManager::isColliding(GameObject *ball, GameObject *object)
 
 bool CollisionManager::isPointOnLine(Vec2f point1, Vec2f point2, float px, float py)
 {
-
 	float x1 = point1.x;
 	float x2 = point2.x;
 	float y1 = point1.y;
@@ -179,5 +185,15 @@ double CollisionManager::distanceSquared(int x1, int y1, int x2, int y2)
 	int deltaX = x2 - x1;
 	int deltaY = y2 - y1;
 	return deltaX * deltaX + deltaY * deltaY;
+}
+
+Vec2f CollisionManager::checkSpeed(Vec2f b, GameObject *object)
+{
+	if(b.magnitude() > 0.3 && b.magnitude() < 3)
+	{
+		b = b * object->bounceFactor;
+	}
+
+	return b;
 }
 

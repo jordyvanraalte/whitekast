@@ -159,9 +159,6 @@
     <ClInclude Include="WorldComponent.h">
       <Filter>Header Files\game\components\DrawComponents</Filter>
     </ClInclude>
-    <ClInclude Include="CollisionManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="DeathState.h">
       <Filter>Header Files\game\states</Filter>
     </ClInclude>
@@ -178,6 +175,12 @@
       <Filter>Header Files\game</Filter>
     </ClInclude>
     <ClInclude Include="Vec.h">
+      <Filter>Header Files\math</Filter>
+    </ClInclude>
+    <ClInclude Include="HighScore.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionManager.h">
       <Filter>Header Files\math</Filter>
     </ClInclude>
   </ItemGroup>
@@ -257,9 +260,6 @@
     <ClCompile Include="WorldComponent.cpp">
       <Filter>Source Files\game\components\DrawComponents</Filter>
     </ClCompile>
-    <ClCompile Include="CollisionManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GameOverState.cpp">
       <Filter>Source Files\game\states</Filter>
     </ClCompile>
@@ -276,6 +276,12 @@
       <Filter>Source Files\game</Filter>
     </ClCompile>
     <ClCompile Include="Vec.cpp">
+      <Filter>Source Files\math</Filter>
+    </ClCompile>
+    <ClCompile Include="HighScore.cpp">
+      <Filter>Source Files\game</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionManager.cpp">
       <Filter>Source Files\math</Filter>
     </ClCompile>
   </ItemGroup>

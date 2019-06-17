@@ -23,6 +23,7 @@
 #include "CollisionManager.h"
 #include "PointCounter.h"
 #include "LivesCounter.h"
+#include "HighScore.h"
 #include <thread> 
 #include <math.h>  
 
@@ -45,11 +46,11 @@ Game::Game(const char * title, int argc, char * argv[])
 	audiomanager = AudioManager::getInstance();
 	pointCounter = PointCounter::getInstance();
 	livesCounter = LivesCounter::getInstance();
-
+	highScore =	   HighScore::getInstance();
 	StateManager::getInstance();
 
 	CollisionManager* collision = new CollisionManager();
-	//audiomanager->playMusic("Audio/busta_loop.WAV");
+	audiomanager->playMusic("Audio/busta_loop.WAV");
 }
 
 Game::~Game()
@@ -92,7 +93,7 @@ void Game::initGlut(const char * title, int argc, char * argv[])
 			gameObject->bounceFactor = 1.5f;
 		}
 		else
-			gameObject->bounceFactor = 1.0f;
+			gameObject->bounceFactor = 0.5f;
 		gameObject->isCollider = true;
 		objects.push_back(gameObject);
 	}
@@ -120,14 +121,21 @@ void Game::initGlut(const char * title, int argc, char * argv[])
 void Game::handleEvents() 
 {
 	pointCounter->hitFlipper();
-	StateManager::getInstance()->handle(this);
-	
+	StateManager::getInstance()->handle(this);	
+}
+
+void Game::death()
+{
+	ball->position = Vec3f(5.0f, -2, 1.5f);
+	ball->velocity = Vec3f(0, 0, 0);
 }
 
 void Game::reset()
 {
 	livesCounter->resetLives();
 	pointCounter->resetPoints();
+	ball->position = Vec3f(5.0f, -2, 1.5f);
+	ball->velocity = Vec3f(0, 0, 0);
 	StateManager::getInstance()->setState(new HomeState());
 }
 
@@ -149,9 +157,9 @@ void Game::initObjects()
 {
 	ball = new GameObject(true);
 	ball->addComponent(new ModelComponent("Models/Pinballs/pinball_3.1.obj", ball));
-	ball->position = ::Vec3f(3, -2, 3.5f);
+	ball->position = ::Vec3f(5, -2, 3.5f);
 	ball->scale = ::Vec3f(0.1f, 0.1f, 0.1f);
-	ball->addComponent(new GravityComponent(::Vec3f(-0.3, 0, 0)));
+	ball->addComponent(new GravityComponent(::Vec3f(-1.8, 0, 0)));
 	ball->addComponent(new CircleCollideComponent(ball));
 
 	Texture texture1 = Texture("Textures/LeftWall.png");
@@ -163,7 +171,7 @@ void Game::initObjects()
 	GameObject* roomCube = new GameObject(false);
 	roomCube->addComponent(new WorldComponent(10, texture1, texture2, texture3, texture4, texture5));
 	roomCube->position = ::Vec3f(0, 0, 0);
-	//objects.push_back(roomCube);
+	objects.push_back(roomCube);
 }
 
 void Game::initFlippers()

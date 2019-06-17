@@ -63,6 +63,8 @@ void GameObject::draw()
 		glColor3f(color.x, color.y, color.z);
 		drawComponent->draw();
 		glPopMatrix();
+		if (collideComponent)
+			collideComponent->drawHitbox();
 	}
 	else {
 		glPushMatrix();
@@ -74,6 +76,8 @@ void GameObject::draw()
 		glScalef(scale.x, scale.y, scale.z);
 		model->draw();
 		glPopMatrix();
+		if (collideComponent)
+			collideComponent->drawHitbox();
 	}
 }
 
@@ -136,6 +140,7 @@ void GameObject::update(float elapsedTime)
 		c->update(elapsedTime);
 
 	vectemp = velocity;
+
 	vectemp.applyTime(elapsedTime);
 
 	position = position + vectemp;

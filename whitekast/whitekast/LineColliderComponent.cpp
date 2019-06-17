@@ -50,6 +50,12 @@ Hitbox* LineCollideComponent::getCirclebox()
 	return circle;
 }
 
+void LineCollideComponent::drawHitbox()
+{
+	hitbox->drawColliders();
+	//circle->drawColliders();
+}
+
 void LineCollideComponent::update(float elapsedTime)
 {
 	hitbox->shiftColliders(gameObject->position);
