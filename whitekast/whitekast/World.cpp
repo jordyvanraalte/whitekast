@@ -12,16 +12,12 @@
 #include "FlipComponent.h"
 #include "Game.h"
 #include "HomeState.h"
+#include "PlayState.h"
+#include "DeathState.h"
 
-std::list<GameObject*> gameObjects;
-WhitekastVision vision;
-float lastFrameTime;
 
-float lookAtX;
-float lookAtY;
-bool keys[255];
 static World* world;
-int width, height;
+
 
 struct Camera
 {
@@ -52,6 +48,7 @@ World::World(int horizontal, int vertical, std::list<GameObject*>& objectlist, W
 
 World::~World() 
 {
+	delete ball;
 	delete world;
 }
 

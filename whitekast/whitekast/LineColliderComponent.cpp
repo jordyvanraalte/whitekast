@@ -38,7 +38,11 @@ LineCollideComponent::LineCollideComponent(GameObject* gameobject, float wkscale
 }
 
 LineCollideComponent::~LineCollideComponent()
-= default;
+{
+	delete hitbox;
+	delete circle;
+	delete gameObject;
+}
 
 Hitbox* LineCollideComponent::getHitbox()
 {

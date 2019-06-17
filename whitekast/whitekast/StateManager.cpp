@@ -1,7 +1,7 @@
 #include "StateManager.h"
 #include "HomeState.h"
 
-static StateManager* instance;
+static StateManager* stateManager;
 StateManager::StateManager()
 {
 	state = new HomeState();
@@ -9,6 +9,8 @@ StateManager::StateManager()
 
 StateManager::~StateManager()
 {
+	delete stateManager;
+	delete state;
 }
 
 void StateManager::setState(State *state)
@@ -31,9 +33,9 @@ void StateManager::handle(Game* game)
 
 StateManager* StateManager::getInstance()
 {
-	if(instance == nullptr)
+	if(stateManager == nullptr)
 	{
-		instance = new StateManager();
+		stateManager = new StateManager();
 	}
-	return instance;
+	return stateManager;
 }

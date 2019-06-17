@@ -8,7 +8,7 @@ CubeComponent::CubeComponent(const float size)
 
 CubeComponent::~CubeComponent()
 {
-
+	
 }
 
 void CubeComponent::draw()

@@ -57,13 +57,6 @@ public:
 	*/
 	void addComponent(Component* component);
 
-	/*
-		Loads a model in to the gameObject.
-
-		@param fileName - searces the file name to load the model in the file
-		@return bool.
-	*/
-	void loadModel(const std::string& fileName);
 
 	/*
 		Returns the componentlist
@@ -88,7 +81,6 @@ public:
 		@return bool.
 	*/
 	void handleEvent(float elapsedTime);
-	void CheckSpeed(float elapsedTime);
 
 	/*
 		Draws the gameObject.

@@ -14,7 +14,7 @@ using namespace chrono;
 
 Mat redFrame, greenFrame, blueFrame;
 vector<WhitekastObject*> visionObjects;
-VideoCapture vCap(1);
+VideoCapture vCap(0);
 
 atomic<bool> movingLeft,
 	movingRight;

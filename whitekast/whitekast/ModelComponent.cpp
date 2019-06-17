@@ -8,7 +8,9 @@ ModelComponent::ModelComponent(std::string path, GameObject* gameobject)
 }
 
 ModelComponent::~ModelComponent()
-= default;
+{
+	delete gameObject;
+}
 
 void ModelComponent::draw()
 {

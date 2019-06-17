@@ -14,7 +14,6 @@ WorldComponent::WorldComponent(float size, Texture texture1, Texture texture2, T
 
 WorldComponent::~WorldComponent()
 {
-
 }
 
 void WorldComponent::draw() 

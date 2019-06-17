@@ -2,7 +2,6 @@
 
 #include "WhitekastObject.h"
 #include "WhitekastVision.h"
-#include "DeathState.h"
 
 class World;
 class AudioManager;
@@ -45,4 +44,8 @@ private:
 	LivesCounter* livesCounter;
 	HighScore*	  highScore;
 	WhitekastVision vision;
+	GameObject* ball;
+
+	int horizontal = 0;
+	int vertical = 0;
 };

@@ -23,6 +23,8 @@ class World
 	bool keys[255];
 	int width, height;
 
+	WhitekastVision vision;
+
 public:
 	World(int horizontal, int vertical, std::list<GameObject*>& objectlist, WhitekastVision whitekastVision, GameObject* ball);
 	~World();

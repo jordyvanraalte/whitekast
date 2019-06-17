@@ -19,6 +19,14 @@ GameObject::GameObject(bool isVisionObject)
 
 GameObject::~GameObject()
 {
+	delete drawComponent;
+	delete collideComponent;
+	delete flipComponent;
+	for(auto c : components)
+	{
+		delete c;
+	}
+	delete model;
 
 }
 
@@ -36,10 +44,6 @@ void GameObject::addComponent(Component* component)
 	if (!collideComponent)
 		collideComponent = dynamic_cast<CollideComponent*>(component);
 	
-}
-
-void GameObject::loadModel(const std::string& fileName)
-{
 }
 
 std::list<Component*> GameObject::getComponents()
@@ -152,8 +156,4 @@ void GameObject::handleEvent(float elapsedTime)
 		return;
 
 	flipComponent->handleEvent(elapsedTime);
-}
-
-void GameObject::CheckSpeed(float elapsedTime)
-{
 }

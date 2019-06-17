@@ -1,19 +1,15 @@
 #include <GL/freeglut.h>
 #include <vector>
-#include <iostream>
 #include <thread> 
-#include <math.h>
 #include "Game.h"
 #include "wtypes.h"
 #include "GameObject.h"
 #include "WhitekastObject.h"
 #include "WhitekastVision.h"
-#include "CubeComponent.h"
 #include "WorldComponent.h"
 #include "FlipComponent.h"
 #include "GravityComponent.h"
 #include "ModelComponent.h"
-#include "CollideComponent.h"
 #include "CircleCollideComponent.h"
 #include "LineColliderComponent.h"
 #include "Vec.h"
@@ -25,21 +21,13 @@
 #include "PointCounter.h"
 #include "LivesCounter.h"
 #include "HighScore.h"
-#include <thread> 
-
-std::list<GameObject*> objects;
-GameObject* ball;
 
 static World* world;
-static Game* instance;
-
-int horizontal = 0;
-int vertical = 0;
-
+static Game* game;
 
 Game::Game(const char * title, int argc, char * argv[])
 {
-	instance = this;
+	game = this;
 	initGlut(title, argc, argv);
 	initObjects();
 	world = new World(horizontal, vertical, objects, vision, ball);
@@ -57,7 +45,13 @@ Game::Game(const char * title, int argc, char * argv[])
 Game::~Game()
 {
 	delete world;
-	delete instance;
+	delete game;
+	std::list<GameObject*> objects;
+	delete audiomanager;
+	delete pointCounter;
+	delete livesCounter;
+	delete highScore;
+	delete ball;
 }
 
 void Game::startGame()
@@ -225,5 +219,5 @@ void Game::initFlippers()
 
 Game* Game::getInstance()
 {
-	return instance;
+	return game;
 }
