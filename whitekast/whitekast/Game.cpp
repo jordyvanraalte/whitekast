@@ -156,7 +156,7 @@ void Game::initObjects()
 	ball->addComponent(new ModelComponent("Models/Pinballs/pinball_3.1.obj", ball));
 	ball->position = ::Vec3f(4.85f, -2.0f, 3.75f);
 	ball->scale = ::Vec3f(0.08f, 0.08f, 0.08f);
-	ball->color = ::Vec3f(1.0f, 1.0f, 0.0f);
+	ball->color = ::Vec3f(0.85f, 0.0f, 0.85f);
 	ball->addComponent(new GravityComponent(::Vec3f(-1.8, 0, 0)));
 	ball->addComponent(new CircleCollideComponent(ball));
 

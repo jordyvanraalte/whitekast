@@ -43,7 +43,7 @@ void FlipComponent::handleEvent(float elapsedTime)
 			if (up)
 			{
 				gameObject->rotation.y += elapsedTime * (speed * 2);
-				gameObject->bounceFactor = 2.5f;
+				gameObject->bounceFactor = 2.51f;
 			}
 			else
 			{

@@ -40,7 +40,7 @@ bool CollisionManager::isColliding(GameObject *ball, GameObject *object)
 				if (ball->isColliding == false && object->isColliding == false)
 				{
 					Vec2f temp = Vec2f(ball->velocity.x, ball->velocity.z),
-						temp2 = mirrorVectorInLine(temp, line);
+						temp2 = mirrorVectorInLine(temp, line, object);
 
 					temp2 = checkSpeed(temp2, object);
 
@@ -68,7 +68,7 @@ bool CollisionManager::isColliding(GameObject *ball, GameObject *object)
 				if (ball->isColliding == false && object->isColliding == false)
 				{
 					Vec2f temp = Vec2f(ball->velocity.x, ball->velocity.z),
-						temp2 = mirrorVectorInLine(temp, line);
+						temp2 = mirrorVectorInLine(temp, line, object);
 
 					temp2 = checkSpeed(temp2, object);
 
@@ -108,7 +108,7 @@ bool CollisionManager::isColliding(GameObject *ball, GameObject *object)
 					if (ball->isColliding == false && object->isColliding == false)
 					{
 						Vec2f temp = Vec2f(ball->velocity.x, ball->velocity.z),
-							temp2 = mirrorVectorInLine(temp, line);
+							temp2 = mirrorVectorInLine(temp, line, object);
 
 						temp2 = checkSpeed(temp2, object);
 
@@ -169,7 +169,7 @@ bool CollisionManager::isPointInCircle(Vec2f point, float cx, float cy, float r)
 	return distance <= r;
 }
 
-Vec2f CollisionManager::mirrorVectorInLine(::Vec2f d, LinesHitbox::Hitline b) const
+Vec2f CollisionManager::mirrorVectorInLine(::Vec2f d, LinesHitbox::Hitline b, GameObject* obj) const
 {
 	std::cout << "vector xy : " << d.x << "," << d.y << "\n";
 	std::cout << "point1 xy : " << b.point1.x << "," << b.point1.y << "\n";
@@ -210,6 +210,15 @@ Vec2f CollisionManager::mirrorVectorInLine(::Vec2f d, LinesHitbox::Hitline b) co
 	{
 		mirroredVec.x = mirroredVec.x + 0.5f;
 		std::cout << "Angle change xy : " << mirroredVec.x << "," << mirroredVec.y << "\n";
+	}
+
+	if (obj->bounceFactor == 2.51f)
+	{
+		mirroredVec = normal * mirroredVec.magnitude();
+	}
+	else if (obj->bounceFactor == 2.5f)
+	{
+		mirroredVec = normal * -mirroredVec.magnitude();
 	}
 
 	return mirroredVec;

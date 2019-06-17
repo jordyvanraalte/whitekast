@@ -15,13 +15,13 @@ CircleHitbox::CircleHitbox(Vec3f pos, float d, Vec3f scale)
 
 void CircleHitbox::drawColliders()
 {
-	glColor3f(0, 0, 1);
+	/*glColor3f(0, 0, 1);
 	glBegin(GL_LINES);
 
 	glVertex3f(circle.x, -1.8f, circle.y);
 	glVertex3f(circle.x-circle.r, -1.8f, circle.y+circle.r);
 
-	glEnd();
+	glEnd();*/
 }
 
 void CircleHitbox::shiftColliders(Vec3f pos)
@@ -71,7 +71,8 @@ void LinesHitbox::drawColliders()
 {
 	for (Hitline line : hitlines)
 	{
-		glColor3f(0, 0, 1);
+		glColor3f(0, 0, 0);
+		glLineWidth(2.5f);
 		glBegin(GL_LINES);
 
 		glVertex3f(line.point1.x, -1.8f, line.point1.y);
