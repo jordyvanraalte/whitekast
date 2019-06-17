@@ -25,7 +25,6 @@
 #include "LivesCounter.h"
 #include "HighScore.h"
 #include <thread> 
-#include <math.h>  
 
 std::list<GameObject*> objects;
 GameObject* ball;
@@ -158,7 +157,8 @@ void Game::initObjects()
 	ball = new GameObject(true);
 	ball->addComponent(new ModelComponent("Models/Pinballs/pinball_3.1.obj", ball));
 	ball->position = ::Vec3f(5, -2, 3.5f);
-	ball->scale = ::Vec3f(0.1f, 0.1f, 0.1f);
+	ball->scale = ::Vec3f(0.08f, 0.08f, 0.08f);
+	ball->color = ::Vec3f(1.0f, 1.0f, 0.0f);
 	ball->addComponent(new GravityComponent(::Vec3f(-1.8, 0, 0)));
 	ball->addComponent(new CircleCollideComponent(ball));
 
@@ -178,7 +178,7 @@ void Game::initFlippers()
 {
 	::Vec3f scale = ::Vec3f(0.1, 0.1, 0.1);
 	GameObject* flipperLeft = new GameObject(true);
-	flipperLeft->color = ::Vec3f(0.0f, 0.0f, 0.0f);
+	flipperLeft->color = ::Vec3f(0.0f, 1.0f, 1.0f);
 	flipperLeft->addComponent(new ModelComponent("Models/Flippers/flipperblend.obj", flipperLeft));
 	flipperLeft->position = ::Vec3f(0.875f, -2, 1.4f);
 	flipperLeft->rotationPoint = ::Vec3f(flipperLeft->position.x - 0.2f, flipperLeft->position.y, flipperLeft->position.z);
@@ -187,16 +187,18 @@ void Game::initFlippers()
 	flipperLeft->bounceFactor = 2.0f;
 	flipperLeft->addComponent(new FlipComponent(true));
 	std::vector<cv::Point> flipperLeftCoordinates;
-	/*flipperLeftCoordinates.push_back(cv::Point((flipperLeft->rotationPoint.x + 0.1)*100, flipperLeft->rotationPoint.z*100));
-	flipperLeftCoordinates.push_back(cv::Point((flipperLeft->rotationPoint.x + 0.1 - (sin(15)*0.3f)) *100,(flipperLeft->rotationPoint.z + (cos(15) *0.3f))*100));*/
-	flipperLeftCoordinates.push_back(cv::Point((flipperLeft->rotationPoint.x + 0.1)*100, flipperLeft->rotationPoint.z*100));
-	flipperLeftCoordinates.push_back(cv::Point((flipperLeft->rotationPoint.x + 0.1) *100,(flipperLeft->rotationPoint.z + 0.3f)*100));
+	flipperLeftCoordinates.push_back(cv::Point(flipperLeft->rotationPoint.x * 100, flipperLeft->rotationPoint.z * 100));
+	flipperLeftCoordinates.push_back(cv::Point(flipperLeft->rotationPoint.x*100, flipperLeft->rotationPoint.z*100));
 	flipperLeft->setCoordinates(flipperLeftCoordinates);
-	flipperLeft->addComponent(new LineCollideComponent(flipperLeft, 0.1));
+	LineCollideComponent* l = new LineCollideComponent(flipperLeft, 0.1f);
+	float newX = -(sin((flipperLeft->rotation.y - 90) * DEG_TO_RAD) * 0.4f);
+	float newZ = -(cos((flipperLeft->rotation.y - 90) * DEG_TO_RAD) * 0.4f);
+	l->flipHitbox(newX, newZ);
+	flipperLeft->addComponent(l);
 	objects.push_back(flipperLeft);
 
 	GameObject* flipperRight = new GameObject(true);
-	flipperRight->color = ::Vec3f(0.0f, 0.0f, 0.0f);
+	flipperRight->color = ::Vec3f(0.0f, 1.0f, 1.0f);
 	flipperRight->addComponent(new ModelComponent("Models/Flippers/flipperblend.obj", flipperRight));
 	flipperRight->position = ::Vec3f(0.875f, -2, 2.595f);
 	flipperRight->scale = scale;
@@ -205,12 +207,14 @@ void Game::initFlippers()
 	flipperRight->bounceFactor = 2.0f;
 	flipperRight->addComponent(new FlipComponent(false));
 	std::vector<cv::Point> flipperRightCoordinates;
-	/*flipperRightCoordinates.push_back(cv::Point((flipperRight->rotationPoint.x + 0.1) *100, flipperRight->rotationPoint.z*100));
-	flipperRightCoordinates.push_back(cv::Point((flipperRight->rotationPoint.x + 0.1 - (sin(15)*0.3f)) * 100, (flipperRight->rotationPoint.z - (cos(15) *0.3f)) * 100));*/
-	flipperRightCoordinates.push_back(cv::Point((flipperRight->rotationPoint.x + 0.1) *100, flipperRight->rotationPoint.z*100));
-	flipperRightCoordinates.push_back(cv::Point((flipperRight->rotationPoint.x + 0.1) * 100, (flipperRight->rotationPoint.z - 0.3f) * 100));
+	flipperRightCoordinates.push_back(cv::Point(flipperRight->rotationPoint.x * 100, flipperRight->rotationPoint.z * 100));
+	flipperRightCoordinates.push_back(cv::Point(flipperRight->rotationPoint.x *100, flipperRight->rotationPoint.z*100));
 	flipperRight->setCoordinates(flipperRightCoordinates);
-	flipperRight->addComponent(new LineCollideComponent(flipperRight, 0.1f));
+	l = new LineCollideComponent(flipperRight, 0.1f);
+	newX = -(sin((flipperRight->rotation.y - 90) * DEG_TO_RAD) * 0.4f);
+	newZ = -(cos((flipperRight->rotation.y - 90) * DEG_TO_RAD) * 0.4f);
+	l->flipHitbox(newX, newZ);
+	flipperRight->addComponent(l);
 	objects.push_back(flipperRight);
 }
 
