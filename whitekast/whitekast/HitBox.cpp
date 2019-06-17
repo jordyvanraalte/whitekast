@@ -1,13 +1,9 @@
-#include "Hitbox.h"
 #include <GL/freeglut.h>
+#include "Hitbox.h"
 
-Hitbox::Hitbox()
-{
-}
+Hitbox::Hitbox() { }
 
-Hitbox::~Hitbox()
-{
-}
+Hitbox::~Hitbox() { }
 
 CircleHitbox::CircleHitbox(Vec3f pos, float d, Vec3f scale)
 {
@@ -22,8 +18,8 @@ void CircleHitbox::drawColliders()
 	glColor3f(0, 0, 1);
 	glBegin(GL_LINES);
 
-	glVertex3f(circle.x, -1.8, circle.y);
-	glVertex3f(circle.x-circle.r, -1.8, circle.y+circle.r);
+	glVertex3f(circle.x, -1.8f, circle.y);
+	glVertex3f(circle.x-circle.r, -1.8f, circle.y+circle.r);
 
 	glEnd();
 }
@@ -78,8 +74,8 @@ void LinesHitbox::drawColliders()
 		glColor3f(0, 0, 1);
 		glBegin(GL_LINES);
 
-		glVertex3f(line.point1.x, -1.8, line.point1.y);
-		glVertex3f(line.point2.x, -1.8, line.point2.y);
+		glVertex3f(line.point1.x, -1.8f, line.point1.y);
+		glVertex3f(line.point2.x, -1.8f, line.point2.y);
 
 		glEnd();
 	}
@@ -99,15 +95,18 @@ void LinesHitbox::shiftColliders(Vec3f pos)
 
 void LinesHitbox::flipColliders(::Vec3f pos)
 {	
-		hitline.point2.x += pos.x * 0.01;
-		hitline.point2.y += pos.z * 0.01;
+		hitline.point2.x += pos.x * 0.01f;
+		hitline.point2.y += pos.z * 0.01f;
+
 		glBegin(GL_QUADS);
+
 		glColor3f(0, 0, 1);
 		glVertex3f(hitline.point1.x, 0, hitline.point1.y);
 		glVertex3f(hitline.point2.x, 0, hitline.point2.y);
 		glVertex3f(hitline.point2.x, 5, hitline.point2.y);
 		glVertex3f(hitline.point1.x, 5, hitline.point1.y);
+
 		glEnd();
-		hitlines.at(0) = hitline;	
-		int x = 0;
+		
+		hitlines.at(0) = hitline;
 }
