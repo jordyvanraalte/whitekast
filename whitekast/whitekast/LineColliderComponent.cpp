@@ -58,7 +58,7 @@ void LineCollideComponent::drawHitbox()
 
 void LineCollideComponent::update(float elapsedTime)
 {
-	hitbox->shiftColliders(gameObject->position);
+	//hitbox->shiftColliders(gameObject->position);
 }
 
 void LineCollideComponent::flipHitbox(float x, float z)

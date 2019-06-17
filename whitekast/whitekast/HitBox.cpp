@@ -95,18 +95,8 @@ void LinesHitbox::shiftColliders(Vec3f pos)
 
 void LinesHitbox::flipColliders(::Vec3f pos)
 {	
-		hitline.point2.x += pos.x * 0.01f;
-		hitline.point2.y += pos.z * 0.01f;
-
-		glBegin(GL_QUADS);
-
-		glColor3f(0, 0, 1);
-		glVertex3f(hitline.point1.x, 0, hitline.point1.y);
-		glVertex3f(hitline.point2.x, 0, hitline.point2.y);
-		glVertex3f(hitline.point2.x, 5, hitline.point2.y);
-		glVertex3f(hitline.point1.x, 5, hitline.point1.y);
-
-		glEnd();
+		hitline.point2.x = hitline.point1.x + pos.x;
+		hitline.point2.y = hitline.point1.y + pos.z;
 		
-		hitlines.at(0) = hitline;
+		hitlines.at(0) = hitline;	
 }

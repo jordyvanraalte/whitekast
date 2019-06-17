@@ -11,7 +11,6 @@ GameObject::GameObject(bool isVisionObject)
 	position = Vec3f(0, 0, 0);
 	rotation = Vec3f(0, 0, 0);
 	scale = Vec3f(1, 1, 1);
-	bounceFactor = 1.0f;
 	this->isVisionObject = isVisionObject;
 	rotationPoint = position;
 	isCollider = false;
@@ -61,7 +60,6 @@ void GameObject::draw()
 		glRotatef(rotation.z, 0, 0, 1);
 		glTranslatef(position.x - rotationPoint.x, position.y - rotationPoint.y, position.z - rotationPoint.z);
 		glScalef(scale.x, scale.y, scale.z);
-		glColor3f(color.x, color.y, color.z);
 		drawComponent->draw();
 		glPopMatrix();
 		if (collideComponent)
@@ -75,6 +73,7 @@ void GameObject::draw()
 		glRotatef(rotation.z, 0, 0, 1);
 		glTranslatef(position.x - rotationPoint.x, position.y - rotationPoint.y, position.z - rotationPoint.z);
 		glScalef(scale.x, scale.y, scale.z);
+		glColor3f(color.x, color.y, color.z);
 		model->draw();
 		glPopMatrix();
 		if (collideComponent)
@@ -140,11 +139,11 @@ void GameObject::update(float elapsedTime)
 	for (auto c : components)
 		c->update(elapsedTime);
 
-	vectemp = velocity;
+	b = velocity;
 
-	vectemp.applyTime(elapsedTime);
+	b.applyTime(elapsedTime);
 
-	position = position + vectemp;
+	position = position + b;
 }
 
 void GameObject::handleEvent(float elapsedTime)
@@ -153,4 +152,8 @@ void GameObject::handleEvent(float elapsedTime)
 		return;
 
 	flipComponent->handleEvent(elapsedTime);
+}
+
+void GameObject::CheckSpeed(float elapsedTime)
+{
 }

@@ -26,7 +26,8 @@ class GameObject
 	CollideComponent* collideComponent = nullptr;
 
 	std::list<Component*> components;
-	::Vec3f vectemp;
+	
+	::Vec3f b;
 
 public:
 	GameObject(bool isVisionObject);
@@ -87,6 +88,7 @@ public:
 		@return bool.
 	*/
 	void handleEvent(float elapsedTime);
+	void CheckSpeed(float elapsedTime);
 
 	/*
 		Draws the gameObject.

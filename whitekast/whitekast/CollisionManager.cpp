@@ -1,5 +1,6 @@
 #include <iostream>
 #include "CollisionManager.h"
+#include "FlipComponent.h"
 
 #include "CollisionManager.h"
 #include "PointCounter.h"
@@ -187,10 +188,29 @@ Vec2f CollisionManager::mirrorVectorInLine(::Vec2f d, LinesHitbox::Hitline b) co
 	// our normal normalised
 	::Vec2f normal(Vec2f::vectorNormalised(n));
 
-	// test Formula 2
+	float value = Vec2f::vectorDotProduct(d, normal);
+
+	float rad = value / (d.magnitude() * normal.magnitude());
+
+	float angle = acos(rad) * 180.0f / PI;
+
+	if(angle > 90)
+	{
+		angle = 180 - angle;
+	}
+
+	std::cout << "angle : " << angle << "\n";
+
+	//Test Formula 2
 	::Vec2f mirroredVec = d - 2 * normal * (Vec2f::vectorDotProduct(normal, d));
 
 	std::cout << "Mirrored vector xy : " << mirroredVec.x << "," << mirroredVec.y << "\n";
+
+	if (angle > 80)
+	{
+		mirroredVec.x = mirroredVec.x + 0.5f;
+		std::cout << "Angle change xy : " << mirroredVec.x << "," << mirroredVec.y << "\n";
+	}
 
 	return mirroredVec;
 }
@@ -221,7 +241,18 @@ float CollisionManager::distanceSquared(float x1, float y1, float x2, float y2)
 
 Vec2f CollisionManager::checkSpeed(Vec2f b, GameObject *object)
 {
-	if(b.magnitude() > 0.3 && b.magnitude() < 3)
+
+	if (b.magnitude() <= 1.0f) {
+		b = ::Vec2f::vectorNormalised(b);
+		b = b * 1.1f;
+	}
+	
+	if (b.magnitude() >= 3.0f) {
+		b = ::Vec2f::vectorNormalised(b);
+		b = b * 2.9f;
+	}
+
+	if(b.magnitude() > 1.0f && b.magnitude() < 3.0f)
 	{
 		b = b * object->bounceFactor;
 	}

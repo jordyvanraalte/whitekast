@@ -5,7 +5,7 @@
 
 class FlipComponent : public Component
 {
-	float speed = 100.0f;
+	float speed = 200.0f;
 	bool up = true;
 	bool flipping = false;
 	bool left = true;
