@@ -13,6 +13,8 @@ StateManager::~StateManager()
 
 void StateManager::setState(State *state)
 {
+	delete this->state;
+	this->state = nullptr;
 	this->state = state;
 }
 
@@ -26,8 +28,6 @@ void StateManager::handle(Game* game)
 {
 	this->state->handle(game);
 }
-
-
 
 StateManager* StateManager::getInstance()
 {
