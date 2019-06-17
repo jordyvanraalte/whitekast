@@ -1,5 +1,4 @@
 #include <GL/freeglut.h>
-#include <math.h>
 #include <vector>
 #include <iostream>
 #include <thread> 
@@ -126,7 +125,7 @@ void Game::handleEvents()
 
 void Game::death()
 {
-	ball->position = Vec3f(5.0f, -2, 1.5f);
+	ball->position = Vec3f(4.75f, -2.0f, 0.5f);
 	ball->velocity = Vec3f(0, 0, 0);
 }
 
@@ -134,7 +133,7 @@ void Game::reset()
 {
 	livesCounter->resetLives();
 	pointCounter->resetPoints();
-	ball->position = Vec3f(7.0f, -2, 1.5f);
+	ball->position = Vec3f(4.75f, -2.0f, 0.5f);
 	ball->velocity = Vec3f(0, 0, 0);
 	StateManager::getInstance()->setState(new HomeState());
 }
@@ -157,7 +156,7 @@ void Game::initObjects()
 {
 	ball = new GameObject(true);
 	ball->addComponent(new ModelComponent("Models/Pinballs/pinball_3.1.obj", ball));
-	ball->position = ::Vec3f(10, -2, 3.5f);
+	ball->position = ::Vec3f(4.75f, -2.0f, 0.5f);
 	ball->scale = ::Vec3f(0.08f, 0.08f, 0.08f);
 	ball->color = ::Vec3f(1.0f, 1.0f, 0.0f);
 	ball->addComponent(new GravityComponent(::Vec3f(-1.8, 0, 0)));

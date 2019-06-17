@@ -182,7 +182,7 @@ Vec2f CollisionManager::mirrorVectorInLine(::Vec2f d, LinesHitbox::Hitline b) co
 
 	if (angle > 80)
 	{
-		mirroredVec.x = mirroredVec.x + 0.12f;
+		mirroredVec.x = mirroredVec.x + 0.5f;
 		std::cout << "Angle change xy : " << mirroredVec.x << "," << mirroredVec.y << "\n";
 	}
 
