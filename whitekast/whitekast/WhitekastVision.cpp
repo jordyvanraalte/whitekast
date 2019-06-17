@@ -1,48 +1,45 @@
-#include "WhitekastObject.h"
 #include <iostream>
 #include <string>
-#include "WhitekastVision.h"
 #include <stdlib.h>
 #include <chrono>
 #include <thread>
 #include <atomic>
+#include "WhitekastVision.h"
+#include "WhitekastObject.h"
 
 using namespace cv;
 using namespace std;
-using namespace std::this_thread;
-using namespace std::chrono;
+using namespace this_thread;
+using namespace chrono;
 
 Mat redFrame, greenFrame, blueFrame;
 vector<WhitekastObject*> visionObjects;
 VideoCapture vCap(0);
 
-std::atomic<bool> movingLeft;
-std::atomic<bool> movingRight;
+atomic<bool> movingLeft,
+	movingRight;
 const int minMotion = -15000;
 
-WhitekastVision::WhitekastVision()
-{
-}
 
-WhitekastVision::~WhitekastVision()
-{
-}
+WhitekastVision::WhitekastVision() { }
+
+WhitekastVision::~WhitekastVision() { }
 
 vector<WhitekastObject*> WhitekastVision::initVision()
 {
 	if (!vCap.isOpened())
 	{
-		std::cout << "Cannot open the video cam" << std::endl;
+		cout << "Cannot open the video cam" << endl;
 		exit(0);
 	}
-	double dWidth = vCap.get(CV_CAP_PROP_FRAME_WIDTH);
-	double dHeight = vCap.get(CV_CAP_PROP_FRAME_HEIGHT);
-	std::cout << "Frame size : " << dWidth << " x " << dHeight << std::endl;
+
+	double dWidth = vCap.get(CV_CAP_PROP_FRAME_WIDTH),
+		dHeight = vCap.get(CV_CAP_PROP_FRAME_HEIGHT);
+	cout << "Frame size : " << dWidth << " x " << dHeight << endl;
 
 	int running = 1;
-	while (running) {
+	while (running)
 		running = captureFrames();
-	}
 
 	createBorder();
 	findObjectsByFrame(redFrame, RED);
@@ -55,9 +52,7 @@ vector<WhitekastObject*> WhitekastVision::initVision()
 void WhitekastVision::startThread()
 {
 	while (1)
-	{
 		captureMovement();
-	}
 }
 
 int WhitekastVision::captureMovement()
@@ -75,61 +70,40 @@ int WhitekastVision::captureMovement()
 	//imshow("move2", videoFrame2);
 
 	if (getWhitePixelsLeft(videoFrame) - getWhitePixelsLeft(videoFrame2) <= minMotion)
-	{
 		movingLeft = true;
-	}
 	else
-	{
 		movingLeft = false;
-	}
 
 	if (getWhitePixelsRight(videoFrame) - getWhitePixelsRight(videoFrame2) <= minMotion)
-	{
 		movingRight = true;
-	}
 	else
-	{
 		movingRight = false;
-	}
 
-	if (waitKey(1) == 27) {
+	if (waitKey(1) == 27)
 		return 0;
-	}
 
 	return 1;
 }
 
-//This method will return the count of white pixels on the left side of the picture(mat) 
 int WhitekastVision::getWhitePixelsLeft(const Mat mat)
 {
 	int count = 0;
 	for (int x = 0; x < mat.rows; x++)
-	{
 		for (int y = 0; y < mat.cols / 2; y++)
-		{
 			if (mat.at<uchar>(x, y) == 255)
-			{
 				count++;
-			}
-		}
-	}
+	
 	return count;
 }
 
-//This method returns the count of white pixels on the right side of the picture(mat) 
 int WhitekastVision::getWhitePixelsRight(const Mat mat)
 {
 	int count = 0;
 	for (int x = 0; x < mat.rows; x++)
-	{
 		for (int y = mat.cols / 2; y < mat.cols; y++)
-		{
 			if (mat.at<uchar>(x, y) == 255)
-			{
 				count++;
-			}
-		}
-	}
+
 	return count;
 }
 
@@ -172,14 +146,10 @@ int WhitekastVision::captureFrames()
 	Mat blueDilation;
 	dilate(blueFrame, blueDilation, structuringElement);
 	erode(blueDilation, blueFrame, structuringElement);
-	/*
-		imshow("Red", redFrame);
-		imshow("Green", greenFrame);
-		imshow("Blue", blueFrame);
-	*/
-	if (waitKey(1) == 27) {
+
+	if (waitKey(1) == 27)
 		return 0;
-	}
+	
 	return 1;
 }
 
@@ -195,30 +165,30 @@ void WhitekastVision::createBorder()
 	WhitekastObject* bottomRightWall = new WhitekastObject(GREEN);
 	vector<Point> coordinates1, coordinates2, coordinates3, coordinates4, coordinates5;
 
-	coordinates1.push_back(Point(0.0f, (3.5f*CAMERA_HEIGHT) / 10.0f));
-	coordinates1.push_back(Point((1.0f*CAMERA_WIDTH) / 7.0f, (3.5f*CAMERA_HEIGHT) / 10.0f));
-	coordinates1.push_back(Point((2.0f*CAMERA_WIDTH) / 7.0f, 0.0f));
-	coordinates1.push_back(Point(0.0f, 0.0f));
-	bottomLeftWall->setCenter(Point((1.0f*CAMERA_WIDTH) / 12.0f, (1.0f*CAMERA_HEIGHT) / 5.0f));
+	coordinates1.push_back(Point(0, (int)((3.5f * CAMERA_HEIGHT) / 10.0f)));
+	coordinates1.push_back(Point((int)((1.0f * CAMERA_WIDTH) / 7.0f), (int)((3.5f * CAMERA_HEIGHT) / 10.0f)));
+	coordinates1.push_back(Point((int)((2.0f * CAMERA_WIDTH) / 7.0f), 0));
+	coordinates1.push_back(Point(0, 0));
+	bottomLeftWall->setCenter(Point((int)((1.0f * CAMERA_WIDTH) / 12.0f), (int)((1.0f * CAMERA_HEIGHT) / 5.0f)));
 	bottomLeftWall->setCoordinates(coordinates1, false);
 
-	coordinates2.push_back(Point((1.0f*CAMERA_WIDTH) / 6.0f, 0.0f));
-	coordinates2.push_back(Point(CAMERA_WIDTH, 0.0f));
+	coordinates2.push_back(Point((int)((1.0f * CAMERA_WIDTH) / 6.0f), 0));
+	coordinates2.push_back(Point((int)CAMERA_WIDTH, 0));
 	leftWall->setCoordinates(coordinates2, false);
 
-	coordinates3.push_back(Point(CAMERA_WIDTH, 0.0f));
-	coordinates3.push_back(Point(CAMERA_WIDTH, CAMERA_HEIGHT));
+	coordinates3.push_back(Point((int)CAMERA_WIDTH, 0));
+	coordinates3.push_back(Point((int)CAMERA_WIDTH, (int)CAMERA_HEIGHT));
 	topWall->setCoordinates(coordinates3, false);
 
-	coordinates4.push_back(Point(CAMERA_WIDTH, CAMERA_HEIGHT));
-	coordinates4.push_back(Point((1.0f*CAMERA_WIDTH) / 6.0f, CAMERA_HEIGHT));
+	coordinates4.push_back(Point((int)CAMERA_WIDTH, (int)CAMERA_HEIGHT));
+	coordinates4.push_back(Point((int)((1.0f * CAMERA_WIDTH) / 6.0f), (int)CAMERA_HEIGHT));
 	rightWall->setCoordinates(coordinates4, false);
 
-	coordinates5.push_back(Point((2.0f*CAMERA_WIDTH) / 7.0f, CAMERA_HEIGHT));
-	coordinates5.push_back(Point(0.0f, CAMERA_HEIGHT));
-	coordinates5.push_back(Point(0.0f, (6.5f*CAMERA_HEIGHT) / 10.0f));
-	coordinates5.push_back(Point((1.0f*CAMERA_WIDTH) / 7.0f, (6.5f*CAMERA_HEIGHT) / 10.0f));
-	bottomRightWall->setCenter(Point((1.0f*CAMERA_WIDTH) / 12.0f, (4.0f*CAMERA_HEIGHT) / 5.0f));
+	coordinates5.push_back(Point((int)((2.0f*CAMERA_WIDTH) / 7.0f), (int)CAMERA_HEIGHT));
+	coordinates5.push_back(Point(0, (int)CAMERA_HEIGHT));
+	coordinates5.push_back(Point(0, (int)((6.5f * CAMERA_HEIGHT) / 10.0f)));
+	coordinates5.push_back(Point((int)((1.0f * CAMERA_WIDTH) / 7.0f), (int)((6.5f*CAMERA_HEIGHT) / 10.0f)));
+	bottomRightWall->setCenter(Point((int)((1.0f * CAMERA_WIDTH) / 12.0f), (int)((4.0f * CAMERA_HEIGHT) / 5.0f)));
 	bottomRightWall->setCoordinates(coordinates5, false);
 
 	visionObjects.push_back(bottomLeftWall);
@@ -242,7 +212,8 @@ void WhitekastVision::findObjectsByFrame(const Mat frame, const ObjectColor obje
 	for (size_t i = 0; i < contours.size(); i++)
 	{
 		double areaContour = contourArea(contours[i]);
-		if (areaContour > 500.0) {
+		if (areaContour > 500.0)
+		{
 			//Scalar color = Scalar(0, 255, 255);
 			//drawContours(contourFrame, contours, (int)i, color, 2, LINE_8, hierarchy, 0);
 
@@ -251,7 +222,7 @@ void WhitekastVision::findObjectsByFrame(const Mat frame, const ObjectColor obje
 			Rect rect = boundingRect(contours[i]);
 			double cx = rect.x + rect.width / 2.0;
 			double cy = rect.y + rect.height / 2.0;
-			Point centerPoint = Point(cx, cy);
+			Point centerPoint = Point(((int)cx), ((int)cy));
 			object->setCenter(centerPoint);
 			visionObjects.push_back(object);
 		}

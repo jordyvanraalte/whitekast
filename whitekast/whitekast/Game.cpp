@@ -1,6 +1,11 @@
-#include "wtypes.h"
-#include "Game.h"
+#include <GL/freeglut.h>
 #include <math.h>
+#include <vector>
+#include <iostream>
+#include <thread> 
+#include <math.h>
+#include "Game.h"
+#include "wtypes.h"
 #include "GameObject.h"
 #include "WhitekastObject.h"
 #include "WhitekastVision.h"
@@ -13,10 +18,7 @@
 #include "CircleCollideComponent.h"
 #include "LineColliderComponent.h"
 #include "Vec.h"
-#include <vector>
-#include <iostream>
 #include "World.h"
-#include <GL/freeglut.h>
 #include "AudioManager.h"
 #include "StateManager.h"
 #include "HomeState.h"
@@ -24,8 +26,6 @@
 #include "PointCounter.h"
 #include "LivesCounter.h"
 #include "HighScore.h"
-#include <thread> 
-#include <math.h>  
 
 std::list<GameObject*> objects;
 GameObject* ball;
@@ -35,6 +35,7 @@ static Game* instance;
 
 int horizontal = 0;
 int vertical = 0;
+
 
 Game::Game(const char * title, int argc, char * argv[])
 {
@@ -76,8 +77,8 @@ void Game::initGlut(const char * title, int argc, char * argv[])
 
 	vision = WhitekastVision();
 	std::vector<WhitekastObject*> whitekastObjects = vision.initVision();
-	boardWidth = whitekastObjects.at(0)->getWidth();
-	boardHeight = whitekastObjects.at(0)->getSize();
+	boardWidth = (int)whitekastObjects.at(0)->getWidth();
+	boardHeight = (int)whitekastObjects.at(0)->getSize();
 	initFlippers();
 	
 
@@ -158,7 +159,7 @@ void Game::initObjects()
 	ball->addComponent(new ModelComponent("Models/Pinballs/pinball_3.1.obj", ball));
 	ball->position = ::Vec3f(5, -2, 3.5f);
 	ball->scale = ::Vec3f(0.1f, 0.1f, 0.1f);
-	ball->addComponent(new GravityComponent(::Vec3f(-1.8, 0, 0)));
+	ball->addComponent(new GravityComponent(::Vec3f(-1.8f, 0, 0)));
 	ball->addComponent(new CircleCollideComponent(ball));
 
 	Texture texture1 = Texture("Textures/LeftWall.png");
@@ -175,7 +176,7 @@ void Game::initObjects()
 
 void Game::initFlippers()
 {
-	::Vec3f scale = ::Vec3f(0.1, 0.1, 0.1);
+	::Vec3f scale = ::Vec3f(0.1f, 0.1f, 0.1f);
 	GameObject* flipperLeft = new GameObject(true);
 	flipperLeft->color = ::Vec3f(0.0f, 0.0f, 0.0f);
 	flipperLeft->addComponent(new ModelComponent("Models/Flippers/flipperblend.obj", flipperLeft));
@@ -188,14 +189,14 @@ void Game::initFlippers()
 	std::vector<cv::Point> flipperLeftCoordinates;
 	/*flipperLeftCoordinates.push_back(cv::Point((flipperLeft->rotationPoint.x + 0.1)*100, flipperLeft->rotationPoint.z*100));
 	flipperLeftCoordinates.push_back(cv::Point((flipperLeft->rotationPoint.x + 0.1 - (sin(15)*0.3f)) *100,(flipperLeft->rotationPoint.z + (cos(15) *0.3f))*100));*/
-	flipperLeftCoordinates.push_back(cv::Point((flipperLeft->rotationPoint.x + 0.1)*100, flipperLeft->rotationPoint.z*100));
-	flipperLeftCoordinates.push_back(cv::Point((flipperLeft->rotationPoint.x + 0.1) *100,(flipperLeft->rotationPoint.z + 0.3f)*100));
+	flipperLeftCoordinates.push_back(cv::Point((int)((flipperLeft->rotationPoint.x + 0.1f) * 100), (int)(flipperLeft->rotationPoint.z * 100)));
+	flipperLeftCoordinates.push_back(cv::Point((int)((flipperLeft->rotationPoint.x + 0.1f) * 100), (int)((flipperLeft->rotationPoint.z + 0.3f) * 100)));
 	flipperLeft->setCoordinates(flipperLeftCoordinates);
-	flipperLeft->addComponent(new LineCollideComponent(flipperLeft, 0.1));
+	flipperLeft->addComponent(new LineCollideComponent(flipperLeft, 0.1f));
 	objects.push_back(flipperLeft);
 
 	GameObject* flipperRight = new GameObject(true);
-	flipperRight->color = ::Vec3f(0.0f, 0.0f, 0.0f);
+	flipperRight->color = ::Vec3f(0, 0, 0);
 	flipperRight->addComponent(new ModelComponent("Models/Flippers/flipperblend.obj", flipperRight));
 	flipperRight->position = ::Vec3f(0.875f, -2, 2.595f);
 	flipperRight->scale = scale;
@@ -206,8 +207,8 @@ void Game::initFlippers()
 	std::vector<cv::Point> flipperRightCoordinates;
 	/*flipperRightCoordinates.push_back(cv::Point((flipperRight->rotationPoint.x + 0.1) *100, flipperRight->rotationPoint.z*100));
 	flipperRightCoordinates.push_back(cv::Point((flipperRight->rotationPoint.x + 0.1 - (sin(15)*0.3f)) * 100, (flipperRight->rotationPoint.z - (cos(15) *0.3f)) * 100));*/
-	flipperRightCoordinates.push_back(cv::Point((flipperRight->rotationPoint.x + 0.1) *100, flipperRight->rotationPoint.z*100));
-	flipperRightCoordinates.push_back(cv::Point((flipperRight->rotationPoint.x + 0.1) * 100, (flipperRight->rotationPoint.z - 0.3f) * 100));
+	flipperRightCoordinates.push_back(cv::Point((int)((flipperRight->rotationPoint.x + 0.1) * 100), (int)(flipperRight->rotationPoint.z * 100)));
+	flipperRightCoordinates.push_back(cv::Point((int)((flipperRight->rotationPoint.x + 0.1) * 100), (int)((flipperRight->rotationPoint.z - 0.3f) * 100)));
 	flipperRight->setCoordinates(flipperRightCoordinates);
 	flipperRight->addComponent(new LineCollideComponent(flipperRight, 0.1f));
 	objects.push_back(flipperRight);

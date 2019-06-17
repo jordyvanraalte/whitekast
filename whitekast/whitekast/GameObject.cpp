@@ -1,9 +1,10 @@
+#include <GL/freeglut.h>
+#include <iostream>
 #include "GameObject.h"
 #include "FlipComponent.h"
 #include "DrawComponent.h"
 #include "CollideComponent.h"
-#include <GL/freeglut.h>
-#include <iostream>
+
 
 GameObject::GameObject(bool isVisionObject)
 {

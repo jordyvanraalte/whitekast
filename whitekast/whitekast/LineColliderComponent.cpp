@@ -33,8 +33,8 @@ LineCollideComponent::LineCollideComponent(GameObject* gameobject, float wkscale
 		}
 	}
 
-	cv::Point position = cv::Point((((highest1.x + highest2.x) / 2)*wkscale)*gameObject->scale.x, (((highest1.y + highest2.y) / 2)*wkscale)*gameObject->scale.y);
-	circle = new CircleHitbox(Vec3f(position.x, 0 , position.y), lengthHighest+4, Vec3f(1,1,1));
+	cv::Point position = cv::Point((int)((((highest1.x + highest2.x) / 2) * wkscale) * gameObject->scale.x), (int)((((highest1.y + highest2.y) / 2) * wkscale) * gameObject->scale.y));
+	circle = new CircleHitbox(Vec3f((float)position.x, 0, (float)position.y), (float)(lengthHighest + 4), Vec3f(1, 1, 1));
 }
 
 LineCollideComponent::~LineCollideComponent()

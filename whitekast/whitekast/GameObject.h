@@ -13,6 +13,7 @@
 #include "ObjModel.h"
 #include "HitBox.h"
 
+
 class Component;
 class DrawComponent;
 class FlipComponent;
@@ -25,7 +26,6 @@ class GameObject
 	CollideComponent* collideComponent = nullptr;
 
 	std::list<Component*> components;
-	
 	::Vec3f vectemp;
 
 public:
