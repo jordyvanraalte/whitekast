@@ -10,7 +10,6 @@ GameObject::GameObject(bool isVisionObject)
 	position = Vec3f(0, 0, 0);
 	rotation = Vec3f(0, 0, 0);
 	scale = Vec3f(1, 1, 1);
-	bounceFactor = 1.0f;
 	this->isVisionObject = isVisionObject;
 	rotationPoint = position;
 	isCollider = false;
@@ -139,11 +138,24 @@ void GameObject::update(float elapsedTime)
 	for (auto c : components)
 		c->update(elapsedTime);
 
-	vectemp = velocity;
+	b = velocity;
 
-	vectemp.applyTime(elapsedTime);
+	b.applyTime(elapsedTime);
 
-	position = position + vectemp;
+	::Vec2f temp = ::Vec2f(b.x, b.z);
+	if (temp.magnitude() < 0.8f) {
+		temp = ::Vec2f::vectorNormalised(temp);
+		temp = temp * 0.8f;
+	}
+	else if (temp.magnitude() > 3.0f) {
+		temp = ::Vec2f::vectorNormalised(temp);
+		temp = temp * 3.0f;
+	}
+
+	b.x = temp.x;
+	b.z = temp.y;
+
+	position = position + b;
 }
 
 void GameObject::handleEvent(float elapsedTime)

@@ -184,7 +184,7 @@ void Game::initFlippers()
 	flipperLeft->rotationPoint = ::Vec3f(flipperLeft->position.x - 0.2f, flipperLeft->position.y, flipperLeft->position.z);
 	flipperLeft->scale = scale;
 	flipperLeft->rotation.y = -105;
-	flipperLeft->bounceFactor = 2.0f;
+	flipperLeft->bounceFactor = 0.5f;
 	flipperLeft->addComponent(new FlipComponent(true));
 	std::vector<cv::Point> flipperLeftCoordinates;
 	flipperLeftCoordinates.push_back(cv::Point(flipperLeft->rotationPoint.x * 100, flipperLeft->rotationPoint.z * 100));
@@ -204,7 +204,7 @@ void Game::initFlippers()
 	flipperRight->scale = scale;
 	flipperRight->rotationPoint = ::Vec3f(flipperRight->position.x - 0.2f, flipperRight->position.y, flipperRight->position.z);
 	flipperRight->rotation.y = 105;
-	flipperRight->bounceFactor = 2.0f;
+	flipperRight->bounceFactor = 0.5f;
 	flipperRight->addComponent(new FlipComponent(false));
 	std::vector<cv::Point> flipperRightCoordinates;
 	flipperRightCoordinates.push_back(cv::Point(flipperRight->rotationPoint.x * 100, flipperRight->rotationPoint.z * 100));

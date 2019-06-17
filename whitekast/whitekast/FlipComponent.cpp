@@ -43,11 +43,12 @@ void FlipComponent::handleEvent(float elapsedTime)
 			if (up)
 			{
 				gameObject->rotation.y += elapsedTime * (speed * 2);
+				gameObject->bounceFactor = 1.5f;
 			}
 			else
 			{
 				gameObject->rotation.y -= elapsedTime * speed;
-				
+				gameObject->bounceFactor = 0.5f;
 			}
 
 			for (Component* c : gameObject->getComponents())
@@ -79,10 +80,12 @@ void FlipComponent::handleEvent(float elapsedTime)
 			if (up)
 			{
 				gameObject->rotation.y -= elapsedTime * (speed * 2);
+				gameObject->bounceFactor = 1.5f;
 			}
 			else
 			{
 				gameObject->rotation.y += elapsedTime * speed;
+				gameObject->bounceFactor = 0.5f;
 			}
 
 			for (Component* c : gameObject->getComponents())

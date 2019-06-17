@@ -26,7 +26,7 @@ class GameObject
 
 	std::list<Component*> components;
 	
-	::Vec3f vectemp;
+	::Vec3f b;
 
 public:
 	GameObject(bool isVisionObject);

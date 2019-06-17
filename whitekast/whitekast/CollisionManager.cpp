@@ -1,6 +1,6 @@
 #include "CollisionManager.h"
 #include <iostream>
-
+#include "FlipComponent.h"
 
 CollisionManager::CollisionManager()
 {
@@ -189,11 +189,10 @@ double CollisionManager::distanceSquared(int x1, int y1, int x2, int y2)
 
 Vec2f CollisionManager::checkSpeed(Vec2f b, GameObject *object)
 {
-	if(b.magnitude() > 0.3 && b.magnitude() < 3)
+	if(b.magnitude() >= 0.8f && b.magnitude() <= 3.0f)
 	{
 		b = b * object->bounceFactor;
 	}
-
 	return b;
 }
 
