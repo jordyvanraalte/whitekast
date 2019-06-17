@@ -74,7 +74,6 @@ int WhitekastVision::captureMovement()
 	threshold(videoFrame2, videoFrame2, 100, 255, THRESH_BINARY_INV);
 	//imshow("move2", videoFrame2);
 
-
 	if (getWhitePixelsLeft(videoFrame) - getWhitePixelsLeft(videoFrame2) <= minMotion)
 	{
 		movingLeft = true;

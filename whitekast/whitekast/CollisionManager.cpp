@@ -2,6 +2,7 @@
 
 #include "CollisionManager.h"
 #include "PointCounter.h"
+#include "AudioManager.h"
 
 CollisionManager::CollisionManager()
 {
@@ -51,6 +52,7 @@ bool CollisionManager::isColliding(GameObject *ball, GameObject *object)
 
 					ball->velocity = Vec3f(temp2.x, 0, temp2.y);
 					PointCounter::getInstance()->hitBumper();
+					AudioManager::getInstance()->playSound("audio/bumper_hit.wav");
 				}
 				ball->isColliding = true;
 				object->isColliding = true;
@@ -68,6 +70,7 @@ bool CollisionManager::isColliding(GameObject *ball, GameObject *object)
 
 					ball->velocity = Vec3f(temp2.x, 0, temp2.y);
 					PointCounter::getInstance()->hitBumper();
+					AudioManager::getInstance()->playSound("audio/bumper_hit.wav");
 				}
 				ball->isColliding = true;
 				object->isColliding = true;
@@ -97,6 +100,7 @@ bool CollisionManager::isColliding(GameObject *ball, GameObject *object)
 
 						ball->velocity = Vec3f(temp2.x, 0, temp2.y);
 						PointCounter::getInstance()->hitBumper();
+						AudioManager::getInstance()->playSound("audio/bumper_hit.wav");
 					}
 					ball->isColliding = true;
 					object->isColliding = true;
