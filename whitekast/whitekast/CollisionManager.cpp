@@ -20,7 +20,7 @@ bool CollisionManager::isColliding(GameObject *ball, GameObject *object)
 
 	//Check if the circle collide, then enter loop. This increases performance
 	//checkCircleCollision(circleball, circleobject)
-	if(checkCircleCollision(circleball, circleobject))
+	if(true)
 	{
 		CircleHitbox *circle = dynamic_cast<CircleHitbox*>(ball->getHitbox());
 		LinesHitbox *lines = dynamic_cast<LinesHitbox*>(object->getHitbox());
