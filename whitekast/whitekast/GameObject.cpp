@@ -155,5 +155,4 @@ void GameObject::handleEvent(float elapsedTime)
 
 void GameObject::CheckSpeed(float elapsedTime)
 {
-	
 }

@@ -155,10 +155,29 @@ Vec2f CollisionManager::mirrorVectorInLine(::Vec2f d, LinesHitbox::Hitline b) co
 	//Our normal normalised
 	::Vec2f normal(Vec2f::vectorNormalised(n));
 
+	float value = Vec2f::vectorDotProduct(d, normal);
+
+	float rad = value / (d.magnitude() * normal.magnitude());
+
+	float angle = acos(rad) * 180.0f / PI;
+
+	if(angle > 90)
+	{
+		angle = 180 - angle;
+	}
+
+	std::cout << "angle : " << angle << "\n";
+
 	//Test Formula 2
 	::Vec2f mirroredVec = d - 2 * normal * (Vec2f::vectorDotProduct(normal, d));
 
 	std::cout << "Mirrored vector xy : " << mirroredVec.x << "," << mirroredVec.y << "\n";
+
+	if (angle > 80)
+	{
+		mirroredVec.x = mirroredVec.x + 0.12f;
+		std::cout << "Angle change xy : " << mirroredVec.x << "," << mirroredVec.y << "\n";
+	}
 
 	return mirroredVec;
 }

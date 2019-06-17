@@ -140,7 +140,7 @@ void World::idle(void)
 	if (keys['R'])
 	{
 	
-		ball->position = Vec3f(5.0f, -2, 1.5f);
+		ball->position = Vec3f(1.5f, -2, 3.5f);
 		ball->velocity = Vec3f(0, 0, 0);
 	}
 	if(keys['B'])

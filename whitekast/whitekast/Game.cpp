@@ -133,7 +133,7 @@ void Game::reset()
 {
 	livesCounter->resetLives();
 	pointCounter->resetPoints();
-	ball->position = Vec3f(5.0f, -2, 1.5f);
+	ball->position = Vec3f(7.0f, -2, 1.5f);
 	ball->velocity = Vec3f(0, 0, 0);
 	StateManager::getInstance()->setState(new HomeState());
 }
@@ -187,8 +187,8 @@ void Game::initFlippers()
 	flipperLeft->bounceFactor = 0.5f;
 	flipperLeft->addComponent(new FlipComponent(true));
 	std::vector<cv::Point> flipperLeftCoordinates;
-	flipperLeftCoordinates.push_back(cv::Point(flipperLeft->rotationPoint.x * 100, flipperLeft->rotationPoint.z * 100));
-	flipperLeftCoordinates.push_back(cv::Point(flipperLeft->rotationPoint.x*100, flipperLeft->rotationPoint.z*100));
+	flipperLeftCoordinates.push_back(cv::Point((flipperLeft->rotationPoint.x + 0.03f) * 100, (flipperLeft->rotationPoint.z - 0.03f) * 100));
+	flipperLeftCoordinates.push_back(cv::Point((flipperLeft->rotationPoint.x + 0.03f) * 100, (flipperLeft->rotationPoint.z - 0.03f) * 100));
 	flipperLeft->setCoordinates(flipperLeftCoordinates);
 	LineCollideComponent* l = new LineCollideComponent(flipperLeft, 0.1f);
 	float newX = -(sin((flipperLeft->rotation.y - 90) * DEG_TO_RAD) * 0.4f);
@@ -207,8 +207,8 @@ void Game::initFlippers()
 	flipperRight->bounceFactor = 0.5f;
 	flipperRight->addComponent(new FlipComponent(false));
 	std::vector<cv::Point> flipperRightCoordinates;
-	flipperRightCoordinates.push_back(cv::Point(flipperRight->rotationPoint.x * 100, flipperRight->rotationPoint.z * 100));
-	flipperRightCoordinates.push_back(cv::Point(flipperRight->rotationPoint.x *100, flipperRight->rotationPoint.z*100));
+	flipperRightCoordinates.push_back(cv::Point((flipperRight->rotationPoint.x + 0.03f) * 100, (flipperRight->rotationPoint.z + 0.03f) * 100));
+	flipperRightCoordinates.push_back(cv::Point((flipperRight->rotationPoint.x + 0.03f) * 100, (flipperRight->rotationPoint.z + 0.03f) * 100));
 	flipperRight->setCoordinates(flipperRightCoordinates);
 	l = new LineCollideComponent(flipperRight, 0.1f);
 	newX = -(sin((flipperRight->rotation.y - 90) * DEG_TO_RAD) * 0.4f);
