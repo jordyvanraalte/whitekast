@@ -93,6 +93,10 @@ void Game::initGlut(const char * title, int argc, char * argv[])
 		{
 			gameObject->bounceFactor = 1.5f;
 		}
+		else if(wkObject->getObjectColor() == BLUE)
+		{
+			gameObject->bounceFactor = 1.0f;
+		}
 		else
 			gameObject->bounceFactor = 0.5f;
 		gameObject->isCollider = true;

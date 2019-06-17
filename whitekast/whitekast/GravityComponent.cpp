@@ -16,5 +16,6 @@ void GravityComponent::update(const float elapsedTime)
 	vectemp.applyTime(elapsedTime);
 
 	gameObject->velocity = gameObject->velocity + vectemp;
-}
+}  
 
+ 
