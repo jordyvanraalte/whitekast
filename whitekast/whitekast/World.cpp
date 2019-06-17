@@ -140,7 +140,7 @@ void World::idle(void)
 	if (keys['E']) camera.posZ -= deltaTime * speed;
 	if (keys['R'] || keys['r'])
 	{
-		ball->position = Vec3f(4.75f, -2.0f, 0.5f);
+		ball->position = Vec3f(4.85f, -2.0f, 3.75f);
 		ball->velocity = Vec3f(0, 0, 0);
 	}
 	if(keys['B'] || keys['b']) StateManager::getInstance()->setState(new PlayState());
